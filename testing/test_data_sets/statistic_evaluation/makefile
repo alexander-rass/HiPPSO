@@ -1,2 +1,0 @@
-test:
-	./doTests.sh
