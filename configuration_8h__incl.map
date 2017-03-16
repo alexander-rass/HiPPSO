@@ -1,4 +1,4 @@
-<map id="general/configuration.h" name="general/configuration.h">
+<map id="src/general/configuration.h" name="src/general/configuration.h">
 <area shape="rect" id="node4" href="$bound__handling_8h.html" title="This file contains an abstract class for different bound handling strategies, which can be used for t..." alt="" coords="1173,184,1324,225"/>
 <area shape="rect" id="node9" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="1336,437,1465,464"/>
 <area shape="rect" id="node10" href="$neighborhood_8h.html" title="This file contains an abstract classes for neighborhood generation. " alt="" coords="958,191,1149,218"/>

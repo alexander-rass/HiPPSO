@@ -1,4 +1,4 @@
-<map id="general/main.h" name="general/main.h">
+<map id="src/general/main.h" name="src/general/main.h">
 <area shape="rect" id="node3" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="83,229,253,256"/>
 <area shape="rect" id="node7" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm. " alt="" coords="310,80,453,107"/>
 <area shape="rect" id="node6" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="73,304,202,331"/>

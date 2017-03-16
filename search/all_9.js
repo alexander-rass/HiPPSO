@@ -5,6 +5,7 @@ var searchData=
   ['inclined_5fplane_2eh',['inclined_plane.h',['../inclined__plane_8h.html',1,'']]],
   ['inclinedplane',['InclinedPlane',['../classhighprecisionpso_1_1InclinedPlane.html',1,'highprecisionpso::InclinedPlane'],['../classhighprecisionpso_1_1InclinedPlane.html#a6865685afbf1ca5dfce1e298d3671e68',1,'highprecisionpso::InclinedPlane::InclinedPlane()']]],
   ['inclinedplaneasym',['InclinedPlaneAsym',['../classhighprecisionpso_1_1InclinedPlaneAsym.html',1,'highprecisionpso::InclinedPlaneAsym'],['../classhighprecisionpso_1_1InclinedPlaneAsym.html#a379c059b989d370cdb46362ef7c04fa5',1,'highprecisionpso::InclinedPlaneAsym::InclinedPlaneAsym()']]],
+  ['includes_2eh',['includes.h',['../includes_8h.html',1,'']]],
   ['increaseprecision',['IncreasePrecision',['../namespacehighprecisionpso_1_1mpftoperations.html#a23e8307b742aaca3185a1ca617baeddc',1,'highprecisionpso::mpftoperations']]],
   ['increasingordernthobjectmergeoperation',['IncreasingOrderNthObjectMergeOperation',['../classhighprecisionpso_1_1IncreasingOrderNthObjectMergeOperation.html',1,'highprecisionpso::IncreasingOrderNthObjectMergeOperation'],['../classhighprecisionpso_1_1IncreasingOrderNthObjectMergeOperation.html#a5b5cebcd3f8f92516b6461471db8ff84',1,'highprecisionpso::IncreasingOrderNthObjectMergeOperation::IncreasingOrderNthObjectMergeOperation()']]],
   ['information_5ftype',['information_type',['../classhighprecisionpso_1_1configuration_1_1InitializationInformation.html#a8bed1b8c4c7d60cc2693204e8c7d044d',1,'highprecisionpso::configuration::InitializationInformation']]],

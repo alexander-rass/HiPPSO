@@ -1,4 +1,4 @@
-<map id="general/random_number_generator.h" name="general/random_number_generator.h">
+<map id="src/general/random_number_generator.h" name="src/general/random_number_generator.h">
 <area shape="rect" id="node5" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="197,95,368,121"/>
 <area shape="rect" id="node7" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="278,169,407,196"/>
 </map>

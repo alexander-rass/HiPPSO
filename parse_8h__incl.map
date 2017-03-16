@@ -1,4 +1,4 @@
-<map id="general/parse.h" name="general/parse.h">
+<map id="src/general/parse.h" name="src/general/parse.h">
 <area shape="rect" id="node4" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="521,319,650,345"/>
 <area shape="rect" id="node6" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="368,244,539,271"/>
 <area shape="rect" id="node7" href="$random__number__generator_8h.html" title="This file contains the available random number generators. " alt="" coords="5,162,192,189"/>

@@ -1,4 +1,4 @@
-<map id="bound_handling/random_forth.h" name="bound_handling/random_forth.h">
+<map id="src/bound_handling/random_forth.h" name="src/bound_handling/random_forth.h">
 <area shape="rect" id="node2" href="$bound__handling_8h.html" title="This file contains an abstract class for different bound handling strategies, which can be used for t..." alt="" coords="211,95,361,136"/>
 <area shape="rect" id="node6" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="164,184,285,211"/>
 <area shape="rect" id="node8" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="139,259,310,285"/>

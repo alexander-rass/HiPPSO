@@ -1,5 +1,6 @@
-<map id="general/random_number_generator.h" name="general/random_number_generator.h">
-<area shape="rect" id="node2" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,95,159,121"/>
-<area shape="rect" id="node3" href="$operations_8h.html" title="This file contains a large set of operations for calculations with the mpf_t data type..." alt="" coords="183,95,322,121"/>
-<area shape="rect" id="node4" href="$parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="347,95,457,121"/>
+<map id="src/general/random_number_generator.h" name="src/general/random_number_generator.h">
+<area shape="rect" id="node2" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,95,180,121"/>
+<area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="202,169,351,196"/>
+<area shape="rect" id="node4" href="$operations_8h.html" title="This file contains a large set of operations for calculations with the mpf_t data type..." alt="" coords="256,95,417,121"/>
+<area shape="rect" id="node5" href="$parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="442,95,575,121"/>
 </map>

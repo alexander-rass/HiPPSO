@@ -1,4 +1,4 @@
-<map id="position_and_velocity_updater/position_and_velocity_updater.h" name="position_and_velocity_updater/position_and_velocity_updater.h">
+<map id="src/position_and_velocity_updater/position_and_velocity_updater.h" name="src/position_and_velocity_updater/position_and_velocity_updater.h">
 <area shape="rect" id="node4" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="241,259,411,285"/>
 <area shape="rect" id="node8" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="212,184,333,211"/>
 <area shape="rect" id="node9" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm. " alt="" coords="60,109,203,136"/>
