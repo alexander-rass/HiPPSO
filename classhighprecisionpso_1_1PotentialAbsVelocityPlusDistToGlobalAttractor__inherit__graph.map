@@ -1,0 +1,4 @@
+<map id="highprecisionpso::PotentialAbsVelocityPlusDistToGlobalAttractor" name="highprecisionpso::PotentialAbsVelocityPlusDistToGlobalAttractor">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PotentialCalculator.html" title="This class is an abstract class. It supplies the interface for calculation of some statistical data..." alt="" coords="38,95,217,136"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations..." alt="" coords="40,5,215,47"/>
+</map>

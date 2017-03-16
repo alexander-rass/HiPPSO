@@ -1,0 +1,6 @@
+<map id="highprecisionpso::PotentialCalculator" name="highprecisionpso::PotentialCalculator">
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1PotentialAbsVelocityPlusDistToGlobalAttractor.html" title="This potential calculator can calculate the scaled absolute value of the velocity plus the distance t..." alt="" coords="455,5,699,47"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1PotentialFunctionDifference.html" title="This potential calculator can calculate the function difference statistic. " alt="" coords="487,71,666,112"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1PotentialSqrtAbsVelocityPlusSqrtDistToGlobalAttractor.html" title="This potential calculator can calculate the scaled square root of the absolute velocity plus the squa..." alt="" coords="455,135,698,191"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations..." alt="" coords="5,71,180,112"/>
+</map>

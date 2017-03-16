@@ -1,0 +1,8 @@
+<map id="highprecisionpso::Neighborhood" name="highprecisionpso::Neighborhood">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1AdjacencyListNeighborhood.html" title="This class is an abstract class, which implements a complete neighborhood topology through a neighbor..." alt="" coords="261,49,449,90"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1GlobalBest.html" title="This class implements the global best topology for the particle swarm, where all particles are neighb..." alt="" coords="260,115,451,141"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1GridNeighborhood.html" title="This class implements the grid or von Neumann topology for the particle swarm. " alt="" coords="505,5,736,32"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1LBestNeighborhood.html" title="This class implements the lbest neighborhood topology for the particle swarm. " alt="" coords="500,56,741,83"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1WheelNeighborhood.html" title="This class implements the wheel topology for the particle swarm. " alt="" coords="499,107,743,133"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1RingNeighborhood.html" title="This class implements the ring neighborhood topology for the particle swarm. " alt="" coords="791,56,1025,83"/>
+</map>

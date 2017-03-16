@@ -1,0 +1,5 @@
+<map id="highprecisionpso::ComposedStatisticMergeOperation" name="highprecisionpso::ComposedStatisticMergeOperation">
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ComposedDimensionMergeOperation.html" title="This class implements a merge operation, which merges the values of all dimensions to a single value..." alt="" coords="467,5,657,47"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ComposedParticleMergeOperation.html" title="This class implements a merge operation, which merges the values of all particles to a single value..." alt="" coords="467,71,657,112"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1StatisticMergeOperation.html" title="This class is an abstract class. It supplies the interface to merge specific statistical evaluations ..." alt="" coords="5,39,180,80"/>
+</map>

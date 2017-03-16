@@ -1,0 +1,15 @@
+<map id="highprecisionpso::Modification" name="highprecisionpso::Modification">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1AbsModification.html" title="This modification calculates the absolute value of the supplied value. " alt="" coords="254,5,474,32"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ArccosModification.html" title="This modification calculates the arccosine function of the supplied value. " alt="" coords="280,57,448,98"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ArcsinModification.html" title="This modification calculates the arcsine function of the supplied value. " alt="" coords="282,122,446,163"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1ArctanModification.html" title="This modification calculates the arctangent function of the supplied value. " alt="" coords="281,187,447,229"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1CosModification.html" title="This modification calculates the cosine function of the supplied value. " alt="" coords="253,253,475,280"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1ExpModification.html" title="This modification calculates the exponential function of the supplied value. " alt="" coords="254,304,474,331"/>
+<area shape="rect" id="node8" href="$classhighprecisionpso_1_1Log2DoubleModification.html" title="This modification calculates logarithm with base two of the supplied value. " alt="" coords="266,355,462,397"/>
+<area shape="rect" id="node9" href="$classhighprecisionpso_1_1Log2Modification.html" title="This modification calculates the logarithm with base two of the supplied value. " alt="" coords="251,421,477,448"/>
+<area shape="rect" id="node10" href="$classhighprecisionpso_1_1LogEModification.html" title="This modification calculates the logarithm with base E of the supplied value. " alt="" coords="251,472,477,499"/>
+<area shape="rect" id="node11" href="$classhighprecisionpso_1_1PowModification.html" title="This modification calculates the power of the supplied value to a given exponent. ..." alt="" coords="253,523,475,549"/>
+<area shape="rect" id="node12" href="$classhighprecisionpso_1_1SinModification.html" title="This modification calculates the sine function of the supplied value. " alt="" coords="256,573,472,600"/>
+<area shape="rect" id="node13" href="$classhighprecisionpso_1_1SqrtModification.html" title="This modification calculates the square root of the supplied value. " alt="" coords="253,624,475,651"/>
+<area shape="rect" id="node14" href="$classhighprecisionpso_1_1TanModification.html" title="This modification calculates the tangent function of the supplied value. " alt="" coords="255,675,473,701"/>
+</map>

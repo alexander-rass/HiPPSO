@@ -1,0 +1,7 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1RandomNumberGenerator.html" title="This class is an abstract class. It supplies the interface for random number generators. " alt="" coords="5,113,181,155"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1FastLinearCongruenceRandomNumberGenerator.html" title="This is a fast random number generator which uses linear congruences. " alt="" coords="247,5,491,47"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1FastM2P63LinearCongruenceRandomNumberGenerator.html" title="This is a fast random number generator, which uses linear congruences. It uses the modulus 263..." alt="" coords="246,70,491,126"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1IntenseLinearCongruenceRandomNumberGenerator.html" title="This is a random number generator which uses linear congruences. " alt="" coords="229,149,508,191"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1IntenseM2P63LinearCongruenceRandomNumberGenerator.html" title="This is a random number generator which uses linear congruences. It uses the modulus 263..." alt="" coords="237,214,500,270"/>
+</map>

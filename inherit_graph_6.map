@@ -1,0 +1,9 @@
+<map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1PairCombinationOperation.html" title="This class is an abstract class. It supplies the interface for merging two mpf_t values to a single v..." alt="" coords="5,141,228,182"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1AddOperation.html" title="This pair combination operation merges two values by addition. " alt="" coords="277,5,483,32"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1DivideOperation.html" title="This pair combination operation merges two values by division. " alt="" coords="298,57,462,98"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1MaxOperation.html" title="This pair combination operation merges two values by calculation of the maximum. " alt="" coords="276,123,484,149"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1MinOperation.html" title="This pair combination operation merges two values by calculation of the minimum. " alt="" coords="278,173,482,200"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1MultiplyOperation.html" title="This pair combination operation merges two values by multiplication. " alt="" coords="294,225,466,266"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1SubtractOperation.html" title="This pair combination operation merges two values by subtraction. " alt="" coords="292,290,468,331"/>
+</map>

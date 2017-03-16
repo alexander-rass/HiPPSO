@@ -1,0 +1,7 @@
+<map id="highprecisionpso::PositionAndVelocityUpdater" name="highprecisionpso::PositionAndVelocityUpdater">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DefaultUpdater.html" title="This class implements the standard movement equations for particle swarm optimization. " alt="" coords="245,5,415,47"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1DeltaUpdater.html" title="The delta updater implements a specific position and velocity update procedure. " alt="" coords="228,71,432,98"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1DimensionIndependentUpdater.html" title="This class implements an update procedure, which acts independent to the coordinate axes..." alt="" coords="235,123,425,164"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1OrientationChangeUpdater.html" title="The orientation change updater implements an update procedure, which changes orientation if some dire..." alt="" coords="235,188,425,229"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1TestingUpdater.html" title="The testing updater implements an experimental position and velocity update procedure. " alt="" coords="245,253,415,295"/>
+</map>

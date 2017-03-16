@@ -1,0 +1,5 @@
+<map id="highprecisionpso::RingNeighborhood" name="highprecisionpso::RingNeighborhood">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1LBestNeighborhood.html" title="This class implements the lbest neighborhood topology for the particle swarm. " alt="" coords="5,169,247,196"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1AdjacencyListNeighborhood.html" title="This class is an abstract class, which implements a complete neighborhood topology through a neighbor..." alt="" coords="32,80,220,121"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1Neighborhood.html" title="This class is an abstract class. It supplies the interface for neighborhood topologies of the particl..." alt="" coords="23,5,229,32"/>
+</map>
