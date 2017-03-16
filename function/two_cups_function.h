@@ -45,7 +45,7 @@
 namespace highprecisionpso {
 
 /**
-* @brief This class represents a test function with \f$2^D\f$ many optimal positions.
+* @brief This class represents a test function with 2<sup>D</sup> many optimal positions.
 */
 class TwoCupsFunction: public Function {
 public:
@@ -58,7 +58,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}tc(pos[d])\f$ where \f$tc(x)=(x+1)^2\f$ if x is not positive and \f$tc(x)=(x-1)^4\f$ if x is positive.
+	* @return &sum;<sub>d=0..D-1</sub>tc( pos[d] ), where tc( x )= ( x + 1 )<sup>2</sup> if x is not positive and tc( x )= ( x -1 )<sup>4</sup> if x is positive.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -68,7 +68,7 @@ public:
 	* @param pos The position.
 	* @param d The index of the observed dimension.
 	*
-	* @return \f$\min(abs(pos[d]-1), abs(pos[d]+1))\f$.
+	* @return min( abs( pos[d]-1 ), abs( pos[d]+1 ) ).
 	*/
 	mpf_t* DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d);
 };

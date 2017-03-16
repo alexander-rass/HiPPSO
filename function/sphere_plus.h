@@ -54,7 +54,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}pos[d]^2\f$ if all position entries are positive and plus infinity otherwise.
+	* @return &sum;<sub>d=0..D-1</sub>pos[d]<sup>2</sup> if all position entries are positive and plus infinity otherwise.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

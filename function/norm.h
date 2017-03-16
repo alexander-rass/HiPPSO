@@ -54,7 +54,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}abs(pos[d])\f$
+	* @return &sum;<sub>d=0..D-1</sub> abs( pos[d] )
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -79,7 +79,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$\max_{d\in\lbrace0,\ldots,D-1\rbrace}abs(pos[d])\f$.
+	* @return max<sub>d&isin;{0,...,D-1}</sub> abs( pos[d] ).
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -106,11 +106,11 @@ public:
 	*/
 	Norm2PowerK(int exponent);
 	/**
-	* @brief Returns the \f$2^{exponent}\f$-norm of the given  position.
+	* @brief Returns the 2<sup>exponent</sup>-norm of the given  position.
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}(pos[d])^{(2^{exponent})}\f$.
+	* @return &sum;<sub>d=0..D-1</sub> ( pos[d] )<sup>(2<sup>exponent</sup>)</sup>.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -181,7 +181,7 @@ public:
 };
 
 /**
-* @brief This class represents a function, which calculates the p-norm for all \f$p=1+1/2^{exponent}\f$.
+* @brief This class represents a function, which calculates the p-norm for all p=1+1/2<sup>exponent</sup>.
 */
 class Norm1Plus2PowerMinusK: public Function {
 public:
@@ -192,11 +192,11 @@ public:
 	*/
 	Norm1Plus2PowerMinusK(int exponent);
 	/**
-	* @brief Returns the \f$(1+1/2^{exponent})\f$-norm of the given  position.
+	* @brief Returns the (1+1/2<sup>exponent</sup>)-norm of the given  position.
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}(abs(pos[d]))^{(1+1/2^{exponent})}\f$.
+	* @return &sum;<sub>d=0..D-1</sub> ( abs( pos[d] ) )<sup>(1+1/2<sup>exponent</sup>)</sup>.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

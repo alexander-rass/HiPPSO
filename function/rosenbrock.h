@@ -60,7 +60,7 @@ public:
 	*
 	* @param pos The position vector.
 	*
-	* @return \f$10\cdot D+\sum_{d=0}^{D-2}(100(pos[d+1] - pos[d]^2)^2+(1-pos[d])^2)\f$.
+	* @return 10 &middot; D+&sum;<sub>d=0..D-2</sub> (100 ( pos[d+1] - pos[d]<sup>2</sup> )<sup>2</sup> + ( 1 - pos[d] )<sup>2</sup> ).
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

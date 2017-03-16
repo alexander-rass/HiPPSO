@@ -64,7 +64,7 @@ public:
 	*
 	* @param pos The position vector.
 	*
-	* @return \f$\sum_{d=0}^{D-1}max\_scale^{d/(D-1)}pos[d]^2\f$.
+	* @return &sum;<sub>d=0..D-1</sub> max_scale<sup>d/(D-1)</sup>pos[d]<sup>2</sup>.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -85,7 +85,7 @@ private:
 };
 
 /**
-* @brief This class represents a scaled version of the well known sphere function with fixed scale \f$10^6\f$.
+* @brief This class represents a scaled version of the well known sphere function with fixed scale 10<sup>6</sup>.
 */
 class ScaledSphereFixed: public ScaledSphere {
 public:
@@ -143,7 +143,7 @@ private:
 };
 
 /**
-* @brief This class represents a scaled and rotated version of the well known sphere function with fixed scale \f$10^6\f$.
+* @brief This class represents a scaled and rotated version of the well known sphere function with fixed scale 10<sup>6</sup>.
 */
 class ScaledHadamardRotatedSphereFixed: public ScaledHadamardRotatedSphere {
 public:
@@ -173,7 +173,7 @@ public:
 	*
 	* @param pos The position vector.
 	*
-	* @return \f$\sum_{d=0}^{D-1}scale[d] \cdot pos[d]^2\f$.
+	* @return &sum;<sub>d=0..D-1</sub> scale[d] &middot; pos[d]<sup>2</sup>.
 	*
 	* scale is a once randomly generated vector with non negative entries.
 	*/

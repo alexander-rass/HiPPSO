@@ -57,7 +57,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$\sum_{d=0}^{D-1}(\sum_{i=0}^d pos[i])^2\f$.
+	* @return &sum;<sub>d=0..D-1</sub>(&sum;<sub>i=0..d</sub> pos[i])<sup>2</sup>.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
@@ -97,7 +97,7 @@ public:
 	*
 	* @param pos The position.
 	*
-	* @return \f$-\sum_{d=0}^{D-1}(pos[d]\cdot\sin(\sqrt{pos[d]}))\f$.
+	* @return -&sum;<sub>d=0..D-1</sub>( pos[d] &middot; sin( sqrt( pos[d] ) ) ).
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

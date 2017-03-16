@@ -50,17 +50,17 @@ namespace highprecisionpso {
 enum SingleDifferentDirectionMode { 
 	/**
 	* @brief In this mode the special direction is the direction of the coordinate axis belonging to the first dimension.
-	* The special direction vector is then \f$(1,0,\ldots,0)\f$
+	* The special direction vector is then (1,0,...,0)
 	*/
 	SINGLE_DIFFERENT_DIRECTION_MODE_FIRST,
 	/**
 	* @brief In this mode the special direction is diagonal according to all dimensions. All entries of the direction vector are 1.
-	* The special direction vector is then \f$(1,1,\ldots,1)\f$
+	* The special direction vector is then (1,1,...,1)
 	*/
 	SINGLE_DIFFERENT_DIRECTION_MODE_DIAGONAL, 
 	/**
 	* @brief In this mode the special direction is randomly chosen according to the random number generator for this function.
-	* The special direction vector is then \f$(r_0,r_1,\ldots,r_{D-1})\f$, where each \f$r_i\f$ is randomly distributed similar to a gaussian distribution with expectation 0 and variance 1.
+	* The special direction vector is then (r<sub>0</sub>,r<sub>1</sub>,...,r<sub>D-1</sub>), where each r<sub>i</sub> is randomly distributed similar to a gaussian distribution with expectation 0 and variance 1.
 	*/
 	SINGLE_DIFFERENT_DIRECTION_MODE_RANDOM };
 
@@ -90,10 +90,13 @@ public:
 	*
 	* Let sd be the special direction vector.
 	* See the enumeration about the single different direction mode for details on this vector.
-	* Let orth be the orthogonal projection of the position vector to the special direction vector: \f$orth:=((pos.sd)/(sd.sd))\cdot sd\f$.
-	* Let rem be the remaining part: \f$rem:=pos-orth\f$.
-	* Then the result is \f$(orth.orth)^{single\_dimension\_exponent}+(rem.rem)^{remaining\_dimension\_exponent}\f$.
-	* Here \f$(a.b)\f$ represents the dot product (scalar product) of the two vectors a and b.
+	* Let *orth* be the orthogonal projection of the position vector to the special direction vector:<br>
+    * orth:=( ( pos . sd ) / ( sd . sd ) ) &middot; sd.<br>
+	* Let *rem* be the remaining part:<br>
+    * rem:=pos-orth.<br>
+	* Then the result is<br>
+    * ( orth . orth )<sup>single_dimension_exponent</sup> + ( rem . rem )<sup>remaining_dimension_exponent</sup>.<br>
+	* Here ( a . b ) represents the dot product (scalar product) of the two vectors a and b.
 	*
 	* @param pos The position.
 	*

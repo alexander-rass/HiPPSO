@@ -204,9 +204,9 @@ bool Equals(const std::vector<mpf_t*> & a, const std::vector<mpf_t*> & b);
 /**
 * @brief Calculates the orthogonal projection of the vector vec on the projection vector.
 *
-* The following formula is used:
-* \f$( ( vec . projection\_vector ) / ( projection\_vector . projection\_vector ) ) \cdot projection\_vector\f$,
-* where \f$( a . b )\f$ is dot product or scalar product.
+* The following formula is used:<br>
+* ( ( vec . projection_vector ) / ( projection_vector . projection_vector ) ) &middot; projection_vector,<br>
+* where ( a . b ) is dot product or scalar product.
 *
 * @param vec The vector which should be projected.
 * @param projection_vector The projection vector.
@@ -300,12 +300,12 @@ mpf_t* Add(const mpf_t* a, const mpf_t* b);
 */
 mpf_t* Subtract(const mpf_t* a, const mpf_t* b);
 /**
-* @brief Multiplies the value of parameter a by a factor of \f$2^p\f$.
+* @brief Multiplies the value of parameter a by a factor of 2<sup>p</sup>.
 *
 * @param a The factor.
 * @param p The exponent.
 *
-* @return \f$a \cdot 2^p\f$.
+* @return a &middot; 2<sup>p</sup>.
 */
 mpf_t* Multiply2Exp(const mpf_t* a, int p);
 /**
@@ -314,7 +314,7 @@ mpf_t* Multiply2Exp(const mpf_t* a, int p);
 * @param a The first value.
 * @param b The second value.
 *
-* @return \f$a \cdot b\f$.
+* @return a &middot; b.
 */
 mpf_t* Multiply(const mpf_t* a, const mpf_t* b);
 /**
@@ -323,7 +323,7 @@ mpf_t* Multiply(const mpf_t* a, const mpf_t* b);
 * @param a The first value.
 * @param b The second value.
 *
-* @return \f$a \cdot b\f$.
+* @return a &middot; b.
 */
 mpf_t* Multiply(const mpf_t* a, const double b);
 /**

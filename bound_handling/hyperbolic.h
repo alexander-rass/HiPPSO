@@ -48,8 +48,8 @@ namespace highprecisionpso {
 * @brief This class implements the bound handling strategy hyperbolic for the particle swarm optimization.
 *
 * This bound handling strategy applies at each step.
-* For each dimension the new velocity \f$vel[i]\f$ is scaled by \f$1/(\vert\frac{vel[i]}{av}\vert +1)\f$,
-* where \f$av\f$ is the distance to the search space bound in direction of the velocity.
+* For each dimension the new velocity vel[i] is scaled by 1/(|vel[i]/av| +1),
+* where av is the distance to the search space bound in direction of the velocity.
 * As this bound handling strategy already adjusts the velocity no further velocity adjustment is applied.
 * The new position is calculated by adding the adjusted new velocity to the old position.
 */
@@ -58,8 +58,8 @@ public:
 	/**
 	* @brief Updates the position of the particle p according to the current position and the new (already calculated) velocity.
 	*
-	* First the new velocity \f$vel[i]\f$ is scaled by \f$1/(\vert\frac{vel[i]}{av}\vert +1)\f$,
-	* where \f$av\f$ is the distance to the search space bound in direction of the velocity.
+	* First the new velocity vel[i] is scaled by 1/(|vel[i]/av| +1),
+	* where av is the distance to the search space bound in direction of the velocity.
 	* As this bound handling strategy already adjusts the velocity no further velocity adjustment is applied.
 	* The new position is calculated by adding the adjusted new velocity to the old position.
 	* 

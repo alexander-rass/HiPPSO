@@ -54,9 +54,9 @@ public:
 	*
 	* @param pos The position vector.
 	*
-	* @return \f$\sum_{d_1=0}^{D-1}\sum_{d_2=d_1+1}^{D-1}\chi_{pos[d_1]\geq pos[d_2]}\f$,
+	* @return &sum;<sub>a=0..D-1</sub>&sum;<sub>b=a+1..D-1</sub>(pos[a]&ge;pos[b]),
 	*
-	* where \f$\chi\f$ is the characteristic function.
+	* where (pos[a]&ge;pos[b]) is 1 if the inequation holds and 0 otherwise.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

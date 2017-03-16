@@ -60,7 +60,7 @@ public:
 	*
 	* @param pos The position vector.
 	*
-	* @return \f$10\cdot D+\sum_{d=1}^{D-1}(pos[d]^2-10\cos(2\pi\cdot pos[d]))\f$.
+	* @return 10 &middot; D + &sum;<sub>d=1..D-1</sub>( pos[d]<sup>2</sup> - 10 cos( 2&pi; &middot; pos[d] ) ).
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();

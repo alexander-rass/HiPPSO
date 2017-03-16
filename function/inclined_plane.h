@@ -85,7 +85,7 @@ public:
 	/**
 	* @brief Returns a weighted sum of the vector entries.
 	*
-	* Calculates the following sum: \f$-\sum_{d=0}^{D-1}(d+1)\cdot pos[d]\f$.
+	* Calculates the following sum: -&sum;<sub>d=0..D-1</sub> ( d + 1 ) &middot; pos[d].
 	*
 	* @param pos The position.
 	*

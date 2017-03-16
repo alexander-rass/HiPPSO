@@ -79,11 +79,11 @@ public:
 	/**
 	* @brief Calculates for a specific particle and a specific dimension the function difference statistic.
 	*
-	* Let \f$x\f$ be the position of the particle.
-	* Let \f$v\f$ be the velocity of the particle.
-	* Let \f$f\f$ be the objective function.
-	* Let \f$x'\f$ be a position such that \f$x'[dim] = x[dim] + v[dim]\f$ and \f$x'[d] = x[d]\f$ for all dimensions not equal to dim.
-	* Then the result of the function difference statistic is \f$abs ( f ( x ) - f ( x' ) )\f$.
+	* Let x be the position of the particle.<br>
+	* Let v be the velocity of the particle.<br>
+	* Let f be the objective function.<br>
+	* Let x' be a position such that x'[dim] = x[dim] + v[dim] and x'[d] = x[d] for all dimensions not equal to dim.<br>
+	* Then the result of the function difference statistic is abs( f ( x ) - f ( x' ) ).
 	*
 	* @param p The particle.
 	* @param dim The dimension index.
@@ -108,11 +108,11 @@ public:
 	/**
 	* @brief Calculates the scaled absolute value of the velocity plus the distance to the global attractor.
 	*
-	* Let \f$x\f$ be the position of the particle,
-	* let \f$v\f$ be the velocity of the particle,
-	* let \f$g\f$ be the global attractor of the particle
-	* and let \f$s\f$ be the scale of this potential calculator.
-	* Then the result of this potential calculation is \f$s \cdot abs ( v[dim] ) + abs ( x[dim] - g[dim] )\f$.
+	* Let x be the position of the particle,<br>
+	* let v be the velocity of the particle,<br>
+	* let g be the global attractor of the particle<br>
+	* and let s be the scale of this potential calculator.<br>
+	* Then the result of this potential calculation is (s &middot; abs( v[dim] ) + abs( x[dim] - g[dim] )).
 	*
 	* @param p The particle.
 	* @param dim The dimension index.
@@ -140,11 +140,11 @@ public:
 	/**
 	* @brief Calculates the scaled square root of the absolute value of the velocity plus the square root of the distance to the global attractor.
 	*
-	* Let \f$x\f$ be the position of the particle,
-	* let \f$v\f$ be the velocity of the particle,
-	* let \f$g\f$ be the global attractor of the particle
-	* and let \f$s\f$ be the scale of this PotentialCalculator.
-	* Then the result of this potential calculation is \f$s \cdot sqrt ( abs ( v[dim] ) ) + sqrt ( abs ( x[dim] - g[dim] ) )\f$.
+	* Let x be the position of the particle,<br>
+	* let v be the velocity of the particle,<br>
+	* let g be the global attractor of the particle<br>
+	* and let s be the scale of this PotentialCalculator.<br>
+	* Then the result of this potential calculation is (s &middot; sqrt( abs( v[dim] ) ) + sqrt( abs( x[dim] - g[dim] ) ).
 	*
 	* @param p The particle.
 	* @param dim The dimension index.
