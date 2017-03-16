@@ -10,6 +10,7 @@
   * [Installation on a Linux operating system](#installation-on-a-linux-operating-system)
 * [Usage](#usage)
 * [Examples](#examples)
+* [Documentation](#documentation)
 * [Feedback](#feedback)
 * [License](#license)
 * [Scientific Results](#scientific-results)
@@ -219,6 +220,10 @@ optimization is stopped completely. Therefore it is obvious that using larger
 precision is essential to produce reliable examples. Furthermore HiPPSO
 automatically increases precision on demand, which saves runtime on earlier
 iterations, when lower precision is sufficient.
+
+## Documentation
+
+The documentation including an API can be found on https://alexander-rass.github.io/HiPPSO/
 
 ## Feedback
 
