@@ -4,3 +4,6 @@ test_program
 
 # build folder
 build
+
+# swap files from vi/vim/gvim etc
+*.swp
