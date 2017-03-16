@@ -89,11 +89,3 @@ debug:
 debugtest:
 	make test "OPTIMIZATION=-O0" "DEBUGFLAG=-g"
 
-.PHONY: doc
-
-doc:
-	doxygen doc/doxygen.conf > /dev/null
-
-cleandoc:
-	rm -rf doc/html
-
