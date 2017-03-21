@@ -26,7 +26,7 @@ debugtest:
 .PHONY: doc
 
 doc:
-	doxygen doc/doxygen.conf > /dev/null
+	doxygen doc/Doxyfile > /dev/null
 
 cleandoc:
 	rm -rf doc/html/*

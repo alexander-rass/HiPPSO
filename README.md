@@ -1,6 +1,7 @@
-# High Precision Particle Swarm Optimization (HiPPSO) in C++
 
-## Table of Contents
+# High Precision Particle Swarm Optimization (HiPPSO) in C++<a name="high-precision-particle-swarm-optimization-hippso-in-c"></a>
+
+## Table of Contents<a name="table-of-contents"></a>
 * [High Precision Particle Swarm Optimization (HiPPSO) in C++](#high-precision-particle-swarm-optimization-hippso-in-c)
 * [Table of Contents](#table-of-contents)
 * [Description](#description)
@@ -16,7 +17,7 @@
 * [Scientific Results](#scientific-results)
 * [References](#references)
 
-## Description
+## Description<a name="description"></a>
 
 The High Precision Particle Swarm Optimization (HiPPSO) is an implementation of
 the particle swarm optimization (PSO) with highly precise data types.
@@ -44,7 +45,7 @@ attractors is the global attractor.  The movement of a particle is governed by
 so-called movement equations that depend on both the particle's velocity and
 its two attractors and on some additional fixed algorithm parameters.
 
-## Features
+## Features<a name="features"></a>
 
 The key feature of this implementation is the usage of data types with
 arbitrary precision.  Those data types are used for all relevant calculations.
@@ -72,9 +73,9 @@ available features and used. Here the arbitrary precision data type needs to be
 used, but to ease this process a large set of operations on this data type is
 already implemented.
 
-## Installation Instructions
+## Installation Instructions<a name="installation-instructions"></a>
 
-### Installation on Windows
+### Installation on Windows<a name="installation-on-windows"></a>
 
 * Install Cygwin with components gcc, m4 and make
 * Install the GMP library
@@ -94,7 +95,7 @@ already implemented.
   PATH variable. If you do this you can start the High Precision PSO program at
   any location without prefix.
   
-### Installation on a Linux operating system
+### Installation on a Linux operating system<a name="installation-on-a-linux-operating-system"></a>
 
 * Install g++ compiler, and make (if not already present).
 
@@ -111,7 +112,7 @@ already implemented.
   PATH variable. If you do this you can start the High Precision PSO program at
   any location without prefix.
 
-## Usage
+## Usage<a name="usage"></a>
 
 The program is a command line tool.  If the program is started without any
 parameters, then the available options will be displayed.
@@ -128,7 +129,7 @@ Usually the High Precision PSO program is started with parameter `c` and the nam
 of the configuration file.  For example to start the HiPPSO with the example
 configuration file one can use
 
-    ./high_precision_pso c guideline_configuration_files/example_configuration_file.conf
+`./high_precision_pso c guideline_configuration_files/example_configuration_file.conf`
 
 The HiPPSO generates various files.  At the start it generates a configuration
 backup file (extension `confBU`), which stores the chosen configuration.  Also
@@ -159,7 +160,7 @@ This option might be useful if you like to increase the number of iterations,
 or change the statistical evaluations.  The HiPPSO will then start the
 simulation at the stored iteration in the data backup file.
 
-## Examples
+## Examples<a name="examples"></a>
 
 In the examples folder some examples can be found.
 
@@ -221,17 +222,17 @@ precision is essential to produce reliable examples. Furthermore HiPPSO
 automatically increases precision on demand, which saves runtime on earlier
 iterations, when lower precision is sufficient.
 
-## Documentation
+## Documentation<a name="documentation"></a>
 
 The documentation including an API can be found on https://alexander-rass.github.io/HiPPSO/
 
-## Feedback
+## Feedback<a name="feedback"></a>
 
 Please feel free to contact Alexander Raß (Alexander.Rass@fau.de). Feedback or
 a notice that you use this program is highly appreciated. We will also support
 you in case you have problems during installation or usage of this program.
 
-## License
+## License<a name="license"></a>
 
 The MIT License (MIT)
 
@@ -258,7 +259,7 @@ SOFTWARE.
 
 See also the [license file](LICENSE.md "license file")
 
-## Scientific Results
+## Scientific Results<a name="scientific-results"></a>
 
 The following paper uses HiPPSO for experiments:
 
@@ -267,7 +268,7 @@ Explanation of Stagnation at Points that are not Local Optima in Particle Swarm 
 17th Genetic and Evolutionary Computation Conference (GECCO) <br>
 DOI: 10.1145/2739482.2764654
 
-## References
+## References<a name="references"></a>
 
 [1] R. C. Eberhart and J. Kennedy.<br>
 A new optimizer using particle swarm theory.<br>
