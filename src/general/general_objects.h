@@ -663,7 +663,7 @@ public:
 	* @brief Calculates for each dimension the distance to the nearest 1-dimensional local optimum.
 	*
 	* For each dimension the given position is observed.
-	* The position entry in the can be varied and all other position entries are regarded as constants.
+	* The position entry in the current dimension can be varied and all other position entries are regarded as constants.
 	* In this setting the nearest local optimum in respect to the specified objective function is calculated by varying the value of the current dimension.
 	* (In general this is done by some kind of ternary search.)
 	* Then the distance to the found local optimum is the value for the current position.
