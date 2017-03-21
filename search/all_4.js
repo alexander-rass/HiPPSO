@@ -22,6 +22,5 @@ var searchData=
   ['divideoperation',['DivideOperation',['../classhighprecisionpso_1_1DivideOperation.html',1,'highprecisionpso']]],
   ['dopso',['DoPso',['../namespacehighprecisionpso.html#aa7f0490e44696b3303ee7fb8bb0f43d4',1,'highprecisionpso']]],
   ['doubleconstantevaluation',['DoubleConstantEvaluation',['../classhighprecisionpso_1_1DoubleConstantEvaluation.html#aef4187682c596439ed0c86b6f4628c69',1,'highprecisionpso::DoubleConstantEvaluation']]],
-  ['doubleconstantevaluation',['DoubleConstantEvaluation',['../classhighprecisionpso_1_1DoubleConstantEvaluation.html',1,'highprecisionpso']]],
-  ['doxygen_2dbootstrapped',['doxygen-bootstrapped',['../md_doc_doxygen-bootstrapped__README.html',1,'']]]
+  ['doubleconstantevaluation',['DoubleConstantEvaluation',['../classhighprecisionpso_1_1DoubleConstantEvaluation.html',1,'highprecisionpso']]]
 ];
