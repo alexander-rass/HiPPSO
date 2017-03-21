@@ -2,7 +2,7 @@ var searchData=
 [
   ['ceil',['Ceil',['../namespacehighprecisionpso_1_1mpftoperations.html#ad9f817a2a1097d58d77bd4884a42138d',1,'highprecisionpso::mpftoperations']]],
   ['changenumberofmpftvaluescached',['ChangeNumberOfMpftValuesCached',['../namespacehighprecisionpso_1_1mpftoperations.html#a6ba6588431bd445462fc549642b21fdf',1,'highprecisionpso::mpftoperations']]],
-  ['clone',['Clone',['../namespacehighprecisionpso_1_1vectoroperations.html#a4837b267a99043c0c9687a31390b1ccb',1,'highprecisionpso::vectoroperations::Clone()'],['../namespacehighprecisionpso_1_1mpftoperations.html#a82b4216d585325e33e06257b081a73e7',1,'highprecisionpso::mpftoperations::Clone()']]],
+  ['clone',['Clone',['../namespacehighprecisionpso_1_1vectoroperations.html#a9fbf99f3c4714738b701962ef4a87c47',1,'highprecisionpso::vectoroperations::Clone()'],['../namespacehighprecisionpso_1_1mpftoperations.html#a82b4216d585325e33e06257b081a73e7',1,'highprecisionpso::mpftoperations::Clone()']]],
   ['combinefunction',['CombineFunction',['../classhighprecisionpso_1_1CombineFunction.html#a3357f5cd6c933641bdb6104f0bc771a7',1,'highprecisionpso::CombineFunction']]],
   ['combinespecificfunction',['CombineSpecificFunction',['../classhighprecisionpso_1_1CombineSpecificFunction.html#ab3b1211bf0a409c0508d0221671aeda5',1,'highprecisionpso::CombineSpecificFunction']]],
   ['combinespecificstatisticalevaluation',['CombineSpecificStatisticalEvaluation',['../classhighprecisionpso_1_1CombineSpecificStatisticalEvaluation.html#a982145938e860400fb084964da3dd57b',1,'highprecisionpso::CombineSpecificStatisticalEvaluation']]],
