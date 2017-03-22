@@ -1,7 +1,7 @@
 var searchData=
 [
   ['abs',['Abs',['../namespacehighprecisionpso_1_1mpftoperations.html#ad241cda88758a9a488ae995641b294eb',1,'highprecisionpso::mpftoperations']]],
-  ['absmodification',['AbsModification',['../classhighprecisionpso_1_1AbsModification.html',1,'highprecisionpso']]],
+  ['absoperation',['AbsOperation',['../classhighprecisionpso_1_1AbsOperation.html',1,'highprecisionpso']]],
   ['absorption_2eh',['absorption.h',['../absorption_8h.html',1,'']]],
   ['absorption_5fmark_5fdimensions_5fall_5fon_5fchange',['ABSORPTION_MARK_DIMENSIONS_ALL_ON_CHANGE',['../namespacehighprecisionpso.html#a4ed08dfdbb51ba5d3a34d1c4965f70a6af8dde73b592cad4be49a8cbcf4eb5ccd',1,'highprecisionpso']]],
   ['absorption_5fmark_5fdimensions_5fon_5fboundary',['ABSORPTION_MARK_DIMENSIONS_ON_BOUNDARY',['../namespacehighprecisionpso.html#a4ed08dfdbb51ba5d3a34d1c4965f70a6a516ef82a4d15bb7326f9ddc1124ae0e0',1,'highprecisionpso']]],
@@ -17,12 +17,12 @@ var searchData=
   ['adjustvelocity',['AdjustVelocity',['../classhighprecisionpso_1_1VelocityAdjustmentAdjust.html#a0f22e65fc7884e334b1f88024beafb32',1,'highprecisionpso::VelocityAdjustmentAdjust::AdjustVelocity()'],['../classhighprecisionpso_1_1VelocityAdjustmentDeterministicBack.html#a46067a3043dee9106f157bf2766f4f3b',1,'highprecisionpso::VelocityAdjustmentDeterministicBack::AdjustVelocity()'],['../classhighprecisionpso_1_1VelocityAdjustmentNone.html#ae5616b6b918f607aa201d445577c322e',1,'highprecisionpso::VelocityAdjustmentNone::AdjustVelocity()'],['../classhighprecisionpso_1_1VelocityAdjustmentRandomBack.html#a9f687125d3d6a12fa6d86c85a7eac82f',1,'highprecisionpso::VelocityAdjustmentRandomBack::AdjustVelocity()'],['../classhighprecisionpso_1_1VelocityAdjustment.html#a103562251b0e7d2df2e22604f2c6f109',1,'highprecisionpso::VelocityAdjustment::AdjustVelocity()'],['../classhighprecisionpso_1_1VelocityAdjustmentZero.html#a2811088938bd88a894e60a18229282df',1,'highprecisionpso::VelocityAdjustmentZero::AdjustVelocity()']]],
   ['allowedtorun',['AllowedToRun',['../namespacehighprecisionpso.html#aa410017a2666123aabba6b2590749f71',1,'highprecisionpso']]],
   ['arccos',['Arccos',['../namespacehighprecisionpso_1_1mpftoperations.html#aa4fefada85597d6253e0c8f0f7a40d14',1,'highprecisionpso::mpftoperations']]],
-  ['arccosmodification',['ArccosModification',['../classhighprecisionpso_1_1ArccosModification.html',1,'highprecisionpso']]],
+  ['arccosoperation',['ArccosOperation',['../classhighprecisionpso_1_1ArccosOperation.html',1,'highprecisionpso']]],
   ['arcsin',['Arcsin',['../namespacehighprecisionpso_1_1mpftoperations.html#a399ecdb31ef64362e482cc944c13c33c',1,'highprecisionpso::mpftoperations']]],
-  ['arcsinmodification',['ArcsinModification',['../classhighprecisionpso_1_1ArcsinModification.html',1,'highprecisionpso']]],
+  ['arcsinoperation',['ArcsinOperation',['../classhighprecisionpso_1_1ArcsinOperation.html',1,'highprecisionpso']]],
   ['arctan',['Arctan',['../namespacehighprecisionpso_1_1mpftoperations.html#a8c23bb0b6eb97166f7e794be7eeed550',1,'highprecisionpso::mpftoperations']]],
-  ['arctanmodification',['ArctanModification',['../classhighprecisionpso_1_1ArctanModification.html',1,'highprecisionpso']]],
-  ['arithmeticaveragemergeoperation',['ArithmeticAverageMergeOperation',['../classhighprecisionpso_1_1ArithmeticAverageMergeOperation.html',1,'highprecisionpso']]],
-  ['arithmeticaveragemergeoperation',['ArithmeticAverageMergeOperation',['../classhighprecisionpso_1_1ArithmeticAverageMergeOperation.html#a1c2bcf6d2418404b25668378a0622170',1,'highprecisionpso::ArithmeticAverageMergeOperation']]],
+  ['arctanoperation',['ArctanOperation',['../classhighprecisionpso_1_1ArctanOperation.html',1,'highprecisionpso']]],
+  ['arithmeticaveragereduceoperation',['ArithmeticAverageReduceOperation',['../classhighprecisionpso_1_1ArithmeticAverageReduceOperation.html',1,'highprecisionpso']]],
+  ['arithmeticaveragereduceoperation',['ArithmeticAverageReduceOperation',['../classhighprecisionpso_1_1ArithmeticAverageReduceOperation.html#afab764d2ecdc6d9178bce9bef32fcb0c',1,'highprecisionpso::ArithmeticAverageReduceOperation']]],
   ['assertcondition',['AssertCondition',['../check__condition_8h.html#ae31b85628f94b1afd86a6ef6af972e3a',1,'check_condition.h']]]
 ];

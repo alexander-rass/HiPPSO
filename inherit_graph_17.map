@@ -1,13 +1,4 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classhighprecisionpso_1_1VectorMergeOperation.html" title="This an abstract class. It supplies the interface for merging a vector of mpf_t values to a single va..." alt="" coords="5,300,171,341"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ArithmeticAverageMergeOperation.html" title="This vector merge operation merges a vector by calculation of its arithmetic average. " alt="" coords="238,5,425,47"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1FunctionEvaluationMergeOperation.html" title="This vector merge operation merges a vector by evaluation of the given function. " alt="" coords="243,71,420,112"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1GeometricAverageMergeOperation.html" title="This vector merge operation merges a vector by calculation of its geometric average. " alt="" coords="238,136,425,177"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1IncreasingOrderNthObjectMergeOperation.html" title="This vector merge operation merges a vector by sorting the vector and returning the value at the resp..." alt="" coords="229,201,434,243"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1MaximalValueMergeOperation.html" title="This vector merge operation merges a vector by calculation of its maximal entry. " alt="" coords="243,267,419,308"/>
-<area shape="rect" id="node7" href="$classhighprecisionpso_1_1MinimalValueMergeOperation.html" title="This vector merge operation merges a vector by calculation of its minimal entry. " alt="" coords="245,332,417,373"/>
-<area shape="rect" id="node8" href="$classhighprecisionpso_1_1ObjectiveFunctionEvaluationMergeOperation.html" title="This vector merge operation merges a vector by evaluation of the specified objective function..." alt="" coords="219,397,444,439"/>
-<area shape="rect" id="node9" href="$classhighprecisionpso_1_1ProductMergeOperation.html" title="This vector merge operation merges a vector by calculation of its product. " alt="" coords="245,463,417,504"/>
-<area shape="rect" id="node10" href="$classhighprecisionpso_1_1SpecificIdMergeOperation.html" title="This vector merge operation merges a vector by ignoring all values of the vector except the specified..." alt="" coords="244,528,419,569"/>
-<area shape="rect" id="node11" href="$classhighprecisionpso_1_1SumMergeOperation.html" title="This vector merge operation merges a vector by calculation of its sum. " alt="" coords="236,593,427,635"/>
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1VectorOperation.html" title="This class is an abstract class. It supplies the interface to operate on vectors of mpf_t values..." alt="" coords="5,5,171,46"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DistTo1DOptimumOperation.html" title="This vector operation calculates for each dimension the distance to the nearest 1&#45;dimensional local o..." alt="" coords="219,5,392,46"/>
 </map>

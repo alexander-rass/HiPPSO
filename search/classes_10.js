@@ -1,7 +1,7 @@
 var searchData=
 [
-  ['vectormergeoperation',['VectorMergeOperation',['../classhighprecisionpso_1_1VectorMergeOperation.html',1,'highprecisionpso']]],
-  ['vectormodification',['VectorModification',['../classhighprecisionpso_1_1VectorModification.html',1,'highprecisionpso']]],
+  ['vectoroperation',['VectorOperation',['../classhighprecisionpso_1_1VectorOperation.html',1,'highprecisionpso']]],
+  ['vectorreduceoperation',['VectorReduceOperation',['../classhighprecisionpso_1_1VectorReduceOperation.html',1,'highprecisionpso']]],
   ['velocityadjustment',['VelocityAdjustment',['../classhighprecisionpso_1_1VelocityAdjustment.html',1,'highprecisionpso']]],
   ['velocityadjustmentadjust',['VelocityAdjustmentAdjust',['../classhighprecisionpso_1_1VelocityAdjustmentAdjust.html',1,'highprecisionpso']]],
   ['velocityadjustmentdeterministicback',['VelocityAdjustmentDeterministicBack',['../classhighprecisionpso_1_1VelocityAdjustmentDeterministicBack.html',1,'highprecisionpso']]],

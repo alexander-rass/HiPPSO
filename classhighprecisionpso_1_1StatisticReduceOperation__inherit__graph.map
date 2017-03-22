@@ -1,0 +1,5 @@
+<map id="highprecisionpso::StatisticReduceOperation" name="highprecisionpso::StatisticReduceOperation">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ComposedStatisticReduceOperation.html" title="This class is an abstract class. Additionally to the statistic reduce operation it stores a vector re..." alt="" coords="230,38,421,79"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ComposedDimensionReduceOperation.html" title="This class implements a reduce operation, which reduces the values of all dimensions to a single valu..." alt="" coords="470,5,661,46"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ComposedParticleReduceOperation.html" title="This class implements a reduce operation, which reduces the values of all particles to a single value..." alt="" coords="470,70,661,111"/>
+</map>

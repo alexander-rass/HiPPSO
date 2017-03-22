@@ -1,0 +1,12 @@
+<map id="highprecisionpso::VectorReduceOperation" name="highprecisionpso::VectorReduceOperation">
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ArithmeticAverageReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its arithmetic average. " alt="" coords="243,5,429,46"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1FunctionEvaluationReduceOperation.html" title="This vector reduce operation reduces a vector by evaluation of the given function. " alt="" coords="244,70,428,111"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1GeometricAverageReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its geometric average. " alt="" coords="243,135,429,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1IncreasingOrderNthObjectReduceOperation.html" title="This vector reduce operation reduces a vector by sorting the vector and returning the value at the re..." alt="" coords="229,201,443,242"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1MaximalValueReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its maximal entry. " alt="" coords="248,266,424,307"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1MinimalValueReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its minimal entry. " alt="" coords="250,331,422,373"/>
+<area shape="rect" id="node8" href="$classhighprecisionpso_1_1ObjectiveFunctionEvaluationReduceOperation.html" title="This vector reduce operation reduces a vector by evaluation of the specified objective function..." alt="" coords="219,397,453,438"/>
+<area shape="rect" id="node9" href="$classhighprecisionpso_1_1ProductReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its product. " alt="" coords="250,462,422,503"/>
+<area shape="rect" id="node10" href="$classhighprecisionpso_1_1SpecificIdReduceOperation.html" title="This vector reduce operation reduces a vector by ignoring all values of the vector except the specifi..." alt="" coords="249,527,423,569"/>
+<area shape="rect" id="node11" href="$classhighprecisionpso_1_1SumReduceOperation.html" title="This vector reduce operation reduces a vector by calculation of its sum. " alt="" coords="237,593,435,634"/>
+</map>

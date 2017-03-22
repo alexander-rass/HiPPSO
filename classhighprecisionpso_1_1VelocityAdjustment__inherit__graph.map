@@ -1,7 +1,7 @@
 <map id="highprecisionpso::VelocityAdjustment" name="highprecisionpso::VelocityAdjustment">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1VelocityAdjustmentAdjust.html" title="This class implements the adjust velocity adjustment strategy. " alt="" coords="238,5,413,47"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1VelocityAdjustmentDeterministicBack.html" title="This class implements the deterministic back velocity adjustment strategy. " alt="" coords="228,71,423,112"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1VelocityAdjustmentNone.html" title="This class implements the none velocity adjustment strategy. " alt="" coords="238,136,413,177"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1VelocityAdjustmentRandomBack.html" title="This class implements the random back velocity adjustment strategy. " alt="" coords="238,201,413,243"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1VelocityAdjustmentZero.html" title="This class implements the zero velocity adjustment strategy. " alt="" coords="238,267,413,308"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1VelocityAdjustmentAdjust.html" title="This class implements the adjust velocity adjustment strategy. " alt="" coords="239,5,414,46"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1VelocityAdjustmentDeterministicBack.html" title="This class implements the deterministic back velocity adjustment strategy. " alt="" coords="229,70,424,111"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1VelocityAdjustmentNone.html" title="This class implements the none velocity adjustment strategy. " alt="" coords="239,135,414,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1VelocityAdjustmentRandomBack.html" title="This class implements the random back velocity adjustment strategy. " alt="" coords="239,201,414,242"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1VelocityAdjustmentZero.html" title="This class implements the zero velocity adjustment strategy. " alt="" coords="239,266,414,307"/>
 </map>

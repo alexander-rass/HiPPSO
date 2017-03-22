@@ -1,5 +1,5 @@
 <map id="src/statistics/direct_statistics.h" name="src/statistics/direct_statistics.h">
-<area shape="rect" id="node4" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="154,184,324,211"/>
-<area shape="rect" id="node7" href="$specific__statistical__evaluations_8h.html" title="This file contain classes, which can evaluate matrices depending on the current state of the particle..." alt="" coords="34,95,204,136"/>
-<area shape="rect" id="node6" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="216,259,345,285"/>
+<area shape="rect" id="node4" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="154,187,324,213"/>
+<area shape="rect" id="node7" href="$specific__statistical__evaluations_8h.html" title="This file contain classes, which can evaluate matrices depending on the current state of the particle..." alt="" coords="34,97,203,138"/>
+<area shape="rect" id="node6" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="216,261,344,288"/>
 </map>

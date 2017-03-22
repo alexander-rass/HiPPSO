@@ -1,7 +1,7 @@
 <map id="src/statistics/specific_statistical_evaluations.h" name="src/statistics/specific_statistical_evaluations.h">
-<area shape="rect" id="node2" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="125,259,274,285"/>
-<area shape="rect" id="node3" href="$parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="29,184,162,211"/>
-<area shape="rect" id="node4" href="$direct__statistics_8h.html" title="This file contain classes, which evaluate to vectors depending on the current state of the particle s..." alt="" coords="133,95,266,136"/>
-<area shape="rect" id="node6" href="$potential__calculator_8h.html" title="This file contains classes for statistical calculations. " alt="" coords="332,95,483,136"/>
-<area shape="rect" id="node5" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="238,184,412,211"/>
+<area shape="rect" id="node2" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="125,261,273,288"/>
+<area shape="rect" id="node3" href="$parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="29,187,162,213"/>
+<area shape="rect" id="node4" href="$direct__statistics_8h.html" title="This file contain classes, which evaluate to vectors depending on the current state of the particle s..." alt="" coords="133,97,266,138"/>
+<area shape="rect" id="node6" href="$potential__calculator_8h.html" title="This file contains classes for statistical calculations. " alt="" coords="332,97,482,138"/>
+<area shape="rect" id="node5" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="238,187,412,213"/>
 </map>

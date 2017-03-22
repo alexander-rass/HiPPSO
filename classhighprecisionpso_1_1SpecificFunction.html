@@ -104,7 +104,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 </div><!--header-->
 <div class="contents">
 
-<p>This class is an abstract class. It supplies an interface for modification of vectors.  
+<p>This class is an abstract class. It supplies an interface for operations on vectors.  
  <a href="classhighprecisionpso_1_1SpecificFunction.html#details">More...</a></p>
 
 <p><code>#include &lt;<a class="el" href="function_8h_source.html">function.h</a>&gt;</code></p>
@@ -113,10 +113,10 @@ Inheritance diagram for highprecisionpso::SpecificFunction:</div>
 <div class="dyncontent">
 <div class="center"><img src="classhighprecisionpso_1_1SpecificFunction__inherit__graph.png" border="0" usemap="#highprecisionpso_1_1SpecificFunction_inherit__map" alt="Inheritance graph"/></div>
 <map name="highprecisionpso_1_1SpecificFunction_inherit__map" id="highprecisionpso_1_1SpecificFunction_inherit__map">
-<area shape="rect" id="node2" href="classhighprecisionpso_1_1CombineSpecificFunction.html" title="This class implements a specific function, which combines two specific functions with an operation..." alt="" coords="229,5,407,47"/>
-<area shape="rect" id="node3" href="classhighprecisionpso_1_1ConstantSpecificFunction.html" title="This class implements a specific function with an evaluation function that always evaluates to a vect..." alt="" coords="228,71,408,112"/>
-<area shape="rect" id="node4" href="classhighprecisionpso_1_1IdentitySpecificFunction.html" title="This class implements a specific function with an evaluation function that clones the input..." alt="" coords="233,136,403,177"/>
-<area shape="rect" id="node5" href="classhighprecisionpso_1_1ModifiedSpecificFunction.html" title="This class implements a specific function, which combines a modification with a specific function..." alt="" coords="230,201,406,243"/>
+<area shape="rect" id="node2" href="classhighprecisionpso_1_1CombineSpecificFunction.html" title="This class implements a specific function, which combines two specific functions with an operation..." alt="" coords="231,5,409,46"/>
+<area shape="rect" id="node3" href="classhighprecisionpso_1_1ConstantSpecificFunction.html" title="This class implements a specific function with an evaluation function that always evaluates to a vect..." alt="" coords="230,70,410,111"/>
+<area shape="rect" id="node4" href="classhighprecisionpso_1_1IdentitySpecificFunction.html" title="This class implements a specific function with an evaluation function that clones the input..." alt="" coords="235,135,405,177"/>
+<area shape="rect" id="node5" href="classhighprecisionpso_1_1OperatedSpecificFunction.html" title="This class implements a specific function, which combines an operation with a specific function..." alt="" coords="230,201,410,242"/>
 </map>
 <center><span class="legend">[<a href="graph_legend.html">legend</a>]</span></center></div>
 <table class="memberdecls">
@@ -133,7 +133,7 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a84eb2190e2aa5367bc7fe49261471f3a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
-<div class="textblock"><p>This class is an abstract class. It supplies an interface for modification of vectors. </p>
+<div class="textblock"><p>This class is an abstract class. It supplies an interface for operations on vectors. </p>
 </div><h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a class="anchor" id="a1391b69f73ad43a43e39448a0be64ab4"></a>
 <div class="memitem">
@@ -192,7 +192,7 @@ Public Member Functions</h2></td></tr>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>The vector of function values of the position. </dd></dl>
 
-<p>Implemented in <a class="el" href="classhighprecisionpso_1_1CombineSpecificFunction.html#a66110e65afab0265f4dd20a9a96055d4">highprecisionpso::CombineSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1ModifiedSpecificFunction.html#a5c2d62e0059f83c48b25ed4ca2ac3183">highprecisionpso::ModifiedSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1IdentitySpecificFunction.html#a1b8e7a2fde254ed67c3f05aa1f0623c8">highprecisionpso::IdentitySpecificFunction</a>, and <a class="el" href="classhighprecisionpso_1_1ConstantSpecificFunction.html#a465c4b025644ca39d9c2a57918df3312">highprecisionpso::ConstantSpecificFunction</a>.</p>
+<p>Implemented in <a class="el" href="classhighprecisionpso_1_1CombineSpecificFunction.html#a66110e65afab0265f4dd20a9a96055d4">highprecisionpso::CombineSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1OperatedSpecificFunction.html#a8149a93be366a4f2ac9b4d7de5169b3e">highprecisionpso::OperatedSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1IdentitySpecificFunction.html#a1b8e7a2fde254ed67c3f05aa1f0623c8">highprecisionpso::IdentitySpecificFunction</a>, and <a class="el" href="classhighprecisionpso_1_1ConstantSpecificFunction.html#a465c4b025644ca39d9c2a57918df3312">highprecisionpso::ConstantSpecificFunction</a>.</p>
 
 </div>
 </div>
@@ -220,7 +220,7 @@ Public Member Functions</h2></td></tr>
 <p>Returns a string representation of this object. </p>
 <dl class="section return"><dt>Returns</dt><dd>The name of the object. </dd></dl>
 
-<p>Implemented in <a class="el" href="classhighprecisionpso_1_1CombineSpecificFunction.html#a7365d7e2be31d489d647d160456f898e">highprecisionpso::CombineSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1ModifiedSpecificFunction.html#a679f1a235a11d669b30627d8a4e05315">highprecisionpso::ModifiedSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1IdentitySpecificFunction.html#ae7342277cfa06451699a4f05f29c8620">highprecisionpso::IdentitySpecificFunction</a>, and <a class="el" href="classhighprecisionpso_1_1ConstantSpecificFunction.html#aaa2419afe962eca27fc741b084a151b6">highprecisionpso::ConstantSpecificFunction</a>.</p>
+<p>Implemented in <a class="el" href="classhighprecisionpso_1_1CombineSpecificFunction.html#a7365d7e2be31d489d647d160456f898e">highprecisionpso::CombineSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1OperatedSpecificFunction.html#aea65a9f3f5de087f8c7c6c1c13c64c5f">highprecisionpso::OperatedSpecificFunction</a>, <a class="el" href="classhighprecisionpso_1_1IdentitySpecificFunction.html#ae7342277cfa06451699a4f05f29c8620">highprecisionpso::IdentitySpecificFunction</a>, and <a class="el" href="classhighprecisionpso_1_1ConstantSpecificFunction.html#aaa2419afe962eca27fc741b084a151b6">highprecisionpso::ConstantSpecificFunction</a>.</p>
 
 </div>
 </div>

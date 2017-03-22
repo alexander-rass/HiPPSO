@@ -8,5 +8,5 @@ var searchData=
   ['arccos',['Arccos',['../namespacehighprecisionpso_1_1mpftoperations.html#aa4fefada85597d6253e0c8f0f7a40d14',1,'highprecisionpso::mpftoperations']]],
   ['arcsin',['Arcsin',['../namespacehighprecisionpso_1_1mpftoperations.html#a399ecdb31ef64362e482cc944c13c33c',1,'highprecisionpso::mpftoperations']]],
   ['arctan',['Arctan',['../namespacehighprecisionpso_1_1mpftoperations.html#a8c23bb0b6eb97166f7e794be7eeed550',1,'highprecisionpso::mpftoperations']]],
-  ['arithmeticaveragemergeoperation',['ArithmeticAverageMergeOperation',['../classhighprecisionpso_1_1ArithmeticAverageMergeOperation.html#a1c2bcf6d2418404b25668378a0622170',1,'highprecisionpso::ArithmeticAverageMergeOperation']]]
+  ['arithmeticaveragereduceoperation',['ArithmeticAverageReduceOperation',['../classhighprecisionpso_1_1ArithmeticAverageReduceOperation.html#afab764d2ecdc6d9178bce9bef32fcb0c',1,'highprecisionpso::ArithmeticAverageReduceOperation']]]
 ];

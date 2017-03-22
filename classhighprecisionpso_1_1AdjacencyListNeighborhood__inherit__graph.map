@@ -1,7 +1,7 @@
 <map id="highprecisionpso::AdjacencyListNeighborhood" name="highprecisionpso::AdjacencyListNeighborhood">
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1GridNeighborhood.html" title="This class implements the grid or von Neumann topology for the particle swarm. " alt="" coords="503,5,733,32"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1LBestNeighborhood.html" title="This class implements the lbest neighborhood topology for the particle swarm. " alt="" coords="497,56,739,83"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1WheelNeighborhood.html" title="This class implements the wheel topology for the particle swarm. " alt="" coords="496,107,740,133"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Neighborhood.html" title="This class is an abstract class. It supplies the interface for neighborhood topologies of the particl..." alt="" coords="5,56,212,83"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1RingNeighborhood.html" title="This class implements the ring neighborhood topology for the particle swarm. " alt="" coords="788,56,1023,83"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1GridNeighborhood.html" title="This class implements the grid or von Neumann topology for the particle swarm. " alt="" coords="506,5,737,32"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1LBestNeighborhood.html" title="This class implements the lbest neighborhood topology for the particle swarm. " alt="" coords="501,56,742,83"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1WheelNeighborhood.html" title="This class implements the wheel topology for the particle swarm. " alt="" coords="499,107,743,133"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Neighborhood.html" title="This class is an abstract class. It supplies the interface for neighborhood topologies of the particl..." alt="" coords="6,56,213,83"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1RingNeighborhood.html" title="This class implements the ring neighborhood topology for the particle swarm. " alt="" coords="792,56,1027,83"/>
 </map>

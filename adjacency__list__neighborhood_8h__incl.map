@@ -1,6 +1,6 @@
 <map id="src/neighborhood/adjacency_list_neighborhood.h" name="src/neighborhood/adjacency_list_neighborhood.h">
-<area shape="rect" id="node2" href="$neighborhood_8h.html" title="This file contains an abstract classes for neighborhood generation. " alt="" coords="68,95,259,121"/>
-<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="243,244,414,271"/>
-<area shape="rect" id="node10" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="160,169,281,196"/>
-<area shape="rect" id="node9" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="268,319,397,345"/>
+<area shape="rect" id="node2" href="$neighborhood_8h.html" title="This file contains an abstract classes for neighborhood generation. " alt="" coords="68,96,258,123"/>
+<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="243,245,414,272"/>
+<area shape="rect" id="node10" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="160,171,281,197"/>
+<area shape="rect" id="node9" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="268,320,397,347"/>
 </map>

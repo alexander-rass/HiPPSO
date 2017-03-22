@@ -1,7 +1,7 @@
 var searchData=
 [
   ['tan',['Tan',['../namespacehighprecisionpso_1_1mpftoperations.html#a9ce2e84c861f8ae4bb844aaafcf38683',1,'highprecisionpso::mpftoperations']]],
-  ['tanmodification',['TanModification',['../classhighprecisionpso_1_1TanModification.html',1,'highprecisionpso']]],
+  ['tanoperation',['TanOperation',['../classhighprecisionpso_1_1TanOperation.html',1,'highprecisionpso']]],
   ['testing_2eh',['testing.h',['../testing_8h.html',1,'']]],
   ['testing_5fupdater_2eh',['testing_updater.h',['../testing__updater_8h.html',1,'']]],
   ['testingfunction',['TestingFunction',['../classhighprecisionpso_1_1TestingFunction.html',1,'highprecisionpso']]],

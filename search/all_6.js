@@ -12,8 +12,8 @@ var searchData=
   ['function_5fbehavior_5foutside_5fof_5fbounds_5fnormal_5fevaluation',['FUNCTION_BEHAVIOR_OUTSIDE_OF_BOUNDS_NORMAL_EVALUATION',['../namespacehighprecisionpso_1_1configuration.html#aec851c70b0d3931d56acc1589f9241a0a47645d580da873564a5bcef346764909',1,'highprecisionpso::configuration']]],
   ['function_5fbehavior_5foutside_5fof_5fbounds_5fperiodic',['FUNCTION_BEHAVIOR_OUTSIDE_OF_BOUNDS_PERIODIC',['../namespacehighprecisionpso_1_1configuration.html#aec851c70b0d3931d56acc1589f9241a0a2e9e14ed64013ff6f7735527a5aef01c',1,'highprecisionpso::configuration']]],
   ['functionbehavioroutsideofboundsmode',['FunctionBehaviorOutsideOfBoundsMode',['../namespacehighprecisionpso_1_1configuration.html#aec851c70b0d3931d56acc1589f9241a0',1,'highprecisionpso::configuration']]],
-  ['functionevaluationmergeoperation',['FunctionEvaluationMergeOperation',['../classhighprecisionpso_1_1FunctionEvaluationMergeOperation.html#afde31e7a90081a310c79d80a6303771a',1,'highprecisionpso::FunctionEvaluationMergeOperation']]],
-  ['functionevaluationmergeoperation',['FunctionEvaluationMergeOperation',['../classhighprecisionpso_1_1FunctionEvaluationMergeOperation.html',1,'highprecisionpso']]],
-  ['functionmergeoperator',['FunctionMergeOperator',['../classhighprecisionpso_1_1FunctionMergeOperator.html',1,'highprecisionpso']]],
-  ['functionmergeoperator',['FunctionMergeOperator',['../classhighprecisionpso_1_1FunctionMergeOperator.html#ad56774481c71991c9e0993ccac5db86d',1,'highprecisionpso::FunctionMergeOperator']]]
+  ['functionevaluationreduceoperation',['FunctionEvaluationReduceOperation',['../classhighprecisionpso_1_1FunctionEvaluationReduceOperation.html#a10f75a714360ebf2ea0274afc0f26074',1,'highprecisionpso::FunctionEvaluationReduceOperation']]],
+  ['functionevaluationreduceoperation',['FunctionEvaluationReduceOperation',['../classhighprecisionpso_1_1FunctionEvaluationReduceOperation.html',1,'highprecisionpso']]],
+  ['functionreduceoperator',['FunctionReduceOperator',['../classhighprecisionpso_1_1FunctionReduceOperator.html',1,'highprecisionpso']]],
+  ['functionreduceoperator',['FunctionReduceOperator',['../classhighprecisionpso_1_1FunctionReduceOperator.html#a9439abcee829a64837d8c04b45e6773e',1,'highprecisionpso::FunctionReduceOperator']]]
 ];
