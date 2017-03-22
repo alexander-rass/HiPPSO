@@ -18,7 +18,4 @@ RemoteSystemsTempFiles
 # documentation data
 /doc/html
 
-# automatically generated md file for doxygen mainpage
-/doc/DOXYGEN_README.md
-
 

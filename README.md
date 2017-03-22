@@ -175,7 +175,7 @@ In the [examples folder](https://github.com/alexander-rass/HiPPSO/tree/master/ex
 some examples can be found.
 
 `example_01` starts a particle swarm with four particles on the sphere function
-<nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr>
+(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)
 in two dimensions. The used configuration file is
 [example_01.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.conf).
 A statistic is generatet, which contains the objective function value of the
@@ -197,7 +197,7 @@ in the folder of the generated png files)
 But even in higher dimensions the swarm can be displayed very well by this
 software.  `example_02` starts a particle swarm with eight particles on the
 sphere function
-<nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr>
+(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)
 in eight dimensions. The used configuration file is
 [example_02.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_02.conf).
 The debug swarm directive created a folder with gnuplot scripts.  After
@@ -218,7 +218,7 @@ The explicit advantage of this software is the opportunity to activate self
 adjusting precision.  `example_03` displays the development of the global
 attractor value of the HiPPSO optimizing the three-dimensional Rosenbrock
 function
-<nobr>(f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) )</nobr>
+(f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) )
 with four particles. The used configuration files are
 [example_03a.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03a.conf)
 (configuration with self adjusting precision) and

@@ -26,7 +26,6 @@ debugtest:
 .PHONY: doc
 
 doc:
-	sed -e "s#<nobr>#\\\\htmlonly<nobr>#g" -e "s#</nobr>#</nobr>\\\\endhtmlonly#g" README.md > doc/DOXYGEN_README.md &&\
 	doxygen doc/Doxyfile > /dev/null
 
 cleandoc:
