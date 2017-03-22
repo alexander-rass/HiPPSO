@@ -14,6 +14,5 @@ var searchData=
   ['loge',['LogE',['../namespacehighprecisionpso_1_1mpftoperations.html#aac901f880c79453fa2cec7ff9ab22919',1,'highprecisionpso::mpftoperations']]],
   ['logeoperation',['LogEOperation',['../classhighprecisionpso_1_1LogEOperation.html',1,'highprecisionpso']]],
   ['lower_5fbound',['lower_bound',['../classhighprecisionpso_1_1configuration_1_1InitializationInformation.html#abdc4d3dce9fd8d9a82c1885c3ad0a9f9',1,'highprecisionpso::configuration::InitializationInformation']]],
-  ['lower_5fsearch_5fspace_5fbound',['lower_search_space_bound',['../classhighprecisionpso_1_1SearchSpaceBound.html#ac1639160fd589a73fdf92234042ec4ed',1,'highprecisionpso::SearchSpaceBound']]],
-  ['license',['LICENSE',['../md_LICENSE.html',1,'']]]
+  ['lower_5fsearch_5fspace_5fbound',['lower_search_space_bound',['../classhighprecisionpso_1_1SearchSpaceBound.html#ac1639160fd589a73fdf92234042ec4ed',1,'highprecisionpso::SearchSpaceBound']]]
 ];

@@ -46,7 +46,6 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
   <div id="navrow1" class="tabs">
     <ul class="tablist">
       <li class="current"><a href="index.html"><span>Main&#160;Page</span></a></li>
-      <li><a href="pages.html"><span>Related&#160;Pages</span></a></li>
       <li><a href="namespaces.html"><span>Namespaces</span></a></li>
       <li><a href="annotated.html"><span>Classes</span></a></li>
       <li><a href="files.html"><span>Files</span></a></li>
@@ -94,6 +93,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li><a href="#table-of-contents">Table of Contents</a></li>
 <li><a href="#description">Description</a></li>
 <li><a href="#features">Features</a></li>
+<li><a href="#download">Download</a></li>
 <li><a href="#installation-instructions">Installation Instructions</a><ul>
 <li><a href="#installation-on-windows">Installation on Windows</a></li>
 <li><a href="#installation-on-a-linux-operating-system">Installation on a Linux operating system</a></li>
@@ -115,6 +115,8 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>The key feature of this implementation is the usage of data types with arbitrary precision. Those data types are used for all relevant calculations. Here the precision is meant as the number of bits of the mantissa of the floating point data type. Either the precision can be set to a fixed value or the precision can be set adjustable. If the precision is set adjustable, then the software autonomously increases the precision to avoid errors related to imprecise evaluations. With this implementation one can get as close to actual real numbers as possible.</p>
 <p>In addition this software is highly adaptable. Many options for the particle swarm are already implemented. There are a plenty of already defined objective functions, neighborhood topologies and bound handling strategies. For analysis of the particle swarm there are also a plenty of statistical evaluations, which can be displayed. Furthermore the objective functions and the statistical evaluations are highly modularized to enable the user to specify them on demand.</p>
 <p>If the available options are not sufficient, then it is possible to implement further possibilities (Further objective functions, neighborhood topologies, statistical evaluations, bound handling strategies, velocity adjustment strategies, position and velocity update procedures, ...). Only the respective interfaces need to be implemented and then new idea can be added to the available features and used. Here the arbitrary precision data type needs to be used, but to ease this process a large set of operations on this data type is already implemented.</p>
+<h2>Download<a class="anchor" id="download"></a></h2>
+<p>The source code and all further data can be downloaded from the <a href="https://github.com/alexander-rass/HiPPSO/">github-repository</a>.</p>
 <h2>Installation Instructions<a class="anchor" id="installation-instructions"></a></h2>
 <h3>Installation on Windows<a class="anchor" id="installation-on-windows"></a></h3>
 <ul>
@@ -132,7 +134,7 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>It might be necessary to copy the library <code>libgmp.a</code> and <code>libgmp.la</code> from <code>/usr/local/lib</code> to <code>/lib</code> to ensure that it is recognized.</li>
 </ul>
 </li>
-<li>Download and unzip the High Precision PSO sources and switch to that folder.</li>
+<li><a href="https://github.com/alexander-rass/HiPPSO/">Download</a> and unzip the High Precision PSO sources and switch to that folder.</li>
 <li>Execute <code>make</code> to generate the executable file (<code>high_precision_pso.exe</code>).</li>
 <li>The executable file can be moved to any location - it contains the whole program. For example you can move it to a folder, which is included in your PATH variable. If you do this you can start the High Precision PSO program at any location without prefix.</li>
 </ul>
@@ -146,13 +148,13 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <li>Alternatively you can install it as described in the Windows section.</li>
 </ul>
 </li>
-<li>Download and unzip the High Precision PSO sources and switch to that folder.</li>
+<li><a href="https://github.com/alexander-rass/HiPPSO/">Download</a> and unzip the High Precision PSO sources and switch to that folder.</li>
 <li>Execute <code>make</code> to generate the executable file (<code>high_precision_pso</code>).</li>
 <li>The executable file can be moved to any location - it contains the whole program. For example you can move it to a folder, which is included in your PATH variable. If you do this you can start the High Precision PSO program at any location without prefix.</li>
 </ul>
 <h2>Usage<a class="anchor" id="usage"></a></h2>
 <p>The program is a command line tool. If the program is started without any parameters, then the available options will be displayed.</p>
-<p>The behavior is specified in a configuration file. Examples and explanations of all options, which can be used in the configuration files, can be found in the sub-folder <code>guideline_configuration_files</code>. An exception is the file <code>runcheck.conf</code>. If the runcheck option is activated in the normal configuration files, then it can be specified, when the program is allowed to run. As the runcheck configuration file is parsed multiple times this can be used to terminate the program without losing any information.</p>
+<p>The behavior is specified in a configuration file. Examples and explanations of all options, which can be used in the configuration files, can be found in the sub-folder <a href="https://github.com/alexander-rass/HiPPSO/tree/master/guideline_configuration_files">guideline_configuration_files</a>. An exception is the file <a href="https://github.com/alexander-rass/HiPPSO/blob/master/guideline_configuration_files/runcheck.conf">runcheck.conf</a>. If the runcheck option is activated in the normal configuration files, then it can be specified, when the program is allowed to run. As the runcheck configuration file is parsed periodically during runtime this can be used to terminate the program in a clean way without losing any information.</p>
 <p>Usually the High Precision PSO program is started with parameter <code>c</code> and the name of the configuration file. For example to start the HiPPSO with the example configuration file one can use</p>
 <p><code>./high_precision_pso c guideline_configuration_files/example_configuration_file.conf</code></p>
 <p>The HiPPSO generates various files. At the start it generates a configuration backup file (extension <code>confBU</code>), which stores the chosen configuration. Also at the start a log file (extension <code>log</code>) is created, which stores when the HiPPSO starts / stops / restarts / finishes simulation of the particle swarm. Approximately each minute (and at clean termination) a data backup file (extension <code>backup</code>) is generated, which stores all information about the current state such that it can be recovered. Additionally for each specified statistic a data file will be generated, which contains the evaluated statistical data. If also the debug swarm directive is activated in the configuration file, then an additional folder is created with the name of the prefix of the other files. In this folder gnuplot input files are created and a script to create images out of them. gnuplot needs to be installed to generate images.</p>
@@ -160,31 +162,27 @@ var searchBox = new SearchBox("searchBox", "search",false,'Search');
 <p>If the HiPPSO has been illegally terminated, then one can try to restart with parameter <code>rf</code> and the name of the configuration backup file, which has extension <code>confBU</code>.</p>
 <p>Additionally the HiPPSO can restart with a configuration file and a data backup file. For this purpose one can use the parameter <code>restart</code> followed by the name of the configuration file followed by the name of the data backup file. This option might be useful if you like to increase the number of iterations, or change the statistical evaluations. The HiPPSO will then start the simulation at the stored iteration in the data backup file.</p>
 <h2>Examples<a class="anchor" id="examples"></a></h2>
-<p>In the examples folder some examples can be found.</p>
-<p><code>example_01</code> starts a particle swarm with four particles on the sphere function (f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>) in two dimensions. The used configuration file is <code>example_01.conf</code>. A statistic is generatet, which contains the objective function value of the best found position. In combination with the short gnuplot script <code>example_01.STAT.GlBestFuncValue.gnuplot.txt</code> the following figure can be produced:</p>
+<p>In the <a href="https://github.com/alexander-rass/HiPPSO/tree/master/examples">examples folder</a> some examples can be found.</p>
+<p><code>example_01</code> starts a particle swarm with four particles on the sphere function  <nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr> in two dimensions. The used configuration file is <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.conf">example_01.conf</a>. A statistic is generatet, which contains the objective function value of the best found position. In combination with the short gnuplot script <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.STAT.GlBestFuncValue.gnuplot">example_01.STAT.GlBestFuncValue.gnuplot</a>. the following figure can be produced:</p>
 <div class="image">
-<img src="example_01.STAT.GlBestFuncValue.png" alt="example_01.STAT.GlBestFuncValue.png"/>
-<div class="caption">
-trend of the objective function value of the best found position</div></div>
-<p> Additionally the debug swarm directive created a folder with gnuplot scripts. After executing the script the images look like this:</p>
+<img src="https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_01.STAT.GlBestFuncValue.png"  alt="trend of the objective function value of the best found position" title="trend of the objective function value of the best found position"/>
+</div>
+<p>Additionally the debug swarm directive created a folder with gnuplot scripts. After executing the script the images look like this:</p>
 <div class="image">
-<img src="example_01.animation.gif" alt="example_01.animation.gif"/>
-<div class="caption">
-particles and attractors</div></div>
-<p> (This gif is produced by the command <code>convert -delay 50 -loop 0 *.png \( +clone -set delay 500 \) +swap +delete animation.gif</code> in the folder of the generated png files)</p>
-<p>But even in higher dimensions the swarm can be displayed very well by this software. <code>example_02</code> starts a particle swarm with eight particles on the sphere function (f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>) in eight dimensions. The used configuration file ist <code>example_02.conf</code>. The debug swarm directive created a folder with gnuplot scripts. After executing the script the images look like this:</p>
+<img src="https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_01.animation.gif"  alt="particles and attractors" title="particles and attractors"/>
+</div>
+<p>(This gif is produced by the command <code>convert -delay 50 -loop 0 *.png \( +clone -set delay 500 \) +swap +delete animation.gif</code> in the folder of the generated png files)</p>
+<p>But even in higher dimensions the swarm can be displayed very well by this software. <code>example_02</code> starts a particle swarm with eight particles on the sphere function  <nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr> in eight dimensions. The used configuration file is <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_02.conf">example_02.conf</a>. The debug swarm directive created a folder with gnuplot scripts. After executing the script the images look like this:</p>
 <div class="image">
-<img src="example_02.animation.gif" alt="example_02.animation.gif"/>
-<div class="caption">
-particles and attractors</div></div>
-<p> (This gif is produced by the command <code>convert -delay 100 -loop 0 *.png \( +clone -set delay 500 \) +swap +delete -resize 50% animation.gif</code> in the folder of the generated png files)</p>
+<img src="https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_02.animation.gif"  alt="particles and attractors" title="particles and attractors"/>
+</div>
+<p>(This gif is produced by the command <code>convert -delay 100 -loop 0 *.png \( +clone -set delay 500 \) +swap +delete -resize 50% animation.gif</code> in the folder of the generated png files)</p>
 <p>If this visualization is not suitable, then the bare data of particle positions, local and global attractor positions, velocities and anything else can be extracted by statistics. Through this statistics everyone can display the data in the preferred way.</p>
-<p>The explicit advantage of this software is the opportunity to activate self adjusting precision. <code>example_03</code> displays the developement of the global attractor value of the HiPPSO optimizing the three-dimensional Rosenbrock function (f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) ) with four particles. The used configuration files are <code>example_03a.conf</code> (configuration with self adjusting precision) and <code>example_03b.conf</code> (configuration with constant precision). A statistic is generatet, which contains the objective function value of the best found position. In combination with the short gnuplot script <code>example_03.STAT.GlBestFuncValue.gnuplot.txt</code> the following figure can be produced:</p>
+<p>The explicit advantage of this software is the opportunity to activate self adjusting precision. <code>example_03</code> displays the development of the global attractor value of the HiPPSO optimizing the three-dimensional Rosenbrock function  <nobr>(f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) )</nobr> with four particles. The used configuration files are <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03a.conf">example_03a.conf</a> (configuration with self adjusting precision) and <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03b.conf">example_03b.conf</a> (configuration with constant precision). A statistic is generatet, which contains the objective function value of the best found position. In combination with the short gnuplot script <a href="https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03.STAT.GlBestFuncValue.gnuplot">example_03.STAT.GlBestFuncValue.gnuplot</a> the following figure can be produced:</p>
 <div class="image">
-<img src="example_03.STAT.GlBestFuncValue.png" alt="example_03.STAT.GlBestFuncValue.png"/>
-<div class="caption">
-trend of the objective function value of the best found position</div></div>
-<p> This image visualizes the limitations of constant precision, which is present in usual floating point calculations, compared to the actual behaviour. As the position differences become small the actual differences can not be stored correctly to ensure correct transformation of the mathematical idea of PSO to the actual optimization procedure. This results in a situation where optimization is stopped completely. Therefore it is obvious that using larger precision is essential to produce reliable examples. Furthermore HiPPSO automatically increases precision on demand, which saves runtime on earlier iterations, when lower precision is sufficient.</p>
+<img src="https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_03.STAT.GlBestFuncValue.png"  alt="trend of the objective function value of the best found position" title="trend of the objective function value of the best found position"/>
+</div>
+<p>This image visualizes the limitations of constant precision, which is present in usual floating point calculations, compared to the actual behaviour. As the position differences become small the actual differences can not be stored correctly to ensure correct transformation of the mathematical idea of PSO to the actual optimization procedure. This results in a situation where optimization is stopped completely. Therefore it is obvious that using larger precision is essential to produce reliable examples. Furthermore HiPPSO automatically increases precision on demand, which saves runtime on earlier iterations, when lower precision is sufficient.</p>
 <h2>Documentation<a class="anchor" id="documentation"></a></h2>
 <p>The documentation including an API can be found on the related <a href="https://alexander-rass.github.io/HiPPSO/">github-pages</a> of this repository. It is generated by doxygen. For customizing the output of doxygen some files from the <a href="https://github.com/Velron/doxygen-bootstrapped">doxygen-bootstrapped</a> repository of <a href="https://github.com/Velron">Velron</a> are used. It is added as a submodule and has an <a href="https://www.apache.org/licenses/LICENSE-2.0">Apache 2.0 license</a>.</p>
 <h2>Feedback<a class="anchor" id="feedback"></a></h2>
@@ -195,7 +193,7 @@ trend of the objective function value of the best found position</div></div>
 <p>Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the Software is furnished to do so, subject to the following conditions:</p>
 <p>The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.</p>
 <p>THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.</p>
-<p>See also the <a class="el" href="md_LICENSE.html">license file</a></p>
+<p>See also the <a href="https://github.com/alexander-rass/HiPPSO/blob/master/LICENSE">license file</a>.</p>
 <h2>Scientific Results<a class="anchor" id="scientific-results"></a></h2>
 <p>The following paper uses HiPPSO for experiments:</p>
 <p>Raß A., Schmitt M., Wanka R.: <br />
