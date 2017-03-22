@@ -45,18 +45,18 @@
 
 namespace highprecisionpso {
 
-FunctionMergeOperator::FunctionMergeOperator(VectorMergeOperation* vector_merge_operation, SpecificFunction* specific_function):vector_merge_operation_(vector_merge_operation), specific_function_(specific_function){}
+FunctionReduceOperator::FunctionReduceOperator(VectorReduceOperation* vector_reduce_operation, SpecificFunction* specific_function):vector_reduce_operation_(vector_reduce_operation), specific_function_(specific_function){}
 
-mpf_t* FunctionMergeOperator::Eval(const std::vector<mpf_t*> & vec){
+mpf_t* FunctionReduceOperator::Eval(const std::vector<mpf_t*> & vec){
 	std::vector<mpf_t*> tmp = specific_function_->Eval(vec);
-	mpf_t* res = vector_merge_operation_->Evaluate(tmp);
+	mpf_t* res = vector_reduce_operation_->Evaluate(tmp);
 	vectoroperations::ReleaseValues(tmp);
 	return res;
 }
 
-std::string FunctionMergeOperator::GetName(){
+std::string FunctionReduceOperator::GetName(){
 	std::ostringstream os;
-	os << vector_merge_operation_->GetName() << specific_function_->GetName();
+	os << vector_reduce_operation_->GetName() << specific_function_->GetName();
 	return os.str();
 }
 
@@ -75,7 +75,7 @@ std::string OperatedFunction::GetName(){
 	return os.str();
 }
 
-CombineFunction::CombineFunction(PairCombinationOperation* operation, Function* operator1, Function* operator2):operation_(operation), operator1_(operator1), operator2_(operator2){}
+CombineFunction::CombineFunction(PairReduceOperation* operation, Function* operator1, Function* operator2):operation_(operation), operator1_(operator1), operator2_(operator2){}
 
 mpf_t* CombineFunction::Eval(const std::vector<mpf_t*> & vec){
 	mpf_t* res1 = operator1_->Eval(vec);

@@ -97,7 +97,7 @@ SpecificFunction* ParseCombineSpecificFunction(const std::vector<std::string> & 
 		parsed_parameters = mem_parsed_parameters;
 		return NULL;
 	}
-	PairCombinationOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
+	PairReduceOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
 	SpecificFunction* operator1 = ParseSpecificFunction(parameters, parsed_parameters);
 	SpecificFunction* operator2 = ParseSpecificFunction(parameters, parsed_parameters);
 	if(combinationOperation == NULL || operator1 == NULL || operator2 == NULL){
@@ -107,23 +107,23 @@ SpecificFunction* ParseCombineSpecificFunction(const std::vector<std::string> & 
 	return new CombineSpecificFunction(combinationOperation, operator1, operator2);
 }
 
-Function* ParseFunctionMergeOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
+Function* ParseFunctionReduceOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
 	if(parsed_parameters == parameters.size()){
 		return NULL;
 	}
 	unsigned int mem_parsed_parameters = parsed_parameters;
 	std::string parameter = parameters[parsed_parameters++];
-	if(parameter != "merge"){
+	if(parameter != "merge" && parameter != "reduce"){
 		parsed_parameters = mem_parsed_parameters;
 		return NULL;
 	}
-	VectorMergeOperation* mergeOperation = ParseVectorMergeOperation(parameters, parsed_parameters);
+	VectorReduceOperation* reduceOperation = ParseVectorReduceOperation(parameters, parsed_parameters);
 	SpecificFunction* specificFunction = ParseSpecificFunction(parameters, parsed_parameters);
-	if(mergeOperation == NULL || specificFunction == NULL){
+	if(reduceOperation == NULL || specificFunction == NULL){
 		parsed_parameters = parameters.size();
 		return NULL;
 	}
-	return new FunctionMergeOperator(mergeOperation, specificFunction);
+	return new FunctionReduceOperator(reduceOperation, specificFunction);
 }
 
 Function* ParseStandardFunction(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
@@ -361,11 +361,11 @@ Function* ParseFunction(const std::vector<std::string> & parameters, unsigned in
 			parsedFunction = combineFunction;
 		}
 	}
-	// parse merged function
+	// parse reduced function
 	if(parsedFunction == NULL){
-		Function* mergedFunction = ParseFunctionMergeOperator(parameters, parsed_parameters);
-		if(mergedFunction != NULL){
-			parsedFunction = mergedFunction;
+		Function* reducedFunction = ParseFunctionReduceOperator(parameters, parsed_parameters);
+		if(reducedFunction != NULL){
+			parsedFunction = reducedFunction;
 		}
 	}
 	// parse constant function
@@ -409,7 +409,7 @@ Function* ParseCombineFunction(const std::vector<std::string> & parameters, unsi
 		parsed_parameters = mem_parsed_parameters;
 		return NULL;
 	}
-	PairCombinationOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
+	PairReduceOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
 	Function* operator1 = ParseFunction(parameters, parsed_parameters);
 	Function* operator2 = ParseFunction(parameters, parsed_parameters);
 	if(combinationOperation == NULL || operator1 == NULL || operator2 == NULL){
@@ -472,12 +472,12 @@ Operation* ParseOperation(const std::vector<std::string> & parameters, unsigned 
 	return NULL;
 }
 
-PairCombinationOperation* ParsePairCombinationOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
+PairReduceOperation* ParsePairCombinationOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
 	if(parsed_parameters == parameters.size()){
 		return NULL;
 	}
 	std::string parameter = parameters[parsed_parameters++];
-	PairCombinationOperation* combinationOperation = NULL;
+	PairReduceOperation* combinationOperation = NULL;
 	if(parameter == "+") {
 		combinationOperation = new AddOperation;
 	} else if(parameter == "-") {
@@ -530,7 +530,7 @@ SpecificStatisticalEvaluation* ParseCombineSpecificStatistic(const std::vector<s
 		return NULL;
 	}
 	parsed_parameters++;
-	PairCombinationOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
+	PairReduceOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
 	if(combinationOperation == NULL){
 		parsed_parameters = parameters.size();
 		return NULL;
@@ -618,7 +618,7 @@ SpecificStatisticalEvaluation* ParseSpecificStatistic(const std::vector<std::str
 	return NULL;
 }
 
-VectorMergeOperation* ParseVectorMergeOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
+VectorReduceOperation* ParseVectorReduceOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
 	if(parsed_parameters == parameters.size()){
 		return NULL;
 	}
@@ -634,7 +634,7 @@ VectorMergeOperation* ParseVectorMergeOperation(const std::vector<std::string> &
 			parsed_parameters = parameters.size();
 			return NULL;
 		}
-		return new SpecificIdMergeOperation(id);
+		return new SpecificIdReduceOperation(id);
 	} else if(parameter == "increasingOrderNthObject") {
 		if(parsed_parameters >= parameters.size()){
 			return NULL;
@@ -645,41 +645,41 @@ VectorMergeOperation* ParseVectorMergeOperation(const std::vector<std::string> &
 			parsed_parameters = parameters.size();
 			return NULL;
 		}
-		return new IncreasingOrderNthObjectMergeOperation(order_id);
+		return new IncreasingOrderNthObjectReduceOperation(order_id);
 	} else if(parameter == "arithmeticAverage") {
-		return new ArithmeticAverageMergeOperation;
+		return new ArithmeticAverageReduceOperation;
 	} else if(parameter == "geometricAverage") {
-		return new GeometricAverageMergeOperation;
+		return new GeometricAverageReduceOperation;
 	} else if(parameter == "sum") {
-		return new SumMergeOperation;
+		return new SumReduceOperation;
 	} else if(parameter == "product") {
-		return new ProductMergeOperation;
+		return new ProductReduceOperation;
 	} else if(parameter == "maximum") {
-		return new MaximalValueMergeOperation;
+		return new MaximalValueReduceOperation;
 	} else if(parameter == "minimum") {
-		return new MinimalValueMergeOperation;
+		return new MinimalValueReduceOperation;
 	} else if(parameter == "functionEvaluation") {
 		Function* evalFunc = ParseFunction(parameters, parsed_parameters);
 		if(evalFunc == NULL){
 			parsed_parameters = mem_parsed_parameters;
 			return NULL;
 		}
-		return new FunctionEvaluationMergeOperation(evalFunc);
+		return new FunctionEvaluationReduceOperation(evalFunc);
 	} else if(parameter == "objectiveFunctionEvaluation") {
-		return new ObjectiveFunctionEvaluationMergeOperation;
+		return new ObjectiveFunctionEvaluationReduceOperation;
 	} else {
 		parsed_parameters = mem_parsed_parameters;
 		return NULL;
 	}
 }
 
-Statistic* ParseMergeOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
+Statistic* ParseReduceOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
 	if(parsed_parameters == parameters.size()){
 		return NULL;
 	}
 	unsigned int mem_parsed_parameters = parsed_parameters;
 	std::string parameter = parameters[parsed_parameters++];
-	if(parameter != "merge") {
+	if(parameter != "merge" && parameter != "reduce") {
 		parsed_parameters = mem_parsed_parameters;
 		return NULL;
 	}
@@ -687,21 +687,21 @@ Statistic* ParseMergeOperator(const std::vector<std::string> & parameters, unsig
 		return NULL;
 	}
 	parameter = parameters[parsed_parameters++];
-	StatisticMergeOperation* mergeOperation = NULL;
+	StatisticReduceOperation* reduceOperation = NULL;
 	if(parameter == "particle") {
-		VectorMergeOperation* vectorMergeOperation = ParseVectorMergeOperation(parameters, parsed_parameters);
-		if(vectorMergeOperation == NULL){
+		VectorReduceOperation* vectorReduceOperation = ParseVectorReduceOperation(parameters, parsed_parameters);
+		if(vectorReduceOperation == NULL){
 			parsed_parameters = parameters.size();
 			return NULL;
 		}
-		mergeOperation = new ComposedParticleMergeOperation(vectorMergeOperation);
+		reduceOperation = new ComposedParticleReduceOperation(vectorReduceOperation);
 	} else if(parameter == "dimension") {
-		VectorMergeOperation* vectorMergeOperation = ParseVectorMergeOperation(parameters, parsed_parameters);
-		if(vectorMergeOperation == NULL){
+		VectorReduceOperation* vectorReduceOperation = ParseVectorReduceOperation(parameters, parsed_parameters);
+		if(vectorReduceOperation == NULL){
 			parsed_parameters = parameters.size();
 			return NULL;
 		}
-		mergeOperation = new ComposedDimensionMergeOperation(vectorMergeOperation);
+		reduceOperation = new ComposedDimensionReduceOperation(vectorReduceOperation);
 	} else {
 		parsed_parameters = parameters.size();
 		return NULL;
@@ -711,7 +711,7 @@ Statistic* ParseMergeOperator(const std::vector<std::string> & parameters, unsig
 		parsed_parameters = parameters.size();
 		return NULL;
 	}
-	return new StatisticMergeOperator(mergeOperation, specificEvaluation);
+	return new StatisticReduceOperator(reduceOperation, specificEvaluation);
 }
 
 Statistic* ParseCombineStatistic(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
@@ -723,7 +723,7 @@ Statistic* ParseCombineStatistic(const std::vector<std::string> & parameters, un
 		return NULL;
 	}
 	parsed_parameters++;
-	PairCombinationOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
+	PairReduceOperation* combinationOperation = ParsePairCombinationOperation(parameters, parsed_parameters);
 	if(combinationOperation == NULL){
 		parsed_parameters = parameters.size();
 		return NULL;
@@ -758,11 +758,11 @@ Statistic* ParseStatistic(const std::vector<std::string> & parameters, unsigned 
 			}
 		}
 	}
-	// check merge operator
+	// check reduce operator
 	{
-		Statistic* mergeOperator = ParseMergeOperator(parameters, parsed_parameters);
-		if(mergeOperator != NULL){
-			return mergeOperator;
+		Statistic* reduceOperator = ParseReduceOperator(parameters, parsed_parameters);
+		if(reduceOperator != NULL){
+			return reduceOperator;
 		}
 	}
 	if(parsed_parameters == parameters.size()){

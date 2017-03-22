@@ -125,7 +125,7 @@ public:
 	* @param operator1 The first parameter of the operation.
 	* @param operator2 The second parameter of the operation.
 	*/
-	CombineSpecificFunction(PairCombinationOperation* operation, SpecificFunction* operator1, SpecificFunction* operator2);
+	CombineSpecificFunction(PairReduceOperation* operation, SpecificFunction* operator1, SpecificFunction* operator2);
 	/**
 	* @brief Returns the evaluation of the combination of the two specific functions.
 	*
@@ -137,7 +137,7 @@ public:
 	std::string GetName();
 
 private:
-	PairCombinationOperation* operation_;
+	PairReduceOperation* operation_;
 	SpecificFunction* operator1_;
 	SpecificFunction* operator2_;
 };

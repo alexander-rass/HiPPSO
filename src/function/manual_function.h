@@ -50,29 +50,29 @@
 namespace highprecisionpso {
 
 /**
-* @brief This class is a function, which merges a specific function to a function with a vector merge operation.
+* @brief This class is a function, which reduces a specific function to a function with a vector reduce operation.
 */
-class FunctionMergeOperator : public Function {
+class FunctionReduceOperator : public Function {
 public:
 	/**
-	* @brief The constructor, where the specific function, which should be merged, and the vector merge operation can be specified.
+	* @brief The constructor, where the specific function, which should be reduced, and the vector reduce operation can be specified.
 	*
-	* @param vector_merge_operation The merge operation.
-	* @param specific_function The specific function, which should be merged.
+	* @param vector_reduce_operation The reduce operation.
+	* @param specific_function The specific function, which should be reduced.
 	*/
-	FunctionMergeOperator(VectorMergeOperation* vector_merge_operation, SpecificFunction* specific_function);
+	FunctionReduceOperator(VectorReduceOperation* vector_reduce_operation, SpecificFunction* specific_function);
 	/**
-	* @brief Merges the result of the stored specific function by the stored vector merge operation.
+	* @brief Reduces the result of the stored specific function by the stored vector reduce operation.
 	*
 	* @param pos The position for evaluation of the specific function.
 	*
-	* @return The merged result.
+	* @return The reduced result.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
 
 private:
-	VectorMergeOperation* vector_merge_operation_;
+	VectorReduceOperation* vector_reduce_operation_;
 	SpecificFunction* specific_function_;
 };
 
@@ -115,7 +115,7 @@ public:
 	* @param operator1 The first parameter of the operation.
 	* @param operator2 The second parameter of the operation.
 	*/
-	CombineFunction(PairCombinationOperation* operation, Function* operator1, Function* operator2);
+	CombineFunction(PairReduceOperation* operation, Function* operator1, Function* operator2);
 	/**
 	* @brief Returns the evaluation of the combination of the two functions.
 	*
@@ -127,7 +127,7 @@ public:
 	std::string GetName();
 
 private:
-	PairCombinationOperation* operation_;
+	PairReduceOperation* operation_;
 	Function* operator1_;
 	Function* operator2_;
 };

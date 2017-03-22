@@ -85,7 +85,7 @@ std::string OperatedSpecificFunction::GetName(){
 	return os.str();
 }
 
-CombineSpecificFunction::CombineSpecificFunction(PairCombinationOperation* operation, SpecificFunction* operator1, SpecificFunction* operator2):operation_(operation), operator1_(operator1), operator2_(operator2){}
+CombineSpecificFunction::CombineSpecificFunction(PairReduceOperation* operation, SpecificFunction* operator1, SpecificFunction* operator2):operation_(operation), operator1_(operator1), operator2_(operator2){}
 
 std::vector<mpf_t*> CombineSpecificFunction::Eval(const std::vector<mpf_t*> & vec){
 	std::vector<mpf_t*> res1 = operator1_->Eval(vec);

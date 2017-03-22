@@ -109,7 +109,7 @@ public:
 	* @param operator1 The first specific statistical evaluation, which will be combined.
 	* @param operator2 The second specific statistical evaluation, which will be combined.
 	*/
-	CombineSpecificStatisticalEvaluation(PairCombinationOperation* operation, SpecificStatisticalEvaluation* operator1, SpecificStatisticalEvaluation* operator2);
+	CombineSpecificStatisticalEvaluation(PairReduceOperation* operation, SpecificStatisticalEvaluation* operator1, SpecificStatisticalEvaluation* operator2);
 	/**
 	* @brief Evaluates the two specified specific statistical evaluations and combines them.
 	*
@@ -119,7 +119,7 @@ public:
 	std::string GetName();
 
 private:
-	PairCombinationOperation* operation_;
+	PairReduceOperation* operation_;
 	SpecificStatisticalEvaluation* operator1_;
 	SpecificStatisticalEvaluation* operator2_;
 };
@@ -208,23 +208,23 @@ private:
 	ConstantEvaluation* constant_evaluation_;
 };
 
-/************************ statistical merge operations *****************************/
+/************************ STATISTICAL REDUCE OPERATIONS *****************************/
 
 /**
-* @brief This class is an abstract class. It supplies the interface to merge specific statistical evaluations to analyzable statistics.
+* @brief This class is an abstract class. It supplies the interface to reduce specific statistical evaluations to analyzable statistics.
 */
-class StatisticMergeOperation {
+class StatisticReduceOperation {
 public:
 	/**
 	* The destructor.
 	*/
-	virtual ~StatisticMergeOperation(){}
+	virtual ~StatisticReduceOperation(){}
 	/**
-	* @brief Merges the entries of the given data matrix to a vector.
+	* @brief Reduces the entries of the given data matrix to a vector.
 	*
 	* @param data The data matrix.
 	*
-	* @return The merged vector.
+	* @return The reduced vector.
 	*/
 	virtual std::vector<mpf_t*> Evaluate(const std::vector<std::vector<mpf_t*> > & data) = 0;
 	/**
@@ -237,80 +237,80 @@ public:
 
 /**
 * @brief This class is an abstract class.
-* Additionally to the statistic merge operation it stores a vector merge operation,
-* which determines how specific statistical evaluations should be merged. 
+* Additionally to the statistic reduce operation it stores a vector reduce operation,
+* which determines how specific statistical evaluations should be reduced.
 */
-class ComposedStatisticMergeOperation : public StatisticMergeOperation {
+class ComposedStatisticReduceOperation : public StatisticReduceOperation {
 public:
 	/**
-	* @brief The constructor, where the merge operation can be specified.
+	* @brief The constructor, where the reduce operation can be specified.
 	*
-	* @param vector_merge_operation The merge operation.
+	* @param vector_reduce_operation The reduce operation.
 	*/
-	ComposedStatisticMergeOperation(VectorMergeOperation* vector_merge_operation);
+	ComposedStatisticReduceOperation(VectorReduceOperation* vector_reduce_operation);
 	std::vector<mpf_t*> Evaluate(const std::vector<std::vector<mpf_t*> > & vec) = 0;
 	std::string GetName() = 0;
 protected:
 	/**
-	* @brief The stored vector merge operation.
+	* @brief The stored vector reduce operation.
 	*/
-	VectorMergeOperation*  vector_merge_operation;
+	VectorReduceOperation*  vector_reduce_operation;
 };
 
 /**
-* @brief This class implements a merge operation, which merges the values of all particles to a single value.
+* @brief This class implements a reduce operation, which reduces the values of all particles to a single value.
 */
-class ComposedParticleMergeOperation : public ComposedStatisticMergeOperation {
+class ComposedParticleReduceOperation : public ComposedStatisticReduceOperation {
 public:
 	/**
-	* @brief The constructor, where the merge operation can be specified.
+	* @brief The constructor, where the reduce operation can be specified.
 	*
-	* @param vector_merge_operation The merge operation.
+	* @param vector_reduce_operation The reduce operation.
 	*/
-	ComposedParticleMergeOperation(VectorMergeOperation* vector_merge_operation);
+	ComposedParticleReduceOperation(VectorReduceOperation* vector_reduce_operation);
 	/**
-	* @brief Merges the entries of the given data matrix to a vector.
+	* @brief Reduces the entries of the given data matrix to a vector.
 	*
 	* The data matrix contains a vector for each particle and each of those
 	* vectors has an entry for each dimension of the search space.
-	* This merge operation merges the particles together and therefore produces
+	* This reduce operation reduces the particles together and therefore produces
 	* a value for each dimension of the search space.
-	* For example if the vector merge operation calculates an average and the data
+	* For example if the vector reduce operation calculates an average and the data
 	* matrix contains the positions of the particles, then an average position is calculated.
 	*
 	* @param data The data matrix.
 	*
-	* @return The merged vector.
+	* @return The reduced vector.
 	*/
 	std::vector<mpf_t*> Evaluate(const std::vector<std::vector<mpf_t*> > & data);
 	std::string GetName();
 };
 
 /**
-* @brief This class implements a merge operation, which merges the values of all dimensions to a single value.
+* @brief This class implements a reduce operation, which reduces the values of all dimensions to a single value.
 */
-class ComposedDimensionMergeOperation : public ComposedStatisticMergeOperation {
+class ComposedDimensionReduceOperation : public ComposedStatisticReduceOperation {
 public:
 	/**
-	* @brief The constructor, where the merge operation can be specified.
+	* @brief The constructor, where the reduce operation can be specified.
 	*
-	* @param vector_merge_operation The merge operation.
+	* @param vector_reduce_operation The reduce operation.
 	*/
-	ComposedDimensionMergeOperation(VectorMergeOperation* vector_merge_operation);
+	ComposedDimensionReduceOperation(VectorReduceOperation* vector_reduce_operation);
 	/**
-	* @brief Merges the entries of the given data matrix to a vector.
+	* @brief Reduces the entries of the given data matrix to a vector.
 	*
 	* The data matrix contains a vector for each particle and each of those
 	* vectors has an entry for each dimension of the search space.
-	* This merge operation merges the dimensions of the search space together
+	* This reduce operation reduces the dimensions of the search space together
 	* and therefore produces a value for each particle.
-	* For example if the vector merge operation calculates the sum and the data
+	* For example if the vector reduce operation calculates the sum and the data
 	* matrix contains the squared positions of the particles,
 	* then for each particle the squared euclidean distance to the origin is calculated.
 	*
 	* @param data The data matrix.
 	*
-	* @return The merged vector.
+	* @return The reduced vector.
 	*/
 	std::vector<mpf_t*> Evaluate(const std::vector<std::vector<mpf_t*> > & data);
 	std::string GetName();

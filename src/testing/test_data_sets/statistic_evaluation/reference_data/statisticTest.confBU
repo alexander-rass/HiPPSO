@@ -19,32 +19,32 @@ neighborhood gBest
 positionAndVelocityUpdater default
 outputPrecision -1
 showStatistics 0 1222111222 1
-showNamedStatistic S000 merge particle specific 0 position
-showNamedStatistic S001 merge particle specific 1 position
-showNamedStatistic S002 merge particle specific 0 velocity
-showNamedStatistic S003 merge particle specific 1 velocity
-showNamedStatistic S004 merge particle specific 0 localAttractor
-showNamedStatistic S005 merge particle specific 1 localAttractor
-showNamedStatistic S006 merge particle specific 0 globalAttractor
-showNamedStatistic S007 merge particle specific 1 globalAttractor
-showNamedStatistic S008 merge particle specific 0 functionDifference
-showNamedStatistic S009 merge particle specific 1 functionDifference
-showNamedStatistic S010 merge particle specific 0 absVelocityPlusDistToGlobalAttractor 2.0
-showNamedStatistic S011 merge particle specific 1 absVelocityPlusDistToGlobalAttractor 2.0
-showNamedStatistic S012 merge particle specific 0 sqrtAbsVelocityPlusSqrtDistToGlobalAttractor 2.0
-showNamedStatistic S013 merge particle specific 1 sqrtAbsVelocityPlusSqrtDistToGlobalAttractor 2.0
-showNamedStatistic S014 merge particle specific 0 constant Pi
-showNamedStatistic S015 merge particle specific 1 constant Pi
-showNamedStatistic S016 merge dimension functionEvaluation standard sphere position
-showNamedStatistic S017 merge dimension functionEvaluation standard sphere localAttractor
-showNamedStatistic S018 merge dimension specific 0 velocity
-showNamedStatistic S019 merge dimension specific 1 velocity
-showNamedStatistic S020 merge dimension specific 2 velocity
-showNamedStatistic S021 merge dimension specific 3 velocity
-showNamedStatistic S022 merge dimension specific 0 position
-showNamedStatistic S023 merge dimension specific 1 position
-showNamedStatistic S024 merge dimension specific 2 position
-showNamedStatistic S025 merge dimension specific 3 position
+showNamedStatistic S000 reduce particle specific 0 position
+showNamedStatistic S001 reduce particle specific 1 position
+showNamedStatistic S002 reduce particle specific 0 velocity
+showNamedStatistic S003 reduce particle specific 1 velocity
+showNamedStatistic S004 reduce particle specific 0 localAttractor
+showNamedStatistic S005 reduce particle specific 1 localAttractor
+showNamedStatistic S006 reduce particle specific 0 globalAttractor
+showNamedStatistic S007 reduce particle specific 1 globalAttractor
+showNamedStatistic S008 reduce particle specific 0 functionDifference
+showNamedStatistic S009 reduce particle specific 1 functionDifference
+showNamedStatistic S010 reduce particle specific 0 absVelocityPlusDistToGlobalAttractor 2.0
+showNamedStatistic S011 reduce particle specific 1 absVelocityPlusDistToGlobalAttractor 2.0
+showNamedStatistic S012 reduce particle specific 0 sqrtAbsVelocityPlusSqrtDistToGlobalAttractor 2.0
+showNamedStatistic S013 reduce particle specific 1 sqrtAbsVelocityPlusSqrtDistToGlobalAttractor 2.0
+showNamedStatistic S014 reduce particle specific 0 constant Pi
+showNamedStatistic S015 reduce particle specific 1 constant Pi
+showNamedStatistic S016 reduce dimension functionEvaluation standard sphere position
+showNamedStatistic S017 reduce dimension functionEvaluation standard sphere localAttractor
+showNamedStatistic S018 reduce dimension specific 0 velocity
+showNamedStatistic S019 reduce dimension specific 1 velocity
+showNamedStatistic S020 reduce dimension specific 2 velocity
+showNamedStatistic S021 reduce dimension specific 3 velocity
+showNamedStatistic S022 reduce dimension specific 0 position
+showNamedStatistic S023 reduce dimension specific 1 position
+showNamedStatistic S024 reduce dimension specific 2 position
+showNamedStatistic S025 reduce dimension specific 3 position
 showNamedStatistic S026 globalBestPosition
 showNamedStatistic S027 globalBestPositionDistanceTo1DOptimum
 showNamedStatistic S028 globalBestPositionFunctionEvaluation
@@ -53,5 +53,5 @@ showNamedStatistic S030 globalAttractorUpdates
 showNamedStatistic S031 precision
 showNamedStatistic S032 constant 7 1.5
 showNamedStatistic S033 combine + constant 9 1.5 constant 9 3.0
-showNamedStatistic S034 merge particle arithmeticAverage combine + constant 1.5 constant 3.0
+showNamedStatistic S034 reduce particle arithmeticAverage combine + constant 1.5 constant 3.0
 initializeVelocity zero

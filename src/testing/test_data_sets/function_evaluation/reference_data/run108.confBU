@@ -17,12 +17,12 @@ neighborhood gBest
 positionAndVelocityUpdater default
 outputPrecision -1
 showStatistics 0 1222111222 1
-showNamedStatistic Pos0 merge particle specific 0 position
-showNamedStatistic Pos1 merge particle specific 1 position
-showNamedStatistic Vel0 merge particle specific 0 velocity
-showNamedStatistic Vel1 merge particle specific 1 velocity
+showNamedStatistic Pos0 reduce particle specific 0 position
+showNamedStatistic Pos1 reduce particle specific 1 position
+showNamedStatistic Vel0 reduce particle specific 0 velocity
+showNamedStatistic Vel1 reduce particle specific 1 velocity
 initializeVelocity zero
-function merge functionEvaluation standard rosenbrock combine + identity constant 1
-showNamedStatistic FuncEvalPos merge dimension functionEvaluation merge functionEvaluation standard rosenbrock combine + identity constant 1 position
-showNamedStatistic FuncEvalLocAt merge dimension functionEvaluation merge functionEvaluation standard rosenbrock combine + identity constant 1 localAttractor
+function reduce functionEvaluation standard rosenbrock combine + identity constant 1
+showNamedStatistic FuncEvalPos reduce dimension functionEvaluation reduce functionEvaluation standard rosenbrock combine + identity constant 1 position
+showNamedStatistic FuncEvalLocAt reduce dimension functionEvaluation reduce functionEvaluation standard rosenbrock combine + identity constant 1 localAttractor
 fileprefix run108

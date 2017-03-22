@@ -62,7 +62,7 @@ std::string Statistic::EvaluationToString(){
 	return res;
 }
 
-CombineStatistic::CombineStatistic(PairCombinationOperation* operation, Statistic* operator1, Statistic* operator2):operation_(operation),operator1_(operator1), operator2_(operator2){}
+CombineStatistic::CombineStatistic(PairReduceOperation* operation, Statistic* operator1, Statistic* operator2):operation_(operation),operator1_(operator1), operator2_(operator2){}
 
 std::vector<mpf_t*> CombineStatistic::Evaluate(){
 	std::vector<mpf_t*> res1, res2, res;
@@ -83,20 +83,20 @@ std::string CombineStatistic::GetName(){
 	return os.str();
 }
 
-StatisticMergeOperator::StatisticMergeOperator(StatisticMergeOperation* mergeOperation, SpecificStatisticalEvaluation* specificEvaluation):merge_operation_(mergeOperation), specific_evaluation_(specificEvaluation){}
+StatisticReduceOperator::StatisticReduceOperator(StatisticReduceOperation* reduceOperation, SpecificStatisticalEvaluation* specificEvaluation):reduce_operation_(reduceOperation), specific_evaluation_(specificEvaluation){}
 
-std::vector<mpf_t*> StatisticMergeOperator::Evaluate(){
+std::vector<mpf_t*> StatisticReduceOperator::Evaluate(){
 	std::vector<std::vector<mpf_t*> > data = specific_evaluation_->Evaluate();
-	std::vector<mpf_t*> result = merge_operation_->Evaluate(data);
+	std::vector<mpf_t*> result = reduce_operation_->Evaluate(data);
 	for(unsigned int i = 0; i < data.size(); i++) {
 		vectoroperations::ReleaseValues(data[i]);
 	}
 	return result;
 }
 
-std::string StatisticMergeOperator::GetName(){
+std::string StatisticReduceOperator::GetName(){
 	std::ostringstream os;
-	os << merge_operation_->GetName() << specific_evaluation_->GetName();
+	os << reduce_operation_->GetName() << specific_evaluation_->GetName();
 	return os.str();
 }
 

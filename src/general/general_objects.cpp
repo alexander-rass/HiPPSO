@@ -104,39 +104,39 @@ bool operator<(const ProgramVersion & a, const ProgramVersion & b){
 	return a.version_patch_level < b.version_patch_level;
 }
 
-SpecificIdMergeOperation::SpecificIdMergeOperation (int id):id_(id){}
+SpecificIdReduceOperation::SpecificIdReduceOperation (int id):id_(id){}
 
-mpf_t* SpecificIdMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	AssertCondition(id_ >= 0 && id_ < (int) vec.size(), "Id of merge operation specific is out of range.");
+mpf_t* SpecificIdReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
+	AssertCondition(id_ >= 0 && id_ < (int) vec.size(), "Id of reduce operation specific is out of range.");
 	return mpftoperations::Clone(vec[id_]);
 }
 
-std::string SpecificIdMergeOperation::GetName(){
+std::string SpecificIdReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "Id" << id_;
 	return os.str();
 }
 
-IncreasingOrderNthObjectMergeOperation::IncreasingOrderNthObjectMergeOperation (int order_id): order_id_(order_id){}
+IncreasingOrderNthObjectReduceOperation::IncreasingOrderNthObjectReduceOperation (int order_id): order_id_(order_id){}
 
-mpf_t* IncreasingOrderNthObjectMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* IncreasingOrderNthObjectReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	std::vector<mpf_t*> data = vectoroperations::Clone(vec);
 	vectoroperations::Sort(&data);
-	AssertCondition(order_id_ >= 0 && order_id_ < (int) data.size(), "Id of merge operation increasingOrderNthObject is out of range.");
+	AssertCondition(order_id_ >= 0 && order_id_ < (int) data.size(), "Id of reduce operation increasingOrderNthObject is out of range.");
 	mpf_t* result = mpftoperations::Clone(data[order_id_]);
 	vectoroperations::ReleaseValues(data);
 	return result;
 }
 
-std::string IncreasingOrderNthObjectMergeOperation::GetName(){
+std::string IncreasingOrderNthObjectReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "Id" << order_id_ << "Sorted";
 	return os.str();
 }
 
-ArithmeticAverageMergeOperation::ArithmeticAverageMergeOperation(){}
+ArithmeticAverageReduceOperation::ArithmeticAverageReduceOperation(){}
 
-mpf_t* ArithmeticAverageMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* ArithmeticAverageReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	mpf_t* sum = vectoroperations::Add(vec);
 	mpf_t* dividend = mpftoperations::ToMpft((unsigned int)vec.size());
 	mpf_t* result = mpftoperations::Divide(sum, dividend);
@@ -145,15 +145,15 @@ mpf_t* ArithmeticAverageMergeOperation::Evaluate(const std::vector<mpf_t*> & vec
 	return result;
 }
 
-std::string ArithmeticAverageMergeOperation::GetName(){
+std::string ArithmeticAverageReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "ArithAv";
 	return os.str();
 }
 
-GeometricAverageMergeOperation::GeometricAverageMergeOperation(){}
+GeometricAverageReduceOperation::GeometricAverageReduceOperation(){}
 
-mpf_t* GeometricAverageMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* GeometricAverageReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	mpf_t* product = mpftoperations::ToMpft(1.0);
 	for( unsigned int i = 0; i < vec.size(); i++ ) {
 		mpf_t* tmp = mpftoperations::Multiply(product, vec[i]);
@@ -171,27 +171,27 @@ mpf_t* GeometricAverageMergeOperation::Evaluate(const std::vector<mpf_t*> & vec)
 	return result;
 }
 
-std::string GeometricAverageMergeOperation::GetName() {
+std::string GeometricAverageReduceOperation::GetName() {
 	std::ostringstream os;
 	os << "GeomAv";
 	return os.str();
 }
 
-SumMergeOperation::SumMergeOperation(){}
+SumReduceOperation::SumReduceOperation(){}
 
-mpf_t* SumMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* SumReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return vectoroperations::Add(vec);
 }
 
-std::string SumMergeOperation::GetName(){
+std::string SumReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "Sum";
 	return os.str();
 }
 
-ProductMergeOperation::ProductMergeOperation(){}
+ProductReduceOperation::ProductReduceOperation(){}
 
-mpf_t* ProductMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* ProductReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	mpf_t* product = mpftoperations::ToMpft(1.0);
 	for( unsigned int i = 0; i < vec.size(); i++ ) {
 		mpf_t* tmp = mpftoperations::Multiply(product, vec[i]);
@@ -201,15 +201,15 @@ mpf_t* ProductMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return product;
 }
 
-std::string ProductMergeOperation::GetName(){
+std::string ProductReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "GeomAv";
 	return os.str();
 }
 
-MaximalValueMergeOperation::MaximalValueMergeOperation(){}
+MaximalValueReduceOperation::MaximalValueReduceOperation(){}
 
-mpf_t* MaximalValueMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* MaximalValueReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	mpf_t* res = mpftoperations::GetMinusInfinity();
 	for( unsigned int i = 0; i < vec.size(); i++ ){
 		mpf_t* next_res = mpftoperations::Max(res, vec[i]);
@@ -219,15 +219,15 @@ mpf_t* MaximalValueMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return res;
 }
 
-std::string MaximalValueMergeOperation::GetName(){
+std::string MaximalValueReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "Max";
 	return os.str();
 }
 
-MinimalValueMergeOperation::MinimalValueMergeOperation(){}
+MinimalValueReduceOperation::MinimalValueReduceOperation(){}
 
-mpf_t* MinimalValueMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* MinimalValueReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	mpf_t* res = mpftoperations::GetPlusInfinity();
 	for( unsigned int i = 0; i < vec.size(); i++ ){
 		mpf_t* next_res = mpftoperations::Min(res, vec[i]);
@@ -237,32 +237,32 @@ mpf_t* MinimalValueMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return res;
 }
 
-std::string MinimalValueMergeOperation::GetName(){
+std::string MinimalValueReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "Min";
 	return os.str();
 }
 
 
-FunctionEvaluationMergeOperation::FunctionEvaluationMergeOperation(Function* function):function_(function){}
+FunctionEvaluationReduceOperation::FunctionEvaluationReduceOperation(Function* function):function_(function){}
 
-mpf_t* FunctionEvaluationMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* FunctionEvaluationReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return function_->Eval(vec);
 }
 
-std::string FunctionEvaluationMergeOperation::GetName(){
+std::string FunctionEvaluationReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "FuncEval" << function_->GetName();
 	return os.str();
 }
 
-ObjectiveFunctionEvaluationMergeOperation::ObjectiveFunctionEvaluationMergeOperation(){}
+ObjectiveFunctionEvaluationReduceOperation::ObjectiveFunctionEvaluationReduceOperation(){}
 
-mpf_t* ObjectiveFunctionEvaluationMergeOperation::Evaluate(const std::vector<mpf_t*> & vec){
+mpf_t* ObjectiveFunctionEvaluationReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	return configuration::g_function->Evaluate(vec);
 }
 
-std::string ObjectiveFunctionEvaluationMergeOperation::GetName(){
+std::string ObjectiveFunctionEvaluationReduceOperation::GetName(){
 	std::ostringstream os;
 	os << "ObFunc" << configuration::g_function->GetName();
 	return os.str();

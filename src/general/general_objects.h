@@ -145,23 +145,23 @@ bool operator==(const ProgramVersion & a, const ProgramVersion & b);
 */
 bool operator<(const ProgramVersion & a, const ProgramVersion & b);
 
-/************** VECTOR MERGE OPERATIONS ***********************/
+/************** VECTOR REDUCE OPERATIONS ***********************/
 /**
 * @brief This an abstract class. It supplies the interface
-* for merging a vector of mpf_t values to a single value.
+* for reducing a vector of mpf_t values to a single value.
 */
-class VectorMergeOperation {
+class VectorReduceOperation {
 public:
 	/**
 	 * @brief The destructor.
 	 */
-	virtual ~VectorMergeOperation(){}
+	virtual ~VectorReduceOperation(){}
 	/**
-	* @brief Merges the entries of the vector to a single value.
+	* @brief Reduces the entries of the vector to a single value.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
-	* @return The merged value.
+	* @return The reduced value.
 	*/
 	virtual mpf_t* Evaluate(const std::vector<mpf_t*> & vec) = 0;
 
@@ -173,22 +173,22 @@ public:
 	virtual std::string GetName() = 0;
 };
 
-/************************* VECTOR MERGE OPERATIONS ******************************/
+/************************* VECTOR REDUCE OPERATIONS ******************************/
 /**
-* @brief This vector merge operation merges a vector by ignoring all values of the vector except the specified one.
+* @brief This vector reduce operation reduces a vector by ignoring all values of the vector except the specified one.
 */
-class SpecificIdMergeOperation : public VectorMergeOperation {
+class SpecificIdReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor, where the remaining index can be specified.
 	*
 	* @param id The remaining index.
 	*/
-	SpecificIdMergeOperation(int id);
+	SpecificIdReduceOperation(int id);
 	/**
-	* @brief Merges the vector by ignoring all entries except the specified one.
+	* @brief Reduces the vector by ignoring all entries except the specified one.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The value of the entry at the specified position.
 	*/
@@ -203,21 +203,21 @@ private:
 };
 
 /**
-* @brief This vector merge operation merges a vector by sorting the vector
+* @brief This vector reduce operation reduces a vector by sorting the vector
 * and returning the value at the respective position of the sorted vector.
 */
-class IncreasingOrderNthObjectMergeOperation : public VectorMergeOperation {
+class IncreasingOrderNthObjectReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor, where the remaining index can be specified.
 	*
 	* @param order_id The remaining index.
 	*/
-	IncreasingOrderNthObjectMergeOperation (int order_id);
+	IncreasingOrderNthObjectReduceOperation (int order_id);
 	/**
-	* @brief Merges the vector by sorting the vector and then ignoring all entries except the specified one.
+	* @brief Reduces the vector by sorting the vector and then ignoring all entries except the specified one.
 	*
-	* @param vec The vector which should be merged
+	* @param vec The vector which should be reduced.
 	*
 	* @return The value of the entry at the specified position of the sorted vector.
 	*/
@@ -232,18 +232,18 @@ private:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its arithmetic average.
+* @brief This vector reduce operation reduces a vector by calculation of its arithmetic average.
 */
-class ArithmeticAverageMergeOperation : public VectorMergeOperation {
+class ArithmeticAverageReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	ArithmeticAverageMergeOperation();
+	ArithmeticAverageReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its arithmetic average.
+	* @brief Reduces the vector by calculation of its arithmetic average.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The arithmetic average of the vector vec.
 	*/
@@ -252,18 +252,18 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its geometric average.
+* @brief This vector reduce operation reduces a vector by calculation of its geometric average.
 */
-class GeometricAverageMergeOperation : public VectorMergeOperation {
+class GeometricAverageReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	GeometricAverageMergeOperation();
+	GeometricAverageReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its geometric average.
+	* @brief Reduces the vector by calculation of its geometric average.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The geometric average of the vector vec.
 	*/
@@ -272,18 +272,18 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its sum.
+* @brief This vector reduce operation reduces a vector by calculation of its sum.
 */
-class SumMergeOperation : public VectorMergeOperation {
+class SumReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	SumMergeOperation();
+	SumReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its sum.
+	* @brief Reduces the vector by calculation of its sum.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The sum of the vector vec.
 	*/
@@ -292,18 +292,18 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its product.
+* @brief This vector reduce operation reduces a vector by calculation of its product.
 */
-class ProductMergeOperation : public VectorMergeOperation {
+class ProductReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	ProductMergeOperation();
+	ProductReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its product.
+	* @brief Reduces the vector by calculation of its product.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The product of the vector vec.
 	*/
@@ -312,18 +312,18 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its maximal entry.
+* @brief This vector reduce operation reduces a vector by calculation of its maximal entry.
 */
-class MaximalValueMergeOperation : public VectorMergeOperation {
+class MaximalValueReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	MaximalValueMergeOperation();
+	MaximalValueReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its maximal entry.
+	* @brief Reduces the vector by calculation of its maximal entry.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The maximal entry of the vector vec.
 	*/
@@ -332,18 +332,18 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by calculation of its minimal entry.
+* @brief This vector reduce operation reduces a vector by calculation of its minimal entry.
 */
-class MinimalValueMergeOperation : public VectorMergeOperation {
+class MinimalValueReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	MinimalValueMergeOperation();
+	MinimalValueReduceOperation();
 	/**
-	* @brief Merges the vector by calculation of its minimal entry.
+	* @brief Reduces the vector by calculation of its minimal entry.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The minimal entry of the vector vec.
 	*/
@@ -352,20 +352,20 @@ public:
 };
 
 /**
-* @brief This vector merge operation merges a vector by evaluation of the given function.
+* @brief This vector reduce operation reduces a vector by evaluation of the given function.
 */
-class FunctionEvaluationMergeOperation : public VectorMergeOperation {
+class FunctionEvaluationReduceOperation : public VectorReduceOperation {
 public:
 	/**
-	* @brief The constructor, where the merging function can be specified.
+	* @brief The constructor, where the reducing function can be specified.
 	*
-	* @param function The function, which should be evaluated to merge a vector.
+	* @param function The function, which should be evaluated to reduce a vector.
 	*/
-	FunctionEvaluationMergeOperation(Function* function);
+	FunctionEvaluationReduceOperation(Function* function);
 	/**
-	* @brief Merges the vector by evaluation of the specified function.
+	* @brief Reduces the vector by evaluation of the specified function.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The result of the evaluation of the specified function with input vector vec.
 	*/
@@ -377,18 +377,18 @@ private:
 };
 
 /**
-* @brief This vector merge operation merges a vector by evaluation of the specified objective function.
+* @brief This vector reduce operation reduces a vector by evaluation of the specified objective function.
 */
-class ObjectiveFunctionEvaluationMergeOperation : public VectorMergeOperation {
+class ObjectiveFunctionEvaluationReduceOperation : public VectorReduceOperation {
 public:
 	/**
 	* @brief The constructor.
 	*/
-	ObjectiveFunctionEvaluationMergeOperation();
+	ObjectiveFunctionEvaluationReduceOperation();
 	/**
-	* @brief Merges the vector by evaluation of the specified objective function in the configuration section.
+	* @brief Reduces the vector by evaluation of the specified objective function in the configuration section.
 	*
-	* @param vec The vector which should be merged.
+	* @param vec The vector which should be reduced.
 	*
 	* @return The result of the evaluation of the specified objective function with input vector vec.
 	*/
@@ -398,21 +398,21 @@ public:
 
 /************** PAIR COMBINATION OPERATIONS ********************/
 /**
-* @brief This class is an abstract class. It supplies the interface for merging two mpf_t values to a single value.
+* @brief This class is an abstract class. It supplies the interface for reducing two mpf_t values to a single value.
 */
-class PairCombinationOperation {
+class PairReduceOperation {
 public:
 	/**
 	 * @brief The destructor.
 	 */
-	virtual ~PairCombinationOperation(){}
+	virtual ~PairReduceOperation(){}
 	/**
-	* @brief Merges two values to a single value.
+	* @brief Reduces two values to a single value.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
-	* @return The merged value.
+	* @return The reduced value.
 	*/
 	virtual mpf_t* Evaluate(mpf_t* value1, mpf_t* value2) = 0;
 	/**
@@ -424,15 +424,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by addition.
+* @brief This pair combination operation reduces two values by addition.
 */
-class AddOperation : public PairCombinationOperation {
+class AddOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by adding them.
+	* @brief Reduces the two values by adding them.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return The sum of value1 and value2
 	*/
@@ -441,15 +441,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by subtraction.
+* @brief This pair combination operation reduces two values by subtraction.
 */
-class SubtractOperation : public PairCombinationOperation {
+class SubtractOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by subtraction.
+	* @brief Reduces the two values by subtraction.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return value1 - value2
 	*/
@@ -458,15 +458,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by multiplication.
+* @brief This pair combination operation reduces two values by multiplication.
 */
-class MultiplyOperation : public PairCombinationOperation {
+class MultiplyOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by multiplication.
+	* @brief Reduces the two values by multiplication.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return The product of value1 and value2
 	*/
@@ -475,15 +475,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by division.
+* @brief This pair combination operation reduces two values by division.
 */
-class DivideOperation : public PairCombinationOperation {
+class DivideOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by division.
+	* @brief Reduces the two values by division.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return value1 / value2
 	*/
@@ -492,15 +492,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by calculation of the minimum.
+* @brief This pair combination operation reduces two values by calculation of the minimum.
 */
-class MinOperation : public PairCombinationOperation {
+class MinOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by calculation of the minimum.
+	* @brief Reduces the two values by calculation of the minimum.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return min ( value1 , value2 )
 	*/
@@ -509,15 +509,15 @@ public:
 };
 
 /**
-* @brief This pair combination operation merges two values by calculation of the maximum.
+* @brief This pair combination operation reduces two values by calculation of the maximum.
 */
-class MaxOperation : public PairCombinationOperation {
+class MaxOperation : public PairReduceOperation {
 public:
 	/**
-	* @brief Merges the two values by calculation of the maximum.
+	* @brief Reduces the two values by calculation of the maximum.
 	*
-	* @param value1 The first value which should be merged.
-	* @param value2 The second value which should be merged.
+	* @param value1 The first value which should be reduced.
+	* @param value2 The second value which should be reduced.
 	*
 	* @return max ( value1 , value2 )
 	*/

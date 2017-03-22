@@ -69,7 +69,7 @@ std::string OperatedSpecificStatisticalEvaluation::GetName(){
 	return operation_->GetName() + specific_evaluation_->GetName();
 }
 
-CombineSpecificStatisticalEvaluation::CombineSpecificStatisticalEvaluation(PairCombinationOperation* operation, SpecificStatisticalEvaluation* operator1, SpecificStatisticalEvaluation* operator2):operation_(operation),operator1_(operator1), operator2_(operator2){}
+CombineSpecificStatisticalEvaluation::CombineSpecificStatisticalEvaluation(PairReduceOperation* operation, SpecificStatisticalEvaluation* operator1, SpecificStatisticalEvaluation* operator2):operation_(operation),operator1_(operator1), operator2_(operator2){}
 
 std::vector<std::vector<mpf_t*> > CombineSpecificStatisticalEvaluation::Evaluate(){
 	std::vector<std::vector<mpf_t*> > res1, res2, res;
@@ -160,11 +160,11 @@ std::string ConstantSpecificStatisticalEvaluation::GetName(){
 	return constant_evaluation_->GetName();
 }
 
-ComposedStatisticMergeOperation::ComposedStatisticMergeOperation(VectorMergeOperation* vector_merge_operation):vector_merge_operation(vector_merge_operation){}
+ComposedStatisticReduceOperation::ComposedStatisticReduceOperation(VectorReduceOperation* vector_reduce_operation):vector_reduce_operation(vector_reduce_operation){}
 
-ComposedParticleMergeOperation::ComposedParticleMergeOperation(VectorMergeOperation* vector_merge_operation):ComposedStatisticMergeOperation(vector_merge_operation){}
+ComposedParticleReduceOperation::ComposedParticleReduceOperation(VectorReduceOperation* vector_reduce_operation):ComposedStatisticReduceOperation(vector_reduce_operation){}
 
-std::vector<mpf_t*> ComposedParticleMergeOperation::Evaluate(const std::vector<std::vector<mpf_t*> > & vec){
+std::vector<mpf_t*> ComposedParticleReduceOperation::Evaluate(const std::vector<std::vector<mpf_t*> > & vec){
 	if(vec.size() == 0)return std::vector<mpf_t*>(0);
 	std::vector<std::vector<mpf_t*> > transposed;
 	for(unsigned int i = 0; i < vec[0].size(); i++){
@@ -176,30 +176,30 @@ std::vector<mpf_t*> ComposedParticleMergeOperation::Evaluate(const std::vector<s
 	}
 	std::vector<mpf_t*> result;
 	for(unsigned int i = 0; i < transposed.size(); i++){
-		result.push_back(vector_merge_operation->Evaluate(transposed[i]));
+		result.push_back(vector_reduce_operation->Evaluate(transposed[i]));
 	}
 	return result;
 }
 
-std::string ComposedParticleMergeOperation::GetName() {
+std::string ComposedParticleReduceOperation::GetName() {
 	std::ostringstream os;
-	os << "P" << vector_merge_operation->GetName();
+	os << "P" << vector_reduce_operation->GetName();
 	return  os.str();
 }
 
-ComposedDimensionMergeOperation::ComposedDimensionMergeOperation(VectorMergeOperation* vector_merge_operation):ComposedStatisticMergeOperation(vector_merge_operation){}
+ComposedDimensionReduceOperation::ComposedDimensionReduceOperation(VectorReduceOperation* vector_reduce_operation):ComposedStatisticReduceOperation(vector_reduce_operation){}
 
-std::vector<mpf_t*> ComposedDimensionMergeOperation::Evaluate(const std::vector<std::vector<mpf_t*> > & vec){
+std::vector<mpf_t*> ComposedDimensionReduceOperation::Evaluate(const std::vector<std::vector<mpf_t*> > & vec){
 	std::vector<mpf_t*> result;
 	for( unsigned int i = 0; i < vec.size(); i++ ){
-		result.push_back( vector_merge_operation->Evaluate(vec[i]) );
+		result.push_back( vector_reduce_operation->Evaluate(vec[i]) );
 	}
 	return result;
 }
 
-std::string ComposedDimensionMergeOperation::GetName() {
+std::string ComposedDimensionReduceOperation::GetName() {
 	std::ostringstream os;
-	os << "D" << vector_merge_operation->GetName();
+	os << "D" << vector_reduce_operation->GetName();
 	return  os.str();
 }
 

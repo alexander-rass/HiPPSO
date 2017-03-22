@@ -7,8 +7,8 @@ do
 	cat base_configfile.conf > $file;
 	functionDescription=$(head -n$line function_options.conf | tail -n1);
 	echo "function $functionDescription" >> $file;
-	echo "showNamedStatistic FuncEvalPos merge dimension functionEvaluation $functionDescription position" >> $file;
-	echo "showNamedStatistic FuncEvalLocAt merge dimension functionEvaluation $functionDescription localAttractor" >> $file;
+	echo "showNamedStatistic FuncEvalPos reduce dimension functionEvaluation $functionDescription position" >> $file;
+	echo "showNamedStatistic FuncEvalLocAt reduce dimension functionEvaluation $functionDescription localAttractor" >> $file;
 
 	echo "fileprefix run$line" >>  $file;
 	../../../high_precision_pso c $file ;

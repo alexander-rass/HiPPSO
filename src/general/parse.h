@@ -81,7 +81,7 @@ Operation* ParseOperation(const std::vector<std::string> & parameters, unsigned 
  *
  * @return A pointer to the parsed pair combination operation if the parsing process was successful and NULL otherwise.
  */
-PairCombinationOperation* ParsePairCombinationOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
+PairReduceOperation* ParsePairCombinationOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
  * @brief Parses the given vector for a constant evaluation starting at the given index.
  *
@@ -96,18 +96,18 @@ PairCombinationOperation* ParsePairCombinationOperation(const std::vector<std::s
  */
 ConstantEvaluation* ParseConstantEvaluation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
- * @brief Parses the given vector for a vector merge operation starting at the given index.
+ * @brief Parses the given vector for a vector reduce operation starting at the given index.
  *
- * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a vector merge operation.
- * If nothing can be parsed as a vector merge operation then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
- * If a vector merge operation can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
+ * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a vector reduce operation.
+ * If nothing can be parsed as a vector reduce operation then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
+ * If a vector reduce operation can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
  *
  * @param parameters The vector containing the specification.
  * @param parsed_parameters The number of already parsed parameters by previous functions.
  *
- * @return A pointer to the parsed vector merge operation if the parsing process was successful and NULL otherwise.
+ * @return A pointer to the parsed vector reduce operation if the parsing process was successful and NULL otherwise.
  */
-VectorMergeOperation* ParseVectorMergeOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
+VectorReduceOperation* ParseVectorReduceOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 
 /**
  * @brief Parses the given vector for a specific statistical evaluation starting at the given index.
@@ -136,18 +136,18 @@ SpecificStatisticalEvaluation* ParseSpecificStatistic(const std::vector<std::str
  */
 SpecificStatisticalEvaluation* ParseCombineSpecificStatistic(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
- * @brief Parses the given vector for a merge operator starting at the given index.
+ * @brief Parses the given vector for a reduce operator starting at the given index.
  *
- * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a merge operator.
- * If nothing can be parsed as a merge operator then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
- * If a merge operator can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
+ * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a reduce operator.
+ * If nothing can be parsed as a reduce operator then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
+ * If a reduce operator can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
  *
  * @param parameters The vector containing the specification.
  * @param parsed_parameters The number of already parsed parameters by previous functions.
  *
- * @return A pointer to the parsed merge operator if the parsing process was successful and NULL otherwise.
+ * @return A pointer to the parsed reduce operator if the parsing process was successful and NULL otherwise.
  */
-Statistic* ParseMergeOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
+Statistic* ParseReduceOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
  * @brief Parses the given vector for a statistic starting at the given index.
  *
@@ -202,18 +202,18 @@ SpecificFunction* ParseSpecificFunction(const std::vector<std::string> & paramet
  */
 SpecificFunction* ParseCombineSpecificFunction(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
- * @brief Parses the given vector for a function merge operator starting at the given index.
+ * @brief Parses the given vector for a function reduce operator starting at the given index.
  *
- * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a function merge operator.
- * If nothing can be parsed as a function merge operator then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
- * If a function merge operator can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
+ * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a function reduce operator.
+ * If nothing can be parsed as a function reduce operator then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
+ * If a function reduce operator can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
  *
  * @param parameters The vector containing the specification.
  * @param parsed_parameters The number of already parsed parameters by previous functions.
  *
- * @return A pointer to the parsed function merge operator if the parsing process was successful and NULL otherwise.
+ * @return A pointer to the parsed function reduce operator if the parsing process was successful and NULL otherwise.
  */
-Function* ParseFunctionMergeOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
+Function* ParseFunctionReduceOperator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
  * @brief Parses the given vector for a standard function starting at the given index.
  *

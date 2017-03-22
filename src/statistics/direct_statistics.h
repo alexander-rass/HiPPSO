@@ -90,7 +90,7 @@ public:
 	* @param operator1 The first statistic, which will be combined.
 	* @param operator2 The second statistic, which will be combined.
 	*/
-	CombineStatistic(PairCombinationOperation* operation, Statistic* operator1, Statistic* operator2);
+	CombineStatistic(PairReduceOperation* operation, Statistic* operator1, Statistic* operator2);
 	/**
 	* @brief Evaluates the two specified statistics and combines them.
 	*
@@ -100,25 +100,25 @@ public:
 	std::string GetName();
 
 private:
-	PairCombinationOperation* operation_;
+	PairReduceOperation* operation_;
 	Statistic* operator1_;
 	Statistic* operator2_;
 };
 
 /**
-* @brief This class implements a statistic, which merges a specific statistical evaluation to an analyzable statistic.
+* @brief This class implements a statistic, which reduces a specific statistical evaluation to an analyzable statistic.
 */
-class StatisticMergeOperator: public Statistic {
+class StatisticReduceOperator: public Statistic {
 public:
 	/**
-	* @brief The constructor, where the merge operation and the specific statistical evaluation can be specified.
+	* @brief The constructor, where the reduce operation and the specific statistical evaluation can be specified.
 	*
-	* @param merge_operation The merge operation, which specifies how the specific statistical evaluation should be merged.
+	* @param reduce_operation The reduce operation, which specifies how the specific statistical evaluation should be reduced.
 	* @param specific_evaluation The specific statistical evaluation.
 	*/
-	StatisticMergeOperator(StatisticMergeOperation* merge_operation, SpecificStatisticalEvaluation* specific_evaluation);
+	StatisticReduceOperator(StatisticReduceOperation* reduce_operation, SpecificStatisticalEvaluation* specific_evaluation);
 	/**
-	* @brief Evaluates the specific statistical evaluation and merges the result to an analyzable statistic.
+	* @brief Evaluates the specific statistical evaluation and reduces the result to an analyzable statistic.
 	*
 	* @return The result of the statistical evaluations.
 	*/
@@ -126,7 +126,7 @@ public:
 	std::string GetName();
 
 private:
-	StatisticMergeOperation* merge_operation_;
+	StatisticReduceOperation* reduce_operation_;
 	SpecificStatisticalEvaluation* specific_evaluation_;
 };
 

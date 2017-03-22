@@ -17,12 +17,12 @@ neighborhood gBest
 positionAndVelocityUpdater default
 outputPrecision -1
 showStatistics 0 1222111222 1
-showNamedStatistic Pos0 merge particle specific 0 position
-showNamedStatistic Pos1 merge particle specific 1 position
-showNamedStatistic Vel0 merge particle specific 0 velocity
-showNamedStatistic Vel1 merge particle specific 1 velocity
+showNamedStatistic Pos0 reduce particle specific 0 position
+showNamedStatistic Pos1 reduce particle specific 1 position
+showNamedStatistic Vel0 reduce particle specific 0 velocity
+showNamedStatistic Vel1 reduce particle specific 1 velocity
 initializeVelocity zero
-function cos merge sum identity
-showNamedStatistic FuncEvalPos merge dimension functionEvaluation cos merge sum identity position
-showNamedStatistic FuncEvalLocAt merge dimension functionEvaluation cos merge sum identity localAttractor
+function cos reduce sum identity
+showNamedStatistic FuncEvalPos reduce dimension functionEvaluation cos reduce sum identity position
+showNamedStatistic FuncEvalLocAt reduce dimension functionEvaluation cos reduce sum identity localAttractor
 fileprefix run58
