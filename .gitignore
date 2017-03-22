@@ -8,5 +8,17 @@ build
 # swap files from vi/vim/gvim etc
 *.swp
 
+# eclipse files
+.cproject
+.metadata
+.project
+.settings
+RemoteSystemsTempFiles
+
 # documentation data
 /doc/html
+
+# automatically generated md file for doxygen mainpage
+/doc/DOXYGEN_README.md
+
+

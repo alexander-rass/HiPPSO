@@ -6,6 +6,7 @@
 * [Table of Contents](#table-of-contents)
 * [Description](#description)
 * [Features](#features)
+* [Download](#download)
 * [Installation Instructions](#installation-instructions)
   * [Installation on Windows](#installation-on-windows)
   * [Installation on a Linux operating system](#installation-on-a-linux-operating-system)
@@ -73,6 +74,11 @@ available features and used. Here the arbitrary precision data type needs to be
 used, but to ease this process a large set of operations on this data type is
 already implemented.
 
+## Download<a name="download"></a>
+
+The source code and all further data can be downloaded from the
+[github-repository](https://github.com/alexander-rass/HiPPSO/).
+
 ## Installation Instructions<a name="installation-instructions"></a>
 
 ### Installation on Windows<a name="installation-on-windows"></a>
@@ -88,13 +94,13 @@ already implemented.
   * Execute `make install`
   * It might be necessary to copy the library `libgmp.a` and `libgmp.la` from
     `/usr/local/lib` to `/lib` to ensure that it is recognized.
-* Download and unzip the High Precision PSO sources and switch to that folder.
+* [Download](https://github.com/alexander-rass/HiPPSO/) and unzip the High Precision PSO sources and switch to that folder.
 * Execute `make` to generate the executable file (`high_precision_pso.exe`).
 * The executable file can be moved to any location - it contains the whole
   program. For example you can move it to a folder, which is included in your
   PATH variable. If you do this you can start the High Precision PSO program at
   any location without prefix.
-  
+
 ### Installation on a Linux operating system<a name="installation-on-a-linux-operating-system"></a>
 
 * Install g++ compiler, and make (if not already present).
@@ -105,7 +111,7 @@ already implemented.
   * On systems like Ubuntu you can install the GMP library by the command
     `sudo apt-get install libgmp-dev`.
   * Alternatively you can install it as described in the Windows section.
-* Download and unzip the High Precision PSO sources and switch to that folder.
+* [Download](https://github.com/alexander-rass/HiPPSO/) and unzip the High Precision PSO sources and switch to that folder.
 * Execute `make` to generate the executable file (`high_precision_pso`).
 * The executable file can be moved to any location - it contains the whole
   program. For example you can move it to a folder, which is included in your
@@ -119,11 +125,14 @@ parameters, then the available options will be displayed.
 
 The behavior is specified in a configuration file. Examples and explanations of
 all options, which can be used in the configuration files, can be found in the
-sub-folder `guideline_configuration_files`. An exception is the file
-`runcheck.conf`.  If the runcheck option is activated in the normal
-configuration files, then it can be specified, when the program is allowed to
-run.  As the runcheck configuration file is parsed multiple times this can be
-used to terminate the program without losing any information.
+sub-folder
+[guideline_configuration_files](https://github.com/alexander-rass/HiPPSO/tree/master/guideline_configuration_files).
+An exception is the file
+[runcheck.conf](https://github.com/alexander-rass/HiPPSO/blob/master/guideline_configuration_files/runcheck.conf).
+If the runcheck option is activated in the normal configuration files, then it
+can be specified, when the program is allowed to run.  As the runcheck
+configuration file is parsed periodically during runtime this can be used to
+terminate the program in a clean way without losing any information.
 
 Usually the High Precision PSO program is started with parameter `c` and the name
 of the configuration file.  For example to start the HiPPSO with the example
@@ -162,33 +171,39 @@ simulation at the stored iteration in the data backup file.
 
 ## Examples<a name="examples"></a>
 
-In the examples folder some examples can be found.
+In the [examples folder](https://github.com/alexander-rass/HiPPSO/tree/master/examples)
+some examples can be found.
 
 `example_01` starts a particle swarm with four particles on the sphere function
-(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>) in two dimensions.  The used configuration
-file is `example_01.conf`.  A statistic is generatet, which contains the
-objective function value of the best found position.  In combination with the
-short gnuplot script `example_01.STAT.GlBestFuncValue.gnuplot.txt` the
-following figure can be produced:
+<nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr>
+in two dimensions. The used configuration file is
+[example_01.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.conf).
+A statistic is generatet, which contains the objective function value of the
+best found position.  In combination with the short gnuplot script
+[example_01.STAT.GlBestFuncValue.gnuplot](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.STAT.GlBestFuncValue.gnuplot).
+the following figure can be produced:
 
-![trend of the objective function value of the best found position](examples/example_01.STAT.GlBestFuncValue.png "trend of the objective function value of the best found position")
+![trend of the objective function value of the best found position](https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_01.STAT.GlBestFuncValue.png "trend of the objective function value of the best found position")
 
 Additionally the debug swarm directive created a folder with gnuplot scripts.
 After executing the script the images look like this:
 
-![particles and attractors](examples/example_01.animation.gif "particles and attractors")
+![particles and attractors](https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_01.animation.gif "particles and attractors")
 
-(This gif is produced by the command 
+(This gif is produced by the command
 `convert -delay 50 -loop 0  *.png \( +clone -set delay 500 \) +swap +delete animation.gif`
 in the folder of the generated png files)
 
-But even in higher dimensions the swarm can be displayed very well by this software.
-`example_02` starts a particle swarm with eight particles on the sphere function
-(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>) in eight dimensions. The used configuration
-file ist `example_02.conf`. The debug swarm directive created a folder with gnuplot scripts.
-After executing the script the images look like this:
+But even in higher dimensions the swarm can be displayed very well by this
+software.  `example_02` starts a particle swarm with eight particles on the
+sphere function
+<nobr>(f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)</nobr>
+in eight dimensions. The used configuration file is
+[example_02.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_02.conf).
+The debug swarm directive created a folder with gnuplot scripts.  After
+executing the script the images look like this:
 
-![particles and attractors](examples/example_02.animation.gif "particles and attractors")
+![particles and attractors](https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_02.animation.gif "particles and attractors")
 
 (This gif is produced by the command
 `convert -delay 100 -loop 0  *.png \( +clone -set delay 500 \) +swap +delete -resize 50% animation.gif`
@@ -200,17 +215,21 @@ can be extracted by statistics. Through this statistics everyone can display
 the data in the preferred way.
 
 The explicit advantage of this software is the opportunity to activate self
-adjusting precision.  `example_03` displays the developement of the global
+adjusting precision.  `example_03` displays the development of the global
 attractor value of the HiPPSO optimizing the three-dimensional Rosenbrock
-function (f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) ) with four particles. The used configuration files
-are `example_03a.conf` (configuration with self adjusting precision) and
-`example_03b.conf` (configuration with constant precision).  A statistic is
-generatet, which contains the objective function value of the best found
-position.  In combination with the short gnuplot script
-`example_03.STAT.GlBestFuncValue.gnuplot.txt` the following figure can be
-produced:
+function
+<nobr>(f(x)=&sum;<sub>d=0..D-2</sub>(100(x[i+1]-x[i]<sup>2</sup>)<sup>2</sup>+(1-x[i])<sup>2</sup>) )</nobr>
+with four particles. The used configuration files are
+[example_03a.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03a.conf)
+(configuration with self adjusting precision) and
+[example_03b.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03b.conf)
+(configuration with constant precision).  A statistic is generatet, which
+contains the objective function value of the best found position.  In
+combination with the short gnuplot script
+[example_03.STAT.GlBestFuncValue.gnuplot](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03.STAT.GlBestFuncValue.gnuplot)
+the following figure can be produced:
 
-![trend of the objective function value of the best found position](examples/example_03.STAT.GlBestFuncValue.png "trend of the objective function value of the best found position")
+![trend of the objective function value of the best found position](https://github.com/alexander-rass/HiPPSO/raw/master/examples/example_03.STAT.GlBestFuncValue.png "trend of the objective function value of the best found position")
 
 This image visualizes the limitations of constant precision, which is present
 in usual floating point calculations, compared to the actual behaviour.  As the
@@ -264,14 +283,15 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
-See also the [license file](LICENSE.md "license file")
+See also the
+[license file](https://github.com/alexander-rass/HiPPSO/blob/master/LICENSE).
 
 ## Scientific Results<a name="scientific-results"></a>
 
 The following paper uses HiPPSO for experiments:
 
-Raß A., Schmitt M., Wanka R.: <br> 
-Explanation of Stagnation at Points that are not Local Optima in Particle Swarm Optimization by Potential Analysis <br> 
+Raß A., Schmitt M., Wanka R.: <br>
+Explanation of Stagnation at Points that are not Local Optima in Particle Swarm Optimization by Potential Analysis <br>
 17th Genetic and Evolutionary Computation Conference (GECCO) <br>
 DOI: 10.1145/2739482.2764654
 
