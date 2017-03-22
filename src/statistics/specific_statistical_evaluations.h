@@ -72,19 +72,19 @@ public:
 };
 
 /**
-* @brief This class implements a specific statistical evaluation, which modifies the values of another specific statistical evaluation.
+* @brief This class implements a specific statistical evaluation, which operates on the values of another specific statistical evaluation.
 */
-class ModifiedSpecificStatisticalEvaluation : public SpecificStatisticalEvaluation {
+class OperatedSpecificStatisticalEvaluation : public SpecificStatisticalEvaluation {
 public:
 	/**
-	* @brief The constructor, where the modification and the specific statistical evaluation can be specified.
+	* @brief The constructor, where the operation and the specific statistical evaluation can be specified.
 	*
-	* @param modification The modification operation, which will be performed on the specific statistical evaluation.
-	* @param specific_evaluation The specific statistical evaluation, which will be modified.
+	* @param operation The operation, which will be performed on the specific statistical evaluation.
+	* @param specific_evaluation The specific statistical evaluation, which will be operated on.
 	*/
-	ModifiedSpecificStatisticalEvaluation(Modification* modification, SpecificStatisticalEvaluation* specific_evaluation);
+	OperatedSpecificStatisticalEvaluation(Operation* operation, SpecificStatisticalEvaluation* specific_evaluation);
 	/**
-	* @brief Evaluates the specified specific statistical evaluation and modifies its values by the specified modification.
+	* @brief Evaluates the specified specific statistical evaluation and operates on its values by the specified operation.
 	*
 	* @return The result of the statistical evaluations.
 	*/
@@ -92,7 +92,7 @@ public:
 	std::string GetName();
 
 private:
-	Modification* modification_;
+	Operation* operation_;
 	SpecificStatisticalEvaluation* specific_evaluation_;
 };
 

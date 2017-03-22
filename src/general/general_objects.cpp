@@ -359,27 +359,27 @@ std::string MinusInfinityConstantEvaluation::GetName(){
 	return "-oo";
 }
 
-mpf_t* SqrtModification::Modify( mpf_t* v ){
+mpf_t* SqrtOperation::Operate( mpf_t* v ){
 	return mpftoperations::Sqrt( v );
 }
 
-std::string SqrtModification::GetName(){
+std::string SqrtOperation::GetName(){
 	return "Sqrt";
 }
 
-PowModification::PowModification(double exponent): exponent_(exponent){}
+PowOperation::PowOperation(double exponent): exponent_(exponent){}
 
-mpf_t* PowModification::Modify( mpf_t* v ){
+mpf_t* PowOperation::Operate( mpf_t* v ){
 	return mpftoperations::Pow( v, exponent_ );
 }
 
-std::string PowModification::GetName(){
+std::string PowOperation::GetName(){
 	std::ostringstream os;
 	os << "Pow" << exponent_;
 	return os.str();
 }
 
-mpf_t* Log2Modification::Modify( mpf_t* v ){
+mpf_t* Log2Operation::Operate( mpf_t* v ){
 	mpf_t* two = mpftoperations::ToMpft(2.0);
 	mpf_t* ln2 = mpftoperations::LogE(two);
 	mpf_t* lnv = mpftoperations::LogE(v);
@@ -390,91 +390,91 @@ mpf_t* Log2Modification::Modify( mpf_t* v ){
 	return res;
 }
 
-std::string Log2Modification::GetName(){
+std::string Log2Operation::GetName(){
 	return "Log2";
 }
 
-mpf_t* Log2DoubleModification::Modify( mpf_t* v ){
+mpf_t* Log2DoubleOperation::Operate( mpf_t* v ){
 	return mpftoperations::ToMpft(mpftoperations::Log2Double(v));
 }
 
-std::string Log2DoubleModification::GetName(){
+std::string Log2DoubleOperation::GetName(){
 	return "Log2dbl";
 }
 
-mpf_t* AbsModification::Modify( mpf_t* v ){
+mpf_t* AbsOperation::Operate( mpf_t* v ){
 	return mpftoperations::Abs(v);
 }
 
-std::string AbsModification::GetName(){
+std::string AbsOperation::GetName(){
 	return "Abs";
 }
 
-mpf_t* ExpModification::Modify( mpf_t* v ){
+mpf_t* ExpOperation::Operate( mpf_t* v ){
 	return mpftoperations::Exp(v);
 }
 
-std::string ExpModification::GetName(){
+std::string ExpOperation::GetName(){
 	return "Exp";
 }
 
-mpf_t* SinModification::Modify( mpf_t* v ){
+mpf_t* SinOperation::Operate( mpf_t* v ){
 	return mpftoperations::Sin(v);
 }
 
-std::string SinModification::GetName(){
+std::string SinOperation::GetName(){
 	return "Sin";
 }
 
-mpf_t* CosModification::Modify( mpf_t* v ){
+mpf_t* CosOperation::Operate( mpf_t* v ){
 	return mpftoperations::Cos(v);
 }
 
-std::string CosModification::GetName(){
+std::string CosOperation::GetName(){
 	return "Cos";
 }
 
-mpf_t* TanModification::Modify( mpf_t* v ){
+mpf_t* TanOperation::Operate( mpf_t* v ){
 	return mpftoperations::Tan(v);
 }
 
-std::string TanModification::GetName(){
+std::string TanOperation::GetName(){
 	return "Tan";
 }
 
-mpf_t* ArcsinModification::Modify( mpf_t* v ){
+mpf_t* ArcsinOperation::Operate( mpf_t* v ){
 	return mpftoperations::Arcsin(v);
 }
 
-std::string ArcsinModification::GetName(){
+std::string ArcsinOperation::GetName(){
 	return "Arcsin";
 }
 
-mpf_t* ArccosModification::Modify( mpf_t* v ){
+mpf_t* ArccosOperation::Operate( mpf_t* v ){
 	return mpftoperations::Arccos(v);
 }
 
-std::string ArccosModification::GetName(){
+std::string ArccosOperation::GetName(){
 	return "Arccos";
 }
 
-mpf_t* ArctanModification::Modify( mpf_t* v ){
+mpf_t* ArctanOperation::Operate( mpf_t* v ){
 	return mpftoperations::Arctan(v);
 }
 
-std::string ArctanModification::GetName(){
+std::string ArctanOperation::GetName(){
 	return "Arctan";
 }
 
-mpf_t* LogEModification::Modify( mpf_t* v ){
+mpf_t* LogEOperation::Operate( mpf_t* v ){
 	return mpftoperations::LogE(v);
 }
 
-std::string LogEModification::GetName(){
+std::string LogEOperation::GetName(){
 	return "LogE";
 }
 
-std::vector<mpf_t*> DistTo1DOptimumModification::Modify(std::vector<mpf_t*> pos){
+std::vector<mpf_t*> DistTo1DOptimumOperation::Operate(std::vector<mpf_t*> pos){
 	std::vector<mpf_t*> res;
 	for(unsigned int d = 0; d < pos.size(); d++) {
 		res.push_back(configuration::g_function->DistanceTo1DLocalOptimum(pos, d));
@@ -482,7 +482,7 @@ std::vector<mpf_t*> DistTo1DOptimumModification::Modify(std::vector<mpf_t*> pos)
 	return res;
 }
 
-std::string DistTo1DOptimumModification::GetName(){
+std::string DistTo1DOptimumOperation::GetName(){
 	return "Dist1DOpt";
 }
 

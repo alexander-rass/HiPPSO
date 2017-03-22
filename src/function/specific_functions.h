@@ -87,19 +87,19 @@ public:
 };
 
 /**
-* @brief This class implements a specific function, which combines a modification with a specific function.
+* @brief This class implements a specific function, which combines an operation with a specific function.
 */
-class ModifiedSpecificFunction : public SpecificFunction {
+class OperatedSpecificFunction : public SpecificFunction {
 public:
 	/**
-	* @brief The constructor, which specifies the modification and the specific function, which should be combined.
+	* @brief The constructor, which specifies the operation and the specific function, which should be combined.
 	*
-	* @param modification The modification.
+	* @param operation The operation.
 	* @param specific_function The specific function.
 	*/
-	ModifiedSpecificFunction(Modification* modification, SpecificFunction* specific_function);
+	OperatedSpecificFunction(Operation* operation, SpecificFunction* specific_function);
 	/**
-	* @brief Returns the evaluation of the specified modification on the specified specific function.
+	* @brief Returns the evaluation of the specified operation on the specified specific function.
 	*
 	* @param pos The position.
 	*
@@ -109,7 +109,7 @@ public:
 	std::string GetName();
 
 private:
-	Modification* modification_;
+	Operation* operation_;
 	SpecificFunction* specific_function_;
 };
 

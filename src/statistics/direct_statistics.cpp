@@ -100,20 +100,20 @@ std::string StatisticMergeOperator::GetName(){
 	return os.str();
 }
 
-ModifiedStatistic::ModifiedStatistic(Modification* modification, Statistic* statistic):modification_(modification), statistic_(statistic){}
+OperatedStatistic::OperatedStatistic(Operation* operation, Statistic* statistic):operation_(operation), statistic_(statistic){}
 
-std::vector<mpf_t*> ModifiedStatistic::Evaluate(){
+std::vector<mpf_t*> OperatedStatistic::Evaluate(){
 	std::vector<mpf_t*> values = statistic_->Evaluate();
 	std::vector<mpf_t*> result;
 	for(unsigned int i = 0; i < values.size(); i++){
-		result.push_back(modification_->Modify(values[i]));
+		result.push_back(operation_->Operate(values[i]));
 	}
 	vectoroperations::ReleaseValues(values);
 	return result;
 }
 
-std::string ModifiedStatistic::GetName(){
-	return modification_->GetName() + statistic_->GetName();
+std::string OperatedStatistic::GetName(){
+	return operation_->GetName() + statistic_->GetName();
 }
 
 NamedStatistic::NamedStatistic(std::string name, Statistic* statistic):name_(name), statistic_(statistic){}
@@ -136,8 +136,8 @@ std::string GlobalBestPositionStatistic::GetName(){
 
 std::vector<mpf_t*> GlobalBestPositionDistTo1DOptimumStatistic::Evaluate(){
 	std::vector<mpf_t*> globBest = configuration::g_neighborhood->GetGlobalAttractorPosition();
-	DistTo1DOptimumModification modification;
-	std::vector<mpf_t*> res = modification.Modify(globBest);
+	DistTo1DOptimumOperation operation;
+	std::vector<mpf_t*> res = operation.Operate(globBest);
 	vectoroperations::ReleaseValues(globBest);
 	return res;
 }

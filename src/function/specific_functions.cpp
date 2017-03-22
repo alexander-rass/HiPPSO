@@ -67,21 +67,21 @@ std::string IdentitySpecificFunction::GetName(){
 	return "x";
 }
 
-ModifiedSpecificFunction::ModifiedSpecificFunction(Modification* modification, SpecificFunction* specificFunction):modification_(modification),specific_function_(specificFunction){}
+OperatedSpecificFunction::OperatedSpecificFunction(Operation* operation, SpecificFunction* specificFunction):operation_(operation),specific_function_(specificFunction){}
 
-std::vector<mpf_t*> ModifiedSpecificFunction::Eval(const std::vector<mpf_t*> & vec){
+std::vector<mpf_t*> OperatedSpecificFunction::Eval(const std::vector<mpf_t*> & vec){
 	std::vector<mpf_t*> res1 = specific_function_->Eval(vec);
 	std::vector<mpf_t*> res;
 	for(unsigned int i = 0; i < res1.size(); i++){
-		res.push_back(modification_->Modify(res1[i]));
+		res.push_back(operation_->Operate(res1[i]));
 	}
 	vectoroperations::ReleaseValues(res1);
 	return res;
 }
 
-std::string ModifiedSpecificFunction::GetName(){
+std::string OperatedSpecificFunction::GetName(){
 	std::ostringstream os;
-	os << modification_->GetName() << specific_function_->GetName();
+	os << operation_->GetName() << specific_function_->GetName();
 	return os.str();
 }
 

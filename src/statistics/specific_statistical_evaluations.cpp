@@ -51,13 +51,13 @@
 
 namespace highprecisionpso {
 
-ModifiedSpecificStatisticalEvaluation::ModifiedSpecificStatisticalEvaluation(Modification* modification, SpecificStatisticalEvaluation* specificEvaluation):modification_(modification), specific_evaluation_(specificEvaluation){}
+OperatedSpecificStatisticalEvaluation::OperatedSpecificStatisticalEvaluation(Operation* operation, SpecificStatisticalEvaluation* specificEvaluation):operation_(operation), specific_evaluation_(specificEvaluation){}
 
-std::vector<std::vector<mpf_t*> > ModifiedSpecificStatisticalEvaluation::Evaluate(){
+std::vector<std::vector<mpf_t*> > OperatedSpecificStatisticalEvaluation::Evaluate(){
 	std::vector<std::vector<mpf_t*> > data = specific_evaluation_->Evaluate();
 	for(unsigned int i = 0; i < data.size(); i++){
 		for(unsigned int j = 0; j < data[i].size(); j++){
-			mpf_t* result = modification_->Modify(data[i][j]);
+			mpf_t* result = operation_->Operate(data[i][j]);
 			mpftoperations::ReleaseValue(data[i][j]);
 			data[i][j] = result;
 		}
@@ -65,8 +65,8 @@ std::vector<std::vector<mpf_t*> > ModifiedSpecificStatisticalEvaluation::Evaluat
 	return data;
 }
 
-std::string ModifiedSpecificStatisticalEvaluation::GetName(){
-	return modification_->GetName() + specific_evaluation_->GetName();
+std::string OperatedSpecificStatisticalEvaluation::GetName(){
+	return operation_->GetName() + specific_evaluation_->GetName();
 }
 
 CombineSpecificStatisticalEvaluation::CombineSpecificStatisticalEvaluation(PairCombinationOperation* operation, SpecificStatisticalEvaluation* operator1, SpecificStatisticalEvaluation* operator2):operation_(operation),operator1_(operator1), operator2_(operator2){}

@@ -57,18 +57,18 @@ namespace highprecisionpso {
 namespace parse {
 
 /**
- * @brief Parses the given vector for a modification starting at the given index.
+ * @brief Parses the given vector for an operation starting at the given index.
  *
- * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a modification.
- * If nothing can be parsed as a modification then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
- * If a modification can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
+ * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of an operation.
+ * If nothing can be parsed as an operation then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
+ * If an operation can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
  *
  * @param parameters The vector containing the specification.
  * @param parsed_parameters The number of already parsed parameters by previous functions.
  *
- * @return A pointer to the parsed modification if the parsing process was successful and NULL otherwise.
+ * @return A pointer to the parsed operation if the parsing process was successful and NULL otherwise.
  */
-Modification* ParseModification(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
+Operation* ParseOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 /**
  * @brief Parses the given vector for a pair combination operation starting at the given index.
  *

@@ -60,18 +60,18 @@ std::string FunctionMergeOperator::GetName(){
 	return os.str();
 }
 
-ModifiedFunction::ModifiedFunction(Modification* modification, Function* function):modification_(modification), function_(function){}
+OperatedFunction::OperatedFunction(Operation* operation, Function* function):operation_(operation), function_(function){}
 
-mpf_t* ModifiedFunction::Eval(const std::vector<mpf_t*> & vec) {
+mpf_t* OperatedFunction::Eval(const std::vector<mpf_t*> & vec) {
 	mpf_t* tmp = function_->Eval(vec);
-	mpf_t* res = modification_->Modify(tmp);
+	mpf_t* res = operation_->Operate(tmp);
 	mpftoperations::ReleaseValue(tmp);
 	return res;
 }
 
-std::string ModifiedFunction::GetName(){
+std::string OperatedFunction::GetName(){
 	std::ostringstream os;
-	os << modification_->GetName() << function_->GetName();
+	os << operation_->GetName() << function_->GetName();
 	return os.str();
 }
 

@@ -48,16 +48,16 @@ namespace highprecisionpso {
 namespace parse {
 
 SpecificFunction* ParseSpecificFunction(const std::vector<std::string> & parameters, unsigned int & parsed_parameters){
-	// parse Modification
+	// parse Operation
 	{
-		Modification* modification = ParseModification(parameters, parsed_parameters);
-		if(modification != NULL) {
+		Operation* operation = ParseOperation(parameters, parsed_parameters);
+		if(operation != NULL) {
 			SpecificFunction* specificFunction = ParseSpecificFunction(parameters, parsed_parameters);
 			if(specificFunction == NULL){
 				parsed_parameters = parameters.size();
 				return NULL;
 			}
-			return new ModifiedSpecificFunction(modification, specificFunction);
+			return new OperatedSpecificFunction(operation, specificFunction);
 		}
 	}
 	// parse combined specific Function
@@ -337,14 +337,14 @@ Function* ParseFunction(const std::vector<std::string> & parameters, unsigned in
 	unsigned int mem_parsed_parameters = parsed_parameters;
 	// parse modified function
 	{
-		Modification* modification = ParseModification(parameters, parsed_parameters);
-		if(modification != NULL) {
+		Operation* operation = ParseOperation(parameters, parsed_parameters);
+		if(operation != NULL) {
 			Function* function = ParseFunction(parameters, parsed_parameters);
 			if(function == NULL) {
 				parsed_parameters = parameters.size();
 				return NULL;
 			}
-			parsedFunction = new ModifiedFunction(modification, function);
+			parsedFunction = new OperatedFunction(operation, function);
 		}
 	}
 	// parse standard function
@@ -421,21 +421,21 @@ Function* ParseCombineFunction(const std::vector<std::string> & parameters, unsi
 
 
 
-Modification* ParseModification(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
+Operation* ParseOperation(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
 	if(parsed_parameters == parameters.size()){
 		return NULL;
 	}
-	Modification* modification = NULL;
+	Operation* operation = NULL;
 	unsigned int mem_parsed_parameters = parsed_parameters;
 	std::string parameter = parameters[parsed_parameters++];
 	if(parameter == "sqrt"){
-		modification = new SqrtModification;
+		operation = new SqrtOperation;
 	} else if(parameter == "log2"){
-		modification = new Log2Modification;
+		operation = new Log2Operation;
 	} else if(parameter == "log2dbl"){
-		modification = new Log2DoubleModification;
+		operation = new Log2DoubleOperation;
 	} else if(parameter == "abs"){
-		modification = new AbsModification;
+		operation = new AbsOperation;
 	} else if(parameter == "pow"){
 		if(parsed_parameters == parameters.size()){
 			parsed_parameters = parameters.size();
@@ -447,26 +447,26 @@ Modification* ParseModification(const std::vector<std::string> & parameters, uns
 			parsed_parameters = parameters.size();
 			return NULL;
 		}
-		modification = new PowModification(exponent);
+		operation = new PowOperation(exponent);
 	} else if(parameter == "exp"){
-		modification = new ExpModification;
+		operation = new ExpOperation;
 	} else if(parameter == "sin"){
-		modification = new SinModification;
+		operation = new SinOperation;
 	} else if(parameter == "cos"){
-		modification = new CosModification;
+		operation = new CosOperation;
 	} else if(parameter == "tan"){
-		modification = new TanModification;
+		operation = new TanOperation;
 	} else if(parameter == "arcsin"){
-		modification = new ArcsinModification;
+		operation = new ArcsinOperation;
 	} else if(parameter == "arccos"){
-		modification = new ArccosModification;
+		operation = new ArccosOperation;
 	} else if(parameter == "arctan"){
-		modification = new ArctanModification;
+		operation = new ArctanOperation;
 	} else if(parameter == "logE"){
-		modification = new LogEModification;
+		operation = new LogEOperation;
 	}
-	if(modification != NULL){
-		return modification;
+	if(operation != NULL){
+		return operation;
 	}
 	parsed_parameters = mem_parsed_parameters;
 	return NULL;
@@ -552,16 +552,16 @@ SpecificStatisticalEvaluation* ParseSpecificStatistic(const std::vector<std::str
 			return statistic;
 		}
 	}
-	// check modification
+	// check operation
 	{
-		Modification* modification = ParseModification(parameters, parsed_parameters);
-		if(modification != NULL){
+		Operation* operation = ParseOperation(parameters, parsed_parameters);
+		if(operation != NULL){
 			SpecificStatisticalEvaluation* statistic = ParseSpecificStatistic(parameters, parsed_parameters);
 			if(statistic == NULL){
 				parsed_parameters = parameters.size();
 				return NULL;
 			} else {
-				return new ModifiedSpecificStatisticalEvaluation(modification, statistic);
+				return new OperatedSpecificStatisticalEvaluation(operation, statistic);
 			}
 		}
 	}
@@ -745,16 +745,16 @@ Statistic* ParseStatistic(const std::vector<std::string> & parameters, unsigned 
 			return statistic;
 		}
 	}
-	// check modification
+	// check operation
 	{
-		Modification* modification = ParseModification(parameters, parsed_parameters);
-		if(modification != NULL){
+		Operation* operation = ParseOperation(parameters, parsed_parameters);
+		if(operation != NULL){
 			Statistic* statistic = ParseStatistic(parameters, parsed_parameters);
 			if(statistic == NULL){
 				parsed_parameters = parameters.size();
 				return NULL;
 			} else {
-				return new ModifiedStatistic(modification, statistic);
+				return new OperatedStatistic(operation, statistic);
 			}
 		}
 	}

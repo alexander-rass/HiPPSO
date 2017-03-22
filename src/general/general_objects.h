@@ -628,24 +628,24 @@ public:
 	std::string GetName();
 };
 
-/************** VECTOR MODIFICATIONS *********************/
+/************** VECTOR OPERATIONS *********************/
 /**
-* @brief This class is an abstract class. It supplies the interface to modify vectors of mpf_t values.
+* @brief This class is an abstract class. It supplies the interface to operate on vectors of mpf_t values.
 */
-class VectorModification {
+class VectorOperation {
 public:
 	/**
 	 * @brief The destructor.
 	 */
-	virtual ~VectorModification(){}
+	virtual ~VectorOperation(){}
 	/**
-	* @brief Calculates a modification of the supplied vector.
+	* @brief Calculates a operation of the supplied vector.
 	*
-	* @param vec The vector which should be modified.
+	* @param vec The vector which should be the base of operation.
 	*
-	* @return The modified vector.
+	* @return The result of the operation on the given vector.
 	*/
-	virtual std::vector<mpf_t*> Modify(std::vector<mpf_t*> vec) = 0;
+	virtual std::vector<mpf_t*> Operate(std::vector<mpf_t*> vec) = 0;
 	/**
 	* @brief Returns a string representation of this object.
 	*
@@ -655,9 +655,9 @@ public:
 };
 
 /**
-* @brief This vector modification calculates for each dimension the distance to the nearest 1-dimensional local optimum.
+* @brief This vector operation calculates for each dimension the distance to the nearest 1-dimensional local optimum.
 */
-class DistTo1DOptimumModification : public VectorModification {
+class DistTo1DOptimumOperation : public VectorOperation {
 public:
 	/**
 	* @brief Calculates for each dimension the distance to the nearest 1-dimensional local optimum.
@@ -672,28 +672,28 @@ public:
 	*
 	* @return The distances to the local optima.
 	*/
-	std::vector<mpf_t*> Modify(std::vector<mpf_t*> vec);
+	std::vector<mpf_t*> Operate(std::vector<mpf_t*> vec);
 	std::string GetName();
 };
 
-/************** MODIFICATIONS ****************************/
+/************** OPERATIONS ****************************/
 /**
-* @brief This class is an abstract class. It supplies the interface to modify single mpf_t values.
+* @brief This class is an abstract class. It supplies the interface to operate on single mpf_t values.
 */
-class Modification {
+class Operation {
 public:
 	/**
 	 * @brief The destructor.
 	 */
-	virtual ~Modification(){}
+	virtual ~Operation(){}
 	/**
-	* @brief Calculates a modification of the supplied mpf_t value.
+	* @brief Calculates a operation of the supplied mpf_t value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The modified value.
+	* @return The result of the operation.
 	*/
-	virtual mpf_t* Modify(mpf_t* value) = 0;
+	virtual mpf_t* Operate(mpf_t* value) = 0;
 	/**
 	* @brief Returns a string representation of this object.
 	*
@@ -704,41 +704,41 @@ public:
 
 
 /**
-* @brief This modification calculates the square root of the supplied value.
+* @brief This operation calculates the square root of the supplied value.
 */
-class SqrtModification : public Modification {
+class SqrtOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the square root of the value which should be modified.
+	* @brief Calculates the square root of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The square root of the value which should be modified.
+	* @return The square root of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the power of the supplied value to a given exponent.
+* @brief This operation calculates the power of the supplied value to a given exponent.
 */
-class PowModification : public Modification {
+class PowOperation : public Operation {
 public:
 	/**
 	* @brief The constructor, where the exponent of the power calculation can be specified.
 	*
 	* @param exponent The exponent of the power calculation.
 	*/
-	PowModification(double exponent);
+	PowOperation(double exponent);
 
 	/**
-	* @brief Calculates the power of the value which should be modified to the specified exponent.
+	* @brief Calculates the power of the supplied value to the specified exponent.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The power of the value which should be modified to the specified exponent.
+	* @return The power of the supplied value to the specified exponent.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 
 private:
@@ -746,182 +746,182 @@ private:
 };
 
 /**
-* @brief This modification calculates the logarithm with base two of the supplied value.
+* @brief This operation calculates the logarithm with base two of the supplied value.
 */
-class Log2Modification : public Modification {
+class Log2Operation : public Operation {
 public:
 	/**
-	* @brief Calculates the logarithm with base two of the value which should be modified.
+	* @brief Calculates the logarithm with base two of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The logarithm with base two of the value which should be modified.
+	* @return The logarithm with base two of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates logarithm with base two of the supplied value.
-* @warning Results of modification may have very bad precision.
+* @brief This operation calculates logarithm with base two of the supplied value.
+* @warning Results of operation may have very bad precision.
 */
-class Log2DoubleModification : public Modification {
+class Log2DoubleOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the logarithm with base two of the value which should be modified.
+	* @brief Calculates the logarithm with base two of the supplied value.
 	*
 	* @warning The calculation uses double calculations. Therefore the result may have a very bad precision.
-	* For exact results pleas use the Log2Modification and not Log2DoubleModification!
+	* For exact results pleas use the Log2Operation and not Log2DoubleOperation!
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The logarithm with base two of the value which should be modified.
+	* @return The logarithm with base two of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the absolute value of the supplied value.
+* @brief This operation calculates the absolute value of the supplied value.
 */
-class AbsModification : public Modification {
+class AbsOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the absolute value of the value which should be modified.
+	* @brief Calculates the absolute value of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The absolute value of the value which should be modified.
+	* @return The absolute value of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the exponential function of the supplied value.
+* @brief This operation calculates the exponential function of the supplied value.
 */
-class ExpModification : public Modification {
+class ExpOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the exponential function of the value which should be modified.
+	* @brief Calculates the exponential function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The exponential function of the value which should be modified.
+	* @return The exponential function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the sine function of the supplied value.
+* @brief This operation calculates the sine function of the supplied value.
 */
-class SinModification : public Modification {
+class SinOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the sine function of the value which should be modified.
+	* @brief Calculates the sine function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The sine function of the value which should be modified.
+	* @return The sine function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the cosine function of the supplied value.
+* @brief This operation calculates the cosine function of the supplied value.
 */
-class CosModification : public Modification {
+class CosOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the cosine function of the value which should be modified.
+	* @brief Calculates the cosine function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The cosine function of the value which should be modified.
+	* @return The cosine function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the tangent function of the supplied value.
+* @brief This operation calculates the tangent function of the supplied value.
 */
-class TanModification : public Modification {
+class TanOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the tangent function of the value which should be modified.
+	* @brief Calculates the tangent function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The tangent function of the value which should be modified.
+	* @return The tangent function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the arcsine function of the supplied value.
+* @brief This operation calculates the arcsine function of the supplied value.
 */
-class ArcsinModification : public Modification {
+class ArcsinOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the arcsine function of the value which should be modified.
+	* @brief Calculates the arcsine function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The arcsine function of the value which should be modified.
+	* @return The arcsine function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the arccosine function of the supplied value.
+* @brief This operation calculates the arccosine function of the supplied value.
 */
-class ArccosModification : public Modification {
+class ArccosOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the arccosine function of the value which should be modified.
+	* @brief Calculates the arccosine function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The arccosine function of the value which should be modified.
+	* @return The arccosine function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the arctangent function of the supplied value.
+* @brief This operation calculates the arctangent function of the supplied value.
 */
-class ArctanModification : public Modification {
+class ArctanOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the arctangent function of the value which should be modified.
+	* @brief Calculates the arctangent function of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The arctangent function of the value which should be modified.
+	* @return The arctangent function of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 
 /**
-* @brief This modification calculates the logarithm with base E of the supplied value.
+* @brief This operation calculates the logarithm with base E of the supplied value.
 */
-class LogEModification : public Modification {
+class LogEOperation : public Operation {
 public:
 	/**
-	* @brief Calculates the logarithm with base E of the value which should be modified.
+	* @brief Calculates the logarithm with base E of the supplied value.
 	*
-	* @param value The value which should be modified.
+	* @param value The value which should be operated on.
 	*
-	* @return The logarithm with base E of the value which should be modified.
+	* @return The logarithm with base E of the supplied value.
 	*/
-	mpf_t* Modify(mpf_t* value);
+	mpf_t* Operate(mpf_t* value);
 	std::string GetName();
 };
 

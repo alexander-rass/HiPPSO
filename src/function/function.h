@@ -186,7 +186,7 @@ private:
 };
 
 /**
-* @brief This class is an abstract class. It supplies an interface for modification of vectors.
+* @brief This class is an abstract class. It supplies an interface for operations on vectors.
 */
 class SpecificFunction {
 public:

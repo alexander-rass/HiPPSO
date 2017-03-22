@@ -131,19 +131,19 @@ private:
 };
 
 /**
-* @brief This class implements a statistic, which modifies the values of another statistic.
+* @brief This class implements a statistic, which operates on the values of another statistic.
 */
-class ModifiedStatistic: public Statistic {
+class OperatedStatistic: public Statistic {
 public:
 	/**
-	* @brief The constructor, where the modification and the statistic can be specified.
+	* @brief The constructor, where the operation and the statistic can be specified.
 	*
-	* @param modification The modification operation, which will be performed on the statistic.
-	* @param statistic The statistic, which will be modified.
+	* @param operation The operation operation, which will be performed on the statistic.
+	* @param statistic The statistic, which will be operated on.
 	*/
-	ModifiedStatistic(Modification* modification, Statistic* statistic);
+	OperatedStatistic(Operation* operation, Statistic* statistic);
 	/**
-	* @brief Evaluates the specified statistic and modifies its values by the specified modification.
+	* @brief Evaluates the specified statistic and operates on its values by the specified operation.
 	*
 	* @return The result of the statistical evaluations.
 	*/
@@ -151,7 +151,7 @@ public:
 	std::string GetName();
 
 private:
-	Modification* modification_;
+	Operation* operation_;
 	Statistic* statistic_;
 };
 

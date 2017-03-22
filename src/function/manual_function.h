@@ -77,29 +77,29 @@ private:
 };
 
 /**
-* @brief This class is a function, which applies some modification to the result of another function.
+* @brief This class is a function, which applies some operation to the result of another function.
 */
-class ModifiedFunction : public Function {
+class OperatedFunction : public Function {
 public:
 	/**
-	* @brief The constructor, where the modification, which should be applied, and the other function can be specified.
+	* @brief The constructor, where the operation, which should be applied, and the other function can be specified.
 	*
-	* @param modification The modification, which should be applied.
+	* @param operation The operation, which should be applied.
 	* @param function The function.
 	*/
-	ModifiedFunction(Modification* modification, Function* function);
+	OperatedFunction(Operation* operation, Function* function);
 	/**
-	* @brief Evaluates the stored function on the given position and applies then the stored modification.
+	* @brief Evaluates the stored function on the given position and applies then the stored operation.
 	*
 	* @param pos The position
 	*
-	* @return The modified function evaluation.
+	* @return The result of the operation applied to the result of the function evaluation.
 	*/
 	mpf_t* Eval(const std::vector<mpf_t*> & pos);
 	std::string GetName();
 
 private:
-	Modification* modification_;
+	Operation* operation_;
 	Function* function_;
 };
 

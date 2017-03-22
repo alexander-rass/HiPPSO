@@ -5,7 +5,7 @@ BINARY_DIRECTORY=bin
 .PHONY: all
 all:
 	$(MAKE) -C $(SOURCE_DIRECTORY)/ && \
-    mkdir $(BINARY_DIRECTORY) && \
+    mkdir -p $(BINARY_DIRECTORY) && \
     cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
 
 .PHONY: test
