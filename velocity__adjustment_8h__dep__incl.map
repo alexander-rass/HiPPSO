@@ -1,5 +1,5 @@
 <map id="src/velocity_adjustment/velocity_adjustment.h" name="src/velocity_adjustment/velocity_adjustment.h">
-<area shape="rect" id="node2" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,104,179,131"/>
+<area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,104,179,131"/>
 <area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="444,187,592,213"/>
 <area shape="rect" id="node4" href="$adjust_8h.html" title="This file contains the adjust velocity adjustment strategy. " alt="" coords="255,97,413,138"/>
 <area shape="rect" id="node5" href="$deterministic__back_8h.html" title="This file contains the deterministic back velocity adjustment strategy. " alt="" coords="439,97,597,138"/>

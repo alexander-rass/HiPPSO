@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['checkprecisionmode',['CheckPrecisionMode',['../namespacehighprecisionpso_1_1configuration.html#a4e88357ca60e71adab09335feadad1c2',1,'highprecisionpso::configuration']]]
+  ['checkprecisionmode',['CheckPrecisionMode',['../namespacearbitraryprecisioncalculation_1_1configuration.html#adcd9fd3c6daa407cb6a562c50ca7d091',1,'arbitraryprecisioncalculation::configuration']]]
 ];

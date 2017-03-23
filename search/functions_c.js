@@ -12,5 +12,5 @@ var searchData=
   ['operator_3e',['operator&gt;',['../namespacehighprecisionpso.html#a26c93042f9a97a54c73e06563a42cd80',1,'highprecisionpso']]],
   ['operator_3e_3d',['operator&gt;=',['../namespacehighprecisionpso.html#a5ec1e6fbde2cbce0cb1bd08a4a514140',1,'highprecisionpso']]],
   ['orientationchangeupdater',['OrientationChangeUpdater',['../classhighprecisionpso_1_1OrientationChangeUpdater.html#a127a2298e7db24901f692965d20e9441',1,'highprecisionpso::OrientationChangeUpdater']]],
-  ['orthogonalprojection',['OrthogonalProjection',['../namespacehighprecisionpso_1_1vectoroperations.html#aaee288cee0deb626f442bd531bb4b77c',1,'highprecisionpso::vectoroperations']]]
+  ['orthogonalprojection',['OrthogonalProjection',['../namespacearbitraryprecisioncalculation_1_1vectoroperations.html#a022ca08f27f72188fc0018b1846e04fd',1,'arbitraryprecisioncalculation::vectoroperations']]]
 ];

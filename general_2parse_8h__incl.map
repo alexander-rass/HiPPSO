@@ -1,0 +1,7 @@
+<map id="src/general/parse.h" name="src/general/parse.h">
+<area shape="rect" id="node4" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="478,349,607,376"/>
+<area shape="rect" id="node6" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="325,260,496,287"/>
+<area shape="rect" id="node7" href="$random__number__generator_8h.html" title="This file contains the available random number generators. " alt="" coords="5,245,149,301"/>
+<area shape="rect" id="node9" href="$direct__statistics_8h.html" title="This file contain classes, which evaluate to vectors depending on the current state of the particle s..." alt="" coords="470,80,652,107"/>
+<area shape="rect" id="node10" href="$specific__statistical__evaluations_8h.html" title="This file contain classes, which can evaluate matrices depending on the current state of the particle..." alt="" coords="225,155,393,197"/>
+</map>

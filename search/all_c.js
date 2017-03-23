@@ -3,7 +3,7 @@ var searchData=
   ['namedstatistic',['NamedStatistic',['../classhighprecisionpso_1_1NamedStatistic.html',1,'highprecisionpso']]],
   ['namedstatistic',['NamedStatistic',['../classhighprecisionpso_1_1NamedStatistic.html#a78fee04c29072496d7cdcd8f69aeb48c',1,'highprecisionpso::NamedStatistic']]],
   ['nearest_2eh',['nearest.h',['../nearest_8h.html',1,'']]],
-  ['negate',['Negate',['../namespacehighprecisionpso_1_1mpftoperations.html#a3b05dd1f7dfd3d31f0a434bee4e172d1',1,'highprecisionpso::mpftoperations']]],
+  ['negate',['Negate',['../namespacearbitraryprecisioncalculation_1_1mpftoperations.html#a0e8660fe13811f22198e352c11a1c209',1,'arbitraryprecisioncalculation::mpftoperations']]],
   ['neighborhood',['Neighborhood',['../classhighprecisionpso_1_1Neighborhood.html',1,'highprecisionpso']]],
   ['neighborhood_2eh',['neighborhood.h',['../neighborhood_8h.html',1,'']]],
   ['no_5fbounds_2eh',['no_bounds.h',['../no__bounds_8h.html',1,'']]],

@@ -1,3 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classhighprecisionpso_1_1configuration_1_1InitializationInformation.html" title="Stores the information how positions or velocities should be initialized. " alt="" coords="6,5,207,46"/>
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1BoundHandling.html" title="This class is an abstract class. It supplies the interface for bound handling strategies of the parti..." alt="" coords="6,241,221,268"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1BoundHandlingAbsorption.html" title="This class implements the bound handling strategy absorption for the particle swarm optimization..." alt="" coords="270,5,485,46"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1BoundHandlingHyperbolic.html" title="This class implements the bound handling strategy hyperbolic for the particle swarm optimization..." alt="" coords="270,70,485,111"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1BoundHandlingNearest.html" title="This class implements the bound handling strategy nearest for the particle swarm optimization. " alt="" coords="270,135,485,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1BoundHandlingNoBounds.html" title="This class implements the bound handling strategy no bounds for the particle swarm optimization..." alt="" coords="270,201,485,242"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1BoundHandlingRandom.html" title="This class implements the bound handling strategy random for the particle swarm optimization. " alt="" coords="270,266,485,307"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1BoundHandlingRandomForth.html" title="This class implements the bound handling strategy random forth for the particle swarm optimization..." alt="" coords="270,331,485,373"/>
+<area shape="rect" id="node8" href="$classhighprecisionpso_1_1BoundHandlingReflect.html" title="This class implements the bound handling strategy reflect for the particle swarm optimization. " alt="" coords="270,397,485,438"/>
+<area shape="rect" id="node9" href="$classhighprecisionpso_1_1BoundHandlingTorus.html" title="This class implements the bound handling strategy torus for the particle swarm optimization. " alt="" coords="270,462,485,503"/>
 </map>

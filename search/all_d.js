@@ -21,5 +21,5 @@ var searchData=
   ['orientation_5fchange_5fupdater_2eh',['orientation_change_updater.h',['../orientation__change__updater_8h.html',1,'']]],
   ['orientationchangeupdater',['OrientationChangeUpdater',['../classhighprecisionpso_1_1OrientationChangeUpdater.html#a127a2298e7db24901f692965d20e9441',1,'highprecisionpso::OrientationChangeUpdater']]],
   ['orientationchangeupdater',['OrientationChangeUpdater',['../classhighprecisionpso_1_1OrientationChangeUpdater.html',1,'highprecisionpso']]],
-  ['orthogonalprojection',['OrthogonalProjection',['../namespacehighprecisionpso_1_1vectoroperations.html#aaee288cee0deb626f442bd531bb4b77c',1,'highprecisionpso::vectoroperations']]]
+  ['orthogonalprojection',['OrthogonalProjection',['../namespacearbitraryprecisioncalculation_1_1vectoroperations.html#a022ca08f27f72188fc0018b1846e04fd',1,'arbitraryprecisioncalculation::vectoroperations']]]
 ];

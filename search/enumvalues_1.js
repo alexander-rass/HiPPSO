@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['check_5fprecision_5falways',['CHECK_PRECISION_ALWAYS',['../namespacehighprecisionpso_1_1configuration.html#a4e88357ca60e71adab09335feadad1c2a4adb03150870ba7c9f04e089c2a457af',1,'highprecisionpso::configuration']]],
-  ['check_5fprecision_5falways_5fexcept_5fstatistics',['CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS',['../namespacehighprecisionpso_1_1configuration.html#a4e88357ca60e71adab09335feadad1c2a0e0dca0a464cfbe66ab38ac169edfb09',1,'highprecisionpso::configuration']]],
-  ['check_5fprecision_5fnever',['CHECK_PRECISION_NEVER',['../namespacehighprecisionpso_1_1configuration.html#a4e88357ca60e71adab09335feadad1c2adbb4bea4abeaa10d982c7614beebba41',1,'highprecisionpso::configuration']]]
+  ['check_5fprecision_5falways',['CHECK_PRECISION_ALWAYS',['../namespacearbitraryprecisioncalculation_1_1configuration.html#adcd9fd3c6daa407cb6a562c50ca7d091a668ac21341b630b93405b7601d730fc2',1,'arbitraryprecisioncalculation::configuration']]],
+  ['check_5fprecision_5falways_5fexcept_5fstatistics',['CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS',['../namespacearbitraryprecisioncalculation_1_1configuration.html#adcd9fd3c6daa407cb6a562c50ca7d091ab2cabed222671e2e5adedccdf7b6d3ab',1,'arbitraryprecisioncalculation::configuration']]],
+  ['check_5fprecision_5fnever',['CHECK_PRECISION_NEVER',['../namespacearbitraryprecisioncalculation_1_1configuration.html#adcd9fd3c6daa407cb6a562c50ca7d091ae5e3ace1a1405202f8b971353c7fa314',1,'arbitraryprecisioncalculation::configuration']]]
 ];

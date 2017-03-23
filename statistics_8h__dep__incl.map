@@ -1,5 +1,5 @@
 <map id="src/statistics/statistics.h" name="src/statistics/statistics.h">
-<area shape="rect" id="node2" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="35,199,209,225"/>
+<area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="35,199,209,225"/>
 <area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="569,288,717,315"/>
 <area shape="rect" id="node4" href="$main_8h.html" title="This file contains the main methods to start the PSO algorithm. " alt="" coords="161,95,289,121"/>
 <area shape="rect" id="node5" href="$position__and__velocity__updater_8h.html" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="543,80,744,136"/>

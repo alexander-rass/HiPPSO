@@ -9,7 +9,7 @@ var searchData=
   ['_7eoperation',['~Operation',['../classhighprecisionpso_1_1Operation.html#a95f36bbeb59fe8c8cbcda8aa218e66fb',1,'highprecisionpso::Operation']]],
   ['_7epairreduceoperation',['~PairReduceOperation',['../classhighprecisionpso_1_1PairReduceOperation.html#a0306b988f3f4b1f0a725e2705565c603',1,'highprecisionpso::PairReduceOperation']]],
   ['_7epositionandvelocityupdater',['~PositionAndVelocityUpdater',['../classhighprecisionpso_1_1PositionAndVelocityUpdater.html#ae2a6aaeedd0e314e5a5d5c47282e9a76',1,'highprecisionpso::PositionAndVelocityUpdater']]],
-  ['_7erandomnumbergenerator',['~RandomNumberGenerator',['../classhighprecisionpso_1_1RandomNumberGenerator.html#a3e9645e54170946768af65fb0f624d3e',1,'highprecisionpso::RandomNumberGenerator']]],
+  ['_7erandomnumbergenerator',['~RandomNumberGenerator',['../classarbitraryprecisioncalculation_1_1RandomNumberGenerator.html#abc5811b221f34b615e49b42215549110',1,'arbitraryprecisioncalculation::RandomNumberGenerator']]],
   ['_7erandompositivedefinitesecondderivative',['~RandomPositiveDefiniteSecondDerivative',['../classhighprecisionpso_1_1RandomPositiveDefiniteSecondDerivative.html#ac47e311d6dc993ce38c19a2fc4b97ede',1,'highprecisionpso::RandomPositiveDefiniteSecondDerivative']]],
   ['_7escaledhadamardrotatedsphere',['~ScaledHadamardRotatedSphere',['../classhighprecisionpso_1_1ScaledHadamardRotatedSphere.html#afc68c47d6f1a8c32444d72db0534132b',1,'highprecisionpso::ScaledHadamardRotatedSphere']]],
   ['_7escaledsphere',['~ScaledSphere',['../classhighprecisionpso_1_1ScaledSphere.html#a90ae00017797382dd2a78e85ebd1e523',1,'highprecisionpso::ScaledSphere']]],
