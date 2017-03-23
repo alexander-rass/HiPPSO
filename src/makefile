@@ -5,13 +5,14 @@ DEBUGFLAG=
 
 INCLUDE_FILE=general/includes.h
 
-SOURCES=$(filter-out testing/tests.cpp, $(filter-out general/main.cpp, $(wildcard */*.cpp)))
+SOURCES=$(filter-out testing/arbitrary_precision_calculation_tests.cpp, $(filter-out testing/pso_tests.cpp, $(filter-out general/main.cpp, $(wildcard */*.cpp))))
 
 OBJECTS=$(addprefix $(BUILD_DIR)/, $(SOURCES:.cpp=.o))
 H_FILES=$(SOURCES:.cpp=.h)
 
 EXECUTABLE=high_precision_pso
-TEST_PROGRAM=test_program
+TEST_PROGRAM_PSO=test_program_pso
+TEST_PROGRAM_APC=test_program_apc
 BUILD_DIR=build
 
 
@@ -20,8 +21,11 @@ all: $(EXECUTABLE)
 $(EXECUTABLE): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/general/main.o
 	$(CXX) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LDFLAGS) -o $@
 
-$(TEST_PROGRAM): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/tests.o
-	$(CXX) $(OBJECTS) $(BUILD_DIR)/testing/tests.o $(LDFLAGS) -o $@
+$(TEST_PROGRAM_PSO): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o
+	$(CXX) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LDFLAGS) -o $@
+
+$(TEST_PROGRAM_APC): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o
+	$(CXX) $(OBJECTS) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LDFLAGS) -o $@
 
 $(INCLUDE_FILE): $(H_FILES)
 	echo "/**" > $@&& \
@@ -64,8 +68,9 @@ $(INCLUDE_FILE): $(H_FILES)
 	echo "" >> $@ && \
 	echo $(H_FILES) | tr ' ' '\n' | grep -v "check_condition.h" | sed "s:$$:\":" | sed "s:^:#include \":" | sort >> $@
 
-test: $(TEST_PROGRAM) $(EXECUTABLE)
-	./$(TEST_PROGRAM) && \
+test: $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC) $(EXECUTABLE)
+	./$(TEST_PROGRAM_PSO) && \
+    ./$(TEST_PROGRAM_APC) && \
 	$(MAKE) -C testing/test_data_sets/
 
 
@@ -81,7 +86,7 @@ $(BUILD_DIR)/%.d: ;
 -include $(OBJECTS:.o=.d)
 
 clean:
-	rm -rf $(BUILD_DIR) $(EXECUTABLE) $(INCLUDE_FILE) $(TEST_PROGRAM)
+	rm -rf $(BUILD_DIR) $(EXECUTABLE) $(INCLUDE_FILE) $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC)
 
 debug:
 	make all "OPTIMIZATION=-O0" "DEBUGFLAG=-g"

@@ -1,6 +1,7 @@
 # executables of main program and test program
 high_precision_pso
-test_program
+test_program_pso
+test_program_apc
 
 # build folder
 build
