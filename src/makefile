@@ -5,7 +5,7 @@ DEBUGFLAG=
 
 INCLUDE_FILE=general/includes.h
 
-SOURCES=$(filter-out general/main.cpp, $(wildcard bound_handling/*.cpp) $(wildcard function/*.cpp) $(wildcard position_and_velocity_updater/*.cpp) $(wildcard neighborhood/*.cpp) $(wildcard velocity_adjustment/*.cpp) $(wildcard statistics/*.cpp) $(wildcard general/*.cpp))
+SOURCES=$(filter-out testing/tests.cpp, $(filter-out general/main.cpp, $(wildcard */*.cpp)))
 
 OBJECTS=$(addprefix $(BUILD_DIR)/, $(SOURCES:.cpp=.o))
 H_FILES=$(SOURCES:.cpp=.h)

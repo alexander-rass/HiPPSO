@@ -1631,7 +1631,7 @@ int test_randomNumberGenerator(){
 	}
 	long long value;
 	int found_zeros = 0;
-	for(unsigned long long iterations = 1; iterations <= (1ULL << 33); iterations++){
+	for(unsigned long long iterations = 1; iterations <= (1ULL << 31); iterations++){
 		value = random->RandomLongLong();
 		if(value == 0){
 			assert(iterations == (1ULL << 63));
