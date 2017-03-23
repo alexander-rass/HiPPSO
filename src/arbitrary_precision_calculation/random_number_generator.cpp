@@ -37,13 +37,13 @@
 *
 */
 
-#include <general/random_number_generator.h>
+#include <arbitrary_precision_calculation/random_number_generator.h>
 #include <cmath>
 #include <iostream>
 #include <sstream>
 
 #include "general/check_condition.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 
 namespace highprecisionpso {
 

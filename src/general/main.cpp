@@ -41,7 +41,7 @@
 
 #include <algorithm>
 #include <dirent.h>
-#include <general/random_number_generator.h>
+#include <arbitrary_precision_calculation/random_number_generator.h>
 #include <fstream>
 #include <iostream>
 #include <sstream>
@@ -52,7 +52,7 @@
 #include "general/check_condition.h"
 #include "general/configuration.h"
 #include "general/general_objects.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/particle.h"
 #include "general/visualization.h"
 #include "neighborhood/neighborhood.h"

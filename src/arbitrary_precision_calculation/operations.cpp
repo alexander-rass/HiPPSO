@@ -37,8 +37,8 @@
 *
 */
 
-#include <general/random_number_generator.h>
-#include "general/operations.h"
+#include <arbitrary_precision_calculation/random_number_generator.h>
+#include "arbitrary_precision_calculation/operations.h"
 
 #include <algorithm>
 #include <fstream>

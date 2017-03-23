@@ -45,7 +45,7 @@
 
 #include "function/function.h"
 #include "general/general_objects.h"
-#include "random_number_generator.h"
+#include "arbitrary_precision_calculation/random_number_generator.h"
 #include "statistics/direct_statistics.h"
 #include "statistics/specific_statistical_evaluations.h"
 

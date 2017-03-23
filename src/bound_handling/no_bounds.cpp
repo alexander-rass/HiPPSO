@@ -39,7 +39,7 @@
 
 #include "bound_handling/no_bounds.h"
 
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/particle.h"
 
 namespace highprecisionpso {

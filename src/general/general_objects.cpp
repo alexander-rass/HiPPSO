@@ -43,7 +43,7 @@
 
 #include "general/check_condition.h"
 #include "general/configuration.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 
 namespace highprecisionpso {
 

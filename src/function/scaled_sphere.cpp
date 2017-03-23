@@ -37,14 +37,14 @@
 *
 */
 
-#include <general/random_number_generator.h>
+#include <arbitrary_precision_calculation/random_number_generator.h>
 #include "function/scaled_sphere.h"
 
 #include <cmath>
 #include <sstream>
 
 #include "general/check_condition.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/parse.h"
 
 namespace highprecisionpso {

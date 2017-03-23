@@ -47,7 +47,7 @@
 #include "function/function.h"
 #include "neighborhood/neighborhood.h"
 #include "position_and_velocity_updater/position_and_velocity_updater.h"
-#include "random_number_generator.h"
+#include "arbitrary_precision_calculation/random_number_generator.h"
 #include "statistics/direct_statistics.h"
 #include "statistics/statistics.h"
 #include "velocity_adjustment/velocity_adjustment.h"

@@ -37,10 +37,10 @@
 *
 */
 
-#include <general/random_number_generator.h>
+#include <arbitrary_precision_calculation/random_number_generator.h>
 #include "function/random_positive_definite.h"
 
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/parse.h"
 #include "general/check_condition.h"
 

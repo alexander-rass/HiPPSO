@@ -26,6 +26,7 @@ debugtest:
 .PHONY: doc
 
 doc:
+	$(MAKE) cleandoc && \
 	doxygen doc/Doxyfile > /dev/null
 
 cleandoc:

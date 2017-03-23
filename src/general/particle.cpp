@@ -42,7 +42,7 @@
 #include "function/function.h"
 #include "general/check_condition.h"
 #include "general/configuration.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "neighborhood/neighborhood.h"
 #include "position_and_velocity_updater/position_and_velocity_updater.h"
 #include "statistics/statistics.h"

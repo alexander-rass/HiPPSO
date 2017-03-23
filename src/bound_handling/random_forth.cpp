@@ -42,7 +42,7 @@
 #include "function/function.h"
 #include "general/check_condition.h"
 #include "general/configuration.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/particle.h"
 #include "velocity_adjustment/velocity_adjustment.h"
 

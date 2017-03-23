@@ -42,7 +42,7 @@
 #include <sstream>
 
 #include "general/check_condition.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 
 namespace highprecisionpso {
 

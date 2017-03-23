@@ -44,7 +44,7 @@
 #include "general/check_condition.h"
 #include "general/configuration.h"
 #include "general/general_objects.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "neighborhood/neighborhood.h"
 #include "statistics/statistics.h"
 

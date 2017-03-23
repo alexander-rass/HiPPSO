@@ -37,7 +37,7 @@
 *
 */
 
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "schwefel.h"
 
 namespace highprecisionpso {

@@ -41,7 +41,7 @@
 
 #include <sstream>
 
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 
 namespace highprecisionpso {
 

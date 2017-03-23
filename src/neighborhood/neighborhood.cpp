@@ -39,7 +39,7 @@
 
 #include "neighborhood/neighborhood.h"
 
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/particle.h"
 
 namespace highprecisionpso {

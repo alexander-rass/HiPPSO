@@ -46,7 +46,7 @@
 
 #include "bound_handling/bound_handling.h"
 #include "general/configuration.h"
-#include "general/operations.h"
+#include "arbitrary_precision_calculation/operations.h"
 #include "general/particle.h"
 #include "neighborhood/neighborhood.h"
 
