@@ -1,5 +1,5 @@
 /**
-* @file   sorting_function.h 
+* @file   function/sorting_function.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains the description of a function which checks how sorted the position entries are.

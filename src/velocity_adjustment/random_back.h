@@ -1,5 +1,5 @@
 /**
-* @file   random_back.h
+* @file   velocity_adjustment/random_back.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the random back velocity adjustment strategy.

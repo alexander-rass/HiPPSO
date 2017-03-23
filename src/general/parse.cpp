@@ -1,5 +1,5 @@
 /**
-* @file   parse.cpp
+* @file   general/parse.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   October, 2015
 * @brief  This file contains functions for parsing the configuration file.
@@ -41,6 +41,7 @@
 
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 
 #include "general/includes.h"
 
@@ -140,7 +141,8 @@ Function* ParseStandardFunction(const std::vector<std::string> & parameters, uns
 		parsed_parameters = parameters.size();
 		return NULL;
 	}
-	std::string functionName = mpftoperations::ToLowerCase(parameters[parsed_parameters++]);
+	std::string functionName = parameters[parsed_parameters++];
+	std::transform(functionName.begin(), functionName.end(), functionName.begin(), ::tolower);
 	//************************ Please add new functions here ***************************//
 	if (functionName == "sphere") {
 		return new Sphere;
@@ -184,7 +186,7 @@ Function* ParseStandardFunction(const std::vector<std::string> & parameters, uns
 			return NULL;
 		}
 		unsigned int rng_parsed_parameters = parsed_parameters;
-		RandomNumberGenerator* rng = ParseRandomNumberGenerator(parameters, parsed_parameters);
+		arbitraryprecisioncalculation::RandomNumberGenerator* rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(parameters, parsed_parameters);
 		if(rng == NULL) {
 			parsed_parameters = parameters.size();
 			return NULL;
@@ -199,7 +201,7 @@ Function* ParseStandardFunction(const std::vector<std::string> & parameters, uns
 			return NULL;
 		}
 		unsigned int rng_parsed_parameters = parsed_parameters;
-		RandomNumberGenerator* rng = ParseRandomNumberGenerator(parameters, parsed_parameters);
+		arbitraryprecisioncalculation::RandomNumberGenerator* rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(parameters, parsed_parameters);
 		if(rng == NULL) {
 			parsed_parameters = parameters.size();
 			return NULL;
@@ -309,7 +311,7 @@ Function* ParseStandardFunction(const std::vector<std::string> & parameters, uns
 					remaining_dimension_power, SINGLE_DIFFERENT_DIRECTION_MODE_DIAGONAL);
 		} else if(parameter == "randomDirection"){
 			unsigned int rng_parsed_parameters = parsed_parameters;
-			RandomNumberGenerator* rng = ParseRandomNumberGenerator(parameters, parsed_parameters);
+			arbitraryprecisioncalculation::RandomNumberGenerator* rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(parameters, parsed_parameters);
 			if(rng == NULL) {
 				parsed_parameters = parameters.size();
 				return NULL;
@@ -804,150 +806,6 @@ Statistic* ParseStatistic(const std::vector<std::string> & parameters, unsigned 
 	}
 	parsed_parameters = mem_parsed_parameters;
 	return NULL;
-}
-
-RandomNumberGenerator* ParseRandomNumberGenerator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters) {
-	if(parsed_parameters == parameters.size()) {
-		return NULL;
-	}
-	unsigned int mem_parsed_parameters = parsed_parameters;
-	std::string parameter = parameters[parsed_parameters++];
-	if(parameter == "linearCongruenceRNG") {
-		if(parsed_parameters + 2 > parameters.size()) {
-			parsed_parameters = mem_parsed_parameters;
-			return NULL;
-		}
-		// parse seed:
-		unsigned long long seed;
-		{
-			std::istringstream is(parameters[parsed_parameters++]);
-			if(!(is >> seed)) {
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-		}
-		// parse <lcrng>
-		std::string subparameter1 = parameters[parsed_parameters++];
-		if(subparameter1 == "standard") {
-			if(parsed_parameters + 1 > parameters.size()) {
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-			std::string subparameter2 = parameters[parsed_parameters++];
-			if(subparameter2 == "fast") {
-				return new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, seed);
-			} else if(subparameter2 == "intense") {
-				if(parsed_parameters + 1 > parameters.size()) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-				int used_bits;
-				{
-					std::istringstream is(parameters[parsed_parameters++]);
-					if(!(is >> used_bits)) {
-						parsed_parameters = mem_parsed_parameters;
-						return NULL;
-					}
-				}
-				return new IntenseM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, seed, used_bits);
-			} else {
-				// invalid option;
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-		} else if(subparameter1 == "mod2p63") {
-			if(parsed_parameters + 3 > parameters.size()) {
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-			unsigned long long multiplier, adder;
-			{
-				std::istringstream is(parameters[parsed_parameters++]);
-				if(!(is >> multiplier)) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-			}
-			{
-				std::istringstream is(parameters[parsed_parameters++]);
-				if(!(is >> adder)) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-			}
-			std::string subparameter2 = parameters[parsed_parameters++];
-			if(subparameter2 == "fast") {
-				return new FastM2P63LinearCongruenceRandomNumberGenerator(multiplier, adder, seed);
-			} else if(subparameter2 == "intense") {
-				if(parsed_parameters + 1 > parameters.size()) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-				int used_bits;
-				{
-					std::istringstream is(parameters[parsed_parameters++]);
-					if(!(is >> used_bits)) {
-						parsed_parameters = mem_parsed_parameters;
-						return NULL;
-					}
-				}
-				return new IntenseM2P63LinearCongruenceRandomNumberGenerator(multiplier, adder, seed, used_bits);
-			} else {
-				// invalid option;
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-		} else if(subparameter1 == "specific") {
-			if(parsed_parameters + 4 > parameters.size()) {
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-			unsigned long long multiplier, adder, modulus;
-			{
-				std::istringstream is(parameters[parsed_parameters++]);
-				if(!(is >> multiplier)) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-			}
-			{
-				std::istringstream is(parameters[parsed_parameters++]);
-				if(!(is >> adder)) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-			}
-			{
-				std::istringstream is(parameters[parsed_parameters++]);
-				if(!(is >> modulus)) {
-					parsed_parameters = mem_parsed_parameters;
-					return NULL;
-				}
-			}
-			std::string subparameter2 = parameters[parsed_parameters++];
-			if(subparameter2 == "fast") {
-				return new FastLinearCongruenceRandomNumberGenerator(multiplier, adder, modulus, seed);
-			} else if(subparameter2 == "intense") {
-				return new IntenseLinearCongruenceRandomNumberGenerator(multiplier, adder, modulus, seed);
-			} else {
-				// invalid option;
-				parsed_parameters = mem_parsed_parameters;
-				return NULL;
-			}
-		} else {
-			// invalid option;
-			parsed_parameters = mem_parsed_parameters;
-			return NULL;
-		}
-	} else { // try to parse seed
-		unsigned long long seed;
-		std::istringstream is(parameter);
-		if(!(is >> seed)){
-			parsed_parameters = mem_parsed_parameters;
-			return NULL;
-		}
-		return new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, seed);
-	}
 }
 
 void SignalInvalidCommand(const std::vector<std::string> & command){

@@ -1,5 +1,5 @@
 /**
-* @file   random_number_generator.h
+* @file   arbitrary_precision_calculation/random_number_generator.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the available random number generators.
@@ -37,16 +37,14 @@
 *
 */
 
-#ifndef HIGH_PRECISION_PSO_GENERAL_RANDOM_NUMBER_GENERATOR_H_
-#define HIGH_PRECISION_PSO_GENERAL_RANDOM_NUMBER_GENERATOR_H_
+#ifndef ARBITRARY_PRECISION_CALCULATION_RANDOM_NUMBER_GENERATOR_H_
+#define ARBITRARY_PRECISION_CALCULATION_RANDOM_NUMBER_GENERATOR_H_
 
 #include <fstream>
 #include <gmp.h>
 #include <string>
 
-#include "general/general_objects.h"
-
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 
 /**
 * @brief This class is an abstract class. It supplies the interface for random number generators.
@@ -74,9 +72,8 @@ public:
 	* @brief Loads data to reset the state of the random number generator to the state which was stored.
 	*
 	* @param input_stream The stream which contains the data about the state of the random number generator.
-	* @param version_of_stored_data The version of the program when the backup was created.
 	*/
-	virtual void LoadData(std::ifstream* input_stream, ProgramVersion* version_of_stored_data) = 0;
+	virtual void LoadData(std::ifstream* input_stream) = 0;
 	/**
 	* @brief Stores the current state of this random number generator,
 	* such that it can completely restore the current state with this data.
@@ -126,7 +123,7 @@ public:
 	*/
 	long long RandomLongLong();
 
-	void LoadData(std::ifstream*, ProgramVersion* version_of_stored_data);
+	void LoadData(std::ifstream*);
 	void StoreData(std::ofstream*);
 	std::string GetName();
 
@@ -172,7 +169,7 @@ public:
 	*/
 	long long RandomLongLong();
 
-	void LoadData(std::ifstream*, ProgramVersion* version_of_stored_data);
+	void LoadData(std::ifstream*);
 	void StoreData(std::ofstream*);
 	std::string GetName();
 
@@ -218,7 +215,7 @@ public:
 	*/
 	long long RandomLongLong();
 
-	void LoadData(std::ifstream*, ProgramVersion* version_of_stored_data);
+	void LoadData(std::ifstream*);
 	void StoreData(std::ofstream*);
 	std::string GetName();
 
@@ -264,7 +261,7 @@ public:
 	*/
 	long long RandomLongLong();
 
-	void LoadData(std::ifstream*, ProgramVersion* version_of_stored_data);
+	void LoadData(std::ifstream*);
 	void StoreData(std::ofstream*);
 	std::string GetName();
 
@@ -276,6 +273,6 @@ private:
 	unsigned long long seed_;
 };
 
-} // namespace highprecisionpso
+} // namespace arbitraryprecisioncalculation
 
-#endif /* HIGH_PRECISION_PSO_GENERAL_RANDOM_NUMBER_GENERATOR_H_ */
+#endif /* ARBITRARY_PRECISION_CALCULATION_RANDOM_NUMBER_GENERATOR_H_ */

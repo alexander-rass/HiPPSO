@@ -1,5 +1,5 @@
 /**
-* @file   visualization.cpp
+* @file   general/visualization.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains functionality to visualize the particle swarm.
@@ -75,11 +75,11 @@ void VisualizeCurrentSwarm(){
 	std::vector<std::vector<double> > bounds;
 	{
 		std::vector<mpf_t*> tmp = configuration::g_function->GetLowerSearchSpaceBound();
-		bounds.push_back(vectoroperations::MpftToDouble(tmp));
-		vectoroperations::ReleaseValues(tmp);
+		bounds.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble(tmp));
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		tmp = configuration::g_function->GetUpperSearchSpaceBound();
-		bounds.push_back(vectoroperations::MpftToDouble(tmp));
-		vectoroperations::ReleaseValues(tmp);
+		bounds.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble(tmp));
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		for(auto v: bounds)for(auto a: v){
 			if(std::isnan(a) || !std::isfinite(a)){
 				bounds_out_of_range = true;
@@ -108,19 +108,19 @@ void VisualizeCurrentSwarm(){
 	std::vector<std::vector<double> > positions, velocities, local_attractors, global_attractors;
 	std::vector<double> overall_global_attractor;
 	for(unsigned int i = 0; i < (*swarm).size(); i++){
-		positions.push_back(vectoroperations::MpftToDouble((*swarm)[i]->position));
-		velocities.push_back(vectoroperations::MpftToDouble((*swarm)[i]->velocity));
+		positions.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble((*swarm)[i]->position));
+		velocities.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble((*swarm)[i]->velocity));
 		std::vector<mpf_t*> tmp = (*swarm)[i]->GetLocalAttractorPosition();
-		local_attractors.push_back(vectoroperations::MpftToDouble(tmp));
-		vectoroperations::ReleaseValues(tmp);
+		local_attractors.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble(tmp));
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		tmp = configuration::g_neighborhood->GetGlobalAttractorPosition((*swarm)[i]->id);
-		global_attractors.push_back(vectoroperations::MpftToDouble(tmp));
-		vectoroperations::ReleaseValues(tmp);
+		global_attractors.push_back(arbitraryprecisioncalculation::vectoroperations::MpftToDouble(tmp));
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 	}
 	{
 		std::vector<mpf_t*> tmp = configuration::g_neighborhood->GetGlobalAttractorPosition();
-		overall_global_attractor = vectoroperations::MpftToDouble(tmp);
-		vectoroperations::ReleaseValues(tmp);
+		overall_global_attractor = arbitraryprecisioncalculation::vectoroperations::MpftToDouble(tmp);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 	}
 	for(auto v: positions)for(auto a: v){
 		if(std::isnan(a) || !std::isfinite(a)){
@@ -207,13 +207,13 @@ void VisualizeCurrentSwarm(){
 		std::vector<mpf_t*> tmp_vec = configuration::g_neighborhood->GetGlobalAttractorPosition();
 		std::cout << "Step " << configuration::g_statistics->current_iteration << ": x=(";
 		for(unsigned int d = 0; d < global_attractors[0].size(); d++){
-			std::cout << mpftoperations::MpftToString(tmp_vec[d]) << " ";
+			std::cout << arbitraryprecisioncalculation::mpftoperations::MpftToString(tmp_vec[d]) << " ";
 		}
 		std::cout << "), f(x) ="; 
 		mpf_t* tmp = configuration::g_neighborhood->GetGlobalAttractorValue();
-		std::cout << mpftoperations::MpftToString(tmp) << std::endl;
-		vectoroperations::ReleaseValues(tmp_vec);
-		mpftoperations::ReleaseValue(tmp);
+		std::cout << arbitraryprecisioncalculation::mpftoperations::MpftToString(tmp) << std::endl;
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp_vec);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
 	if(image_generation_frequency == 0)return;
 	if(configuration::g_statistics->current_iteration % image_generation_frequency != 0)return;

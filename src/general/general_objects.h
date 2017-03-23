@@ -1,5 +1,5 @@
 /**
-* @file   general_objects.h
+* @file   general/general_objects.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains various general objects which can be used by or contained in other objects.

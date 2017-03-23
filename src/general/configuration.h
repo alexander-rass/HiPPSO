@@ -1,5 +1,5 @@
 /**
-* @file   configuration.h 
+* @file   general/configuration.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   June, 2013
 * @brief  This file contains general information about the configuration for running the particle swarm optimization algorithm.
@@ -130,55 +130,6 @@ extern int g_dimensions;
 * Specifies how many iterations of the particle swarm are done.
 */
 extern long long g_max_iterations;
-/**
-* @brief Specifies the initial precision of the mpf_t data type.
-*/
-extern int g_initial_precision;
-/**
-* @brief Remembers whether the initial precision is already set manually.
-* If this is not the case then a specification of the precision also overwrites the initial precision.
-*/
-extern bool g_initial_precision_already_set;
-/**
-* @brief Specifies the additional precision. If precision checks are activated then the check whether the precision should be increased uses this number to increase the calculated needed precision additionally.
-*/
-extern int g_precision_safety_margin;
-
-/**
-* @brief Specification possibilities in which cases precision checks occur.
-*/
-enum CheckPrecisionMode {
-	/**
-	* @brief If there are statistical calculations then no precision is checked. Beside that the precision is checked on each addition and subtraction.
-	*/
-	CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS,
-	/**
-	* @brief The precision is checked on each addition and subtraction.
-	*/
-	CHECK_PRECISION_ALWAYS,
-	/**
-	* @brief The precision is never checked.
-	*/
-	CHECK_PRECISION_NEVER
-};
-/**
-* @brief Stores the information in which cases precision checks occur.
-*/
-extern CheckPrecisionMode g_check_precision_mode;
-/**
-* @brief Specifies the probability whether a precision check is actually done.
-*/
-extern double g_check_precision_probability;
-/**
-* @brief Specifies whether the precision will be increased shortly.
-*/
-extern bool g_increase_precision;
-
-/**
-* @brief Specifies the number of digits for the output of mpf_t values while using printing functions.
-* The value -1 specifies that the output precision should match the current precision of the mpf_t data type.
-*/
-extern int g_output_precision;
 
 /**
 * @brief Specifies at which steps / iterations statistical evaluations are done.
@@ -260,10 +211,6 @@ extern VelocityAdjustment* g_velocity_adjustment;
 * @brief Specifies the way how the positions and the velocities are updated at each iteration.
 */
 extern PositionAndVelocityUpdater* g_position_and_velocity_updater;
-/**
-* @brief Specifies the random number generator for the particle swarm optimization algorithm.
-*/
-extern RandomNumberGenerator* g_standard_random_number_generator;
 /**
 * @brief Specifies the neighborhood topology.
 */

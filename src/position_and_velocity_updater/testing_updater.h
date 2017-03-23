@@ -1,5 +1,5 @@
 /**
-* @file   testing_updater.h
+* @file   position_and_velocity_updater/testing_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains an experimental position and velocity updater.

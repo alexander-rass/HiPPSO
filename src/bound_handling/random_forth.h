@@ -1,5 +1,5 @@
 /**
-* @file   random_forth.h
+* @file   bound_handling/random_forth.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the random forth bound handling strategy.

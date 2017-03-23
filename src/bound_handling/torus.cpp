@@ -1,5 +1,5 @@
 /**
-* @file   torus.cpp
+* @file   bound_handling/torus.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the torus bound handling strategy.
@@ -49,35 +49,35 @@ namespace highprecisionpso {
 void BoundHandlingTorus::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> oldPos = p->GetPosition();
 	std::vector<mpf_t*> vel = p->GetVelocity();
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	{
 		std::vector<mpf_t*> lower = configuration::g_function->GetLowerSearchSpaceBound();
 		std::vector<mpf_t*> upper = configuration::g_function->GetUpperSearchSpaceBound();
 		for(int i = 0; i < configuration::g_dimensions; i++){
-			if(mpftoperations::Compare((lower[i]), (newPos[i])) > 0 ||
-				mpftoperations::Compare((newPos[i]), (upper[i])) > 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare((lower[i]), (newPos[i])) > 0 ||
+				arbitraryprecisioncalculation::mpftoperations::Compare((newPos[i]), (upper[i])) > 0) {
 
-				mpf_t* mod_num = mpftoperations::Subtract(upper[i], lower[i]);
-				while(mpftoperations::Compare(lower[i], newPos[i]) > 0) {
-					mpf_t* tmp = mpftoperations::Add(newPos[i], mod_num);
+				mpf_t* mod_num = arbitraryprecisioncalculation::mpftoperations::Subtract(upper[i], lower[i]);
+				while(arbitraryprecisioncalculation::mpftoperations::Compare(lower[i], newPos[i]) > 0) {
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Add(newPos[i], mod_num);
 					std::swap(tmp, newPos[i]);
-					mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 				}
-				while(mpftoperations::Compare(newPos[i], upper[i]) > 0) {
-					mpf_t* tmp = mpftoperations::Subtract(newPos[i], mod_num);
+				while(arbitraryprecisioncalculation::mpftoperations::Compare(newPos[i], upper[i]) > 0) {
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Subtract(newPos[i], mod_num);
 					std::swap(tmp, newPos[i]);
-					mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 				}
-				mpftoperations::ReleaseValue(mod_num);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(mod_num);
 			}
 		}
-		vectoroperations::ReleaseValues(lower);
-		vectoroperations::ReleaseValues(upper);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lower);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(upper);
 	}
 	p->SetPosition(newPos);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingTorus::GetName(){
@@ -85,30 +85,30 @@ std::string BoundHandlingTorus::GetName(){
 }
 
 std::vector<mpf_t*> BoundHandlingTorus::GetDirectionVector(const std::vector<mpf_t*> & position, const std::vector<mpf_t*> & aim){
-	std::vector<mpf_t*> dir = vectoroperations::Subtract(aim, position);
+	std::vector<mpf_t*> dir = arbitraryprecisioncalculation::vectoroperations::Subtract(aim, position);
 	{
 		std::vector<mpf_t*> lower = configuration::g_function->GetLowerSearchSpaceBound();
 		std::vector<mpf_t*> upper = configuration::g_function->GetUpperSearchSpaceBound();
 		for(int i = 0; i < configuration::g_dimensions; i++){
-			mpf_t* mod_num = mpftoperations::Subtract(upper[i], lower[i]);
+			mpf_t* mod_num = arbitraryprecisioncalculation::mpftoperations::Subtract(upper[i], lower[i]);
 			std::vector<mpf_t*> options;
-			options.push_back(mpftoperations::Add(dir[i], mod_num));
-			options.push_back(mpftoperations::Subtract(dir[i], mod_num));
-			mpf_t* abs_cur = mpftoperations::Abs(dir[i]);
+			options.push_back(arbitraryprecisioncalculation::mpftoperations::Add(dir[i], mod_num));
+			options.push_back(arbitraryprecisioncalculation::mpftoperations::Subtract(dir[i], mod_num));
+			mpf_t* abs_cur = arbitraryprecisioncalculation::mpftoperations::Abs(dir[i]);
 			for(unsigned int k = 0; k < options.size(); k++){
-				mpf_t* abs_next = mpftoperations::Abs(options[k]);
-				if(mpftoperations::Compare(abs_next, abs_cur) < 0) {
+				mpf_t* abs_next = arbitraryprecisioncalculation::mpftoperations::Abs(options[k]);
+				if(arbitraryprecisioncalculation::mpftoperations::Compare(abs_next, abs_cur) < 0) {
 					std::swap(abs_cur, abs_next);
 					std::swap(dir[i], options[k]);
 				}
-				mpftoperations::ReleaseValue(abs_next);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(abs_next);
 			}
-			vectoroperations::ReleaseValues(options);
-			mpftoperations::ReleaseValue(abs_cur);
-			mpftoperations::ReleaseValue(mod_num);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(options);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(abs_cur);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(mod_num);
 		}
-		vectoroperations::ReleaseValues(lower);
-		vectoroperations::ReleaseValues(upper);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lower);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(upper);
 	}
 	return dir;
 }

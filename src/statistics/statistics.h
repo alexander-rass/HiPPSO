@@ -1,5 +1,5 @@
 /**
-* @file   statistics.h
+* @file   statistics/statistics.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains an class, which stores current information about the particle swarm.

@@ -1,5 +1,5 @@
 /**
-* @file   nearest.cpp
+* @file   bound_handling/nearest.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the nearest bound handling strategy.
@@ -50,29 +50,29 @@ namespace highprecisionpso {
 void BoundHandlingNearest::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> oldPos = p->GetPosition();
 	std::vector<mpf_t*> vel = p->GetVelocity();
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	std::vector<mpf_t*> low_position = configuration::g_function->GetLowerSearchSpaceBound();
 	std::vector<mpf_t*> high_position = configuration::g_function->GetUpperSearchSpaceBound();
 	std::vector<bool> modifiedDimensions(newPos.size(), false);
 	for(unsigned int d = 0; d < newPos.size(); d++){
-		if(mpftoperations::Compare(newPos[d], low_position[d]) < 0) {
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(newPos[d], low_position[d]) < 0) {
 			modifiedDimensions[d] = true;
-			mpftoperations::ReleaseValue(newPos[d]);
-			newPos[d] = mpftoperations::Clone(low_position[d]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newPos[d]);
+			newPos[d] = arbitraryprecisioncalculation::mpftoperations::Clone(low_position[d]);
 		}
-		if(mpftoperations::Compare(newPos[d], high_position[d]) > 0) {
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(newPos[d], high_position[d]) > 0) {
 			modifiedDimensions[d] = true;
-			mpftoperations::ReleaseValue(newPos[d]);
-			newPos[d] = mpftoperations::Clone(high_position[d]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newPos[d]);
+			newPos[d] = arbitraryprecisioncalculation::mpftoperations::Clone(high_position[d]);
 		}
 	}
 	p->SetPosition(newPos);
 	configuration::g_velocity_adjustment->AdjustVelocity(p, modifiedDimensions, oldPos);
-	vectoroperations::ReleaseValues(low_position);
-	vectoroperations::ReleaseValues(high_position);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(low_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(high_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingNearest::GetName(){

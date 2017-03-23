@@ -1,5 +1,5 @@
 /**
-* @file   tests.cpp
+* @file   testing/tests.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains methods for checking correct functionality of the software.
@@ -69,37 +69,37 @@ void init(){
 double maximalError = 0.0;
 
 mpf_t* getError(mpf_t* pv1, mpf_t* pv2){
-	mpf_t* v1 = mpftoperations::Clone(pv1);
-	mpf_t* v2 = mpftoperations::Clone(pv2);
-	mpf_t* a1 = mpftoperations::Abs(v1);
-	mpf_t* a2 = mpftoperations::Abs(v2);
-	mpf_t* ma = mpftoperations::Max(a1, a2);
-	if(mpftoperations::Compare(ma, 1.0) > 0){
-		mpf_t* tmp = mpftoperations::Divide(v1, ma);
-		mpftoperations::ReleaseValue(v1);
+	mpf_t* v1 = arbitraryprecisioncalculation::mpftoperations::Clone(pv1);
+	mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::Clone(pv2);
+	mpf_t* a1 = arbitraryprecisioncalculation::mpftoperations::Abs(v1);
+	mpf_t* a2 = arbitraryprecisioncalculation::mpftoperations::Abs(v2);
+	mpf_t* ma = arbitraryprecisioncalculation::mpftoperations::Max(a1, a2);
+	if(arbitraryprecisioncalculation::mpftoperations::Compare(ma, 1.0) > 0){
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Divide(v1, ma);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
 		v1 =  tmp;
-		tmp = mpftoperations::Divide(v2, ma);
-		mpftoperations::ReleaseValue(v2);
+		tmp = arbitraryprecisioncalculation::mpftoperations::Divide(v2, ma);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 		v2 = tmp;
 	}
-	mpf_t* dif = mpftoperations::Subtract(v1, v2);
-	mpftoperations::ReleaseValue(v1);
-	mpftoperations::ReleaseValue(v2);
-	mpftoperations::ReleaseValue(a1);
-	mpftoperations::ReleaseValue(a2);
-	mpftoperations::ReleaseValue(ma);
-	mpf_t* err = mpftoperations::Abs(dif);
-	mpftoperations::ReleaseValue(dif);
+	mpf_t* dif = arbitraryprecisioncalculation::mpftoperations::Subtract(v1, v2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(a1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(a2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(ma);
+	mpf_t* err = arbitraryprecisioncalculation::mpftoperations::Abs(dif);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(dif);
 	return err;
 }
 
 bool smallError(mpf_t* pv1, double d2){
 	if(!(std::abs(d2) < DBL_MAX))return true;
-	mpf_t* v2 = mpftoperations::ToMpft(d2);
+	mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::ToMpft(d2);
 	mpf_t* merr = getError(pv1, v2);
-	double err = mpftoperations::MpftToDouble(merr);
-	mpftoperations::ReleaseValue(v2);
-	mpftoperations::ReleaseValue(merr);
+	double err = arbitraryprecisioncalculation::mpftoperations::MpftToDouble(merr);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(merr);
 	maximalError = std::max(maximalError, err);
 	if(err >= EPS){
 		std::cout << "error: " << err << std::endl;
@@ -118,8 +118,8 @@ int testValues(std::vector<mpf_t*> checkNums,
 		std::vector<mpf_t*> actualResults,
 		std::vector<mpf_t*> moreAccurateResults,
 		int mpf_t_used){
-	if(configuration::g_increase_precision){
-		configuration::g_increase_precision = false;
+	if(arbitraryprecisioncalculation::configuration::g_increase_precision){
+		arbitraryprecisioncalculation::configuration::g_increase_precision = false;
 		std::cout << "WARNING: evaluation leads to an increase of precision\n";
 	}
 	{
@@ -146,9 +146,9 @@ int testValues(std::vector<mpf_t*> checkNums,
 	for(unsigned int i = 0; i < expectedResults.size(); i++){
 		if(!smallError(actualResults[i], expectedResults[i])){
 			std::cerr << "WARNING: Error is not small but " << getMaximalError() << " for number ";
-			std::cerr << mpftoperations::MpftToString(checkNums[i]);
+			std::cerr << arbitraryprecisioncalculation::mpftoperations::MpftToString(checkNums[i]);
 			std::cerr << std::endl;
-			std::cerr << "  actual result: " << mpftoperations::MpftToDouble(actualResults[i]) << std::endl;
+			std::cerr << "  actual result: " << arbitraryprecisioncalculation::mpftoperations::MpftToDouble(actualResults[i]) << std::endl;
 			std::cerr << "expected result:" << expectedResults[i] << std::endl;
 			assert(false);
 			return 1;
@@ -156,26 +156,26 @@ int testValues(std::vector<mpf_t*> checkNums,
 	}
 	std::cout << "double precision tests passed - ";
 	std::cout << "maximal error = " << getMaximalError() << std::endl;
-	mpf_t* maxErr = mpftoperations::ToMpft(0.0);
+	mpf_t* maxErr = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 
 	for(unsigned int i = 0; i < checkNums.size(); i++){
 		mpf_t* res1 = actualResults[i];
 		mpf_t* res2 = moreAccurateResults[i];
-		if(mpftoperations::Compare(res1, res2) == 0)continue;
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(res1, res2) == 0)continue;
 		mpf_t* err = getError(res1, res2);
-		if(mpftoperations::Compare(maxErr, err) < 0){
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(maxErr, err) < 0){
 			std::swap(maxErr, err);
 		}
-		mpftoperations::ReleaseValue(err);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(err);
 	}
 	unsigned int minAccuracy = 0;
-	while(mpftoperations::Compare(maxErr, 1.0) < 0 && minAccuracy < largePrecision){
+	while(arbitraryprecisioncalculation::mpftoperations::Compare(maxErr, 1.0) < 0 && minAccuracy < largePrecision){
 		minAccuracy++;
-		mpf_t* tmp = mpftoperations::Add(maxErr, maxErr);
-		mpftoperations::ReleaseValue(maxErr);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Add(maxErr, maxErr);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxErr);
 		maxErr = tmp;
 	}
-	mpftoperations::ReleaseValue(maxErr);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxErr);
 	std::cout << "accuracy: min(rel error, abs error):" << minAccuracy << "/" << smallPrecision
 		<< " = " << (100.0 * minAccuracy / (double) smallPrecision) << "%\n";
 	if(minAccuracy < 0.5 * smallPrecision){
@@ -186,33 +186,33 @@ int testValues(std::vector<mpf_t*> checkNums,
 		assert(result_should_be_true);
 		if(!(result_should_be_true)) return 1;
 	}
-/*	if(mpftoperations::GetNumberOfMpftValuesInUse() != mpftoperations::GetNumberOfMpftValuesCached() + (int)checkNums.size() * 3 + mpf_t_used){
+/*	if(arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() != arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() + (int)checkNums.size() * 3 + mpf_t_used){
 		std::cerr << std::string(65, '!') << std::endl;
-		std::cerr << "mpf_t's in use inconsistent. Should be " << checkNums.size() * 3 + mpf_t_used + mpftoperations::GetNumberOfMpftValuesCached() << " but there are " << mpftoperations::GetNumberOfMpftValuesInUse() << std::endl;
+		std::cerr << "mpf_t's in use inconsistent. Should be " << checkNums.size() * 3 + mpf_t_used + arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << " but there are " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() << std::endl;
 		std::cerr << std::string(65, '!') << std::endl;
-		mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - checkNums.size() * 3 - mpftoperations::GetNumberOfMpftValuesCached();
+		mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - checkNums.size() * 3 - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 		return 1;
 	}*/
-	vectoroperations::ReleaseValues(checkNums);
-	vectoroperations::ReleaseValues(actualResults);
-	vectoroperations::ReleaseValues(moreAccurateResults);
-	if(mpftoperations::GetNumberOfMpftValuesInUse() != mpf_t_used + mpftoperations::GetNumberOfMpftValuesCached()){
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(checkNums);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(actualResults);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(moreAccurateResults);
+	if(arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() != mpf_t_used + arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached()){
 		std::cerr << std::string(65, '!') << std::endl;
-		std::cerr << "mpf_t's in use inconsistent. Should be " << mpf_t_used + mpftoperations::GetNumberOfMpftValuesCached() << " but there are " << mpftoperations::GetNumberOfMpftValuesInUse() << std::endl;
+		std::cerr << "mpf_t's in use inconsistent. Should be " << mpf_t_used + arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << " but there are " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() << std::endl;
 		std::cerr << std::string(65, '!') << std::endl;
 		return 1;
 	}
-	configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
 	return 0;
 }
 
 int testPi(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start Pi test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(PI);
 	std::vector<mpf_t*> actualResults;
 	std::vector<mpf_t*> moreAccurateResults;
@@ -223,39 +223,39 @@ int testPi(){
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		actualResults.push_back(mpftoperations::GetPi());
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::GetPi());
 		mpf_set_default_prec(largePrecision);
 		{
 			int result_should_be_true = (mpf_get_default_prec() == largePrecision);
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		moreAccurateResults.push_back(mpftoperations::GetPi());
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::GetPi());
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testSin(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start sin test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(PI));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI));
 	expectedResults.push_back(0.0);
-	checkNums.push_back(mpftoperations::ToMpft(1e-50));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1e-50));
 	expectedResults.push_back(sin(1e-50));
-	checkNums.push_back(mpftoperations::ToMpft(PI * 0.5));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI * 0.5));
 	expectedResults.push_back(sin(PI * 0.5));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(0.0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
 		if((dec & 6) == 6) v = 1/v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(sin(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -267,7 +267,7 @@ int testSin(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Sin(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Sin(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -276,32 +276,32 @@ int testSin(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Sin(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Sin(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testCos(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start cos test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(PI));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI));
 	expectedResults.push_back(cos(PI));
-	checkNums.push_back(mpftoperations::ToMpft(1e-50));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1e-50));
 	expectedResults.push_back(cos(1e-50));
-	checkNums.push_back(mpftoperations::ToMpft(PI * 0.5));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI * 0.5));
 	expectedResults.push_back(cos(PI * 0.5));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(1.0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
 		if((dec & 6) == 6) v = 1/v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(cos(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -313,7 +313,7 @@ int testCos(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Cos(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Cos(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -322,32 +322,32 @@ int testCos(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Cos(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Cos(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testTan(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start tan test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(PI));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI));
 	expectedResults.push_back(tan(PI));
-	checkNums.push_back(mpftoperations::ToMpft(1e-50));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1e-50));
 	expectedResults.push_back(tan(1e-50));
-	checkNums.push_back(mpftoperations::ToMpft(PI * 0.5-1e-11));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(PI * 0.5-1e-11));
 	expectedResults.push_back(tan(PI * 0.5-1e-11));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(0.0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
 		if((dec & 6) == 6) v = 1/v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(tan(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -359,7 +359,7 @@ int testTan(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Tan(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Tan(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -368,31 +368,31 @@ int testTan(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Tan(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Tan(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testArcsin(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start arcsin test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(-1.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(-1.0));
 	expectedResults.push_back(-PI * 0.5);
-	checkNums.push_back(mpftoperations::Negate(checkNums[0]));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::Negate(checkNums[0]));
 	expectedResults.push_back( PI * 0.5);
-	checkNums.push_back(mpftoperations::ToMpft(1e-50));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1e-50));
 	expectedResults.push_back(asin(1e-50));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(0.0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(asin(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -404,7 +404,7 @@ int testArcsin(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Arcsin(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arcsin(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -413,31 +413,31 @@ int testArcsin(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Arcsin(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arcsin(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testArccos(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start arccos test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(-1.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(-1.0));
 	expectedResults.push_back(PI);
-	checkNums.push_back(mpftoperations::Negate(checkNums[0]));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::Negate(checkNums[0]));
 	expectedResults.push_back(0.0);
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(PI * 0.5);
-	checkNums.push_back(mpftoperations::ToMpft(1.0-1e-14));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0-1e-14));
 	expectedResults.push_back(acos(1.0-1e-14));
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(acos(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -449,7 +449,7 @@ int testArccos(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Arccos(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arccos(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -458,31 +458,31 @@ int testArccos(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Arccos(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arccos(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testArctan(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start arctan test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::GetPlusInfinity());
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity());
 	expectedResults.push_back(PI * 0.5);
-	checkNums.push_back(mpftoperations::Negate(checkNums[0]));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::Negate(checkNums[0]));
 	expectedResults.push_back(-PI * 0.5);
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(0.0);
-	checkNums.push_back(mpftoperations::ToMpft(1e-50));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1e-50));
 	expectedResults.push_back(asin(1e-50));
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 1) v = -v;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(atan(v));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -494,7 +494,7 @@ int testArctan(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Arctan(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arctan(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -503,7 +503,7 @@ int testArctan(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Arctan(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Arctan(checkNums[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
@@ -549,16 +549,16 @@ int testTrigonometric(){
 }
 
 int testPowInt(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start powInt test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
 	std::vector<int> powers;
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	powers.push_back(1);
 	expectedResults.push_back(std::pow(0.0, 1));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	powers.push_back(0);
 	expectedResults.push_back(std::pow(0.0, 0));
 	for(int i = 0; i <  RANDOM_NUMS; i++){
@@ -566,7 +566,7 @@ int testPowInt(){
 		int dec = rand();
 		if(dec & 1) v = -v;
 		if(dec & 2) v *= 100;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		int p = rand() % 10;
 		if(dec & 4) p = -p;
 		powers.push_back(p);
@@ -581,7 +581,7 @@ int testPowInt(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Pow(checkNums[i], powers[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Pow(checkNums[i], powers[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -590,27 +590,27 @@ int testPowInt(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Pow(checkNums[i], powers[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Pow(checkNums[i], powers[i]));
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testPow(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start pow test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
 	std::vector<mpf_t*> powers;
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
-	powers.push_back(mpftoperations::ToMpft(1.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
+	powers.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
 	expectedResults.push_back(std::pow(0.0, 1));
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
-	powers.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
+	powers.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(std::pow(0.0, 0));
-	checkNums.push_back(mpftoperations::ToMpft(1.0));
-	powers.push_back(mpftoperations::ToMpft(1.2132154564));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
+	powers.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.2132154564));
 	expectedResults.push_back(1.0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
@@ -631,8 +631,8 @@ int testPow(){
 			if(dec & 8) p = -p;
 			if(dec & 16) p *= 100;
 		}
-		checkNums.push_back(mpftoperations::ToMpft(v));
-		powers.push_back(mpftoperations::ToMpft(p));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
+		powers.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(p));
 		expectedResults.push_back(std::pow(v, p));
 	}
 	std::vector<mpf_t*> actualResults;
@@ -644,7 +644,7 @@ int testPow(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Pow(checkNums[i], powers[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Pow(checkNums[i], powers[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -653,20 +653,20 @@ int testPow(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Pow(checkNums[i], powers[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Pow(checkNums[i], powers[i]));
 	}
-	vectoroperations::ReleaseValues(powers);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(powers);
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testE(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start E test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(exp(1.0));
 	std::vector<mpf_t*> actualResults;
 	std::vector<mpf_t*> moreAccurateResults;
@@ -677,39 +677,39 @@ int testE(){
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		actualResults.push_back(mpftoperations::GetE());
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::GetE());
 		mpf_set_default_prec(largePrecision);
 		{
 			int result_should_be_true = (mpf_get_default_prec() == largePrecision);
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		moreAccurateResults.push_back(mpftoperations::GetE());
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::GetE());
 	}
 	testValues(checkNums, expectedResults, actualResults, moreAccurateResults, mpf_t_used); 
 	return 0;
 }
 
 int testLog(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start log test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
 	std::vector<double> expectedResults2;
-	checkNums.push_back(mpftoperations::ToMpft(1.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
 	expectedResults.push_back(0.0);
-	checkNums.push_back(mpftoperations::GetPlusInfinity());
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity());
 	expectedResults.push_back(INFINITY);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
 		int dec = rand();
 		if(dec & 2) v *= 100;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(log(v));
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++) {
-		expectedResults2.push_back(mpftoperations::Log2Double(checkNums[i]) * log(2));
+		expectedResults2.push_back(arbitraryprecisioncalculation::mpftoperations::Log2Double(checkNums[i]) * log(2));
 	}
 	std::vector<mpf_t*> actualResults;
 	std::vector<mpf_t*> moreAccurateResults;
@@ -720,7 +720,7 @@ int testLog(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::LogE(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::LogE(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -729,7 +729,7 @@ int testLog(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::LogE(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::LogE(checkNums[i]));
 	}
 
 	double merr = 0.0;
@@ -748,17 +748,17 @@ int testLog(){
 }
 
 int testExp(){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start exp test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<mpf_t*> checkNums;
 	std::vector<double> expectedResults;
 	std::vector<double> expectedResults2;
-	checkNums.push_back(mpftoperations::GetPlusInfinity());
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity());
 	expectedResults.push_back(INFINITY);
-	checkNums.push_back(mpftoperations::ToMpft(0.0));
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 	expectedResults.push_back(exp(0));
-	checkNums.push_back(mpftoperations::GetMinusInfinity());
+	checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::GetMinusInfinity());
 	expectedResults.push_back(0);
 	for(int i = 0; i <  RANDOM_NUMS; i++){
 		double v = rand() / (double) RAND_MAX;
@@ -766,13 +766,13 @@ int testExp(){
 		if(dec & 4) v = 1.0 / v;
 		if(dec & 2) v *= 100;
 		if(dec & 1) v *= -1;
-		checkNums.push_back(mpftoperations::ToMpft(v));
+		checkNums.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(v));
 		expectedResults.push_back(exp(v));
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++) {
-		mpf_t* tmp = mpftoperations::Exp(checkNums[i]);
-		expectedResults2.push_back(mpftoperations::MpftToDouble(tmp));
-		mpftoperations::ReleaseValue(tmp);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Exp(checkNums[i]);
+		expectedResults2.push_back(arbitraryprecisioncalculation::mpftoperations::MpftToDouble(tmp));
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
 	std::vector<mpf_t*> actualResults;
 	std::vector<mpf_t*> moreAccurateResults;
@@ -783,7 +783,7 @@ int testExp(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		actualResults.push_back(mpftoperations::Exp(checkNums[i]));
+		actualResults.push_back(arbitraryprecisioncalculation::mpftoperations::Exp(checkNums[i]));
 	}
 	mpf_set_default_prec(largePrecision);
 	{
@@ -792,7 +792,7 @@ int testExp(){
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		moreAccurateResults.push_back(mpftoperations::Exp(checkNums[i]));
+		moreAccurateResults.push_back(arbitraryprecisioncalculation::mpftoperations::Exp(checkNums[i]));
 	}
 
 	double merr = 0.0;
@@ -833,35 +833,35 @@ int testLongLongToMpft(){
 	mpf_set_default_prec(64);
 	for(auto v: check_numbers){
 		auto a = v;
-		mpf_t* direct = mpftoperations::ToMpft(v);
+		mpf_t* direct = arbitraryprecisioncalculation::mpftoperations::ToMpft(v);
 		bool negate = (v < 0);
 		a = std::abs(a);
-		mpf_t* cur = mpftoperations::ToMpft(0.0);
-		mpf_t* mul = mpftoperations::ToMpft(1.0);
+		mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
+		mpf_t* mul = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 		while(a){
 			if(a % 2 != 0){
-				mpf_t* tmp = mpftoperations::Add(cur, mul);
+				mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Add(cur, mul);
 				std::swap(tmp, cur);
-				mpftoperations::ReleaseValue(tmp);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 			}
 			a /= 2;
-			mpf_t* tmp = mpftoperations::Multiply(mul, 2.0);
+			mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(mul, 2.0);
 			std::swap(tmp, mul);
-			mpftoperations::ReleaseValue(tmp);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 		}
 		if(negate){
-			mpf_t* tmp = mpftoperations::Negate(cur);
+			mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Negate(cur);
 			std::swap(tmp, cur);
-			mpftoperations::ReleaseValue(tmp);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 		}
-		mpftoperations::ReleaseValue(mul);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(mul);
 		{
-			int result_should_be_true = (mpftoperations::Compare(cur, direct) == 0);
+			int result_should_be_true = (arbitraryprecisioncalculation::mpftoperations::Compare(cur, direct) == 0);
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		mpftoperations::ReleaseValue(cur);
-		mpftoperations::ReleaseValue(direct);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(direct);
 	}
 	mpf_set_default_prec(prev_prec);
 	std::cout << "finished long_long_to_mpf_t test successfully.\n";
@@ -882,14 +882,14 @@ int testCompare(){
 	for(int i = (int)doubles.size() - 1; i >= 0; i--)doubles.push_back(-doubles[i]);
 	for(unsigned int i = 0; i < doubles.size(); i++){
 		for(unsigned int j = 0; j < doubles.size(); j++) {
-			mpf_t* a = mpftoperations::ToMpft(doubles[i]);
-			mpf_t* b = mpftoperations::ToMpft(doubles[j]);
+			mpf_t* a = arbitraryprecisioncalculation::mpftoperations::ToMpft(doubles[i]);
+			mpf_t* b = arbitraryprecisioncalculation::mpftoperations::ToMpft(doubles[j]);
 			int cmp_res = 0;
 			if(doubles[i] < doubles[j])cmp_res = -1;
 			else if(doubles[i] > doubles[j])cmp_res = 1;
-			int cmp_res1 = mpftoperations::Compare(a,b);
-			int cmp_res2 = mpftoperations::Compare(a, doubles[j]);
-			int cmp_res3 = mpftoperations::Compare(doubles[i], b);
+			int cmp_res1 = arbitraryprecisioncalculation::mpftoperations::Compare(a,b);
+			int cmp_res2 = arbitraryprecisioncalculation::mpftoperations::Compare(a, doubles[j]);
+			int cmp_res3 = arbitraryprecisioncalculation::mpftoperations::Compare(doubles[i], b);
 			if(signum(cmp_res) != signum(cmp_res1)){
 				std::cerr << "cmp1 failed " << doubles[i] << " " << doubles[j] << "(expected=" << cmp_res << " received=" << cmp_res1 << ")\n";
 				assert(false);
@@ -905,12 +905,12 @@ int testCompare(){
 				assert(false);
 				return 1;
 			}
-			mpf_t* max_ab = mpftoperations::Max(a,b);
-			mpf_t* min_ab = mpftoperations::Min(a,b);
+			mpf_t* max_ab = arbitraryprecisioncalculation::mpftoperations::Max(a,b);
+			mpf_t* min_ab = arbitraryprecisioncalculation::mpftoperations::Min(a,b);
 			double d_max_ab = std::max(doubles[i], doubles[j]);
 			double d_min_ab = std::min(doubles[i], doubles[j]);
-			double vg_min_ab = mpftoperations::MpftToDouble(min_ab);
-			double vg_max_ab = mpftoperations::MpftToDouble(max_ab);
+			double vg_min_ab = arbitraryprecisioncalculation::mpftoperations::MpftToDouble(min_ab);
+			double vg_max_ab = arbitraryprecisioncalculation::mpftoperations::MpftToDouble(max_ab);
 			{
 				int result_should_be_true = (d_max_ab == vg_max_ab);
 				if(!result_should_be_true){
@@ -929,10 +929,10 @@ int testCompare(){
 				assert(result_should_be_true);
 				if(!(result_should_be_true)) return 1;
 			}
-			mpftoperations::ReleaseValue(max_ab);
-			mpftoperations::ReleaseValue(min_ab);
-			mpftoperations::ReleaseValue(a);
-			mpftoperations::ReleaseValue(b);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(max_ab);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(min_ab);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(a);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(b);
 		}
 	}
 	return 0;
@@ -978,7 +978,7 @@ int testOperations(){
 }
 
 int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double loValue, double centerValue, double hiValue){
-	int mpf_t_used = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	std::cout << "start function <" << func->GetName() << "> test\n";
 	mpf_set_default_prec(BASE_PRECISION);
 	std::vector<std::vector<mpf_t*> > checkNums;
@@ -1004,7 +1004,7 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 			}
 			double x = cen + dif * v;
 			position.push_back(x);
-			mPosition.push_back(mpftoperations::ToMpft(x));
+			mPosition.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(x));
 		}
 		checkNums.push_back(mPosition);
 		if(evalFunc != NULL){
@@ -1039,14 +1039,14 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		vectoroperations::ReleaseValues(tmp);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		tmp = func->GetUpperSearchSpaceBound();
 		{
 			int result_should_be_true = (tmp.size() == (unsigned int) configuration::g_dimensions);
 			assert(result_should_be_true);
 			if(!(result_should_be_true)) return 1;
 		}
-		vectoroperations::ReleaseValues(tmp);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 	}
 	{
 		{
@@ -1060,19 +1060,19 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 			if(!(result_should_be_true)) return 1;
 		}
 		mpf_t* tmp = func->DistanceTo1DLocalOptimum(checkNums[0], 3);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 		tmp = func->DistanceTo1DLocalOptimum(checkNums[0], 0);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 		tmp = func->DistanceTo1DLocalOptimum(checkNums[0], 9);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
 
 	for(unsigned int i = 0; i < checkNums.size(); i++){
 		configuration::g_dimensions = checkNums[i].size();
 		moreAccurateResults.push_back(func->Evaluate(checkNums[i]));
 	}
-	if(configuration::g_increase_precision){
-		configuration::g_increase_precision = false;
+	if(arbitraryprecisioncalculation::configuration::g_increase_precision){
+		arbitraryprecisioncalculation::configuration::g_increase_precision = false;
 		std::cout << "evaluation leads to an increase of precision\n";
 	}
 	if(evalFunc != NULL){
@@ -1106,10 +1106,10 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 				std::cerr << "pos: [";
 				for(auto x : checkNums[i]) {
 					std::cerr << " ";
-					std::cerr << mpftoperations::MpftToString(x);
+					std::cerr << arbitraryprecisioncalculation::mpftoperations::MpftToString(x);
 				}
 				std::cerr << " ]\n";
-				std::cerr << "  actual result: " << mpftoperations::MpftToDouble(actualResults[i]) << std::endl;
+				std::cerr << "  actual result: " << arbitraryprecisioncalculation::mpftoperations::MpftToDouble(actualResults[i]) << std::endl;
 				std::cerr << "expected result:" << expectedResults[i] << std::endl;
 				assert(false);
 				return 1;
@@ -1118,26 +1118,26 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 		std::cout << "double precision tests passed - ";
 		std::cout << "maximal error = " << getMaximalError() << std::endl;
 	}
-	mpf_t* maxErr = mpftoperations::ToMpft(0.0);
+	mpf_t* maxErr = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 
 	for(unsigned int i = 0; i < checkNums.size(); i++){
 		mpf_t* res1 = actualResults[i];
 		mpf_t* res2 = moreAccurateResults[i];
-		if(mpftoperations::Compare(res1, res2) == 0)continue;
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(res1, res2) == 0)continue;
 		mpf_t* err = getError(res1, res2);
-		if(mpftoperations::Compare(maxErr, err) < 0){
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(maxErr, err) < 0){
 			std::swap(maxErr, err);
 		}
-		mpftoperations::ReleaseValue(err);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(err);
 	}
 	unsigned int minAccuracy = 0;
-	while(mpftoperations::Compare(maxErr, 1.0) < 0 && minAccuracy < largePrecision){
+	while(arbitraryprecisioncalculation::mpftoperations::Compare(maxErr, 1.0) < 0 && minAccuracy < largePrecision){
 		minAccuracy++;
-		mpf_t* tmp = mpftoperations::Add(maxErr, maxErr);
-		mpftoperations::ReleaseValue(maxErr);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Add(maxErr, maxErr);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxErr);
 		maxErr = tmp;
 	}
-	mpftoperations::ReleaseValue(maxErr);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxErr);
 	std::cout << "accuracy: min(rel error, abs error):" << minAccuracy << "/" << smallPrecision
 		<< " = " << (100.0 * minAccuracy / (double) smallPrecision) << "%\n";
 	if(minAccuracy < 0.5 * smallPrecision){
@@ -1149,17 +1149,17 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 		if(!(result_should_be_true)) return 1;
 	}
 	for(unsigned int i = 0; i < checkNums.size(); i++){
-		vectoroperations::ReleaseValues(checkNums[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(checkNums[i]);
 	}
-	vectoroperations::ReleaseValues(actualResults);
-	vectoroperations::ReleaseValues(moreAccurateResults);
-	if(mpftoperations::GetNumberOfMpftValuesInUse() != mpf_t_used + mpftoperations::GetNumberOfMpftValuesCached()){
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(actualResults);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(moreAccurateResults);
+	if(arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() != mpf_t_used + arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached()){
 		std::cerr << std::string(65, '!') << std::endl;
-		std::cerr << "mpf_t's in use inconsistent. Should be " << mpf_t_used << " but there are " << mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+		std::cerr << "mpf_t's in use inconsistent. Should be " << mpf_t_used << " but there are " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
 		std::cerr << std::string(65, '!') << std::endl;
 		return 1;
 	}
-	configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
 	return 0;
 }
 
@@ -1570,8 +1570,8 @@ int test_generateGaussianNoise(){
 		std::cout << "check mu=" << mu << " var=" << var << std::endl;
 		std::vector<double> values (test_size);
 		for( int i = 0 ; i < test_size ; i++ ) {
-			mpf_t* tmp = mpftoperations::GetGaussianRandomMpft(mu, sigma);
-			values[i] = mpftoperations::MpftToDouble(tmp);
+			mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::GetGaussianRandomMpft(mu, sigma);
+			values[i] = arbitraryprecisioncalculation::mpftoperations::MpftToDouble(tmp);
 		}
 		sort(values.begin(), values.end());
 		for( int i = 0; i < test_size ; i++ ) {
@@ -1602,10 +1602,10 @@ int test_randomNumberGenerator(){
 		{"linearCongruenceRNG", "0", "mod2p63" , "1571204578482947281", "12345678901234567", "fast"},
 		{"linearCongruenceRNG", "0", "specific", "1571204578482947281", "12345678901234567", "9223372036854775808", "fast"}};
 
-	std::vector<RandomNumberGenerator*> randoms;
+	std::vector<arbitraryprecisioncalculation::RandomNumberGenerator*> randoms;
 	for(unsigned int i = 0; i < rng_descriptions.size(); i++){
 		unsigned int parsed = 0;
-		randoms.push_back(parse::ParseRandomNumberGenerator(rng_descriptions[i], parsed));
+		randoms.push_back(arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(rng_descriptions[i], parsed));
 		assert(parsed == rng_descriptions[i].size());
 		if(parsed != rng_descriptions[i].size())return 1;
 		assert(randoms[i] != NULL);
@@ -1622,12 +1622,12 @@ int test_randomNumberGenerator(){
 			if(randll[j] != randll[0]) return 1;
 			if(mpf_cmp(*(randmpft[j]), *(randmpft[0])) != 0) return 1;
 		}
-		vectoroperations::ReleaseValues(randmpft);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(randmpft);
 	}
-	RandomNumberGenerator* random = NULL;
+	arbitraryprecisioncalculation::RandomNumberGenerator* random = NULL;
 	{
 		unsigned int parsed = 0;
-		random = parse::ParseRandomNumberGenerator(rng_descriptions[0], parsed);
+		random = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(rng_descriptions[0], parsed);
 	}
 	long long value;
 	int found_zeros = 0;
@@ -1665,18 +1665,18 @@ int test_randomNumberGenerator(){
 }
 
 int start(int argv, char * argc[]) {
-	configuration::g_output_precision = 10;
-	configuration::g_precision_safety_margin = BASE_PRECISION / 2;
+	arbitraryprecisioncalculation::configuration::g_output_precision = 10;
+	arbitraryprecisioncalculation::configuration::g_precision_safety_margin = BASE_PRECISION / 2;
 	{
-		int result_should_be_true = (configuration::g_increase_precision == false);
+		int result_should_be_true = (arbitraryprecisioncalculation::configuration::g_increase_precision == false);
 		assert(result_should_be_true);
 		if(!(result_should_be_true)) return 1;
 	}
 	mpf_set_default_prec(BASE_PRECISION);
 	init();
 	std::cout << "start test series\n";
-	std::cout << "initial used mpf_t: " << mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
-	std::cout << "initial memoized mpf_t: " << mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+	std::cout << "initial used mpf_t: " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+	std::cout << "initial memoized mpf_t: " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
 	{
 		int result_should_be_true = (testTrigonometric() == 0);
 		assert(result_should_be_true);
@@ -1693,8 +1693,8 @@ int start(int argv, char * argc[]) {
 		if(!(result_should_be_true)) return 1;
 	}
 	std::cout << "end test series\n";
-	std::cout << "final used mpf_t: " << mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
-	std::cout << "final memoized mpf_t: " << mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+	std::cout << "final used mpf_t: " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+	std::cout << "final memoized mpf_t: " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
 	{
 		int result_should_be_true = (test_generateGaussianNoise() == 0);
 		assert(result_should_be_true);

@@ -1,5 +1,5 @@
 /**
-* @file   scaled_sphere.h 
+* @file   function/scaled_sphere.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   January, 2014
 * @brief  This file contains the description of the scaled sphere functions.

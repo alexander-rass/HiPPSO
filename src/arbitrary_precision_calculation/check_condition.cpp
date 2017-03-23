@@ -1,8 +1,8 @@
 /**
-* @file   bound_handling/bound_handling.cpp
+* @file   arbitrary_precision_calculation/check_condition.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
-* @date   July, 2013
-* @brief  This file contains an abstract class for different bound handling strategies, which can be used for the particle swarm optimization.
+* @date   September, 2015
+* @brief  This file includes a possibility to check conditions which should be true. (similar to assertions).
 *
 * @copyright
 * This project is released under the MIT License (MIT).
@@ -37,14 +37,23 @@
 *
 */
 
-#include "bound_handling/bound_handling.h"
+#include <iostream>
 
-#include "arbitrary_precision_calculation/operations.h"
+#include "check_condition.h"
 
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 
-std::vector<mpf_t*> BoundHandling::GetDirectionVector(const std::vector<mpf_t*> & position, const std::vector<mpf_t*> & aim){
-	return arbitraryprecisioncalculation::vectoroperations::Subtract(aim, position);
+void __AssertCondition(const char * argument, const char * file, const char * function_name,  int line, std::string message){
+	std::cerr << "Unsatisfied condition \"" << std::string(argument) << "\" in file \"" << std::string(file) << "\" in function \"" 
+			<< std::string(function_name) << "\" at line " << line << ".\n";
+	if(message.size() > 0)std::cerr << "Message: " << message << std::endl;
+	std::cerr << "If you are sure that you did not accidentally cause the error yourself "
+			<< "(reason may be explained in the displayed message), "
+			<< "please contact the main program author Alexander Raß per mail at \"Alexander.Rass@fau.de\". "
+			<< "Please supply complete error message and available files which were used for or created by "
+			<< "the current program execution (like configuration file, log file, backup file, etc.). "
+			<< "Please supply also runtime circumstances (operating system, parallel program executions, etc.).\n";
+	exit (1);
 }
 
-} // namespace highprecisionpso
+} // namespace arbitraryprecisioncalculation

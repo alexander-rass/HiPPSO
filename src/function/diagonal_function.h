@@ -1,5 +1,5 @@
 /**
-* @file   diagonal_function.h 
+* @file   function/diagonal_function.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   January, 2014
 * @brief  This file contains the description of a function with heavy diagonal eigenvector in the second derivative matrix.

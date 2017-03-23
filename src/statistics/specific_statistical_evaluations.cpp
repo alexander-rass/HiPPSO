@@ -1,5 +1,5 @@
 /**
-* @file   specific_statistical_evaluations.cpp
+* @file   statistics/specific_statistical_evaluations.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contain classes, which can evaluate matrices depending on the current state of the particle swarm, and some helping classes to generate analyzable statistics out of them.
@@ -58,7 +58,7 @@ std::vector<std::vector<mpf_t*> > OperatedSpecificStatisticalEvaluation::Evaluat
 	for(unsigned int i = 0; i < data.size(); i++){
 		for(unsigned int j = 0; j < data[i].size(); j++){
 			mpf_t* result = operation_->Operate(data[i][j]);
-			mpftoperations::ReleaseValue(data[i][j]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(data[i][j]);
 			data[i][j] = result;
 		}
 	}
@@ -82,8 +82,8 @@ std::vector<std::vector<mpf_t*> > CombineSpecificStatisticalEvaluation::Evaluate
 		for(unsigned int j = 0; j < res1[i].size(); j++) {
 			res[i].push_back(operation_->Evaluate(res1[i][j], res2[i][j]));
 		}
-		vectoroperations::ReleaseValues(res1[i]);
-		vectoroperations::ReleaseValues(res2[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res1[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res2[i]);
 	}
 	return res;
 }
@@ -150,9 +150,9 @@ std::vector<std::vector<mpf_t*> > ConstantSpecificStatisticalEvaluation::Evaluat
 	std::vector<std::vector<mpf_t*> > res;
 	mpf_t* tmp = constant_evaluation_->Evaluate();
 	for(int i = 0; i < configuration::g_particles; i++){
-		res.push_back(vectoroperations::GetConstantVector(configuration::g_dimensions, tmp));
+		res.push_back(arbitraryprecisioncalculation::vectoroperations::GetConstantVector(configuration::g_dimensions, tmp));
 	}
-	mpftoperations::ReleaseValue(tmp);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	return res;
 }
 

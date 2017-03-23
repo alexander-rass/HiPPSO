@@ -1,5 +1,5 @@
 /**
-* @file   visualization.h 
+* @file   general/visualization.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains functionality to visualize the particle swarm.

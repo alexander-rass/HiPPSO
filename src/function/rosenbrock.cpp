@@ -1,5 +1,5 @@
 /**
-* @file   rosenbrock.cpp
+* @file   function/rosenbrock.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the description of the rosenbrock function and a moved version.
@@ -48,33 +48,33 @@ Rosenbrock::Rosenbrock() : Function ( -30.0, 30.0) {}
 mpf_t* eval_rosenbrock(const std::vector<mpf_t*> & vec){
 	unsigned int D = vec.size();
 	std::vector<mpf_t*> sumUpValues(D-1);
-	mpf_t* n1 = mpftoperations::ToMpft(1.0);
-	mpf_t* n100 = mpftoperations::ToMpft(100.0);
+	mpf_t* n1 = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
+	mpf_t* n100 = arbitraryprecisioncalculation::mpftoperations::ToMpft(100.0);
 	for(unsigned int i = 0; i+1 < D; i++){
 		mpf_t* x = vec[i];
 		mpf_t* xn = vec[i+1];
 
-		mpf_t* xsq = mpftoperations::Multiply(x, x);
-		mpf_t* p1 = mpftoperations::Subtract(xn, xsq);
-		mpf_t* p1sq = mpftoperations::Multiply(p1, p1);
-		mpf_t* t1 = mpftoperations::Multiply(n100, p1sq);
+		mpf_t* xsq = arbitraryprecisioncalculation::mpftoperations::Multiply(x, x);
+		mpf_t* p1 = arbitraryprecisioncalculation::mpftoperations::Subtract(xn, xsq);
+		mpf_t* p1sq = arbitraryprecisioncalculation::mpftoperations::Multiply(p1, p1);
+		mpf_t* t1 = arbitraryprecisioncalculation::mpftoperations::Multiply(n100, p1sq);
 
-		mpf_t* p2 = mpftoperations::Subtract(n1, x);
-		mpf_t* t2 = mpftoperations::Multiply(p2, p2);
+		mpf_t* p2 = arbitraryprecisioncalculation::mpftoperations::Subtract(n1, x);
+		mpf_t* t2 = arbitraryprecisioncalculation::mpftoperations::Multiply(p2, p2);
 
-		sumUpValues[i] = mpftoperations::Add(t1, t2);
+		sumUpValues[i] = arbitraryprecisioncalculation::mpftoperations::Add(t1, t2);
 
-		mpftoperations::ReleaseValue(xsq);
-		mpftoperations::ReleaseValue(p1);
-		mpftoperations::ReleaseValue(p1sq);
-		mpftoperations::ReleaseValue(t1);
-		mpftoperations::ReleaseValue(p2);
-		mpftoperations::ReleaseValue(t2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(xsq);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p1sq);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(t1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(t2);
 	}
-	mpftoperations::ReleaseValue(n1);
-	mpftoperations::ReleaseValue(n100);
-	mpf_t* res = vectoroperations::Add(sumUpValues);
-	vectoroperations::ReleaseValues(sumUpValues);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n100);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(sumUpValues);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(sumUpValues);
 	return res;
 }
 
@@ -92,13 +92,13 @@ MovedRosenbrock::MovedRosenbrock() : Function ( -31.0, 29.0 ) {}
 mpf_t* MovedRosenbrock::Eval(const std::vector<mpf_t*> & vec) {
 	std::vector<mpf_t*> help;
 	unsigned int D = vec.size();
-	mpf_t* n1 = mpftoperations::ToMpft(1.0);
+	mpf_t* n1 = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 	for(unsigned int d = 0; d < D; d++){
-		help.push_back(mpftoperations::Add(n1, vec[d]));
+		help.push_back(arbitraryprecisioncalculation::mpftoperations::Add(n1, vec[d]));
 	}
 	mpf_t* res = eval_rosenbrock(help);
-	mpftoperations::ReleaseValue(n1);
-	vectoroperations::ReleaseValues(help);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n1);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(help);
 	return res;
 }
 

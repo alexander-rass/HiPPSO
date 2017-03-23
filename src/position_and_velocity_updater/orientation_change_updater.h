@@ -1,5 +1,5 @@
 /**
-* @file   orientation_change_updater.h
+* @file   position_and_velocity_updater/orientation_change_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2014
 * @brief  This file contains a position and velocity updater, which changes orientation if some directions have little movement.

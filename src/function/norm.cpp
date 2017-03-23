@@ -1,5 +1,5 @@
 /**
-* @file   norm.cpp 
+* @file   function/norm.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the description of various norm functions.
@@ -50,10 +50,10 @@ namespace highprecisionpso {
 mpf_t* Norm1::Eval(const std::vector<mpf_t*> & vec) {
 	std::vector<mpf_t*> vecAbs(vec.size());
 	for(unsigned int i = 0; i < vec.size(); i++){
-		vecAbs[i] = mpftoperations::Abs(vec[i]);
+		vecAbs[i] = arbitraryprecisioncalculation::mpftoperations::Abs(vec[i]);
 	}
-	mpf_t* res = vectoroperations::Add(vecAbs);
-	vectoroperations::ReleaseValues(vecAbs);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(vecAbs);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vecAbs);
 	return res;
 }
 
@@ -62,7 +62,7 @@ std::string Norm1::GetName(){
 }
 
 mpf_t* Norm1::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 // NormOO NormOO NormOO NormOO NormOO NormOO NormOO NormOO NormOO NormOO
@@ -70,13 +70,13 @@ mpf_t* NormInfinity::Eval(const std::vector<mpf_t*> & vec) {
 	mpf_t* res = NULL;
 	for(unsigned int i = 0; i < vec.size(); i++){
 		if(res == NULL){
-			res = mpftoperations::Abs(vec[i]);
+			res = arbitraryprecisioncalculation::mpftoperations::Abs(vec[i]);
 		} else {
 			mpf_t* v1 = res;
-			mpf_t* v2 = mpftoperations::Abs(vec[i]);
-			res = mpftoperations::Max(v1, v2);
-			mpftoperations::ReleaseValue(v1);
-			mpftoperations::ReleaseValue(v2);
+			mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::Abs(vec[i]);
+			res = arbitraryprecisioncalculation::mpftoperations::Max(v1, v2);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 		}
 	}
 	return res;
@@ -87,7 +87,7 @@ std::string NormInfinity::GetName(){
 }
 
 mpf_t* NormInfinity::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 // Norm2pk Norm2pk Norm2pk Norm2pk Norm2pk Norm2pk Norm2pk Norm2pk Norm2pk
@@ -96,14 +96,14 @@ Norm2PowerK::Norm2PowerK(int exponent):exponent_(exponent){
 }
 
 mpf_t* Norm2PowerK::Eval(const std::vector<mpf_t*> & vec) {
-	std::vector<mpf_t*> curVec = vectoroperations::Clone(vec);
+	std::vector<mpf_t*> curVec = arbitraryprecisioncalculation::vectoroperations::Clone(vec);
 	for(int j = 0; j < exponent_; j++){
-		std::vector<mpf_t*> nextVec = vectoroperations::Multiply(curVec, curVec);
-		vectoroperations::ReleaseValues(curVec);
+		std::vector<mpf_t*> nextVec = arbitraryprecisioncalculation::vectoroperations::Multiply(curVec, curVec);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curVec);
 		curVec = nextVec;
 	}
-	mpf_t* res = vectoroperations::Add(curVec);
-	vectoroperations::ReleaseValues(curVec);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(curVec);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curVec);
 	return res;
 }
 
@@ -119,7 +119,7 @@ std::string Norm2PowerK::GetName(){
 }
 
 mpf_t* Norm2PowerK::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 Norm2::Norm2():Norm2PowerK(1){}
@@ -135,26 +135,26 @@ Norm1Plus2PowerMinusK::Norm1Plus2PowerMinusK(int exponent):exponent_(exponent){
 mpf_t* Norm1Plus2PowerMinusK::Eval(const std::vector<mpf_t*> & vec) {
 	mpf_t* res = NULL;
 	for(unsigned int i = 0; i < vec.size(); i++){
-		mpf_t* cres = mpftoperations::Abs(vec[i]);
-		mpf_t* v1 = mpftoperations::Sqrt(cres);
+		mpf_t* cres = arbitraryprecisioncalculation::mpftoperations::Abs(vec[i]);
+		mpf_t* v1 = arbitraryprecisioncalculation::mpftoperations::Sqrt(cres);
 		mpf_t* v2;
 		for(int j = 1; j < exponent_; j++){
-			v2 = mpftoperations::Sqrt(v1);
-			mpftoperations::ReleaseValue(v1);
+			v2 = arbitraryprecisioncalculation::mpftoperations::Sqrt(v1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
 			v1 = v2;
 		}
 		v2 = cres;
-		cres = mpftoperations::Multiply(v1, v2);
-		mpftoperations::ReleaseValue(v1);
-		mpftoperations::ReleaseValue(v2);
+		cres = arbitraryprecisioncalculation::mpftoperations::Multiply(v1, v2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 		if(res == NULL){
 			res = cres;
 		} else {
 			v1 = cres;
 			v2 = res;
-			res = mpftoperations::Add(v1, v2);
-			mpftoperations::ReleaseValue(v1);
-			mpftoperations::ReleaseValue(v2);
+			res = arbitraryprecisioncalculation::mpftoperations::Add(v1, v2);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 		}
 	}
 	return res;
@@ -167,7 +167,7 @@ std::string Norm1Plus2PowerMinusK::GetName(){
 }
 
 mpf_t* Norm1Plus2PowerMinusK::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 } // namespace highprecisionpso

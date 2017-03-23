@@ -1,5 +1,5 @@
 /**
-* @file   configuration.cpp
+* @file   general/configuration.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   June, 2013
 * @brief  This file contains general information about the configuration for running the particle swarm optimization algorithm.
@@ -45,6 +45,7 @@
 #include <queue>
 #include <set>
 #include <sstream>
+#include <algorithm>
 
 #include "general/includes.h"
 #include "general/check_condition.h"
@@ -63,19 +64,6 @@ enum UpdateGlobalAttractorMode g_update_global_attractor_mode = UPDATE_GLOBAL_AT
 int g_particles = 2;
 int g_dimensions = 2;
 long long g_max_iterations = 2;
-
-int g_initial_precision = 32;
-bool g_initial_precision_already_set = false;
-int g_precision_safety_margin = 32;
-
-enum CheckPrecisionMode g_check_precision_mode = CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
-double g_check_precision_probability = 1.00;
-// <= 0 -> surely not check
-// >= 1 -> surely check
-// > 0 && < 1 -> randomly check
-bool g_increase_precision = false;
-
-int g_output_precision = 5;
 
 double g_time_between_backups = 60.0;
 double g_time_between_run_checks = 30.0;
@@ -97,8 +85,6 @@ VelocityAdjustment* g_velocity_adjustment = new VelocityAdjustmentNone;
 PositionAndVelocityUpdater* g_position_and_velocity_updater = new DefaultUpdater;
 Neighborhood* g_neighborhood = new GlobalBest;
 Statistics* g_statistics = NULL;
-
-RandomNumberGenerator* g_standard_random_number_generator = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
 
 std::string g_file_prefix = "";
 std::string g_user_defined_file_prefix = "";
@@ -126,15 +112,7 @@ void Init(){
 	g_dimensions = 2;
 	g_max_iterations = 2;
 
-	g_initial_precision = 32;
-	g_initial_precision_already_set = false;
-	g_precision_safety_margin = 32;
-
-	g_check_precision_mode = CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
-	g_check_precision_probability = 1.00;
-	g_increase_precision = false;
-
-	g_output_precision = 5;
+	arbitraryprecisioncalculation::configuration::Init();
 
 	g_preserve_backup_times = std::vector<long long>();
 	g_time_between_backups = 60.0;
@@ -157,8 +135,6 @@ void Init(){
 	g_position_and_velocity_updater = new DefaultUpdater;
 	g_neighborhood = new GlobalBest;
 	g_statistics = NULL;
-
-	g_standard_random_number_generator = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
 
 	g_debug_swarm_activated = false;
 	g_debug_swarm_x_resolution = 2560;
@@ -202,7 +178,8 @@ bool ReadConfigurationFile(std::string fileName) {
 		}
 		if (input.size() == 0)
 			continue;
-		std::string option = mpftoperations::ToLowerCase(input[0]);
+		std::string option = input[0];
+		std::transform(option.begin(), option.end(), option.begin(), ::tolower);
 		if (option == "fileprefix") {
 			if(input.size() != 2){
 				parse::SignalInvalidCommand(input);
@@ -287,7 +264,8 @@ bool ReadConfigurationFile(std::string fileName) {
 				delete (g_bound_handling);
 				g_bound_handling = NULL;
 			}
-			std::string suboption1 = mpftoperations::ToLowerCase(input[1]);
+			std::string suboption1 = input[1];
+			std::transform(suboption1.begin(), suboption1.end(), suboption1.begin(), ::tolower);
 			if (suboption1 == "nobounds") {
 				if(input.size() != 2){
 					parse::SignalInvalidCommand(input);
@@ -452,7 +430,8 @@ bool ReadConfigurationFile(std::string fileName) {
 			if (g_position_and_velocity_updater != NULL) {
 				g_position_and_velocity_updater = NULL;
 			}
-			std::string suboption1 = mpftoperations::ToLowerCase(input[1]);
+			std::string suboption1 = input[1];
+			std::transform(suboption1.begin(), suboption1.end(), suboption1.begin(), ::tolower);
 			if (suboption1 == "default") {
 				g_position_and_velocity_updater = new DefaultUpdater;
 			} else if(suboption1 == "delta") {
@@ -496,31 +475,31 @@ bool ReadConfigurationFile(std::string fileName) {
 			}
 		} else if (option == "initialprecision") {
 			std::istringstream is(input[1]);
-			is >> g_initial_precision;
-			g_initial_precision_already_set = true;
+			is >> arbitraryprecisioncalculation::configuration::g_initial_precision;
+			arbitraryprecisioncalculation::configuration::g_initial_precision_already_set = true;
 		} else if (option == "precision") {
 			std::istringstream is(input[1]);
-			is >> g_precision_safety_margin;
-			if(!g_initial_precision_already_set){
-				g_initial_precision = g_precision_safety_margin;
+			is >> arbitraryprecisioncalculation::configuration::g_precision_safety_margin;
+			if(!arbitraryprecisioncalculation::configuration::g_initial_precision_already_set){
+				arbitraryprecisioncalculation::configuration::g_initial_precision = arbitraryprecisioncalculation::configuration::g_precision_safety_margin;
 			}
 		} else if (option == "outputprecision") {
 			std::istringstream is(input[1]);
-			is >> g_output_precision;
+			is >> arbitraryprecisioncalculation::configuration::g_output_precision;
 		} else if (option == "checkprecision") {
 			if(input[1] == "all"){
-				g_check_precision_mode = CHECK_PRECISION_ALWAYS;
+				arbitraryprecisioncalculation::configuration::g_check_precision_mode = arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS;
 			} else if(input[1] == "allExceptStatistics"){
-				g_check_precision_mode = CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
+				arbitraryprecisioncalculation::configuration::g_check_precision_mode = arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
 			} else if(input[1] == "never"){
-				g_check_precision_mode = CHECK_PRECISION_NEVER;
+				arbitraryprecisioncalculation::configuration::g_check_precision_mode = arbitraryprecisioncalculation::configuration::CHECK_PRECISION_NEVER;
 			} else {
 				parse::SignalInvalidCommand(input);
 				return false;
 			}
 		} else if (option == "checkprecisionprobability"){
 			std::istringstream is(input[1]);
-			is >> g_check_precision_probability;
+			is >> arbitraryprecisioncalculation::configuration::g_check_precision_probability;
 		} else if (option == "showstatistics") {
 			std::vector<long long> newTimeTable;
 			for(int k = 1; k <= 3; k++){
@@ -567,8 +546,8 @@ bool ReadConfigurationFile(std::string fileName) {
 		} else if (option == "srand") {
 			std::istringstream is(input[1]);
 			unsigned int parsed = 1;
-			g_standard_random_number_generator = parse::ParseRandomNumberGenerator(input, parsed);
-			if(g_standard_random_number_generator == NULL || parsed != input.size()) {
+			arbitraryprecisioncalculation::configuration::g_standard_random_number_generator = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(input, parsed);
+			if(arbitraryprecisioncalculation::configuration::g_standard_random_number_generator == NULL || parsed != input.size()) {
 				parse::SignalInvalidCommand(input);
 				return false;
 			}
@@ -849,14 +828,14 @@ std::string GetConfigurationString() {
 		<< ((SHOW_LOG_DIFF_TO_OPT) ? "+" : "-")
 		<< ((SHOW_LOG_VELOCITY) ? "+" : "-");
 #endif 
-	res << "Pr" << g_precision_safety_margin;
-	if(g_initial_precision != g_precision_safety_margin)res << "IPr" << g_initial_precision;
-	if(g_check_precision_mode == CHECK_PRECISION_ALWAYS) res << "A";
-	else if(g_check_precision_mode == CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS) res << "AeS";
-	else if(g_check_precision_mode == CHECK_PRECISION_NEVER) res << "N";
+	res << "Pr" << arbitraryprecisioncalculation::configuration::g_precision_safety_margin;
+	if(arbitraryprecisioncalculation::configuration::g_initial_precision != arbitraryprecisioncalculation::configuration::g_precision_safety_margin)res << "IPr" << arbitraryprecisioncalculation::configuration::g_initial_precision;
+	if(arbitraryprecisioncalculation::configuration::g_check_precision_mode == arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS) res << "A";
+	else if(arbitraryprecisioncalculation::configuration::g_check_precision_mode == arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS) res << "AeS";
+	else if(arbitraryprecisioncalculation::configuration::g_check_precision_mode == arbitraryprecisioncalculation::configuration::CHECK_PRECISION_NEVER) res << "N";
 	else res << "FAIL";
-	if(g_check_precision_probability < 1){
-		res << "_CP" << g_check_precision_probability;
+	if(arbitraryprecisioncalculation::configuration::g_check_precision_probability < 1){
+		res << "_CP" << arbitraryprecisioncalculation::configuration::g_check_precision_probability;
 	}
 	std::set<int> modifiedDimensionsSet;
 	for(auto info: g_position_initialization_informations){
@@ -902,7 +881,7 @@ std::string GetConfigurationString() {
 	if(g_update_global_attractor_mode == UPDATE_GLOBAL_ATTRACTOR_MODE_EACH_PARTICLE) res << "p";
 	else if(g_update_global_attractor_mode == UPDATE_GLOBAL_ATTRACTOR_MODE_EACH_ITERATION) res << "i";
 	else res << "fail";
-	res << g_standard_random_number_generator->GetName();
+	res << arbitraryprecisioncalculation::configuration::g_standard_random_number_generator->GetName();
 	return std::string(res.str());
 }
 

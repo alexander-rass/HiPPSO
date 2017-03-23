@@ -1,5 +1,5 @@
 /**
-* @file   random_positive_definite.cpp 
+* @file   function/random_positive_definite.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the description of a function with random positive definite second derivative matrix.
@@ -41,7 +41,7 @@
 #include "function/random_positive_definite.h"
 
 #include "arbitrary_precision_calculation/operations.h"
-#include "general/parse.h"
+#include "arbitrary_precision_calculation/parse.h"
 #include "general/check_condition.h"
 
 namespace highprecisionpso {
@@ -53,8 +53,8 @@ RandomPositiveDefiniteSecondDerivative::RandomPositiveDefiniteSecondDerivative(s
 
 RandomPositiveDefiniteSecondDerivative::~RandomPositiveDefiniteSecondDerivative(){
 	for(unsigned int i = 0; i < matrix_cached_.size(); i++){
-		mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(matrix_cached_[i].size()) );
-		vectoroperations::ReleaseValues(matrix_cached_[i]);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(matrix_cached_[i].size()) );
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(matrix_cached_[i]);
 		matrix_cached_[i].clear();
 	}
 }
@@ -64,42 +64,42 @@ void RandomPositiveDefiniteSecondDerivative::InitMatrixCached(const std::vector<
 	if(matrix_cached_.size() != D || matrix_cached_precision_ != mpf_get_default_prec()){
 		matrix_cached_precision_ = mpf_get_default_prec();
 		for(unsigned int i = 0; i < matrix_cached_.size(); i++){
-			mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(matrix_cached_[i].size()) );
-			vectoroperations::ReleaseValues(matrix_cached_[i]);
+			arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(matrix_cached_[i].size()) );
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(matrix_cached_[i]);
 		}
 
-		RandomNumberGenerator* rng = NULL;
+		arbitraryprecisioncalculation::RandomNumberGenerator* rng = NULL;
 		{
 			unsigned int parsed = 0;
-			rng = parse::ParseRandomNumberGenerator(rng_description_, parsed);
+			rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(rng_description_, parsed);
 		}
 		std::vector<std::vector<mpf_t*> > tmp(D, std::vector<mpf_t*>(D, (mpf_t*) NULL));
 		for(unsigned int i = 0; i < D; i++){
 			for(unsigned int j = 0; j < D; j++){
 				int neg = 1;
 				if(rng->RandomLongLong()&1)neg = -neg;
-				tmp[i][j] = mpftoperations::ToMpft(neg * rng->RandomLongLong());
+				tmp[i][j] = arbitraryprecisioncalculation::mpftoperations::ToMpft(neg * rng->RandomLongLong());
 			}
 		}
 		matrix_cached_ = std::vector<std::vector<mpf_t*> >(D, std::vector<mpf_t*>(D, (mpf_t*) NULL));
 		for(unsigned int i = 0; i < D; i++){
 			for(unsigned int j = 0; j < D; j++){
-				matrix_cached_[i][j] = mpftoperations::ToMpft(0.0);
+				matrix_cached_[i][j] = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 				for(unsigned int k = 0; k < D; k++){
-					mpf_t* next1 = mpftoperations::Multiply(tmp[i][k], tmp[j][k]);
-					mpf_t* next2 = mpftoperations::Add(matrix_cached_[i][j], next1);
-					mpftoperations::ReleaseValue(matrix_cached_[i][j]);
-					mpftoperations::ReleaseValue(next1);
+					mpf_t* next1 = arbitraryprecisioncalculation::mpftoperations::Multiply(tmp[i][k], tmp[j][k]);
+					mpf_t* next2 = arbitraryprecisioncalculation::mpftoperations::Add(matrix_cached_[i][j], next1);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(matrix_cached_[i][j]);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next1);
 					matrix_cached_[i][j] = next2;
 				}
 			}
 		}
 		for(unsigned int i = 0; i < D; i++){
 			for(unsigned int j = 0; j < D; j++){
-				mpftoperations::ReleaseValue(tmp[i][j]);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp[i][j]);
 			}
 		}
-		mpftoperations::ChangeNumberOfMpftValuesCached( D * D );
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( D * D );
 	}
 }
 
@@ -109,15 +109,15 @@ mpf_t* RandomPositiveDefiniteSecondDerivative::Eval(const std::vector<mpf_t*> & 
 	mpf_t* res = NULL;
 	for(unsigned int i = 0; i < D; i++){
 		for(unsigned int j = 0;j < D; j++){
-			mpf_t* cur = mpftoperations::Multiply(matrix_cached_[i][j], vec[i]);
-			mpf_t* next = mpftoperations::Multiply(cur, vec[j]);
-			mpftoperations::ReleaseValue(cur);
+			mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::Multiply(matrix_cached_[i][j], vec[i]);
+			mpf_t* next = arbitraryprecisioncalculation::mpftoperations::Multiply(cur, vec[j]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
 			cur = next;
 			if(res == NULL)res = cur;
 			else {
-				next = mpftoperations::Add(cur, res);
-				mpftoperations::ReleaseValue(cur);
-				mpftoperations::ReleaseValue(res);
+				next = arbitraryprecisioncalculation::mpftoperations::Add(cur, res);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 				res = next;
 			}
 		}
@@ -133,21 +133,21 @@ mpf_t* RandomPositiveDefiniteSecondDerivative::DistanceTo1DLocalOptimum(const st
 	InitMatrixCached(pos);
 	int D = pos.size();
 	AssertCondition(D == (int)matrix_cached_.size(), "randomposdef: Initialization failed.");
-	mpf_t* B = mpftoperations::ToMpft(0.0);
+	mpf_t* B = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(int d2 = 0; d2 < D; d2++)if(d2 != d){
 		mpf_t* f = matrix_cached_[d][d2];
-		mpf_t* b = mpftoperations::Multiply(f,pos[d2]);
-		mpf_t* newB = mpftoperations::Add(b,B);
-		mpftoperations::ReleaseValue(b);
-		mpftoperations::ReleaseValue(B);
+		mpf_t* b = arbitraryprecisioncalculation::mpftoperations::Multiply(f,pos[d2]);
+		mpf_t* newB = arbitraryprecisioncalculation::mpftoperations::Add(b,B);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(b);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
 		B = newB;
 	}
-	mpf_t* best = mpftoperations::Divide(B,matrix_cached_[d][d]);
-	mpftoperations::ReleaseValue(B);
-	mpf_t* res = mpftoperations::Add(best, pos[d]);
-	mpftoperations::ReleaseValue(best);
-	mpf_t* res_abs = mpftoperations::Abs(res);
-	mpftoperations::ReleaseValue(res);
+	mpf_t* best = arbitraryprecisioncalculation::mpftoperations::Divide(B,matrix_cached_[d][d]);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(best, pos[d]);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(best);
+	mpf_t* res_abs = arbitraryprecisioncalculation::mpftoperations::Abs(res);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 	return res_abs;
 }
 

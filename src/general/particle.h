@@ -1,5 +1,5 @@
 /**
-* @file   particle.h 
+* @file   general/particle.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains information about the particles of the swarm.

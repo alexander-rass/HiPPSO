@@ -1,5 +1,5 @@
 /**
-* @file   schwefel.h 
+* @file   function/schwefel.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   January, 2014
 * @brief  This file contains two different versions of the schwefel test function.

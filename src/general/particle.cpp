@@ -1,5 +1,5 @@
 /**
-* @file   particle.cpp
+* @file   general/particle.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains information about the particles of the swarm.
@@ -60,53 +60,53 @@ Particle::Particle() {
 }
 
 std::vector<mpf_t*> Particle::GetLocalAttractorPosition() {
-	return vectoroperations::Clone(local_attractor_position);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(local_attractor_position);
 }
 
 mpf_t* Particle::GetLocalAttractorValue() {
 	if(0 == local_attractor_position.size())return NULL;
 	if(local_attractor_value_cached_ == NULL 
 			|| mpf_get_default_prec() != local_attractor_value_cached_precision_){
-		if(local_attractor_value_cached_ == NULL)mpftoperations::ChangeNumberOfMpftValuesCached(1);
-		mpftoperations::ReleaseValue(local_attractor_value_cached_);
+		if(local_attractor_value_cached_ == NULL)arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_attractor_value_cached_);
 		local_attractor_value_cached_precision_ = mpf_get_default_prec();
 		local_attractor_value_cached_ = configuration::g_function->Evaluate(local_attractor_position);
 	}
-	return mpftoperations::Clone(local_attractor_value_cached_);
+	return arbitraryprecisioncalculation::mpftoperations::Clone(local_attractor_value_cached_);
 }
 std::vector<mpf_t*> Particle::GetPosition() {
-	return vectoroperations::Clone(position);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(position);
 }
 std::vector<mpf_t*> Particle::GetVelocity() {
-	return vectoroperations::Clone(velocity);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(velocity);
 }
 
 void Particle::SetLocalAttractorPosition(std::vector<mpf_t*> newLocalAttractorPosition) {
 	configuration::g_statistics->local_attractor_update_counter[id]++;
-	vectoroperations::ReleaseValues(local_attractor_position);
-	local_attractor_position = vectoroperations::Clone(newLocalAttractorPosition);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(local_attractor_position);
+	local_attractor_position = arbitraryprecisioncalculation::vectoroperations::Clone(newLocalAttractorPosition);
 	if(local_attractor_value_cached_ != NULL) {
-		mpftoperations::ReleaseValue(local_attractor_value_cached_);
-		mpftoperations::ChangeNumberOfMpftValuesCached(-1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_attractor_value_cached_);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(-1);
 	}
 	local_attractor_value_cached_ = NULL;
 }
 
 void Particle::SetPosition(std::vector<mpf_t*> newPosition) {
-	vectoroperations::ReleaseValues(position);
-	position = vectoroperations::Clone(newPosition);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position);
+	position = arbitraryprecisioncalculation::vectoroperations::Clone(newPosition);
 	mpf_t* newVal = configuration::g_function->Evaluate(position);
 	mpf_t* curLocalAttractorValue = GetLocalAttractorValue();
-	if (curLocalAttractorValue == NULL || (mpftoperations::Compare(newVal, curLocalAttractorValue) <= 0) ) {
+	if (curLocalAttractorValue == NULL || (arbitraryprecisioncalculation::mpftoperations::Compare(newVal, curLocalAttractorValue) <= 0) ) {
 		SetLocalAttractorPosition(position);
 		UpdateGlobalAttractor(position, newVal);
 	}
-	mpftoperations::ReleaseValue(curLocalAttractorValue);
-	mpftoperations::ReleaseValue(newVal);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(curLocalAttractorValue);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newVal);
 }
 void Particle::SetVelocity(std::vector<mpf_t*> newVelocity) {
-	vectoroperations::ReleaseValues(velocity);
-	velocity = vectoroperations::Clone(newVelocity);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velocity);
+	velocity = arbitraryprecisioncalculation::vectoroperations::Clone(newVelocity);
 }
 
 void Particle::UpdateGlobalAttractor(std::vector<mpf_t*> goodPosition,
@@ -123,27 +123,27 @@ void Particle::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_s
 	AssertCondition( velocity.size() == 0, "Load of particle failed.");
 	AssertCondition( local_attractor_position.size() == 0, "Load of particle failed.");
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		position.push_back(mpftoperations::LoadMpft(inputstream, version_of_stored_data));
+		position.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		velocity.push_back(mpftoperations::LoadMpft(inputstream, version_of_stored_data));
+		velocity.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		local_attractor_position.push_back(mpftoperations::LoadMpft(inputstream, version_of_stored_data));
+		local_attractor_position.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
 }
 
 void Particle::StoreData(std::ofstream* outputstream){
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		mpftoperations::StoreMpft(position[d], outputstream);
+		arbitraryprecisioncalculation::mpftoperations::StoreMpft(position[d], outputstream);
 	}
 	(*outputstream) << std::endl;
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		mpftoperations::StoreMpft(velocity[d], outputstream);
+		arbitraryprecisioncalculation::mpftoperations::StoreMpft(velocity[d], outputstream);
 	}
 	(*outputstream) << std::endl;
 	for (int d = 0; d < configuration::g_dimensions; d++) {
-		mpftoperations::StoreMpft(local_attractor_position[d], outputstream);
+		arbitraryprecisioncalculation::mpftoperations::StoreMpft(local_attractor_position[d], outputstream);
 	}
 	(*outputstream) << std::endl;
 }

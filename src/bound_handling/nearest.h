@@ -1,5 +1,5 @@
 /**
-* @file   nearest.h
+* @file   bound_handling/nearest.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the nearest bound handling strategy.

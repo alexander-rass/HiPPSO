@@ -1,5 +1,5 @@
 /**
-* @file   orientation_change_updater.cpp
+* @file   position_and_velocity_updater/orientation_change_updater.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2014
 * @brief  This file contains a position and velocity updater, which changes orientation if some directions have little movement.
@@ -59,12 +59,12 @@ OrientationChangeUpdater::OrientationChangeUpdater(double log2limit):log2_limit_
 void OrientationChangeUpdater::Update(Particle* p) {
 	if(orthogonal_transformation_matrix_.size() != (unsigned int) configuration::g_dimensions){
 		for(unsigned int i = 0; i < orthogonal_transformation_matrix_.size(); i++){
-			vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[i]);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[i]);
 		}
 		orthogonal_transformation_matrix_ = std::vector< std::vector<mpf_t*> >(configuration::g_dimensions, std::vector<mpf_t*>(configuration::g_dimensions, (mpf_t*)NULL));
 		for(int i = 0; i < configuration::g_dimensions; ++i){
 			for(int j = 0; j < configuration::g_dimensions; ++j){
-				orthogonal_transformation_matrix_[i][j] = mpftoperations::ToMpft(((i==j)?1.0:0.0));
+				orthogonal_transformation_matrix_[i][j] = arbitraryprecisioncalculation::mpftoperations::ToMpft(((i==j)?1.0:0.0));
 			}
 		}
 	}
@@ -72,23 +72,23 @@ void OrientationChangeUpdater::Update(Particle* p) {
 			p->position, p->local_attractor_position);
 	std::vector<mpf_t*> glAtPos = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
 	std::vector<mpf_t*> globalDir = configuration::g_bound_handling->GetDirectionVector(p->position, glAtPos);
-	vectoroperations::ReleaseValues(glAtPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(glAtPos);
 	std::pair<double, int> lowest = std::make_pair(1e301, -1), highest = std::make_pair(-1e301, -1);
 	std::vector<mpf_t*> velRot = Rotation(p->velocity);
 	std::vector<mpf_t*> globalRot = Rotation(globalDir);
 	std::vector<mpf_t*> localRot = Rotation(localDir);
 	for(int d = 0; d < configuration::g_dimensions; ++d){
-		mpf_t* v1 = mpftoperations::Abs(velRot[d]);
-		mpf_t* v2 = mpftoperations::Abs(globalRot[d]);
-		mpf_t* v3 = mpftoperations::Abs(localRot[d]);
-		mpf_t* sum1 = mpftoperations::Add(v1, v2);
-		mpf_t* sum2 = mpftoperations::Add(sum1, v3);
-		double logv = mpftoperations::Log2Double(sum2);
-		mpftoperations::ReleaseValue(v1);
-		mpftoperations::ReleaseValue(v2);
-		mpftoperations::ReleaseValue(v3);
-		mpftoperations::ReleaseValue(sum1);
-		mpftoperations::ReleaseValue(sum2);
+		mpf_t* v1 = arbitraryprecisioncalculation::mpftoperations::Abs(velRot[d]);
+		mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::Abs(globalRot[d]);
+		mpf_t* v3 = arbitraryprecisioncalculation::mpftoperations::Abs(localRot[d]);
+		mpf_t* sum1 = arbitraryprecisioncalculation::mpftoperations::Add(v1, v2);
+		mpf_t* sum2 = arbitraryprecisioncalculation::mpftoperations::Add(sum1, v3);
+		double logv = arbitraryprecisioncalculation::mpftoperations::Log2Double(sum2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v3);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sum1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sum2);
 		std::pair<double,int> cur = std::make_pair(logv, d);
 		lowest = std::min(lowest, cur);
 		highest = std::max(highest, cur);
@@ -97,27 +97,27 @@ void OrientationChangeUpdater::Update(Particle* p) {
 	if(highest.first - lowest.first > log2_limit_){
 		int d1 = lowest.second, d2 = highest.second;
 		if(d1 != d2 && std::min(d1, d2) != -1){
-			mpf_t* two = mpftoperations::ToMpft(0.5);
-			mpf_t* sq2 = mpftoperations::Sqrt(two);
-			mpftoperations::ReleaseValue(two);
+			mpf_t* two = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.5);
+			mpf_t* sq2 = arbitraryprecisioncalculation::mpftoperations::Sqrt(two);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(two);
 			std::vector<mpf_t*> vec1, vec2;
 			for(int d = 0; d < configuration::g_dimensions; ++d){
-				mpf_t* v = mpftoperations::Add(orthogonal_transformation_matrix_[d1][d], orthogonal_transformation_matrix_[d2][d]);
-				vec1.push_back(mpftoperations::Multiply(v, sq2));
-				mpftoperations::ReleaseValue(v);
-				v = mpftoperations::Subtract(orthogonal_transformation_matrix_[d1][d], orthogonal_transformation_matrix_[d2][d]);
-				vec2.push_back(mpftoperations::Multiply(v, sq2));
-				mpftoperations::ReleaseValue(v);
+				mpf_t* v = arbitraryprecisioncalculation::mpftoperations::Add(orthogonal_transformation_matrix_[d1][d], orthogonal_transformation_matrix_[d2][d]);
+				vec1.push_back(arbitraryprecisioncalculation::mpftoperations::Multiply(v, sq2));
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v);
+				v = arbitraryprecisioncalculation::mpftoperations::Subtract(orthogonal_transformation_matrix_[d1][d], orthogonal_transformation_matrix_[d2][d]);
+				vec2.push_back(arbitraryprecisioncalculation::mpftoperations::Multiply(v, sq2));
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v);
 			}
-			mpftoperations::ReleaseValue(sq2);
-			vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[d1]);
-			vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[d2]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sq2);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[d1]);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(orthogonal_transformation_matrix_[d2]);
 			orthogonal_transformation_matrix_[d1] = vec1;
 			orthogonal_transformation_matrix_[d2] = vec2;
 
-			vectoroperations::ReleaseValues(velRot);
-			vectoroperations::ReleaseValues(globalRot);
-			vectoroperations::ReleaseValues(localRot);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velRot);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalRot);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localRot);
 			velRot = Rotation(p->velocity);
 			globalRot = Rotation(globalDir);
 			localRot = Rotation(localDir);
@@ -126,59 +126,59 @@ void OrientationChangeUpdater::Update(Particle* p) {
 			// Finally the maximal difference between the product of
 			// the orthogonal transformation matrix and its transposed version
 			// and identity matrix is printed to stdout.
-			mpftoperations::StatisticalCalculationsStart();
-			mpf_t* maxdif = mpftoperations::ToMpft(0.0);
+			arbitraryprecisioncalculation::mpftoperations::StatisticalCalculationsStart();
+			mpf_t* maxdif = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 			for(int i = 0; i < configuration::g_dimensions; i++) for(int j = 0;j < configuration::g_dimensions; j++){
-				mpf_t* cur = mpftoperations::ToMpft((i==j)?1.0:0.0);
+				mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::ToMpft((i==j)?1.0:0.0);
 				for(int k = 0; k < configuration::g_dimensions; k++){
-					mpf_t* tmp = mpftoperations::Multiply(orthogonal_transformation_matrix_[i][k], orthogonal_transformation_matrix_[j][k]);
-					mpf_t* next = mpftoperations::Subtract(cur, tmp);
-					mpftoperations::ReleaseValue(tmp);
-					mpftoperations::ReleaseValue(cur);
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(orthogonal_transformation_matrix_[i][k], orthogonal_transformation_matrix_[j][k]);
+					mpf_t* next = arbitraryprecisioncalculation::mpftoperations::Subtract(cur, tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
 					cur = next;
 				}
-				mpf_t* tmp = mpftoperations::Abs(cur);
-				mpftoperations::ReleaseValue(cur);
-				mpf_t* nmax = mpftoperations::Max(tmp, maxdif);
-				mpftoperations::ReleaseValue(tmp);
-				mpftoperations::ReleaseValue(maxdif);
+				mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Abs(cur);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+				mpf_t* nmax = arbitraryprecisioncalculation::mpftoperations::Max(tmp, maxdif);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxdif);
 				maxdif = nmax;
 			}
-			std::cout << mpftoperations::MpftToString(maxdif) << std::endl;
-			mpftoperations::ReleaseValue(maxdif);
-			mpftoperations::StatisticalCalculationsEnd();
+			std::cout << arbitraryprecisioncalculation::mpftoperations::MpftToString(maxdif) << std::endl;
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxdif);
+			arbitraryprecisioncalculation::mpftoperations::StatisticalCalculationsEnd();
 #endif
 		}
 	}
 
-	std::vector<mpf_t*> lRotRan = vectoroperations::Randomize(localRot);
-	std::vector<mpf_t*> gRotRan = vectoroperations::Randomize(globalRot);
+	std::vector<mpf_t*> lRotRan = arbitraryprecisioncalculation::vectoroperations::Randomize(localRot);
+	std::vector<mpf_t*> gRotRan = arbitraryprecisioncalculation::vectoroperations::Randomize(globalRot);
 
-	std::vector<mpf_t*> scaledGRotRan = vectoroperations::Multiply(gRotRan, configuration::g_coefficient_global_attractor);
-	std::vector<mpf_t*> scaledLRotRan = vectoroperations::Multiply(lRotRan, configuration::g_coefficient_local_attractor);
+	std::vector<mpf_t*> scaledGRotRan = arbitraryprecisioncalculation::vectoroperations::Multiply(gRotRan, configuration::g_coefficient_global_attractor);
+	std::vector<mpf_t*> scaledLRotRan = arbitraryprecisioncalculation::vectoroperations::Multiply(lRotRan, configuration::g_coefficient_local_attractor);
 
-	std::vector<mpf_t*> rotRan = vectoroperations::Add(scaledGRotRan, scaledLRotRan);
+	std::vector<mpf_t*> rotRan = arbitraryprecisioncalculation::vectoroperations::Add(scaledGRotRan, scaledLRotRan);
 
 	std::vector<mpf_t*> randomPart = InverseRotation(rotRan);
-	std::vector<mpf_t*> oldPart = vectoroperations::Multiply(p->velocity, configuration::g_chi);
+	std::vector<mpf_t*> oldPart = arbitraryprecisioncalculation::vectoroperations::Multiply(p->velocity, configuration::g_chi);
 
-	std::vector<mpf_t*> newVelocity = vectoroperations::Add(randomPart, oldPart);
+	std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::Add(randomPart, oldPart);
 
-	vectoroperations::ReleaseValues(localDir);
-	vectoroperations::ReleaseValues(globalDir);
-	vectoroperations::ReleaseValues(velRot);
-	vectoroperations::ReleaseValues(globalRot);
-	vectoroperations::ReleaseValues(localRot);
-	vectoroperations::ReleaseValues(gRotRan);
-	vectoroperations::ReleaseValues(lRotRan);
-	vectoroperations::ReleaseValues(scaledGRotRan);
-	vectoroperations::ReleaseValues(scaledLRotRan);
-	vectoroperations::ReleaseValues(rotRan);
-	vectoroperations::ReleaseValues(randomPart);
-	vectoroperations::ReleaseValues(oldPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velRot);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalRot);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localRot);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(gRotRan);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lRotRan);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scaledGRotRan);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scaledLRotRan);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(rotRan);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(randomPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPart);
 
 	p->SetVelocity(newVelocity);
-	vectoroperations::ReleaseValues(newVelocity);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
 	configuration::g_bound_handling->SetParticleUpdate(p);
 }
 
@@ -192,13 +192,13 @@ std::string OrientationChangeUpdater::GetName(){
 std::vector<mpf_t*> OrientationChangeUpdater::Rotation(std::vector<mpf_t*> v){
 	std::vector<mpf_t*> res;
 	for(int d = 0; d < configuration::g_dimensions; ++d){
-		mpf_t* next = mpftoperations::ToMpft(0.0);
+		mpf_t* next = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 		for(int i = 0; i < configuration::g_dimensions; ++i){
-			mpf_t* cur = mpftoperations::Multiply(v[i], orthogonal_transformation_matrix_[d][i]);
+			mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::Multiply(v[i], orthogonal_transformation_matrix_[d][i]);
 			mpf_t* prev = next;
-			next = mpftoperations::Add(cur, prev);
-			mpftoperations::ReleaseValue(cur);
-			mpftoperations::ReleaseValue(prev);
+			next = arbitraryprecisioncalculation::mpftoperations::Add(cur, prev);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(prev);
 		}
 		res.push_back(next);
 	}
@@ -208,13 +208,13 @@ std::vector<mpf_t*> OrientationChangeUpdater::Rotation(std::vector<mpf_t*> v){
 std::vector<mpf_t*> OrientationChangeUpdater::InverseRotation(std::vector<mpf_t*> v){
 	std::vector<mpf_t*> res;
 	for(int d = 0; d < configuration::g_dimensions; ++d){
-		mpf_t* next = mpftoperations::ToMpft(0.0);
+		mpf_t* next = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 		for(int i = 0; i < configuration::g_dimensions; ++i){
-			mpf_t* cur = mpftoperations::Multiply(v[i], orthogonal_transformation_matrix_[i][d]);
+			mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::Multiply(v[i], orthogonal_transformation_matrix_[i][d]);
 			mpf_t* prev = next;
-			next = mpftoperations::Add(cur, prev);
-			mpftoperations::ReleaseValue(cur);
-			mpftoperations::ReleaseValue(prev);
+			next = arbitraryprecisioncalculation::mpftoperations::Add(cur, prev);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(prev);
 		}
 		res.push_back(next);
 	}
@@ -230,7 +230,7 @@ void OrientationChangeUpdater::LoadData(std::ifstream* inputstream, ProgramVersi
 		(*inputstream) >> C;
 		orthogonal_transformation_matrix_[r] = std::vector<mpf_t*>(C, (mpf_t*) NULL);
 		for(int c = 0; c < C; c++){
-			orthogonal_transformation_matrix_[r][c] = mpftoperations::LoadMpft(inputstream, version_of_stored_data);
+			orthogonal_transformation_matrix_[r][c] = arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream);
 		}
 	}
 }
@@ -240,7 +240,7 @@ void OrientationChangeUpdater::StoreData(std::ofstream* outputstream) {
 	for(unsigned int i = 0; i < orthogonal_transformation_matrix_.size(); i++){
 		(*outputstream) << orthogonal_transformation_matrix_[i].size() << std::endl;
 		for(unsigned int j = 0; j < orthogonal_transformation_matrix_[i].size(); j++) {
-			mpftoperations::StoreMpft(orthogonal_transformation_matrix_[i][j], outputstream);
+			arbitraryprecisioncalculation::mpftoperations::StoreMpft(orthogonal_transformation_matrix_[i][j], outputstream);
 		}
 	}
 }

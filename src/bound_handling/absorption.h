@@ -1,5 +1,5 @@
 /**
-* @file   absorption.h
+* @file   bound_handling/absorption.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the absorption bound handling strategy.

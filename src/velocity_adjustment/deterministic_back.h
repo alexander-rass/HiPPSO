@@ -1,5 +1,5 @@
 /**
-* @file   deterministic_back.h
+* @file   velocity_adjustment/deterministic_back.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the deterministic back velocity adjustment strategy.

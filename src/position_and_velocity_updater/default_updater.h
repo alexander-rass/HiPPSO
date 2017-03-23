@@ -1,5 +1,5 @@
 /**
-* @file   default_updater.h
+* @file   position_and_velocity_updater/default_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the standard class for processing the velocity and position update of each particle.

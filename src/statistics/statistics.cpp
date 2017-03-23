@@ -1,5 +1,5 @@
 /**
-* @file   statistics.cpp
+* @file   statistics/statistics.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains an class, which stores current information about the particle swarm.
@@ -69,7 +69,7 @@ void Statistics::EvaluateStatistics() {
 		}
 	}
 	if (!show)return;
-	mpftoperations::StatisticalCalculationsStart();
+	arbitraryprecisioncalculation::mpftoperations::StatisticalCalculationsStart();
 	stored_statistical_iterations.push_back(current_iteration);
 	for(unsigned int i = 0; i < configuration::g_statistics_list.size(); i++){
 		if(stored_statistical_data.size() <= i){
@@ -77,7 +77,7 @@ void Statistics::EvaluateStatistics() {
 		}
 		stored_statistical_data[i].push_back(configuration::g_statistics_list[i]->EvaluationToString());
 	}
-	mpftoperations::StatisticalCalculationsEnd();
+	arbitraryprecisioncalculation::mpftoperations::StatisticalCalculationsEnd();
 }
 
 void Statistics::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){

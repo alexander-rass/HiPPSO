@@ -1,5 +1,5 @@
 /**
-* @file   mono_sphere.h 
+* @file   function/mono_sphere.h
 * @author Manuel Schmitt
 * @date   September, 2015
 * @brief  This file contains the description of the mono sphere function.

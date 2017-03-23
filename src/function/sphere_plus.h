@@ -1,5 +1,5 @@
 /**
-* @file   sphere_plus.h 
+* @file   function/sphere_plus.h
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the sphere plus function.

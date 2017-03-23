@@ -1,5 +1,5 @@
 /**
-* @file   main.cpp
+* @file   general/main.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   June, 2013
 * @brief  This file contains the main methods to start the PSO algorithm.
@@ -53,6 +53,7 @@
 #include "general/configuration.h"
 #include "general/general_objects.h"
 #include "arbitrary_precision_calculation/operations.h"
+#include "arbitrary_precision_calculation/configuration.h"
 #include "general/particle.h"
 #include "general/visualization.h"
 #include "neighborhood/neighborhood.h"
@@ -92,7 +93,7 @@ int main(int argc, char * argv[]) {
 			if (command == "c") {
 				commandOK = highprecisionpso::configuration::ReadConfigurationFile(std::string(argv[2]));
 				if (commandOK) {
-					mpf_set_default_prec(highprecisionpso::configuration::g_initial_precision);
+					mpf_set_default_prec(arbitraryprecisioncalculation::configuration::g_initial_precision);
 
 					highprecisionpso::configuration::g_file_prefix = highprecisionpso::configuration::GetFilePrefix();
 
@@ -265,7 +266,7 @@ Statistics* RestoreAndDoPso() {
 	long long prec;
 	bu >> prec;
 	mpf_set_default_prec(prec);
-	configuration::g_standard_random_number_generator->LoadData(&bu, &version_of_stored_data);
+	arbitraryprecisioncalculation::configuration::g_standard_random_number_generator->LoadData(&bu);
 	configuration::g_statistics->LoadData(&bu, &version_of_stored_data);
 	configuration::g_neighborhood->LoadData(&bu, &version_of_stored_data);
 	configuration::g_position_and_velocity_updater->LoadData(&bu, &version_of_stored_data);
@@ -299,22 +300,22 @@ Statistics* InitAndDoPso() {
 	{
 		std::vector<mpf_t*> posLow = function->GetLowerSearchSpaceBound();
 		std::vector<mpf_t*> posHigh = function->GetUpperSearchSpaceBound();
-		std::vector<mpf_t*> posDiff = vectoroperations::Subtract(posHigh, posLow);
-		std::vector<mpf_t*> range1P = vectoroperations::Multiply(posDiff, 0.5);
-		std::vector<mpf_t*> center1P = vectoroperations::Add(posLow, range1P);
+		std::vector<mpf_t*> posDiff = arbitraryprecisioncalculation::vectoroperations::Subtract(posHigh, posLow);
+		std::vector<mpf_t*> range1P = arbitraryprecisioncalculation::vectoroperations::Multiply(posDiff, 0.5);
+		std::vector<mpf_t*> center1P = arbitraryprecisioncalculation::vectoroperations::Add(posLow, range1P);
 		for (int i = 0; i < configuration::g_particles; i++) {
-			position_velocity_ranges[0].push_back(vectoroperations::Clone(range1P));
-			position_velocity_ranges[1].push_back(vectoroperations::Clone(range1P));
-			position_velocity_centers[0].push_back(vectoroperations::Clone(center1P));
-			position_velocity_centers[1].push_back(vectoroperations::GetConstantVector(configuration::g_dimensions, 0.0));
-			position_velocity_scales[0].push_back(vectoroperations::GetConstantVector(configuration::g_dimensions, 1.0));
-			position_velocity_scales[1].push_back(vectoroperations::GetConstantVector(configuration::g_dimensions, 1.0));
+			position_velocity_ranges[0].push_back(arbitraryprecisioncalculation::vectoroperations::Clone(range1P));
+			position_velocity_ranges[1].push_back(arbitraryprecisioncalculation::vectoroperations::Clone(range1P));
+			position_velocity_centers[0].push_back(arbitraryprecisioncalculation::vectoroperations::Clone(center1P));
+			position_velocity_centers[1].push_back(arbitraryprecisioncalculation::vectoroperations::GetConstantVector(configuration::g_dimensions, 0.0));
+			position_velocity_scales[0].push_back(arbitraryprecisioncalculation::vectoroperations::GetConstantVector(configuration::g_dimensions, 1.0));
+			position_velocity_scales[1].push_back(arbitraryprecisioncalculation::vectoroperations::GetConstantVector(configuration::g_dimensions, 1.0));
 		}
-		vectoroperations::ReleaseValues(posLow);
-		vectoroperations::ReleaseValues(posHigh);
-		vectoroperations::ReleaseValues(posDiff);
-		vectoroperations::ReleaseValues(range1P);
-		vectoroperations::ReleaseValues(center1P);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posLow);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posHigh);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posDiff);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(range1P);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(center1P);
 	}
 	std::vector<std::vector<configuration::InitializationInformation> > initialization_informations = {configuration::g_position_initialization_informations, configuration::g_velocity_initialization_informations};
 	for (unsigned int position_or_velocity = 0; position_or_velocity < 2; position_or_velocity++){
@@ -330,73 +331,73 @@ Statistics* InitAndDoPso() {
 			int fromDimension = std::max(0, info.dimension_from);
 			int toDimension = std::min(configuration::g_dimensions - 1, info.dimension_to);
 			if (info.information_type == configuration::INITIALIZATION_INFORMATION_TYPE_BOUNDS) {
-				mpf_t* low = mpftoperations::ToMpft(info.lower_bound);
-				mpf_t* high = mpftoperations::ToMpft(info.upper_bound);
-				mpf_t* diff = mpftoperations::Subtract(high, low);
-				mpf_t* newRange = mpftoperations::Multiply(diff, 0.5);
-				mpf_t* newCenter = mpftoperations::Add(low, newRange);
+				mpf_t* low = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.lower_bound);
+				mpf_t* high = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.upper_bound);
+				mpf_t* diff = arbitraryprecisioncalculation::mpftoperations::Subtract(high, low);
+				mpf_t* newRange = arbitraryprecisioncalculation::mpftoperations::Multiply(diff, 0.5);
+				mpf_t* newCenter = arbitraryprecisioncalculation::mpftoperations::Add(low, newRange);
 				for(int did = fromDimension; did <= toDimension; did++) {
 					for(int pid = fromParticle; pid <= toParticle; pid++) {
-						mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
-						mpftoperations::ReleaseValue(position_velocity_centers[position_or_velocity][pid][did]);
-						position_velocity_ranges[position_or_velocity][pid][did] = mpftoperations::Clone(newRange);
-						position_velocity_centers[position_or_velocity][pid][did] = mpftoperations::Clone(newCenter);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_centers[position_or_velocity][pid][did]);
+						position_velocity_ranges[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Clone(newRange);
+						position_velocity_centers[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Clone(newCenter);
 					}
 				}
-				mpftoperations::ReleaseValue(low);
-				mpftoperations::ReleaseValue(high);
-				mpftoperations::ReleaseValue(diff);
-				mpftoperations::ReleaseValue(newRange);
-				mpftoperations::ReleaseValue(newCenter);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(low);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(high);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diff);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newRange);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newCenter);
 			} else if(info.information_type == configuration::INITIALIZATION_INFORMATION_TYPE_CENTER_RANGE
 					|| info.information_type == configuration::INITIALIZATION_INFORMATION_TYPE_RANDOM_CENTER_RANGE) {
-				mpf_t* low = mpftoperations::ToMpft(info.lower_bound);
-				mpf_t* high = mpftoperations::ToMpft(info.upper_bound);
-				mpf_t* diff = mpftoperations::Subtract(high, low);
-				mpf_t* newRange = mpftoperations::ToMpft(info.range);
+				mpf_t* low = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.lower_bound);
+				mpf_t* high = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.upper_bound);
+				mpf_t* diff = arbitraryprecisioncalculation::mpftoperations::Subtract(high, low);
+				mpf_t* newRange = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.range);
 				for(int did = fromDimension; did <= toDimension; did++) {
-					mpf_t* part = mpftoperations::Randomize(diff);
-					mpf_t* newCenter = mpftoperations::Add(low, part);
+					mpf_t* part = arbitraryprecisioncalculation::mpftoperations::Randomize(diff);
+					mpf_t* newCenter = arbitraryprecisioncalculation::mpftoperations::Add(low, part);
 					for(int pid = fromParticle; pid <= toParticle; pid++) {
-						mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
-						mpftoperations::ReleaseValue(position_velocity_centers[position_or_velocity][pid][did]);
-						position_velocity_ranges[position_or_velocity][pid][did] = mpftoperations::Clone(newRange);
-						position_velocity_centers[position_or_velocity][pid][did] = mpftoperations::Clone(newCenter);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_centers[position_or_velocity][pid][did]);
+						position_velocity_ranges[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Clone(newRange);
+						position_velocity_centers[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Clone(newCenter);
 					}
-					mpftoperations::ReleaseValue(newCenter);
-					mpftoperations::ReleaseValue(part);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newCenter);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(part);
 				}
-				mpftoperations::ReleaseValue(low);
-				mpftoperations::ReleaseValue(high);
-				mpftoperations::ReleaseValue(diff);
-				mpftoperations::ReleaseValue(newRange);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(low);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(high);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diff);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newRange);
 			} else if(info.information_type == configuration::INITIALIZATION_INFORMATION_TYPE_NORMAL_SCALE) {
-				mpf_t* scale = mpftoperations::ToMpft(info.normal_scale);
+				mpf_t* scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(info.normal_scale);
 				for(int did = fromDimension; did <= toDimension; did++) {
 					for(int pid = fromParticle; pid <= toParticle; pid++) {
 						mpf_t* oldScale = position_velocity_scales[position_or_velocity][pid][did];
-						position_velocity_scales[position_or_velocity][pid][did] = mpftoperations::Multiply(oldScale, scale);
-						mpftoperations::ReleaseValue(oldScale);
+						position_velocity_scales[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Multiply(oldScale, scale);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(oldScale);
 					}
 				}
-				mpftoperations::ReleaseValue(scale);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(scale);
 			} else if(info.information_type == configuration::INITIALIZATION_INFORMATION_TYPE_POWER_SCALE) {
 				mpf_t* start;
 				if (info.power_scale < 0) {
-					start = mpftoperations::ToMpft(0.5);
+					start = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.5);
 				} else {
-					start = mpftoperations::ToMpft(2.0);
+					start = arbitraryprecisioncalculation::mpftoperations::ToMpft(2.0);
 				}
-				mpf_t* scale = mpftoperations::Pow(start, abs(info.power_scale));
+				mpf_t* scale = arbitraryprecisioncalculation::mpftoperations::Pow(start, abs(info.power_scale));
 				for(int did = fromDimension; did <= toDimension; did++) {
 					for(int pid = fromParticle; pid <= toParticle; pid++) {
 						mpf_t* oldScale = position_velocity_scales[position_or_velocity][pid][did];
-						position_velocity_scales[position_or_velocity][pid][did] = mpftoperations::Multiply(oldScale, scale);
-						mpftoperations::ReleaseValue(oldScale);
+						position_velocity_scales[position_or_velocity][pid][did] = arbitraryprecisioncalculation::mpftoperations::Multiply(oldScale, scale);
+						arbitraryprecisioncalculation::mpftoperations::ReleaseValue(oldScale);
 					}
 				}
-				mpftoperations::ReleaseValue(start);
-				mpftoperations::ReleaseValue(scale);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(start);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(scale);
 			} else {
 				AssertCondition(false, "Invalid / Unsupported initialization specification.");
 			}
@@ -405,58 +406,58 @@ Statistics* InitAndDoPso() {
 	for(unsigned int position_or_velocity = 0; position_or_velocity < 2; position_or_velocity++){
 		for(int did = 0; did < configuration::g_dimensions; did++) {
 			for(int pid = 0; pid < configuration::g_particles; pid++) {
-				mpf_t* newRange = mpftoperations::Multiply(position_velocity_ranges[position_or_velocity][pid][did], position_velocity_scales[position_or_velocity][pid][did]);
-				mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
-				mpftoperations::ReleaseValue(position_velocity_scales[position_or_velocity][pid][did]);
+				mpf_t* newRange = arbitraryprecisioncalculation::mpftoperations::Multiply(position_velocity_ranges[position_or_velocity][pid][did], position_velocity_scales[position_or_velocity][pid][did]);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_ranges[position_or_velocity][pid][did]);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(position_velocity_scales[position_or_velocity][pid][did]);
 				position_velocity_ranges[position_or_velocity][pid][did] = newRange;
 			}
 		}
 	}
 	for (int i = 0; i < configuration::g_particles; i++) {
 		Particle* p = new Particle();
-		std::vector<mpf_t*> position_diff = vectoroperations::Multiply(position_velocity_ranges[0][i], 2.0);
-		std::vector<mpf_t*> position_low = vectoroperations::Subtract(position_velocity_centers[0][i], position_velocity_ranges[0][i]);
-		std::vector<mpf_t*> velocity_diff = vectoroperations::Multiply(position_velocity_ranges[1][i], 2.0);
-		std::vector<mpf_t*> velocity_low = vectoroperations::Subtract(position_velocity_centers[1][i], position_velocity_ranges[1][i]);
+		std::vector<mpf_t*> position_diff = arbitraryprecisioncalculation::vectoroperations::Multiply(position_velocity_ranges[0][i], 2.0);
+		std::vector<mpf_t*> position_low = arbitraryprecisioncalculation::vectoroperations::Subtract(position_velocity_centers[0][i], position_velocity_ranges[0][i]);
+		std::vector<mpf_t*> velocity_diff = arbitraryprecisioncalculation::vectoroperations::Multiply(position_velocity_ranges[1][i], 2.0);
+		std::vector<mpf_t*> velocity_low = arbitraryprecisioncalculation::vectoroperations::Subtract(position_velocity_centers[1][i], position_velocity_ranges[1][i]);
 
-		std::vector<mpf_t*> posRandom = vectoroperations::Randomize(position_diff);
-		std::vector<mpf_t*> newPosition = vectoroperations::Add(position_low, posRandom);
+		std::vector<mpf_t*> posRandom = arbitraryprecisioncalculation::vectoroperations::Randomize(position_diff);
+		std::vector<mpf_t*> newPosition = arbitraryprecisioncalculation::vectoroperations::Add(position_low, posRandom);
 		p->SetPosition(newPosition);
-		vectoroperations::ReleaseValues(posRandom);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posRandom);
 		if(configuration::g_initialize_velocity_mode == configuration::INITIALIZE_VELOCITY_MODE_ZERO){  // zero velocity initialisation
-			std::vector<mpf_t*> newVelocity = vectoroperations::GetConstantVector(configuration::g_dimensions, 0.0);
+			std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::GetConstantVector(configuration::g_dimensions, 0.0);
 			p->SetVelocity(newVelocity);
-			vectoroperations::ReleaseValues(newVelocity);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
 		} else if(configuration::g_initialize_velocity_mode == configuration::INITIALIZE_VELOCITY_MODE_HALFDIFF){ // halfdiff velocity initialisation
-			posRandom = vectoroperations::Randomize(position_diff);
-			std::vector<mpf_t*> tmpPosition = vectoroperations::Add(position_low, posRandom);
-			std::vector<mpf_t*> curDiff = vectoroperations::Subtract(tmpPosition, newPosition);
-			std::vector<mpf_t*> newVelocity = vectoroperations::Multiply(curDiff, 0.5);
+			posRandom = arbitraryprecisioncalculation::vectoroperations::Randomize(position_diff);
+			std::vector<mpf_t*> tmpPosition = arbitraryprecisioncalculation::vectoroperations::Add(position_low, posRandom);
+			std::vector<mpf_t*> curDiff = arbitraryprecisioncalculation::vectoroperations::Subtract(tmpPosition, newPosition);
+			std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::Multiply(curDiff, 0.5);
 			p->SetVelocity(newVelocity);
-			vectoroperations::ReleaseValues(posRandom);
-			vectoroperations::ReleaseValues(tmpPosition);
-			vectoroperations::ReleaseValues(curDiff);
-			vectoroperations::ReleaseValues(newVelocity);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posRandom);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmpPosition);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curDiff);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
 		} else if(configuration::g_initialize_velocity_mode == configuration::INITIALIZE_VELOCITY_MODE_RANDOM){ // uniform velocity initialisation
-			posRandom = vectoroperations::Randomize(velocity_diff);
-			std::vector<mpf_t*> newVelocity = vectoroperations::Add(posRandom, velocity_low);
+			posRandom = arbitraryprecisioncalculation::vectoroperations::Randomize(velocity_diff);
+			std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::Add(posRandom, velocity_low);
 			p->SetVelocity(newVelocity);
-			vectoroperations::ReleaseValues(newVelocity);
-			vectoroperations::ReleaseValues(posRandom);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(posRandom);
 		} else {
 			return NULL;
 		}
-		vectoroperations::ReleaseValues(newPosition);
-		vectoroperations::ReleaseValues(position_velocity_ranges[0][i]);
-		vectoroperations::ReleaseValues(position_velocity_ranges[1][i]);
-		vectoroperations::ReleaseValues(position_velocity_centers[0][i]);
-		vectoroperations::ReleaseValues(position_velocity_centers[1][i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPosition);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_velocity_ranges[0][i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_velocity_ranges[1][i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_velocity_centers[0][i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_velocity_centers[1][i]);
 		swarm->push_back(p);
 
-		vectoroperations::ReleaseValues(position_diff);
-		vectoroperations::ReleaseValues(position_low);
-		vectoroperations::ReleaseValues(velocity_diff);
-		vectoroperations::ReleaseValues(velocity_low);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_diff);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position_low);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velocity_diff);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velocity_low);
 	}
 	configuration::g_neighborhood->ProceedAllUpdates();
 
@@ -468,7 +469,7 @@ Statistics* DoPso(Statistics* statistics) {
 	std::vector<Particle*>* &swarm = statistics->swarm;
 	long long & step = statistics->current_iteration;
 
-	int lastNumberOfmpft = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+	int lastNumberOfmpft = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 	int startstep = step;
 
 	LAST_BACKUP = time(NULL);
@@ -481,7 +482,7 @@ Statistics* DoPso(Statistics* statistics) {
 			&& step > configuration::g_preserve_backup_times[nextBackupStepId]){
 		++nextBackupStepId;
 	}
-	configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
 	if(configuration::g_debug_swarm_activated){
 		visualization::VisualizeCurrentSwarm();
 	}
@@ -521,22 +522,22 @@ Statistics* DoPso(Statistics* statistics) {
 		}
 
 
-		if (lastNumberOfmpft != mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached()) {
+		if (lastNumberOfmpft != arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached()) {
 			if (step > 2 + startstep) {
 				std::cerr << "step " << step << std::endl << "last mpf_t "
 					<< lastNumberOfmpft << std::endl << "curr mpf_t "
-					<< mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
+					<< arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << std::endl;
 			}
-			lastNumberOfmpft = mpftoperations::GetNumberOfMpftValuesInUse() - mpftoperations::GetNumberOfMpftValuesCached();
+			lastNumberOfmpft = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
 		}
 		for (int id = 0; id < configuration::g_particles; id++) {
 			(*swarm)[id]->UpdatePosition();
 			if(configuration::g_update_global_attractor_mode == configuration::UPDATE_GLOBAL_ATTRACTOR_MODE_EACH_PARTICLE){
 				configuration::g_neighborhood->ProceedAllUpdates();
 			}
-			if(configuration::g_increase_precision){
-				configuration::g_increase_precision = false;
-				mpftoperations::IncreasePrecision();
+			if(arbitraryprecisioncalculation::configuration::g_increase_precision){
+				arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+				arbitraryprecisioncalculation::mpftoperations::IncreasePrecision();
 			}
 		}
 		if(configuration::g_update_global_attractor_mode == configuration::UPDATE_GLOBAL_ATTRACTOR_MODE_EACH_ITERATION){
@@ -549,9 +550,9 @@ Statistics* DoPso(Statistics* statistics) {
 			visualization::VisualizeCurrentSwarm();
 		}
 
-		if(configuration::g_increase_precision){
-			configuration::g_increase_precision = false;
-			mpftoperations::IncreasePrecision();
+		if(arbitraryprecisioncalculation::configuration::g_increase_precision){
+			arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+			arbitraryprecisioncalculation::mpftoperations::IncreasePrecision();
 		}
 
 		statistics->EvaluateStatistics();
@@ -588,7 +589,7 @@ void WriteCurrentState(std::string filename) {
 	std::ofstream bu(filename.c_str());
 	bu << PSO_PROGRAM_VERSION.GetCompleteVersion() << std::endl;
 	bu << mpf_get_default_prec() << std::endl;
-	configuration::g_standard_random_number_generator->StoreData(&bu);
+	arbitraryprecisioncalculation::configuration::g_standard_random_number_generator->StoreData(&bu);
 	configuration::g_statistics->StoreData(&bu);
 	configuration::g_neighborhood->StoreData(&bu);
 	configuration::g_position_and_velocity_updater->StoreData(&bu);
@@ -654,10 +655,10 @@ bool AllowedToRun() {
 					}
 					if (!formatOk)
 						continue;
-					int minutes1 = mpftoperations::StringToInt(input[1]) * 60
-						+ mpftoperations::StringToInt(input[2]);
-					int minutes2 = mpftoperations::StringToInt(input[3]) * 60
-						+ mpftoperations::StringToInt(input[4]);
+					int minutes1 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[1]) * 60
+						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[2]);
+					int minutes2 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[3]) * 60
+						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[4]);
 					int cminutes = timeInfo->tm_hour * 60 + timeInfo->tm_min;
 					if (minutes1 <= cminutes && cminutes <= minutes2) {
 						ok = false;
@@ -675,10 +676,10 @@ bool AllowedToRun() {
 					}
 					if (!formatOk)
 						continue;
-					int minutes1 = mpftoperations::StringToInt(input[1]) * 60
-						+ mpftoperations::StringToInt(input[2]);
-					int minutes2 = mpftoperations::StringToInt(input[3]) * 60
-						+ mpftoperations::StringToInt(input[4]);
+					int minutes1 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[1]) * 60
+						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[2]);
+					int minutes2 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[3]) * 60
+						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[4]);
 					int cminutes = timeInfo->tm_hour * 60 + timeInfo->tm_min;
 					if (minutes1 <= cminutes && cminutes <= minutes2) {
 						allowed = true;

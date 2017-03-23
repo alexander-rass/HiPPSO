@@ -1,5 +1,5 @@
 /**
-* @file   dimension_independent_updater.cpp
+* @file   position_and_velocity_updater/dimension_independent_updater.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains a position and velocity updater, which acts independent to the coordinate axes.
@@ -58,16 +58,16 @@ void DimensionIndependentUpdater::Update(Particle* p) {
 	AssertCondition(max_directions_ <= configuration::g_dimensions, "The number of directions for the dimension independent updater is to large. The maximal allowed value is the number of dimensions.");
 	AssertCondition(max_directions_ > 0, "The number of directions for the dimension independent updater needs to be a positive value");
 
-	std::vector<mpf_t*> nextVelocity = vectoroperations::Multiply(p->velocity,
+	std::vector<mpf_t*> nextVelocity = arbitraryprecisioncalculation::vectoroperations::Multiply(p->velocity,
 			configuration::g_chi);
 
 	std::vector<mpf_t*> localAttractorPosition = p->GetLocalAttractorPosition();
 	std::vector<mpf_t*> globalAttractorPosition = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
 
 	std::vector<mpf_t*> main_direction;
-	if(!vectoroperations::Equals(localAttractorPosition, globalAttractorPosition)){
+	if(!arbitraryprecisioncalculation::vectoroperations::Equals(localAttractorPosition, globalAttractorPosition)){
 		main_direction = configuration::g_bound_handling->GetDirectionVector(globalAttractorPosition, localAttractorPosition);
-	} else if(!vectoroperations::Equals(p->position, globalAttractorPosition)){
+	} else if(!arbitraryprecisioncalculation::vectoroperations::Equals(p->position, globalAttractorPosition)){
 		main_direction = configuration::g_bound_handling->GetDirectionVector(globalAttractorPosition, p->position);
 	}
 	
@@ -82,151 +82,151 @@ void DimensionIndependentUpdater::Update(Particle* p) {
 		for(int dirs = 0; dirs < max_directions_ - 1; dirs++){
 			std::vector<mpf_t*> random_direction;
 			for(int d = 0; d < configuration::g_dimensions; d++){
-				random_direction.push_back(mpftoperations::GetGaussianRandomMpft(0.0, 1.0));
+				random_direction.push_back(arbitraryprecisioncalculation::mpftoperations::GetGaussianRandomMpft(0.0, 1.0));
 			}
 			// remove used directions
 			for(unsigned int i = 0; i < used_directions.size(); i++){
-				std::vector<mpf_t*> projection = vectoroperations::OrthogonalProjection(random_direction, used_directions[i]);
-				std::vector<mpf_t*> remaining = vectoroperations::Subtract(random_direction, projection);
-				vectoroperations::ReleaseValues(random_direction);
-				vectoroperations::ReleaseValues(projection);
+				std::vector<mpf_t*> projection = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(random_direction, used_directions[i]);
+				std::vector<mpf_t*> remaining = arbitraryprecisioncalculation::vectoroperations::Subtract(random_direction, projection);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(random_direction);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(projection);
 				random_direction = remaining;
 			}
 			// remove remaining main direction
 			{
-				std::vector<mpf_t*> projection = vectoroperations::OrthogonalProjection(random_direction, remaining_main_direction);
-				std::vector<mpf_t*> remaining = vectoroperations::Subtract(random_direction, projection);
-				vectoroperations::ReleaseValues(random_direction);
-				vectoroperations::ReleaseValues(projection);
+				std::vector<mpf_t*> projection = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(random_direction, remaining_main_direction);
+				std::vector<mpf_t*> remaining = arbitraryprecisioncalculation::vectoroperations::Subtract(random_direction, projection);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(random_direction);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(projection);
 				random_direction = remaining;
 			}
 			// scale random direction to correct relative length of remaining main direction
 			mpf_t* random_direction_length;
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Multiply(random_direction, random_direction);
-				random_direction_length = vectoroperations::Add(tmp);
-				vectoroperations::ReleaseValues(tmp);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Multiply(random_direction, random_direction);
+				random_direction_length = arbitraryprecisioncalculation::vectoroperations::Add(tmp);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 			}
 			mpf_t* remaining_main_direction_length;
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Multiply(remaining_main_direction, remaining_main_direction);
-				remaining_main_direction_length = vectoroperations::Add(tmp);
-				vectoroperations::ReleaseValues(tmp);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Multiply(remaining_main_direction, remaining_main_direction);
+				remaining_main_direction_length = arbitraryprecisioncalculation::vectoroperations::Add(tmp);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 			}
-			AssertCondition(mpftoperations::Compare( random_direction_length, 0.0 ) > 0, "This is an internal error in the dimension independent updater. Please contact the program author.");
-			AssertCondition(mpftoperations::Compare( remaining_main_direction_length, 0.0 ) > 0, "This is an internal error in the dimension independent updater. Please contact the program author.");
-			mpf_t* squared_scale = mpftoperations::Divide(remaining_main_direction_length, random_direction_length);
-			mpf_t* scale = mpftoperations::Sqrt(squared_scale);
-			std::vector<mpf_t*> scaled_random_direction = vectoroperations::Multiply(random_direction, scale);
-			std::vector<mpf_t*> reduced_random_direction = vectoroperations::Multiply(scaled_random_direction, reduction_);
+			AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare( random_direction_length, 0.0 ) > 0, "This is an internal error in the dimension independent updater. Please contact the program author.");
+			AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare( remaining_main_direction_length, 0.0 ) > 0, "This is an internal error in the dimension independent updater. Please contact the program author.");
+			mpf_t* squared_scale = arbitraryprecisioncalculation::mpftoperations::Divide(remaining_main_direction_length, random_direction_length);
+			mpf_t* scale = arbitraryprecisioncalculation::mpftoperations::Sqrt(squared_scale);
+			std::vector<mpf_t*> scaled_random_direction = arbitraryprecisioncalculation::vectoroperations::Multiply(random_direction, scale);
+			std::vector<mpf_t*> reduced_random_direction = arbitraryprecisioncalculation::vectoroperations::Multiply(scaled_random_direction, reduction_);
 			// the next direction consists of the remaining main direction and the reduced random direction
-			std::vector<mpf_t*> next_direction = vectoroperations::Add(reduced_random_direction, remaining_main_direction);
-			mpftoperations::ReleaseValue(squared_scale);
-			mpftoperations::ReleaseValue(scale);
-			mpftoperations::ReleaseValue(random_direction_length);
-			mpftoperations::ReleaseValue(remaining_main_direction_length);
-			vectoroperations::ReleaseValues(random_direction);
-			vectoroperations::ReleaseValues(scaled_random_direction);
-			vectoroperations::ReleaseValues(reduced_random_direction);
+			std::vector<mpf_t*> next_direction = arbitraryprecisioncalculation::vectoroperations::Add(reduced_random_direction, remaining_main_direction);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(squared_scale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(scale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(random_direction_length);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(remaining_main_direction_length);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(random_direction);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scaled_random_direction);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(reduced_random_direction);
 			// update velocity in the current direction and update remaining vectors
-			std::vector<mpf_t*> curLocalDir = vectoroperations::OrthogonalProjection(localDir, next_direction);
+			std::vector<mpf_t*> curLocalDir = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(localDir, next_direction);
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Subtract(localDir, curLocalDir);
-				vectoroperations::ReleaseValues(localDir);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Subtract(localDir, curLocalDir);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
 				localDir = tmp;
 			}
 			// - update velocity with local attractor
-			mpf_t* local_part_scale = mpftoperations::ToMpft(configuration::g_coefficient_local_attractor);
-			mpf_t* local_part_randomized = mpftoperations::Randomize(local_part_scale);
-			std::vector<mpf_t*> curLocalPart = vectoroperations::Multiply(
+			mpf_t* local_part_scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(configuration::g_coefficient_local_attractor);
+			mpf_t* local_part_randomized = arbitraryprecisioncalculation::mpftoperations::Randomize(local_part_scale);
+			std::vector<mpf_t*> curLocalPart = arbitraryprecisioncalculation::vectoroperations::Multiply(
 					curLocalDir,
 					local_part_randomized);
-			mpftoperations::ReleaseValue(local_part_scale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_part_scale);
 			local_part_scale = NULL;
-			mpftoperations::ReleaseValue(local_part_randomized);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_part_randomized);
 			local_part_randomized = NULL;
 
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Add(nextVelocity, curLocalPart);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Add(nextVelocity, curLocalPart);
 				std::swap(tmp, nextVelocity);
-				vectoroperations::ReleaseValues(tmp);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 			}
-			vectoroperations::ReleaseValues(curLocalDir);
-			vectoroperations::ReleaseValues(curLocalPart);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curLocalDir);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curLocalPart);
 
-			std::vector<mpf_t*> curGlobalDir = vectoroperations::OrthogonalProjection(globalDir, next_direction);
+			std::vector<mpf_t*> curGlobalDir = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(globalDir, next_direction);
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Subtract(globalDir, curGlobalDir);
-				vectoroperations::ReleaseValues(globalDir);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Subtract(globalDir, curGlobalDir);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
 				globalDir = tmp;
 			}
 			// - update velocity with global attractor
-			mpf_t* global_part_scale = mpftoperations::ToMpft(configuration::g_coefficient_global_attractor);
-			mpf_t* global_part_randomized = mpftoperations::Randomize(global_part_scale);
-			std::vector<mpf_t*> curGlobalPart = vectoroperations::Multiply(curGlobalDir, global_part_randomized);
-			mpftoperations::ReleaseValue(global_part_scale);
+			mpf_t* global_part_scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(configuration::g_coefficient_global_attractor);
+			mpf_t* global_part_randomized = arbitraryprecisioncalculation::mpftoperations::Randomize(global_part_scale);
+			std::vector<mpf_t*> curGlobalPart = arbitraryprecisioncalculation::vectoroperations::Multiply(curGlobalDir, global_part_randomized);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_part_scale);
 			global_part_scale = NULL;
-			mpftoperations::ReleaseValue(global_part_randomized);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_part_randomized);
 			global_part_randomized = NULL;
 			{
-				std::vector<mpf_t*> tmp = vectoroperations::Add(nextVelocity, curGlobalPart);
+				std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Add(nextVelocity, curGlobalPart);
 				std::swap(tmp, nextVelocity);
-				vectoroperations::ReleaseValues(tmp);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 			}
-			vectoroperations::ReleaseValues(curGlobalDir);
-			vectoroperations::ReleaseValues(curGlobalPart);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curGlobalDir);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(curGlobalPart);
 
 			used_directions.push_back(next_direction);
 			{
-				std::vector<mpf_t*> tmp1 = vectoroperations::OrthogonalProjection(remaining_main_direction, next_direction);
-				std::vector<mpf_t*> tmp2 = vectoroperations::Subtract(remaining_main_direction, tmp1);
+				std::vector<mpf_t*> tmp1 = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(remaining_main_direction, next_direction);
+				std::vector<mpf_t*> tmp2 = arbitraryprecisioncalculation::vectoroperations::Subtract(remaining_main_direction, tmp1);
 				std::swap(tmp2, remaining_main_direction);
-				vectoroperations::ReleaseValues(tmp1);
-				vectoroperations::ReleaseValues(tmp2);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp1);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp2);
 			}
 		}
 		// - update velocity with remaining local attractor
-		mpf_t* local_part_scale = mpftoperations::ToMpft(configuration::g_coefficient_local_attractor);
-		mpf_t* local_part_randomized = mpftoperations::Randomize(local_part_scale);
-		std::vector<mpf_t*> localPart = vectoroperations::Multiply(
+		mpf_t* local_part_scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(configuration::g_coefficient_local_attractor);
+		mpf_t* local_part_randomized = arbitraryprecisioncalculation::mpftoperations::Randomize(local_part_scale);
+		std::vector<mpf_t*> localPart = arbitraryprecisioncalculation::vectoroperations::Multiply(
 				localDir,
 				local_part_randomized);
-		mpftoperations::ReleaseValue(local_part_scale);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_part_scale);
 		local_part_scale = NULL;
-		mpftoperations::ReleaseValue(local_part_randomized);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_part_randomized);
 		local_part_randomized = NULL;
 		{
-			std::vector<mpf_t*> tmp = vectoroperations::Add(nextVelocity, localPart);
+			std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Add(nextVelocity, localPart);
 			std::swap(tmp, nextVelocity);
-			vectoroperations::ReleaseValues(tmp);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		}
-		vectoroperations::ReleaseValues(localPart);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localPart);
 		// - update velocity with remaining global attractor
-		mpf_t* global_part_scale = mpftoperations::ToMpft(configuration::g_coefficient_global_attractor);
-		mpf_t* global_part_randomized = mpftoperations::Randomize(global_part_scale);
-		std::vector<mpf_t*> globalPart = vectoroperations::Multiply(globalDir, global_part_randomized);
-		mpftoperations::ReleaseValue(global_part_scale);
+		mpf_t* global_part_scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(configuration::g_coefficient_global_attractor);
+		mpf_t* global_part_randomized = arbitraryprecisioncalculation::mpftoperations::Randomize(global_part_scale);
+		std::vector<mpf_t*> globalPart = arbitraryprecisioncalculation::vectoroperations::Multiply(globalDir, global_part_randomized);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_part_scale);
 		global_part_scale = NULL;
-		mpftoperations::ReleaseValue(global_part_randomized);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_part_randomized);
 		global_part_randomized = NULL;
 		{
-			std::vector<mpf_t*> tmp = vectoroperations::Add(nextVelocity, globalPart);
+			std::vector<mpf_t*> tmp = arbitraryprecisioncalculation::vectoroperations::Add(nextVelocity, globalPart);
 			std::swap(tmp, nextVelocity);
-			vectoroperations::ReleaseValues(tmp);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 		}
-		vectoroperations::ReleaseValues(globalPart);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalPart);
 
 		for(unsigned int i = 0; i < used_directions.size(); i++){
-			vectoroperations::ReleaseValues(used_directions[i]);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(used_directions[i]);
 		}
-		vectoroperations::ReleaseValues(remaining_main_direction);
-		vectoroperations::ReleaseValues(localDir);
-		vectoroperations::ReleaseValues(globalDir);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(remaining_main_direction);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
 	}
 	p->SetVelocity(nextVelocity);
-	vectoroperations::ReleaseValues(nextVelocity);
-	vectoroperations::ReleaseValues(localAttractorPosition);
-	vectoroperations::ReleaseValues(globalAttractorPosition);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(nextVelocity);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localAttractorPosition);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalAttractorPosition);
 	configuration::g_bound_handling->SetParticleUpdate(p);
 }
 

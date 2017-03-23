@@ -1,5 +1,5 @@
 /**
-* @file   manual_function.cpp
+* @file   function/manual_function.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains abstract classes for function generation.
@@ -50,7 +50,7 @@ FunctionReduceOperator::FunctionReduceOperator(VectorReduceOperation* vector_red
 mpf_t* FunctionReduceOperator::Eval(const std::vector<mpf_t*> & vec){
 	std::vector<mpf_t*> tmp = specific_function_->Eval(vec);
 	mpf_t* res = vector_reduce_operation_->Evaluate(tmp);
-	vectoroperations::ReleaseValues(tmp);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp);
 	return res;
 }
 
@@ -65,7 +65,7 @@ OperatedFunction::OperatedFunction(Operation* operation, Function* function):ope
 mpf_t* OperatedFunction::Eval(const std::vector<mpf_t*> & vec) {
 	mpf_t* tmp = function_->Eval(vec);
 	mpf_t* res = operation_->Operate(tmp);
-	mpftoperations::ReleaseValue(tmp);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	return res;
 }
 
@@ -81,8 +81,8 @@ mpf_t* CombineFunction::Eval(const std::vector<mpf_t*> & vec){
 	mpf_t* res1 = operator1_->Eval(vec);
 	mpf_t* res2 = operator2_->Eval(vec);
 	mpf_t* res = operation_->Evaluate(res1, res2);
-	mpftoperations::ReleaseValue(res1);
-	mpftoperations::ReleaseValue(res2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res2);
 	return res;
 }
 

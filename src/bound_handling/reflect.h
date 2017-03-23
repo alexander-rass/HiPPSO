@@ -1,5 +1,5 @@
 /**
-* @file   reflect.h
+* @file   bound_handling/reflect.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the reflect bound handling strategy.

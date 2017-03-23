@@ -1,5 +1,5 @@
 /**
-* @file   neighborhood.cpp
+* @file   neighborhood/neighborhood.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains an abstract classes for neighborhood generation.
@@ -48,8 +48,8 @@ Neighborhood::~Neighborhood(){
 	while(!remaining_updates_.empty()){
 		std::pair< std::pair< std::vector<mpf_t*>, mpf_t*>, int> n = remaining_updates_.front();
 		remaining_updates_.pop();
-		vectoroperations::ReleaseValues(n.first.first);
-		mpftoperations::ReleaseValue(n.first.second);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(n.first.first);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n.first.second);
 	}
 }
 
@@ -62,7 +62,7 @@ mpf_t* Neighborhood::GetGlobalAttractorValue(Particle* p){
 }
 
 void Neighborhood::UpdateAttractor(std::vector<mpf_t*> position, mpf_t* value, int particleId){
-	remaining_updates_.push(std::make_pair(std::make_pair(vectoroperations::Clone(position), mpftoperations::Clone(value)), particleId));
+	remaining_updates_.push(std::make_pair(std::make_pair(arbitraryprecisioncalculation::vectoroperations::Clone(position), arbitraryprecisioncalculation::mpftoperations::Clone(value)), particleId));
 }
 
 void Neighborhood::ProceedAllUpdates(){
@@ -73,8 +73,8 @@ void Neighborhood::ProceedAllUpdates(){
 		int particleId = currentUpdate.second;
 		UpdateAttractorInstantly(position, value, particleId);
 		remaining_updates_.pop();
-		vectoroperations::ReleaseValues(position);
-		mpftoperations::ReleaseValue(value);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(value);
 	}
 }
 

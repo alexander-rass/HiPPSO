@@ -1,5 +1,5 @@
 /**
-* @file   none.cpp
+* @file   velocity_adjustment/none.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the none velocity adjustment strategy.

@@ -1,5 +1,5 @@
 /**
-* @file   deterministic_back.cpp
+* @file   velocity_adjustment/deterministic_back.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the deterministic back velocity adjustment strategy.
@@ -51,8 +51,8 @@ VelocityAdjustmentDeterministicBack::VelocityAdjustmentDeterministicBack(double 
 void VelocityAdjustmentDeterministicBack::AdjustVelocity(Particle * p, std::vector<bool> adjustDimensions, std::vector<mpf_t*> oldPosition){
 	for(unsigned int i = 0; i < adjustDimensions.size(); i++) {
 		if(adjustDimensions[i]) {
-			mpf_t* tmp = mpftoperations::Multiply(p->velocity[i], -lambda_);
-			mpftoperations::ReleaseValue(p->velocity[i]);
+			mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(p->velocity[i], -lambda_);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p->velocity[i]);
 			p->velocity[i] = tmp;
 		}
 	}

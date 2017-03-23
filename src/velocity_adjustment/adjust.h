@@ -1,5 +1,5 @@
 /**
-* @file   adjust.h
+* @file   velocity_adjustment/adjust.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the adjust velocity adjustment strategy.

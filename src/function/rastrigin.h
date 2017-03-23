@@ -1,5 +1,5 @@
 /**
-* @file   rastrigin.h 
+* @file   function/rastrigin.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the description of the rastrigin function.

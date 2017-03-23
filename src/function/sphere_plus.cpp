@@ -1,5 +1,5 @@
 /**
-* @file   sphere_plus.cpp
+* @file   function/sphere_plus.cpp
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the sphere plus function.
@@ -47,16 +47,16 @@ mpf_t* SpherePlus::Eval(const std::vector<mpf_t*> & vec) {
 	unsigned int D = vec.size();
 	mpf_t* res = NULL;
 	for(unsigned int d = 0; d < D; d++){
-		if (mpftoperations::Compare((vec[d]), 0.0) < 0){
-			return mpftoperations::GetPlusInfinity();
+		if (arbitraryprecisioncalculation::mpftoperations::Compare((vec[d]), 0.0) < 0){
+			return arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 		}
 	}
-	mpf_t* cursum = mpftoperations::ToMpft(0.0);
+	mpf_t* cursum = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(unsigned int i = 0; i < D; i++){
-		mpf_t* tmp = mpftoperations::Multiply(vec[i], vec[i]);
-		mpf_t* tmp2 = mpftoperations::Add(cursum, tmp);
-		mpftoperations::ReleaseValue(tmp);
-		mpftoperations::ReleaseValue(cursum);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(vec[i], vec[i]);
+		mpf_t* tmp2 = arbitraryprecisioncalculation::mpftoperations::Add(cursum, tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cursum);
 		cursum = tmp2;
 	}
 	res = cursum;
@@ -68,7 +68,7 @@ std::string SpherePlus::GetName(){
 }
 
 mpf_t* SpherePlus::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 } // namespace highprecisionpso

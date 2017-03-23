@@ -1,5 +1,5 @@
 /**
-* @file   testing_updater.cpp
+* @file   position_and_velocity_updater/testing_updater.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains an experimental position and velocity updater.
@@ -56,58 +56,58 @@ namespace highprecisionpso {
 void TestingUpdater::Update(Particle* p) {
 	static std::vector<mpf_t*> last_nozero_velocity;
 	while(last_nozero_velocity.size() < (unsigned int)configuration::g_dimensions){
-		mpf_t* one = mpftoperations::ToMpft(1.0);
-		mpf_t* tmp1 = mpftoperations::GetRandomMpft();
-		mpf_t* tmp2 = mpftoperations::Multiply2Exp(tmp1, 1);
-		mpftoperations::ReleaseValue(tmp1);
-		mpftoperations::ReleaseValue(tmp2);
-		mpftoperations::ReleaseValue(one);
-		last_nozero_velocity.push_back(mpftoperations::Subtract(tmp2, one));// x = rand(0.0, 1.0) * 2.0 - 1.0
+		mpf_t* one = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
+		mpf_t* tmp1 = arbitraryprecisioncalculation::mpftoperations::GetRandomMpft();
+		mpf_t* tmp2 = arbitraryprecisioncalculation::mpftoperations::Multiply2Exp(tmp1, 1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(one);
+		last_nozero_velocity.push_back(arbitraryprecisioncalculation::mpftoperations::Subtract(tmp2, one));// x = rand(0.0, 1.0) * 2.0 - 1.0
 	}
 	int current_dir = (configuration::g_statistics->current_iteration / 10) % configuration::g_dimensions;
 
 	std::vector<mpf_t*> localDir = configuration::g_bound_handling->GetDirectionVector(
 			p->position, p->local_attractor_position);
-	std::vector<mpf_t*> helperVector = vectoroperations::Randomize(localDir);
-	vectoroperations::ReleaseValues(localDir);
+	std::vector<mpf_t*> helperVector = arbitraryprecisioncalculation::vectoroperations::Randomize(localDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
 	localDir = helperVector;
 	std::vector<mpf_t*> glAtPos = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
 	std::vector<mpf_t*> unchangedGlobalDir = configuration::g_bound_handling->GetDirectionVector(p->position, glAtPos);
-	std::vector<mpf_t*> globalDir = vectoroperations::Clone(unchangedGlobalDir);
-	helperVector = vectoroperations::Randomize(globalDir);
-	vectoroperations::ReleaseValues(globalDir);
+	std::vector<mpf_t*> globalDir = arbitraryprecisioncalculation::vectoroperations::Clone(unchangedGlobalDir);
+	helperVector = arbitraryprecisioncalculation::vectoroperations::Randomize(globalDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
 	globalDir = helperVector;
-	std::vector<mpf_t*> localPart = vectoroperations::Multiply(localDir,
+	std::vector<mpf_t*> localPart = arbitraryprecisioncalculation::vectoroperations::Multiply(localDir,
 			configuration::g_coefficient_local_attractor);
-	vectoroperations::ReleaseValues(localDir);
-	std::vector<mpf_t*> globalPart = vectoroperations::Multiply(globalDir,
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
+	std::vector<mpf_t*> globalPart = arbitraryprecisioncalculation::vectoroperations::Multiply(globalDir,
 			configuration::g_coefficient_global_attractor);
-	std::vector<mpf_t*> oldVelocityPart = vectoroperations::Multiply(p->velocity,
+	std::vector<mpf_t*> oldVelocityPart = arbitraryprecisioncalculation::vectoroperations::Multiply(p->velocity,
 			configuration::g_chi);
-	helperVector = vectoroperations::Add(localPart, globalPart);
-	vectoroperations::ReleaseValues(localPart);
-	vectoroperations::ReleaseValues(globalPart);
-	std::vector<mpf_t*> newVelocity = vectoroperations::Add(oldVelocityPart,
+	helperVector = arbitraryprecisioncalculation::vectoroperations::Add(localPart, globalPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalPart);
+	std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::Add(oldVelocityPart,
 			helperVector);
-	vectoroperations::ReleaseValues(oldVelocityPart);
-	vectoroperations::ReleaseValues(helperVector);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldVelocityPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(helperVector);
 	for(int i = 0; i < configuration::g_dimensions; i++){
 		if(i == current_dir)continue;
-		mpftoperations::ReleaseValue(newVelocity[i]);
-		newVelocity[i] = mpftoperations::Clone(unchangedGlobalDir[i]);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newVelocity[i]);
+		newVelocity[i] = arbitraryprecisioncalculation::mpftoperations::Clone(unchangedGlobalDir[i]);
 	}
-	vectoroperations::ReleaseValues(globalDir);
-	vectoroperations::ReleaseValues(unchangedGlobalDir);
-	if(mpftoperations::Compare((newVelocity[current_dir]), 0.0) == 0){
-		mpftoperations::ReleaseValue(newVelocity[current_dir]);
-		newVelocity[current_dir] = mpftoperations::Randomize(last_nozero_velocity[current_dir]);
-		AssertCondition(mpftoperations::Compare((newVelocity[current_dir]), 0.0) != 0, "");
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(unchangedGlobalDir);
+	if(arbitraryprecisioncalculation::mpftoperations::Compare((newVelocity[current_dir]), 0.0) == 0){
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newVelocity[current_dir]);
+		newVelocity[current_dir] = arbitraryprecisioncalculation::mpftoperations::Randomize(last_nozero_velocity[current_dir]);
+		AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare((newVelocity[current_dir]), 0.0) != 0, "");
 	} else {
-		mpftoperations::ReleaseValue (last_nozero_velocity[current_dir]);
-		last_nozero_velocity[current_dir] = mpftoperations::Clone(newVelocity[current_dir]);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue (last_nozero_velocity[current_dir]);
+		last_nozero_velocity[current_dir] = arbitraryprecisioncalculation::mpftoperations::Clone(newVelocity[current_dir]);
 	}
 	p->SetVelocity(newVelocity);
-	vectoroperations::ReleaseValues(newVelocity);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
 	configuration::g_bound_handling->SetParticleUpdate(p);
 	/*
 	for(int i = 0; i < configuration::DIMENSIONS; i++){
@@ -128,7 +128,7 @@ void TestingUpdater::Update(Particle* p) {
 	PrintHelper::printVectorShort(p->velocity);
 	cout << std::endl;
 	*/
-	vectoroperations::ReleaseValues(glAtPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(glAtPos);
 }
 
 std::string TestingUpdater::GetName(){

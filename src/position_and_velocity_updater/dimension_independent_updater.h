@@ -1,5 +1,5 @@
 /**
-* @file   dimension_independent_updater.h
+* @file   position_and_velocity_updater/dimension_independent_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains a position and velocity updater, which acts independent to the coordinate axes.

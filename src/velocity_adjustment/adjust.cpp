@@ -1,5 +1,5 @@
 /**
-* @file   adjust.cpp
+* @file   velocity_adjustment/adjust.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the adjust velocity adjustment strategy.
@@ -47,8 +47,8 @@ namespace highprecisionpso {
 void VelocityAdjustmentAdjust::AdjustVelocity(Particle * p, std::vector<bool> adjustDimensions, std::vector<mpf_t*> oldPosition){
 	for(unsigned int i = 0; i < adjustDimensions.size(); i++) {
 		if(adjustDimensions[i]) {
-			mpftoperations::ReleaseValue(p->velocity[i]);
-			p->velocity[i] = mpftoperations::Subtract(p->position[i], oldPosition[i]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p->velocity[i]);
+			p->velocity[i] = arbitraryprecisioncalculation::mpftoperations::Subtract(p->position[i], oldPosition[i]);
 		}
 	}
 }

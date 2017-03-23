@@ -1,5 +1,5 @@
 /**
-* @file   potential_calculator.h 
+* @file   statistics/potential_calculator.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2014
 * @brief  This file contains classes for statistical calculations.

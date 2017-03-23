@@ -1,5 +1,5 @@
 /**
-* @file   two_cups_function.h 
+* @file   function/two_cups_function.h
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the two cups function.

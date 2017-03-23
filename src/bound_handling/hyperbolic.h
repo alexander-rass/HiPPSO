@@ -1,5 +1,5 @@
 /**
-* @file   hyperbolic.h
+* @file   bound_handling/hyperbolic.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the hyperbolic bound handling strategy.

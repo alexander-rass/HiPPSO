@@ -1,5 +1,5 @@
 /**
-* @file   rosenbrock.h 
+* @file   function/rosenbrock.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the description of the rosenbrock function and a moved version.

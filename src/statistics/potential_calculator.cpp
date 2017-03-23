@@ -1,5 +1,5 @@
 /**
-* @file   potential_calculator.cpp
+* @file   statistics/potential_calculator.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2014
 * @brief  This file contains classes for statistical calculations.
@@ -66,15 +66,15 @@ std::vector<std::vector<mpf_t*> > PotentialCalculator::Evaluate(){
 mpf_t* PotentialFunctionDifference::Evaluate(Particle* p, int dim){
 	mpf_t* f1 = (*(configuration::g_function)).Evaluate(p->position);
 	std::vector<mpf_t*> position2 = p->position;
-	mpf_t* x = mpftoperations::Add(p->position[dim], p->velocity[dim]);
+	mpf_t* x = arbitraryprecisioncalculation::mpftoperations::Add(p->position[dim], p->velocity[dim]);
 	position2[dim] = x;
 	mpf_t* f2 = (*(configuration::g_function)).Evaluate(position2);
-	mpftoperations::ReleaseValue(x);
-	mpf_t* dif = mpftoperations::Subtract(f1,f2);
-	mpf_t* res = mpftoperations::Abs(dif);
-	mpftoperations::ReleaseValue(f1);
-	mpftoperations::ReleaseValue(f2);
-	mpftoperations::ReleaseValue(dif);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(x);
+	mpf_t* dif = arbitraryprecisioncalculation::mpftoperations::Subtract(f1,f2);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Abs(dif);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(f1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(f2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(dif);
 	return res;
 }
 
@@ -87,19 +87,19 @@ PotentialAbsVelocityPlusDistToGlobalAttractor::PotentialAbsVelocityPlusDistToGlo
 }
 
 mpf_t* PotentialAbsVelocityPlusDistToGlobalAttractor::Evaluate(Particle* p, int dim){
-	mpf_t* v1 = mpftoperations::Abs(p->velocity[dim]);
-	mpf_t* v2 = mpftoperations::Multiply(v1, scale_);
-	mpftoperations::ReleaseValue(v1);
+	mpf_t* v1 = arbitraryprecisioncalculation::mpftoperations::Abs(p->velocity[dim]);
+	mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::Multiply(v1, scale_);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
 	mpf_t* res = v2;
 	std::vector<mpf_t*> glAtPos = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
-	v1 = mpftoperations::Subtract(p->position[dim], glAtPos[dim]);
-	vectoroperations::ReleaseValues(glAtPos);
-	v2 = mpftoperations::Abs(v1);
-	mpftoperations::ReleaseValue(v1);
+	v1 = arbitraryprecisioncalculation::mpftoperations::Subtract(p->position[dim], glAtPos[dim]);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(glAtPos);
+	v2 = arbitraryprecisioncalculation::mpftoperations::Abs(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
 	v1 = res;
-	res = mpftoperations::Add(v1, v2);
-	mpftoperations::ReleaseValue(v1);
-	mpftoperations::ReleaseValue(v2);
+	res = arbitraryprecisioncalculation::mpftoperations::Add(v1, v2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 	return res;
 }
 
@@ -113,22 +113,22 @@ std::string PotentialAbsVelocityPlusDistToGlobalAttractor::GetName(){
 PotentialSqrtAbsVelocityPlusSqrtDistToGlobalAttractor::PotentialSqrtAbsVelocityPlusSqrtDistToGlobalAttractor(double scale) : scale_(scale){}
 
 mpf_t* PotentialSqrtAbsVelocityPlusSqrtDistToGlobalAttractor::Evaluate(Particle* p, int dim){
-	mpf_t* v1 = mpftoperations::Abs(p->velocity[dim]);
-	mpf_t* v2 = mpftoperations::Sqrt(v1);
-	mpftoperations::ReleaseValue(v1);
-	v1 = mpftoperations::Multiply(v2, scale_);
-	mpftoperations::ReleaseValue(v2);
+	mpf_t* v1 = arbitraryprecisioncalculation::mpftoperations::Abs(p->velocity[dim]);
+	mpf_t* v2 = arbitraryprecisioncalculation::mpftoperations::Sqrt(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+	v1 = arbitraryprecisioncalculation::mpftoperations::Multiply(v2, scale_);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
 	mpf_t* sqrtv = v1;
 	std::vector<mpf_t*> glAtPos = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
-	v1 = mpftoperations::Subtract(p->position[dim], glAtPos[dim]);
-	vectoroperations::ReleaseValues(glAtPos);
-	v2 = mpftoperations::Abs(v1);
-	mpftoperations::ReleaseValue(v1);
-	mpf_t* sqrtdiff = mpftoperations::Sqrt(v2);
-	mpftoperations::ReleaseValue(v2);
-	mpf_t* res = mpftoperations::Add(sqrtv, sqrtdiff);
-	mpftoperations::ReleaseValue(sqrtv);
-	mpftoperations::ReleaseValue(sqrtdiff);
+	v1 = arbitraryprecisioncalculation::mpftoperations::Subtract(p->position[dim], glAtPos[dim]);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(glAtPos);
+	v2 = arbitraryprecisioncalculation::mpftoperations::Abs(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
+	mpf_t* sqrtdiff = arbitraryprecisioncalculation::mpftoperations::Sqrt(v2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v2);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(sqrtv, sqrtdiff);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sqrtv);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sqrtdiff);
 	return res;
 }
 

@@ -1,5 +1,5 @@
 /**
-* @file   no_bounds.h
+* @file   bound_handling/no_bounds.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the no bounds bound handling strategy.

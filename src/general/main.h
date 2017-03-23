@@ -1,5 +1,5 @@
 /**
-* @file   main.h 
+* @file   general/main.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   June, 2013
 * @brief  This file contains the main methods to start the PSO algorithm.

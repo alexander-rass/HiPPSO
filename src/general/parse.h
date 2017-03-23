@@ -1,5 +1,5 @@
 /**
-* @file   parse.h 
+* @file   general/parse.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   October, 2015
 * @brief  This file contains functions for parsing the configuration file.
@@ -253,19 +253,6 @@ Function* ParseFunction(const std::vector<std::string> & parameters, unsigned in
  * @return A pointer to the parsed combined Function if the parsing process was successful and NULL otherwise.
  */
 Function* ParseCombineFunction(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
-/**
- * @brief Parses the given vector for a random number generator starting at the given index.
- *
- * The parameter parsed_parameters will store the number of parsed parameters after successful parsing of a random number generator.
- * If nothing can be parsed as a random number generator then the parameter parsed_parameters will store the initial number of parsed parameters at the time when the function is called.
- * If a random number generator can be parsed partially but without success then the parameter parsed_parameters will store the number of elements of the specification vector.
- *
- * @param parameters The vector containing the specification.
- * @param parsed_parameters The number of already parsed parameters by previous functions.
- *
- * @return A pointer to the parsed random number generator if the parsing process was successful and NULL otherwise.
- */
-RandomNumberGenerator* ParseRandomNumberGenerator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 
 /**
  * @brief Prints the supplied parameters to stderr and let the program terminate with exit code 1.

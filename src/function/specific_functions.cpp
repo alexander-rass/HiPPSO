@@ -1,5 +1,5 @@
 /**
-* @file   specific_functions.cpp
+* @file   function/specific_functions.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains specific functions.
@@ -50,8 +50,8 @@ ConstantSpecificFunction::ConstantSpecificFunction(ConstantEvaluation* constantE
 
 std::vector<mpf_t*> ConstantSpecificFunction::Eval(const std::vector<mpf_t*> & vec){
 	mpf_t* tmp = constant_evaluation_->Evaluate();
-	std::vector<mpf_t*> result = vectoroperations::GetConstantVector(vec.size(), tmp);
-	mpftoperations::ReleaseValue(tmp);
+	std::vector<mpf_t*> result = arbitraryprecisioncalculation::vectoroperations::GetConstantVector(vec.size(), tmp);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	return result;
 }
 
@@ -60,7 +60,7 @@ std::string ConstantSpecificFunction::GetName(){
 }
 
 std::vector<mpf_t*> IdentitySpecificFunction::Eval(const std::vector<mpf_t*> & vec){
-	return vectoroperations::Clone(vec);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(vec);
 }
 
 std::string IdentitySpecificFunction::GetName(){
@@ -75,7 +75,7 @@ std::vector<mpf_t*> OperatedSpecificFunction::Eval(const std::vector<mpf_t*> & v
 	for(unsigned int i = 0; i < res1.size(); i++){
 		res.push_back(operation_->Operate(res1[i]));
 	}
-	vectoroperations::ReleaseValues(res1);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res1);
 	return res;
 }
 
@@ -95,8 +95,8 @@ std::vector<mpf_t*> CombineSpecificFunction::Eval(const std::vector<mpf_t*> & ve
 	for(unsigned int i = 0; i < res1.size(); i++){
 		res.push_back(operation_->Evaluate(res1[i], res2[i]));
 	}
-	vectoroperations::ReleaseValues(res1);
-	vectoroperations::ReleaseValues(res2);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res1);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res2);
 	return res;
 }
 

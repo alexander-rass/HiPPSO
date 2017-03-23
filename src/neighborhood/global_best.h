@@ -1,5 +1,5 @@
 /**
-* @file   global_best.h
+* @file   neighborhood/global_best.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the global best neighborhood topology.

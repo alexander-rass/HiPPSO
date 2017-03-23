@@ -1,5 +1,5 @@
 /**
-* @file   bound_handling.h
+* @file   bound_handling/bound_handling.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains an abstract class for different bound handling strategies, which can be used for the particle swarm optimization.

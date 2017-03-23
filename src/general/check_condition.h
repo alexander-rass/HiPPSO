@@ -1,5 +1,5 @@
 /**
-* @file   check_condition.h 
+* @file   general/check_condition.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file includes a possibility to check conditions which should be true. (similar to assertions).

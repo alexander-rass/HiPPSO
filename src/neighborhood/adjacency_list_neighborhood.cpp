@@ -1,5 +1,5 @@
 /**
-* @file   adjacency_list_neighborhood.cpp
+* @file   neighborhood/adjacency_list_neighborhood.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains neighborhood topologies specified by adjacency lists.
@@ -51,10 +51,10 @@ namespace highprecisionpso {
 
 AdjacencyListNeighborhood::~AdjacencyListNeighborhood(){
 	for(unsigned int i = 0; i < global_attractor_positions_.size(); i++){
-		vectoroperations::ReleaseValues(global_attractor_positions_[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_positions_[i]);
 		global_attractor_positions_[i].clear();
 	}
-	vectoroperations::ReleaseValues(global_attractor_values_cached_);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_values_cached_);
 	global_attractor_values_cached_.clear();
 }
 
@@ -76,17 +76,17 @@ void AdjacencyListNeighborhood::SetGlobalAttractorPositions(std::vector<std::vec
 		AssertCondition(globalAttractors[p].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
 	}
 	for(unsigned int i = 0; i < global_attractor_positions_.size(); i++){
-		vectoroperations::ReleaseValues(global_attractor_positions_[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_positions_[i]);
 		global_attractor_positions_[i].clear();
 	}
 	global_attractor_positions_ = std::vector<std::vector<mpf_t*> >(configuration::g_particles);
 	for(int i = 0; i < configuration::g_particles; i++) {
-		global_attractor_positions_[i] = vectoroperations::Clone(globalAttractors[i]);
+		global_attractor_positions_[i] = arbitraryprecisioncalculation::vectoroperations::Clone(globalAttractors[i]);
 	}
 	for(unsigned int i = 0; i < global_attractor_values_cached_.size(); i++){
 		if(global_attractor_values_cached_[i] != NULL) {
-			mpftoperations::ChangeNumberOfMpftValuesCached(-1);
-			mpftoperations::ReleaseValue(global_attractor_values_cached_[i]);
+			arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(-1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_values_cached_[i]);
 			global_attractor_values_cached_[i] = NULL;
 		}
 	}
@@ -97,13 +97,13 @@ void AdjacencyListNeighborhood::SetGlobalAttractorPositions(std::vector<std::vec
 
 std::vector<mpf_t*> AdjacencyListNeighborhood::GetGlobalAttractorPosition(){
 	int id = GetGlobalAttractorIndex();
-	return vectoroperations::Clone(global_attractor_positions_[id]);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_positions_[id]);
 }
 
 std::vector<mpf_t*> AdjacencyListNeighborhood::GetGlobalAttractorPosition(int particleId){
 	AssertCondition(particleId >= 0, "adjacency list neighborhood: Queried particle id is less than zero.");
 	AssertCondition(global_attractor_positions_.size() > (unsigned int)particleId, "adjacency list neighborhood: Queried particle id is larger than the largest id.");
-	return vectoroperations::Clone(global_attractor_positions_[particleId]);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_positions_[particleId]);
 }
 
 mpf_t* AdjacencyListNeighborhood::GetGlobalAttractorValue(int particleId){
@@ -115,13 +115,13 @@ mpf_t* AdjacencyListNeighborhood::GetGlobalAttractorValue(int particleId){
 		global_attractor_values_cached_precision_[particleId] = mpf_get_default_prec();
 		global_attractor_index_ = -1;
 		if(global_attractor_values_cached_[particleId] != NULL){
-			mpftoperations::ReleaseValue(global_attractor_values_cached_[particleId]);
-			mpftoperations::ChangeNumberOfMpftValuesCached(-1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_values_cached_[particleId]);
+			arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(-1);
 		}
 		global_attractor_values_cached_[particleId] = configuration::g_function->Evaluate(global_attractor_positions_[particleId]);
-		mpftoperations::ChangeNumberOfMpftValuesCached(1);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
 	}
-	return mpftoperations::Clone(global_attractor_values_cached_[particleId]);
+	return arbitraryprecisioncalculation::mpftoperations::Clone(global_attractor_values_cached_[particleId]);
 }
 
 mpf_t* AdjacencyListNeighborhood::GetGlobalAttractorValue(){
@@ -145,24 +145,24 @@ void AdjacencyListNeighborhood::UpdateAttractorInstantly(std::vector<mpf_t*> pos
 		if(global_attractor_positions_[id].size() == 0){
 			global_attractor_index_ = -1;
 			configuration::g_statistics->global_attractor_update_counter[particleId]++;
-			global_attractor_positions_[id] = vectoroperations::Clone(position);
-			if(global_attractor_values_cached_[id] == NULL) mpftoperations::ChangeNumberOfMpftValuesCached(1);
-			mpftoperations::ReleaseValue(global_attractor_values_cached_[id]);
+			global_attractor_positions_[id] = arbitraryprecisioncalculation::vectoroperations::Clone(position);
+			if(global_attractor_values_cached_[id] == NULL) arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_values_cached_[id]);
 			global_attractor_values_cached_[id] = configuration::g_function->Evaluate(global_attractor_positions_[id]);
 			global_attractor_values_cached_precision_[id] = mpf_get_default_prec();
 		} else {
 			AssertCondition(global_attractor_positions_[id].size() == position.size(), "adjacency list neighborhood: The number of dimensions is inconsistent.");
 			mpf_t* curvalue = GetGlobalAttractorValue(id);
-			if(mpftoperations::Compare(value, curvalue) <= 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(value, curvalue) <= 0) {
 				global_attractor_index_ = -1;
 				configuration::g_statistics->global_attractor_update_counter[particleId]++;
-				vectoroperations::ReleaseValues(global_attractor_positions_[id]);
-				global_attractor_positions_[id] = vectoroperations::Clone(position);
-				mpftoperations::ReleaseValue(global_attractor_values_cached_[id]);
+				arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_positions_[id]);
+				global_attractor_positions_[id] = arbitraryprecisioncalculation::vectoroperations::Clone(position);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_values_cached_[id]);
 				global_attractor_values_cached_[id] = configuration::g_function->Evaluate(global_attractor_positions_[id]);
 				global_attractor_values_cached_precision_[id] = mpf_get_default_prec();
 			}
-			mpftoperations::ReleaseValue(curvalue);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(curvalue);
 		}
 	}
 }
@@ -174,13 +174,13 @@ int AdjacencyListNeighborhood::GetGlobalAttractorIndex(){
 		mpf_t* best = GetGlobalAttractorValue(0);
 		for(int i = 1; i < configuration::g_particles; i++) {
 			mpf_t* cur = GetGlobalAttractorValue(i);
-			if(mpftoperations::Compare(best, cur) >= 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(best, cur) >= 0) {
 				std::swap(best, cur);
 				id = i;
 			}
-			mpftoperations::ReleaseValue(cur);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
 		}
-		mpftoperations::ReleaseValue(best);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(best);
 		global_attractor_index_ = id;
 	}
 	return global_attractor_index_;
@@ -191,14 +191,14 @@ void AdjacencyListNeighborhood::LoadData(std::ifstream* inputstream, ProgramVers
 	for(int p = 0; p < configuration::g_particles; p++){
 		global_attractor_positions_.push_back(std::vector<mpf_t*>());
 		for(int d = 0; d < configuration::g_dimensions; d++){
-			global_attractor_positions_[p].push_back(mpftoperations::LoadMpft(inputstream, version_of_stored_data));
+			global_attractor_positions_[p].push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 		}
 	}
 }
 void AdjacencyListNeighborhood::StoreData(std::ofstream* outputstream){
 	for(int p = 0; p < configuration::g_particles; p++){
 		for(int d = 0; d < configuration::g_dimensions; d++){
-			mpftoperations::StoreMpft(global_attractor_positions_[p][d], outputstream);
+			arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_positions_[p][d], outputstream);
 		}
 		(*outputstream) << std::endl;
 	}

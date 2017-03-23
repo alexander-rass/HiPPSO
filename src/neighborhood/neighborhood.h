@@ -1,5 +1,5 @@
 /**
-* @file   neighborhood.h
+* @file   neighborhood/neighborhood.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains an abstract classes for neighborhood generation.

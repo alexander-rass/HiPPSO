@@ -1,5 +1,5 @@
 /**
-* @file   single_different_direction.cpp 
+* @file   function/single_different_direction.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains the description of function which performs different in a single direction.
@@ -43,7 +43,7 @@
 
 #include "general/check_condition.h"
 #include "arbitrary_precision_calculation/operations.h"
-#include "general/parse.h"
+#include "arbitrary_precision_calculation/parse.h"
 
 namespace highprecisionpso {
 
@@ -60,8 +60,8 @@ SingleDifferentDirection::SingleDifferentDirection(double single_dimension_power
 }
 
 SingleDifferentDirection::~SingleDifferentDirection(){
-	mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(special_direction_cached_.size()) );
-	vectoroperations::ReleaseValues(special_direction_cached_);
+	arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -(int)(special_direction_cached_.size()) );
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(special_direction_cached_);
 	special_direction_cached_.clear();
 }
 
@@ -69,62 +69,62 @@ void SingleDifferentDirection::InitSpecialDirection(const std::vector<mpf_t*> & 
 	unsigned int D = vec.size();
 	if(special_direction_cached_.size() != vec.size() || special_direction_cached_precision_ != mpf_get_default_prec()) {
 		special_direction_cached_precision_ = mpf_get_default_prec();
-		mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(special_direction_cached_.size())) );
-		vectoroperations::ReleaseValues(special_direction_cached_);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(special_direction_cached_.size())) );
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(special_direction_cached_);
 		special_direction_cached_.clear();
-		RandomNumberGenerator* rng = NULL;
+		arbitraryprecisioncalculation::RandomNumberGenerator* rng = NULL;
 		switch (direction_mode_){
 			case SINGLE_DIFFERENT_DIRECTION_MODE_FIRST:
-				special_direction_cached_.push_back(mpftoperations::ToMpft(1.0));
+				special_direction_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
 				for(unsigned int d = 1; d < D; d++){
-					special_direction_cached_.push_back(mpftoperations::ToMpft(0.0));
+					special_direction_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
 				}
 				break;
 			case SINGLE_DIFFERENT_DIRECTION_MODE_DIAGONAL:
 				for(unsigned int d = 0; d < D; d++){
-					special_direction_cached_.push_back(mpftoperations::ToMpft(1.0));
+					special_direction_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
 				}
 				break;
 			case SINGLE_DIFFERENT_DIRECTION_MODE_RANDOM:
 				{
 					unsigned int parsed = 0;
-					rng = parse::ParseRandomNumberGenerator(rng_description_, parsed);
+					rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(rng_description_, parsed);
 				}
 				for(unsigned int d = 0; d < D; d++){
-					special_direction_cached_.push_back(mpftoperations::GetGaussianRandomMpft(0.0, 1.0, rng));
+					special_direction_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::GetGaussianRandomMpft(0.0, 1.0, rng));
 				}
 				break;
 			default:
 				AssertCondition(false, "Invalid / Unsupported option for function singleDifferentDirection.");
 		}
-		mpftoperations::ChangeNumberOfMpftValuesCached( special_direction_cached_.size() );
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( special_direction_cached_.size() );
 	}
 }
 
 mpf_t* SingleDifferentDirection::Eval(const std::vector<mpf_t*> & vec) {
 	InitSpecialDirection(vec);
 	if(special_direction_cached_.size() != vec.size()){
-		return mpftoperations::GetUndefined();
+		return arbitraryprecisioncalculation::mpftoperations::GetUndefined();
 	}
-	std::vector<mpf_t*> proj = vectoroperations::OrthogonalProjection(vec, special_direction_cached_);
-	std::vector<mpf_t*> orth = vectoroperations::Subtract(vec , proj);
-	mpf_t* len_proj = vectoroperations::SquaredEuclideanLength(proj);
-	mpf_t* len_orth = vectoroperations::SquaredEuclideanLength(orth);
-	vectoroperations::ReleaseValues(proj);
-	vectoroperations::ReleaseValues(orth);
+	std::vector<mpf_t*> proj = arbitraryprecisioncalculation::vectoroperations::OrthogonalProjection(vec, special_direction_cached_);
+	std::vector<mpf_t*> orth = arbitraryprecisioncalculation::vectoroperations::Subtract(vec , proj);
+	mpf_t* len_proj = arbitraryprecisioncalculation::vectoroperations::SquaredEuclideanLength(proj);
+	mpf_t* len_orth = arbitraryprecisioncalculation::vectoroperations::SquaredEuclideanLength(orth);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(proj);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(orth);
 	if(single_dimension_exponent_ != 1.0){
-		mpf_t* tmp = mpftoperations::Pow(len_proj, single_dimension_exponent_);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Pow(len_proj, single_dimension_exponent_);
 		std::swap(tmp, len_proj);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
 	if(remaining_dimension_exponent_ != 1.0){
-		mpf_t* tmp = mpftoperations::Pow(len_orth, remaining_dimension_exponent_);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Pow(len_orth, remaining_dimension_exponent_);
 		std::swap(tmp, len_orth);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
-	mpf_t* res = mpftoperations::Add(len_proj, len_orth);
-	mpftoperations::ReleaseValue(len_proj);
-	mpftoperations::ReleaseValue(len_orth);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(len_proj, len_orth);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(len_proj);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(len_orth);
 	return res;
 }
 

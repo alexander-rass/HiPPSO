@@ -1,5 +1,5 @@
 /**
-* @file   reflect.cpp
+* @file   bound_handling/reflect.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the reflect bound handling strategy.
@@ -50,35 +50,35 @@ namespace highprecisionpso {
 void BoundHandlingReflect::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> oldPos = p->GetPosition();
 	std::vector<mpf_t*> vel = p->GetVelocity();
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	std::vector<mpf_t*> low_position = configuration::g_function->GetLowerSearchSpaceBound();
 	std::vector<mpf_t*> high_position = configuration::g_function->GetUpperSearchSpaceBound();
 	std::vector<bool> modifiedDimensions(newPos.size(), false);
 	for(unsigned int d = 0; d < newPos.size(); d++){
-		while(mpftoperations::Compare(newPos[d], low_position[d]) < 0 || mpftoperations::Compare(newPos[d], high_position[d]) > 0){
+		while(arbitraryprecisioncalculation::mpftoperations::Compare(newPos[d], low_position[d]) < 0 || arbitraryprecisioncalculation::mpftoperations::Compare(newPos[d], high_position[d]) > 0){
 
 			modifiedDimensions[d] = true;
 
 			mpf_t* bound = (mpf_t*) NULL;
-			if(mpftoperations::Compare(newPos[d], low_position[d]) < 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(newPos[d], low_position[d]) < 0) {
 				bound = low_position[d];
 			} else {
 				bound = high_position[d];
 			}
 			// It is not allowed to free bound because it is not a cloned value.
-			mpf_t* dif = mpftoperations::Subtract(newPos[d], bound);
-			mpftoperations::ReleaseValue(newPos[d]);
-			newPos[d] = mpftoperations::Subtract(bound, dif);
-			mpftoperations::ReleaseValue(dif);
+			mpf_t* dif = arbitraryprecisioncalculation::mpftoperations::Subtract(newPos[d], bound);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newPos[d]);
+			newPos[d] = arbitraryprecisioncalculation::mpftoperations::Subtract(bound, dif);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(dif);
 		}
 	}
 	p->SetPosition(newPos);
 	configuration::g_velocity_adjustment->AdjustVelocity(p, modifiedDimensions, oldPos);
-	vectoroperations::ReleaseValues(low_position);
-	vectoroperations::ReleaseValues(high_position);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(low_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(high_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingReflect::GetName(){

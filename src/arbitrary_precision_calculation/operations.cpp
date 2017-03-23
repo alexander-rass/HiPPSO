@@ -1,5 +1,5 @@
 /**
-* @file   operations.cpp
+* @file   arbitrary_precision_calculation/operations.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains a large set of operations for calculations with the mpf_t data type.
@@ -47,17 +47,16 @@
 #include <string.h>
 #include <unordered_set>
 
-#include "general/check_condition.h"
-#include "general/configuration.h"
-#include "general/general_objects.h"
+#include "arbitrary_precision_calculation/check_condition.h"
+#include "arbitrary_precision_calculation/configuration.h"
 
-// If HIGH_PRECISION_PSO_GENERAL_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_
+// If ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_
 // is set to one then taylor approximation is used for trigonometric functions.
 // If it is set to zero then the CORDIC algorithm is used.
 // Here it is set to one, because even for large precision values the taylor approximation seems to be faster.
-#define HIGH_PRECISION_PSO_GENERAL_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ 1
+#define ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ 1
 
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 namespace vectoroperations {
 
 std::vector<mpf_t*> Add(const std::vector<mpf_t*> & a, const std::vector<mpf_t*> & b) {
@@ -1377,7 +1376,7 @@ mpf_t* Sin(mpf_t* num){
 
 	mpf_t* res = NULL;
 
-#if HIGH_PRECISION_PSO_GENERAL_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ // use taylor approximation
+#if ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ // use taylor approximation
 	if(doCosinus)res = cos_taylor(num);
 	else res = sin_taylor(num);
 #else // use CORDIC-algorithm
@@ -1737,16 +1736,6 @@ std::string MpftToString(mpf_t* v){
 	return res;
 }
 
-std::string ToLowerCase(std::string s) {
-	for (unsigned int i = 0; i < s.size(); i++) {
-		if (s[i] >= 'A' && s[i] <= 'Z') {
-			s[i] -= 'A';
-			s[i] += 'a';
-		}
-	}
-	return s;
-}
-
 int StringToInt(std::string s){
 	std::istringstream is(s);
 	int res;
@@ -1772,7 +1761,7 @@ void StoreMpft(mpf_t* a, std::ofstream * file){
 	}
 }
 
-mpf_t* LoadMpft(std::ifstream* file, ProgramVersion* version_of_stored_data){
+mpf_t* LoadMpft(std::ifstream* file){
 	std::string part;
 	(*file) >> part;
 	if ( part == "+inf" ) {
@@ -1797,4 +1786,4 @@ mpf_t* LoadMpft(std::ifstream* file, ProgramVersion* version_of_stored_data){
 }
 
 } // namespace mpftoperations
-} // namespace highprecisionpso
+} // namespace arbitraryprecisioncalculation

@@ -1,5 +1,5 @@
 /**
-* @file   inclined_plane.cpp 
+* @file   function/inclined_plane.cpp
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the inclined plane functions.
@@ -49,9 +49,9 @@ namespace highprecisionpso {
 InclinedPlane::InclinedPlane(){}
 
 mpf_t* InclinedPlane::Eval(const std::vector<mpf_t*> & vec) {
-	mpf_t* res = vectoroperations::Add(vec);
-	mpf_t* tmp = mpftoperations::Negate(res);
-	mpftoperations::ReleaseValue(res);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(vec);
+	mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Negate(res);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 	res = tmp;
 	return res;
 }
@@ -63,7 +63,7 @@ std::string InclinedPlane::GetName(){
 }
 
 mpf_t* InclinedPlane::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::GetPlusInfinity();
+	return arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 }
 
 // InclinedPlaneAsym InclinedPlaneAsym InclinedPlaneAsym InclinedPlaneAsym InclinedPlaneAsym
@@ -75,11 +75,11 @@ mpf_t* InclinedPlaneAsym::Eval(const std::vector<mpf_t*> & vec) {
 	for(unsigned int i = 0; i < D; i++){
 		scalePerDimension[i] = i + 1.0;
 	}
-	std::vector<mpf_t*> sumUpValues = vectoroperations::Multiply(vec, scalePerDimension);
-	mpf_t* res = vectoroperations::Add(sumUpValues);
-	vectoroperations::ReleaseValues(sumUpValues);
-	mpf_t* tmp = mpftoperations::Negate(res);
-	mpftoperations::ReleaseValue(res);
+	std::vector<mpf_t*> sumUpValues = arbitraryprecisioncalculation::vectoroperations::Multiply(vec, scalePerDimension);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(sumUpValues);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(sumUpValues);
+	mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Negate(res);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 	res = tmp;
 	return res;
 }
@@ -91,7 +91,7 @@ std::string InclinedPlaneAsym::GetName(){
 }
 
 mpf_t* InclinedPlaneAsym::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::GetPlusInfinity();
+	return arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 }
 
 } // namespace highprecisionpso

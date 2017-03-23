@@ -1,5 +1,5 @@
 /**
-* @file   random_number_generator.cpp
+* @file   arbitrary_precision_calculation/random_number_generator.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the available random number generators.
@@ -42,10 +42,10 @@
 #include <iostream>
 #include <sstream>
 
-#include "general/check_condition.h"
+#include "arbitrary_precision_calculation/check_condition.h"
 #include "arbitrary_precision_calculation/operations.h"
 
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 
 RandomNumberGenerator::~RandomNumberGenerator(){}
 
@@ -70,7 +70,7 @@ long long FastM2P63LinearCongruenceRandomNumberGenerator::RandomLongLong(){
 	return (long long) seed_;
 }
 
-void FastM2P63LinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+void FastM2P63LinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream){
 	(*inputstream) >> seed_;
 }
 void FastM2P63LinearCongruenceRandomNumberGenerator::StoreData(std::ofstream* outputstream){
@@ -127,7 +127,7 @@ long long IntenseM2P63LinearCongruenceRandomNumberGenerator::RandomLongLong(){
 	return (long long) seed_;
 }
 
-void IntenseM2P63LinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+void IntenseM2P63LinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream){
 	(*inputstream) >> seed_;
 }
 void IntenseM2P63LinearCongruenceRandomNumberGenerator::StoreData(std::ofstream* outputstream){
@@ -188,7 +188,7 @@ long long FastLinearCongruenceRandomNumberGenerator::RandomLongLong(){
 	return (long long) seed_;
 }
 
-void FastLinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+void FastLinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream){
 	(*inputstream) >> seed_;
 }
 void FastLinearCongruenceRandomNumberGenerator::StoreData(std::ofstream* outputstream){
@@ -259,7 +259,7 @@ long long IntenseLinearCongruenceRandomNumberGenerator::RandomLongLong(){
 	return (long long) seed_;
 }
 
-void IntenseLinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+void IntenseLinearCongruenceRandomNumberGenerator::LoadData(std::ifstream* inputstream){
 	(*inputstream) >> seed_;
 }
 void IntenseLinearCongruenceRandomNumberGenerator::StoreData(std::ofstream* outputstream){
@@ -279,4 +279,4 @@ std::string IntenseLinearCongruenceRandomNumberGenerator::GetName(){
 	return os.str();
 }
 
-} // namespace highprecisionpso
+} // namespace arbitraryprecisioncalculation

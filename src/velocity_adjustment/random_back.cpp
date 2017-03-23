@@ -1,5 +1,5 @@
 /**
-* @file   random_back.cpp
+* @file   velocity_adjustment/random_back.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the random back velocity adjustment strategy.
@@ -47,10 +47,10 @@ namespace highprecisionpso {
 void VelocityAdjustmentRandomBack::AdjustVelocity(Particle * p, std::vector<bool> adjustDimensions, std::vector<mpf_t*> oldPosition){
 	for(unsigned int i = 0; i < adjustDimensions.size(); i++) {
 		if(adjustDimensions[i]) {
-			mpf_t* tmp = mpftoperations::Negate(p->velocity[i]);
-			mpf_t* tmp2 = mpftoperations::Randomize(tmp);
-			mpftoperations::ReleaseValue(p->velocity[i]);
-			mpftoperations::ReleaseValue(tmp);
+			mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Negate(p->velocity[i]);
+			mpf_t* tmp2 = arbitraryprecisioncalculation::mpftoperations::Randomize(tmp);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p->velocity[i]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 			p->velocity[i] = tmp2;
 		}
 	}

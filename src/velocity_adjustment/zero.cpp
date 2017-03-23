@@ -1,5 +1,5 @@
 /**
-* @file   zero.cpp
+* @file   velocity_adjustment/zero.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the zero velocity adjustment strategy.
@@ -47,8 +47,8 @@ namespace highprecisionpso {
 void VelocityAdjustmentZero::AdjustVelocity(Particle * p, std::vector<bool> adjustDimensions, std::vector<mpf_t*> oldPosition){
 	for(unsigned int i = 0; i < adjustDimensions.size(); i++) {
 		if(adjustDimensions[i]) {
-			mpftoperations::ReleaseValue(p->velocity[i]);
-			p->velocity[i] = mpftoperations::ToMpft(0.0);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(p->velocity[i]);
+			p->velocity[i] = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 		}
 	}
 }

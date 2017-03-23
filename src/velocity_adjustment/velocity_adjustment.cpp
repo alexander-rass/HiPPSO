@@ -1,5 +1,5 @@
 /**
-* @file   velocity_adjustment.cpp
+* @file   velocity_adjustment/velocity_adjustment.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains an abstract class for processing the velocity adjustment after the position update of each particle.

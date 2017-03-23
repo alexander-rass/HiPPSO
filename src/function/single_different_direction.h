@@ -1,5 +1,5 @@
 /**
-* @file   single_different_direction.h 
+* @file   function/single_different_direction.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains the description of function which performs different in a single direction.

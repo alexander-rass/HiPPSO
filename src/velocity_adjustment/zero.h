@@ -1,5 +1,5 @@
 /**
-* @file   zero.h
+* @file   velocity_adjustment/zero.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the zero velocity adjustment strategy.

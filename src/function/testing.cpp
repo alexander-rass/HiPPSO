@@ -1,5 +1,5 @@
 /**
-* @file   testing.cpp
+* @file   function/testing.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the description of an experimental testing function.
@@ -48,42 +48,42 @@ mpf_t* TestingFunction::Eval(const std::vector<mpf_t*> & vec) {
 	unsigned int D = vec.size();
 	std::vector<mpf_t*> values(D, (mpf_t*)NULL);
 	for(unsigned int i = 0; i < D; i++){
-		values[i] = mpftoperations::Sin(vec[i]);
+		values[i] = arbitraryprecisioncalculation::mpftoperations::Sin(vec[i]);
 	}
 
 	// move by constant
 #if 1
 	{
-		mpf_t* half = mpftoperations::ToMpft(0.5);
-		mpf_t* move = mpftoperations::Sqrt(half);
-		mpftoperations::ReleaseValue(half);
+		mpf_t* half = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.5);
+		mpf_t* move = arbitraryprecisioncalculation::mpftoperations::Sqrt(half);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(half);
 		std::vector<mpf_t*> moveVector = std::vector<mpf_t*>(vec.size(), move);
-		std::vector<mpf_t*> tmpVector = vectoroperations::Subtract(values, moveVector);
-		vectoroperations::ReleaseValues(values);
+		std::vector<mpf_t*> tmpVector = arbitraryprecisioncalculation::vectoroperations::Subtract(values, moveVector);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(values);
 		values = tmpVector;
-		mpftoperations::ReleaseValue(move);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(move);
 	}
 #endif
 
 	// square result
 #if 1
 	{
-		std::vector<mpf_t*> squares = vectoroperations::Multiply(values, values);
-		vectoroperations::ReleaseValues(values);
+		std::vector<mpf_t*> squares = arbitraryprecisioncalculation::vectoroperations::Multiply(values, values);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(values);
 		values = squares;
 	}
 #endif
 
-	mpf_t* res = vectoroperations::Add(values);
-	vectoroperations::ReleaseValues(values);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(values);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(values);
 
 	// move by constant
 #if 0
 	{
-		mpf_t* move = mpftoperations::ToMpft((double)D);
-		mpf_t* nres = mpftoperations::add(move, res);
-		mpftoperations::ReleaseValue(move);
-		mpftoperations::ReleaseValue(res);
+		mpf_t* move = arbitraryprecisioncalculation::mpftoperations::ToMpft((double)D);
+		mpf_t* nres = arbitraryprecisioncalculation::mpftoperations::add(move, res);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(move);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 		res = nres;
 	}
 #endif

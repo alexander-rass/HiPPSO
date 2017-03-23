@@ -1,5 +1,5 @@
 /**
-* @file   function.h
+* @file   function/function.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains abstract classes for function generation.

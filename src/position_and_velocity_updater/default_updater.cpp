@@ -1,5 +1,5 @@
 /**
-* @file   default_updater.cpp
+* @file   position_and_velocity_updater/default_updater.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the standard class for processing the velocity and position update of each particle.
@@ -53,32 +53,32 @@ namespace highprecisionpso {
 void DefaultUpdater::Update(Particle* p) {
 	std::vector<mpf_t*> localDir = configuration::g_bound_handling->GetDirectionVector(
 			p->position, p->local_attractor_position);
-	std::vector<mpf_t*> helperVector = vectoroperations::Randomize(localDir);
-	vectoroperations::ReleaseValues(localDir);
+	std::vector<mpf_t*> helperVector = arbitraryprecisioncalculation::vectoroperations::Randomize(localDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
 	localDir = helperVector;
 	std::vector<mpf_t*> glAtPos = configuration::g_neighborhood->GetGlobalAttractorPosition(p);
 	std::vector<mpf_t*> globalDir = configuration::g_bound_handling->GetDirectionVector(p->position, glAtPos);
-	vectoroperations::ReleaseValues(glAtPos);
-	helperVector = vectoroperations::Randomize(globalDir);
-	vectoroperations::ReleaseValues(globalDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(glAtPos);
+	helperVector = arbitraryprecisioncalculation::vectoroperations::Randomize(globalDir);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
 	globalDir = helperVector;
-	std::vector<mpf_t*> localPart = vectoroperations::Multiply(localDir,
+	std::vector<mpf_t*> localPart = arbitraryprecisioncalculation::vectoroperations::Multiply(localDir,
 			configuration::g_coefficient_local_attractor);
-	vectoroperations::ReleaseValues(localDir);
-	std::vector<mpf_t*> globalPart = vectoroperations::Multiply(globalDir,
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localDir);
+	std::vector<mpf_t*> globalPart = arbitraryprecisioncalculation::vectoroperations::Multiply(globalDir,
 			configuration::g_coefficient_global_attractor);
-	vectoroperations::ReleaseValues(globalDir);
-	std::vector<mpf_t*> oldVelocityPart = vectoroperations::Multiply(p->velocity,
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalDir);
+	std::vector<mpf_t*> oldVelocityPart = arbitraryprecisioncalculation::vectoroperations::Multiply(p->velocity,
 			configuration::g_chi);
-	helperVector = vectoroperations::Add(localPart, globalPart);
-	vectoroperations::ReleaseValues(localPart);
-	vectoroperations::ReleaseValues(globalPart);
-	std::vector<mpf_t*> newVelocity = vectoroperations::Add(oldVelocityPart,
+	helperVector = arbitraryprecisioncalculation::vectoroperations::Add(localPart, globalPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(localPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globalPart);
+	std::vector<mpf_t*> newVelocity = arbitraryprecisioncalculation::vectoroperations::Add(oldVelocityPart,
 			helperVector);
-	vectoroperations::ReleaseValues(oldVelocityPart);
-	vectoroperations::ReleaseValues(helperVector);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldVelocityPart);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(helperVector);
 	p->SetVelocity(newVelocity);
-	vectoroperations::ReleaseValues(newVelocity);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newVelocity);
 	configuration::g_bound_handling->SetParticleUpdate(p);
 }
 

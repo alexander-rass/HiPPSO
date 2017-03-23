@@ -1,5 +1,5 @@
 /**
-* @file   operations.h 
+* @file   arbitrary_precision_calculation/operations.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains a large set of operations for calculations with the mpf_t data type.
@@ -37,17 +37,16 @@
 *
 */
 
-#ifndef HIGH_PRECISION_PSO_GENERAL_OPERATIONS_H_
-#define HIGH_PRECISION_PSO_GENERAL_OPERATIONS_H_
+#ifndef ARBITRARY_PRECISION_CALCULATION_OPERATIONS_H_
+#define ARBITRARY_PRECISION_CALCULATION_OPERATIONS_H_
 
 #include <gmp.h>
 #include <string>
 #include <vector>
 
-#include "general/general_objects.h"
-#include "random_number_generator.h"
+#include "arbitrary_precision_calculation/random_number_generator.h"
 
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 
 /**
 * @brief Contains a large set of operations for calculations with vectors of the mpf_t data type.
@@ -611,7 +610,7 @@ mpf_t* Ceil(mpf_t* value);
 */
 mpf_t* GetRandomMpft(RandomNumberGenerator* random);
 /**
-* @brief Calculates a random mpf_t value in the range [0,1] with the specified standard random number generator for this PSO execution.
+* @brief Calculates a random mpf_t value in the range [0,1] with the specified standard random number generator for this execution.
 *
 * @return The calculated random number.
 */
@@ -730,14 +729,6 @@ std::string MpftToString(mpf_t* value);
 */
 int StringToInt(std::string input);
 /**
-* @brief Converts a string to another string, where all upper case characters are converted to its lower case match.
-*
-* @param input The string.
-*
-* @return The converted string.
-*/
-std::string ToLowerCase(std::string input);
-/**
 * @brief Writes the content of a mpf_t value to the given stream such that it can completely recovered.
 *
 * @param value The mpf_t value.
@@ -748,13 +739,12 @@ void StoreMpft(mpf_t* value, std::ofstream* stream);
 * @brief Recovers a mpf_t value from an input stream.
 *
 * @param stream The stream.
-* @param version_of_stored_data The program version in which the data was stored.
 *
 * @return The recovered value.
 */
-mpf_t* LoadMpft(std::ifstream* stream, ProgramVersion* version_of_stored_data);
+mpf_t* LoadMpft(std::ifstream* stream);
 
 } // namespace mpftoperations
-} // namespace highprecisionpso
+} // namespace arbitraryprecisioncalculation
 
-#endif /* HIGH_PRECISION_PSO_GENERAL_OPERATIONS_H_ */
+#endif /* ARBITRARY_PRECISION_CALCULATION_OPERATIONS_H_ */

@@ -1,5 +1,5 @@
 /**
-* @file   position_and_velocity_updater.h
+* @file   position_and_velocity_updater/position_and_velocity_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains an abstract class for processing the velocity and position update of each particle.

@@ -1,5 +1,5 @@
 /**
-* @file   manual_function.h
+* @file   function/manual_function.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains abstract classes for function generation.

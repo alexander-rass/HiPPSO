@@ -1,5 +1,5 @@
 /**
-* @file   sorting_function.cpp
+* @file   function/sorting_function.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   August, 2015
 * @brief  This file contains the description of a function which checks how sorted the position entries are.
@@ -44,20 +44,20 @@
 namespace highprecisionpso {
 
 mpf_t* SortingFunction::Eval(const std::vector<mpf_t*> & vec) {
-	mpf_t* result = mpftoperations::ToMpft(0.0);
+	mpf_t* result = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	int res = 0;
 	for(unsigned int i = 0; i < vec.size(); i++){
 		for(unsigned int j = 0; j < i; j++){
-			if(mpftoperations::Compare((vec[i]), (vec[j])) <= 0){
+			if(arbitraryprecisioncalculation::mpftoperations::Compare((vec[i]), (vec[j])) <= 0){
 				++res;
 			}
 		}
 	}
-	mpf_t* tmp1 = mpftoperations::ToMpft((double)res);
-	mpf_t* tmp2 = mpftoperations::Add(tmp1, result);
+	mpf_t* tmp1 = arbitraryprecisioncalculation::mpftoperations::ToMpft((double)res);
+	mpf_t* tmp2 = arbitraryprecisioncalculation::mpftoperations::Add(tmp1, result);
 	std::swap(result, tmp2);
-	mpftoperations::ReleaseValue(tmp1);
-	mpftoperations::ReleaseValue(tmp2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp2);
 	return result;
 }
 
@@ -66,7 +66,7 @@ std::string SortingFunction::GetName(){
 }
 
 mpf_t* SortingFunction::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::ToMpft(0.0);
+	return arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 }
 
 } // namespace highprecisionpso

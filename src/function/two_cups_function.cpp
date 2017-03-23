@@ -1,5 +1,5 @@
 /**
-* @file   two_cups_function.cpp
+* @file   function/two_cups_function.cpp
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the two cups function.
@@ -45,26 +45,26 @@ namespace highprecisionpso {
 
 mpf_t* TwoCupsFunction::Eval(const std::vector<mpf_t*> & vec) {
 	int D = vec.size();
-	mpf_t* res = mpftoperations::ToMpft(0.0);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	mpf_t* vtmp = NULL;
-	mpf_t* n1 = mpftoperations::ToMpft(1.0);
+	mpf_t* n1 = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 	for(int d = 0; d < D; d++){
 		mpf_t* cres;
-		if (mpftoperations::Compare((vec[d]), 0.0) <= 0){
-			vtmp = mpftoperations::Add(vec[d], n1);
-			cres = mpftoperations::Pow(vtmp,2);
+		if (arbitraryprecisioncalculation::mpftoperations::Compare((vec[d]), 0.0) <= 0){
+			vtmp = arbitraryprecisioncalculation::mpftoperations::Add(vec[d], n1);
+			cres = arbitraryprecisioncalculation::mpftoperations::Pow(vtmp,2);
 		}	else {
-			vtmp = mpftoperations::Subtract(vec[d], n1);
-			cres = mpftoperations::Pow(vtmp,4);
+			vtmp = arbitraryprecisioncalculation::mpftoperations::Subtract(vec[d], n1);
+			cres = arbitraryprecisioncalculation::mpftoperations::Pow(vtmp,4);
 		}
-		mpftoperations::ReleaseValue(vtmp);
-		vtmp = mpftoperations::Add(cres, res);
-		mpftoperations::ReleaseValue(cres);
-		mpftoperations::ReleaseValue(res);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(vtmp);
+		vtmp = arbitraryprecisioncalculation::mpftoperations::Add(cres, res);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cres);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 		res = vtmp;
 		vtmp = NULL;
 	}
-	mpftoperations::ReleaseValue(n1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n1);
 	return res;
 }
 
@@ -75,15 +75,15 @@ std::string TwoCupsFunction::GetName(){
 mpf_t* TwoCupsFunction::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
 	mpf_t* res = NULL;
 	mpf_t* v1 = NULL;
-	mpf_t* n1 = mpftoperations::ToMpft(1.0);
-	if (mpftoperations::Compare((pos[d]), 0.0) <= 0){
-		v1 = mpftoperations::Add(pos[d], n1);
+	mpf_t* n1 = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
+	if (arbitraryprecisioncalculation::mpftoperations::Compare((pos[d]), 0.0) <= 0){
+		v1 = arbitraryprecisioncalculation::mpftoperations::Add(pos[d], n1);
 	}	else {
-		v1 = mpftoperations::Subtract(pos[d], n1);
+		v1 = arbitraryprecisioncalculation::mpftoperations::Subtract(pos[d], n1);
 	}
-	res = mpftoperations::Abs(v1);
-	mpftoperations::ReleaseValue(n1);
-	mpftoperations::ReleaseValue(v1);
+	res = arbitraryprecisioncalculation::mpftoperations::Abs(v1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n1);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v1);
 	return res;
 }
 

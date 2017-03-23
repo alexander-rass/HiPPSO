@@ -1,5 +1,5 @@
 /**
-* @file   specific_statistical_evaluations.h
+* @file   statistics/specific_statistical_evaluations.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contain classes, which can evaluate matrices depending on the current state of the particle swarm, and some helping classes to generate analyzable statistics out of them.

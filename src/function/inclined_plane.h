@@ -1,5 +1,5 @@
 /**
-* @file   inclined_plane.h 
+* @file   function/inclined_plane.h
 * @author Manuel Schmitt
 * @date   July, 2014
 * @brief  This file contains the description of the inclined plane functions.

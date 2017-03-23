@@ -1,5 +1,5 @@
 /**
-* @file   torus.h
+* @file   bound_handling/torus.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the torus bound handling strategy.

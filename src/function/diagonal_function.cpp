@@ -1,5 +1,5 @@
 /**
-* @file   diagonal_function.cpp 
+* @file   function/diagonal_function.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   January, 2014
 * @brief  This file contains the description of a function with heavy diagonal eigenvector in the second derivative matrix.
@@ -51,17 +51,17 @@ DiagonalFunction::DiagonalFunction(double scale):scale_(scale){
 }
 
 mpf_t* DiagonalFunction::Eval(const std::vector<mpf_t*> & vec) {
-	mpf_t* vecSum = vectoroperations::Add(vec);
-	mpf_t* vecSum2 = mpftoperations::Multiply(vecSum, vecSum);
-	mpftoperations::ReleaseValue(vecSum);
-	mpf_t* diagPart = mpftoperations::Multiply(vecSum2, scale_);
-	mpftoperations::ReleaseValue(vecSum2);
-	std::vector<mpf_t*> vec2 = vectoroperations::Multiply(vec, vec);
-	mpf_t* spherePart = vectoroperations::Add(vec2);
-	vectoroperations::ReleaseValues(vec2);
-	mpf_t* res = mpftoperations::Add(diagPart, spherePart);
-	mpftoperations::ReleaseValue(diagPart);
-	mpftoperations::ReleaseValue(spherePart);
+	mpf_t* vecSum = arbitraryprecisioncalculation::vectoroperations::Add(vec);
+	mpf_t* vecSum2 = arbitraryprecisioncalculation::mpftoperations::Multiply(vecSum, vecSum);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(vecSum);
+	mpf_t* diagPart = arbitraryprecisioncalculation::mpftoperations::Multiply(vecSum2, scale_);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(vecSum2);
+	std::vector<mpf_t*> vec2 = arbitraryprecisioncalculation::vectoroperations::Multiply(vec, vec);
+	mpf_t* spherePart = arbitraryprecisioncalculation::vectoroperations::Add(vec2);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vec2);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(diagPart, spherePart);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diagPart);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(spherePart);
 	return res;
 }
 
@@ -73,24 +73,24 @@ std::string DiagonalFunction::GetName(){
 
 mpf_t* DiagonalFunction::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
 	int D = pos.size();
-	mpf_t* B = mpftoperations::ToMpft(0.0);
+	mpf_t* B = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(int d2 = 0; d2 < D; d2++)if(d2 != d){
-		mpf_t* f = mpftoperations::ToMpft(scale_);
-		mpf_t* b = mpftoperations::Multiply(f,pos[d2]);
-		mpf_t* newB = mpftoperations::Add(b,B);
-		mpftoperations::ReleaseValue(f);
-		mpftoperations::ReleaseValue(b);
-		mpftoperations::ReleaseValue(B);
+		mpf_t* f = arbitraryprecisioncalculation::mpftoperations::ToMpft(scale_);
+		mpf_t* b = arbitraryprecisioncalculation::mpftoperations::Multiply(f,pos[d2]);
+		mpf_t* newB = arbitraryprecisioncalculation::mpftoperations::Add(b,B);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(f);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(b);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
 		B = newB;
 	}
-	mpf_t* A = mpftoperations::ToMpft(scale_ + 1.0);
-	mpf_t* best = mpftoperations::Divide(B,A);
-	mpftoperations::ReleaseValue(B);
-	mpftoperations::ReleaseValue(A);
-	mpf_t* res = mpftoperations::Add(best, pos[d]);
-	mpftoperations::ReleaseValue(best);
-	mpf_t* res_abs = mpftoperations::Abs(res);
-	mpftoperations::ReleaseValue(res);
+	mpf_t* A = arbitraryprecisioncalculation::mpftoperations::ToMpft(scale_ + 1.0);
+	mpf_t* best = arbitraryprecisioncalculation::mpftoperations::Divide(B,A);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(A);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(best, pos[d]);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(best);
+	mpf_t* res_abs = arbitraryprecisioncalculation::mpftoperations::Abs(res);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 	return res_abs;
 }
 

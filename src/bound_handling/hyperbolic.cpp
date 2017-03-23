@@ -1,5 +1,5 @@
 /**
-* @file   hyperbolic.cpp
+* @file   bound_handling/hyperbolic.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the hyperbolic bound handling strategy.
@@ -53,34 +53,34 @@ void BoundHandlingHyperbolic::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> high_position = configuration::g_function->GetUpperSearchSpaceBound();
 	for(unsigned int d = 0; d < vel.size(); d++){
 		mpf_t* dif = (mpf_t*) NULL;
-		if(mpftoperations::Compare(vel[d], 0.0) > 0) {
-			dif = mpftoperations::Subtract(high_position[d], oldPos[d]);
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(vel[d], 0.0) > 0) {
+			dif = arbitraryprecisioncalculation::mpftoperations::Subtract(high_position[d], oldPos[d]);
 		} else {
-			dif = mpftoperations::Subtract(low_position[d], oldPos[d]);
+			dif = arbitraryprecisioncalculation::mpftoperations::Subtract(low_position[d], oldPos[d]);
 		}
-		mpf_t* tmp1 = mpftoperations::Divide(vel[d], dif);
-		mpf_t* tmp2 = mpftoperations::Abs(tmp1);
-		mpf_t* n1 = mpftoperations::ToMpft(1.0);
-		mpf_t* denominator = mpftoperations::Add(tmp2, n1);
-		mpf_t* new_vel = mpftoperations::Divide(vel[d], denominator);
-		mpftoperations::ReleaseValue(vel[d]);
+		mpf_t* tmp1 = arbitraryprecisioncalculation::mpftoperations::Divide(vel[d], dif);
+		mpf_t* tmp2 = arbitraryprecisioncalculation::mpftoperations::Abs(tmp1);
+		mpf_t* n1 = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
+		mpf_t* denominator = arbitraryprecisioncalculation::mpftoperations::Add(tmp2, n1);
+		mpf_t* new_vel = arbitraryprecisioncalculation::mpftoperations::Divide(vel[d], denominator);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(vel[d]);
 		vel[d] = new_vel;
-		mpftoperations::ReleaseValue(n1);
-		mpftoperations::ReleaseValue(dif);
-		mpftoperations::ReleaseValue(tmp1);
-		mpftoperations::ReleaseValue(tmp2);
-		mpftoperations::ReleaseValue(denominator);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(n1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(dif);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp2);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(denominator);
 	}
 	p->SetVelocity(vel);
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	p->SetPosition(newPos);
 	// There is no velocity adjustment because this bound handling strategy already
 	// adjusts the velocity.
-	vectoroperations::ReleaseValues(low_position);
-	vectoroperations::ReleaseValues(high_position);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(low_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(high_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingHyperbolic::GetName(){

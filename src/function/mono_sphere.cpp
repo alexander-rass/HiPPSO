@@ -1,5 +1,5 @@
 /**
-* @file   mono_sphere.cpp 
+* @file   function/mono_sphere.cpp
 * @author Manuel Schmitt
 * @date   September, 2015
 * @brief  This file contains the description of the mono sphere function.
@@ -46,7 +46,7 @@ namespace highprecisionpso {
 MonoSphere::MonoSphere(){}
 
 mpf_t* MonoSphere::Eval(const std::vector<mpf_t*> & vec) {
-	mpf_t* res = mpftoperations::Multiply(vec[0], vec[0]);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Multiply(vec[0], vec[0]);
 	return res;
 }
 
@@ -56,9 +56,9 @@ std::string MonoSphere::GetName(){
 
 mpf_t* MonoSphere::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
 	if (d==0){
-		return mpftoperations::Abs(pos[d]);
+		return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 	} else {
-		return mpftoperations::ToMpft(0.0);
+		return arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	}
 }
 

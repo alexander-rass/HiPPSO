@@ -1,5 +1,5 @@
 /**
-* @file   norm.h 
+* @file   function/norm.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the description of various norm functions.

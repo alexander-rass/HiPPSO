@@ -1,5 +1,5 @@
 /**
-* @file   general_objects.cpp
+* @file   general/general_objects.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains various general objects which can be used by or contained in other objects.
@@ -108,7 +108,7 @@ SpecificIdReduceOperation::SpecificIdReduceOperation (int id):id_(id){}
 
 mpf_t* SpecificIdReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
 	AssertCondition(id_ >= 0 && id_ < (int) vec.size(), "Id of reduce operation specific is out of range.");
-	return mpftoperations::Clone(vec[id_]);
+	return arbitraryprecisioncalculation::mpftoperations::Clone(vec[id_]);
 }
 
 std::string SpecificIdReduceOperation::GetName(){
@@ -120,11 +120,11 @@ std::string SpecificIdReduceOperation::GetName(){
 IncreasingOrderNthObjectReduceOperation::IncreasingOrderNthObjectReduceOperation (int order_id): order_id_(order_id){}
 
 mpf_t* IncreasingOrderNthObjectReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	std::vector<mpf_t*> data = vectoroperations::Clone(vec);
-	vectoroperations::Sort(&data);
+	std::vector<mpf_t*> data = arbitraryprecisioncalculation::vectoroperations::Clone(vec);
+	arbitraryprecisioncalculation::vectoroperations::Sort(&data);
 	AssertCondition(order_id_ >= 0 && order_id_ < (int) data.size(), "Id of reduce operation increasingOrderNthObject is out of range.");
-	mpf_t* result = mpftoperations::Clone(data[order_id_]);
-	vectoroperations::ReleaseValues(data);
+	mpf_t* result = arbitraryprecisioncalculation::mpftoperations::Clone(data[order_id_]);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(data);
 	return result;
 }
 
@@ -137,11 +137,11 @@ std::string IncreasingOrderNthObjectReduceOperation::GetName(){
 ArithmeticAverageReduceOperation::ArithmeticAverageReduceOperation(){}
 
 mpf_t* ArithmeticAverageReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	mpf_t* sum = vectoroperations::Add(vec);
-	mpf_t* dividend = mpftoperations::ToMpft((unsigned int)vec.size());
-	mpf_t* result = mpftoperations::Divide(sum, dividend);
-	mpftoperations::ReleaseValue(sum);
-	mpftoperations::ReleaseValue(dividend);
+	mpf_t* sum = arbitraryprecisioncalculation::vectoroperations::Add(vec);
+	mpf_t* dividend = arbitraryprecisioncalculation::mpftoperations::ToMpft((unsigned int)vec.size());
+	mpf_t* result = arbitraryprecisioncalculation::mpftoperations::Divide(sum, dividend);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sum);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(dividend);
 	return result;
 }
 
@@ -154,20 +154,20 @@ std::string ArithmeticAverageReduceOperation::GetName(){
 GeometricAverageReduceOperation::GeometricAverageReduceOperation(){}
 
 mpf_t* GeometricAverageReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	mpf_t* product = mpftoperations::ToMpft(1.0);
+	mpf_t* product = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 	for( unsigned int i = 0; i < vec.size(); i++ ) {
-		mpf_t* tmp = mpftoperations::Multiply(product, vec[i]);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(product, vec[i]);
 		std::swap(tmp, product);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
-	mpf_t* one = mpftoperations::ToMpft(1.0);
-	mpf_t* exponent_denominator = mpftoperations::ToMpft((unsigned int)vec.size());
-	mpf_t* exponent = mpftoperations::Divide(one, exponent_denominator);
-	mpf_t* result= mpftoperations::Pow(product, exponent);
-	mpftoperations::ReleaseValue(one);
-	mpftoperations::ReleaseValue(exponent_denominator);
-	mpftoperations::ReleaseValue(exponent);
-	mpftoperations::ReleaseValue(product);
+	mpf_t* one = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
+	mpf_t* exponent_denominator = arbitraryprecisioncalculation::mpftoperations::ToMpft((unsigned int)vec.size());
+	mpf_t* exponent = arbitraryprecisioncalculation::mpftoperations::Divide(one, exponent_denominator);
+	mpf_t* result= arbitraryprecisioncalculation::mpftoperations::Pow(product, exponent);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(one);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(exponent_denominator);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(exponent);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(product);
 	return result;
 }
 
@@ -180,7 +180,7 @@ std::string GeometricAverageReduceOperation::GetName() {
 SumReduceOperation::SumReduceOperation(){}
 
 mpf_t* SumReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	return vectoroperations::Add(vec);
+	return arbitraryprecisioncalculation::vectoroperations::Add(vec);
 }
 
 std::string SumReduceOperation::GetName(){
@@ -192,11 +192,11 @@ std::string SumReduceOperation::GetName(){
 ProductReduceOperation::ProductReduceOperation(){}
 
 mpf_t* ProductReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	mpf_t* product = mpftoperations::ToMpft(1.0);
+	mpf_t* product = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 	for( unsigned int i = 0; i < vec.size(); i++ ) {
-		mpf_t* tmp = mpftoperations::Multiply(product, vec[i]);
+		mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(product, vec[i]);
 		std::swap(tmp, product);
-		mpftoperations::ReleaseValue(tmp);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	}
 	return product;
 }
@@ -210,10 +210,10 @@ std::string ProductReduceOperation::GetName(){
 MaximalValueReduceOperation::MaximalValueReduceOperation(){}
 
 mpf_t* MaximalValueReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	mpf_t* res = mpftoperations::GetMinusInfinity();
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::GetMinusInfinity();
 	for( unsigned int i = 0; i < vec.size(); i++ ){
-		mpf_t* next_res = mpftoperations::Max(res, vec[i]);
-		mpftoperations::ReleaseValue(res);
+		mpf_t* next_res = arbitraryprecisioncalculation::mpftoperations::Max(res, vec[i]);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 		res = next_res;
 	}
 	return res;
@@ -228,10 +228,10 @@ std::string MaximalValueReduceOperation::GetName(){
 MinimalValueReduceOperation::MinimalValueReduceOperation(){}
 
 mpf_t* MinimalValueReduceOperation::Evaluate(const std::vector<mpf_t*> & vec){
-	mpf_t* res = mpftoperations::GetPlusInfinity();
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 	for( unsigned int i = 0; i < vec.size(); i++ ){
-		mpf_t* next_res = mpftoperations::Min(res, vec[i]);
-		mpftoperations::ReleaseValue(res);
+		mpf_t* next_res = arbitraryprecisioncalculation::mpftoperations::Min(res, vec[i]);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 		res = next_res;
 	}
 	return res;
@@ -273,42 +273,42 @@ std::string ObjectiveFunctionEvaluationReduceOperation::GetName(){
 
 
 mpf_t* AddOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Add(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Add(a,b);
 }
 std::string AddOperation::GetName(){
 	return "Add";
 }
 
 mpf_t* SubtractOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Subtract(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Subtract(a,b);
 }
 std::string SubtractOperation::GetName(){
 	return "Sub";
 }
 
 mpf_t* MultiplyOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Multiply(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Multiply(a,b);
 }
 std::string MultiplyOperation::GetName(){
 	return "Mul";
 }
 
 mpf_t* DivideOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Divide(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Divide(a,b);
 }
 std::string DivideOperation::GetName(){
 	return "Div";
 }
 
 mpf_t* MinOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Min(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Min(a,b);
 }
 std::string MinOperation::GetName(){
 	return "Min";
 }
 
 mpf_t* MaxOperation::Evaluate(mpf_t* a, mpf_t* b){
-	return mpftoperations::Max(a,b);
+	return arbitraryprecisioncalculation::mpftoperations::Max(a,b);
 }
 std::string MaxOperation::GetName(){
 	return "Max";
@@ -318,7 +318,7 @@ std::string MaxOperation::GetName(){
 DoubleConstantEvaluation::DoubleConstantEvaluation(double v):value_(v){}
 
 mpf_t* DoubleConstantEvaluation::Evaluate(){
-	return mpftoperations::ToMpft(value_);
+	return arbitraryprecisioncalculation::mpftoperations::ToMpft(value_);
 }
 
 std::string DoubleConstantEvaluation::GetName(){
@@ -328,7 +328,7 @@ std::string DoubleConstantEvaluation::GetName(){
 }
 
 mpf_t* EConstantEvaluation::Evaluate(){
-	return mpftoperations::GetE();
+	return arbitraryprecisioncalculation::mpftoperations::GetE();
 }
 
 std::string EConstantEvaluation::GetName(){
@@ -336,7 +336,7 @@ std::string EConstantEvaluation::GetName(){
 }
 
 mpf_t* PiConstantEvaluation::Evaluate(){
-	return mpftoperations::GetPi();
+	return arbitraryprecisioncalculation::mpftoperations::GetPi();
 }
 
 std::string PiConstantEvaluation::GetName(){
@@ -344,7 +344,7 @@ std::string PiConstantEvaluation::GetName(){
 }
 
 mpf_t* PlusInfinityConstantEvaluation::Evaluate(){
-	return mpftoperations::GetPlusInfinity();
+	return arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 }
 
 std::string PlusInfinityConstantEvaluation::GetName(){
@@ -352,7 +352,7 @@ std::string PlusInfinityConstantEvaluation::GetName(){
 }
 
 mpf_t* MinusInfinityConstantEvaluation::Evaluate(){
-	return mpftoperations::GetMinusInfinity();
+	return arbitraryprecisioncalculation::mpftoperations::GetMinusInfinity();
 }
 
 std::string MinusInfinityConstantEvaluation::GetName(){
@@ -360,7 +360,7 @@ std::string MinusInfinityConstantEvaluation::GetName(){
 }
 
 mpf_t* SqrtOperation::Operate( mpf_t* v ){
-	return mpftoperations::Sqrt( v );
+	return arbitraryprecisioncalculation::mpftoperations::Sqrt( v );
 }
 
 std::string SqrtOperation::GetName(){
@@ -370,7 +370,7 @@ std::string SqrtOperation::GetName(){
 PowOperation::PowOperation(double exponent): exponent_(exponent){}
 
 mpf_t* PowOperation::Operate( mpf_t* v ){
-	return mpftoperations::Pow( v, exponent_ );
+	return arbitraryprecisioncalculation::mpftoperations::Pow( v, exponent_ );
 }
 
 std::string PowOperation::GetName(){
@@ -380,13 +380,13 @@ std::string PowOperation::GetName(){
 }
 
 mpf_t* Log2Operation::Operate( mpf_t* v ){
-	mpf_t* two = mpftoperations::ToMpft(2.0);
-	mpf_t* ln2 = mpftoperations::LogE(two);
-	mpf_t* lnv = mpftoperations::LogE(v);
-	mpf_t* res = mpftoperations::Divide(lnv, ln2);
-	mpftoperations::ReleaseValue(two);
-	mpftoperations::ReleaseValue(ln2);
-	mpftoperations::ReleaseValue(lnv);
+	mpf_t* two = arbitraryprecisioncalculation::mpftoperations::ToMpft(2.0);
+	mpf_t* ln2 = arbitraryprecisioncalculation::mpftoperations::LogE(two);
+	mpf_t* lnv = arbitraryprecisioncalculation::mpftoperations::LogE(v);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Divide(lnv, ln2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(two);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(ln2);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(lnv);
 	return res;
 }
 
@@ -395,7 +395,7 @@ std::string Log2Operation::GetName(){
 }
 
 mpf_t* Log2DoubleOperation::Operate( mpf_t* v ){
-	return mpftoperations::ToMpft(mpftoperations::Log2Double(v));
+	return arbitraryprecisioncalculation::mpftoperations::ToMpft(arbitraryprecisioncalculation::mpftoperations::Log2Double(v));
 }
 
 std::string Log2DoubleOperation::GetName(){
@@ -403,7 +403,7 @@ std::string Log2DoubleOperation::GetName(){
 }
 
 mpf_t* AbsOperation::Operate( mpf_t* v ){
-	return mpftoperations::Abs(v);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(v);
 }
 
 std::string AbsOperation::GetName(){
@@ -411,7 +411,7 @@ std::string AbsOperation::GetName(){
 }
 
 mpf_t* ExpOperation::Operate( mpf_t* v ){
-	return mpftoperations::Exp(v);
+	return arbitraryprecisioncalculation::mpftoperations::Exp(v);
 }
 
 std::string ExpOperation::GetName(){
@@ -419,7 +419,7 @@ std::string ExpOperation::GetName(){
 }
 
 mpf_t* SinOperation::Operate( mpf_t* v ){
-	return mpftoperations::Sin(v);
+	return arbitraryprecisioncalculation::mpftoperations::Sin(v);
 }
 
 std::string SinOperation::GetName(){
@@ -427,7 +427,7 @@ std::string SinOperation::GetName(){
 }
 
 mpf_t* CosOperation::Operate( mpf_t* v ){
-	return mpftoperations::Cos(v);
+	return arbitraryprecisioncalculation::mpftoperations::Cos(v);
 }
 
 std::string CosOperation::GetName(){
@@ -435,7 +435,7 @@ std::string CosOperation::GetName(){
 }
 
 mpf_t* TanOperation::Operate( mpf_t* v ){
-	return mpftoperations::Tan(v);
+	return arbitraryprecisioncalculation::mpftoperations::Tan(v);
 }
 
 std::string TanOperation::GetName(){
@@ -443,7 +443,7 @@ std::string TanOperation::GetName(){
 }
 
 mpf_t* ArcsinOperation::Operate( mpf_t* v ){
-	return mpftoperations::Arcsin(v);
+	return arbitraryprecisioncalculation::mpftoperations::Arcsin(v);
 }
 
 std::string ArcsinOperation::GetName(){
@@ -451,7 +451,7 @@ std::string ArcsinOperation::GetName(){
 }
 
 mpf_t* ArccosOperation::Operate( mpf_t* v ){
-	return mpftoperations::Arccos(v);
+	return arbitraryprecisioncalculation::mpftoperations::Arccos(v);
 }
 
 std::string ArccosOperation::GetName(){
@@ -459,7 +459,7 @@ std::string ArccosOperation::GetName(){
 }
 
 mpf_t* ArctanOperation::Operate( mpf_t* v ){
-	return mpftoperations::Arctan(v);
+	return arbitraryprecisioncalculation::mpftoperations::Arctan(v);
 }
 
 std::string ArctanOperation::GetName(){
@@ -467,7 +467,7 @@ std::string ArctanOperation::GetName(){
 }
 
 mpf_t* LogEOperation::Operate( mpf_t* v ){
-	return mpftoperations::LogE(v);
+	return arbitraryprecisioncalculation::mpftoperations::LogE(v);
 }
 
 std::string LogEOperation::GetName(){

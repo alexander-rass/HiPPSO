@@ -1,5 +1,5 @@
 /**
-* @file   random.h
+* @file   bound_handling/random.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contains the random bound handling strategy.

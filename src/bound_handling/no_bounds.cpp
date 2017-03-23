@@ -1,5 +1,5 @@
 /**
-* @file   no_bounds.cpp
+* @file   bound_handling/no_bounds.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the no bounds bound handling strategy.
@@ -47,11 +47,11 @@ namespace highprecisionpso {
 void BoundHandlingNoBounds::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> oldPos = p->GetPosition();
 	std::vector<mpf_t*> vel = p->GetVelocity();
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	p->SetPosition(newPos);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingNoBounds::GetName(){

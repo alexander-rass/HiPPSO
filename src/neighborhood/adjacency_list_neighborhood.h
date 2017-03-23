@@ -1,5 +1,5 @@
 /**
-* @file   adjacency_list_neighborhood.h
+* @file   neighborhood/adjacency_list_neighborhood.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains neighborhood topologies specified by adjacency lists.

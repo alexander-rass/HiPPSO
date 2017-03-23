@@ -1,5 +1,5 @@
 /**
-* @file   scaled_sphere.cpp
+* @file   function/scaled_sphere.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   January, 2014
 * @brief  This file contains the description of the scaled sphere functions.
@@ -45,7 +45,7 @@
 
 #include "general/check_condition.h"
 #include "arbitrary_precision_calculation/operations.h"
-#include "general/parse.h"
+#include "arbitrary_precision_calculation/parse.h"
 
 namespace highprecisionpso {
 
@@ -56,8 +56,8 @@ ScaledSphere::ScaledSphere(double maxScale) : max_scale_ (maxScale) {
 }
 
 ScaledSphere::~ScaledSphere(){
-	mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
-	vectoroperations::ReleaseValues(scales_cached_);
+	arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scales_cached_);
 	scales_cached_.clear();
 }
 
@@ -65,30 +65,30 @@ mpf_t* ScaledSphere::Eval(const std::vector<mpf_t*> & vec) {
 	unsigned int D = vec.size();
 	if(scales_cached_.size() != D || scales_cached_precision_ != mpf_get_default_prec()) {
 		scales_cached_precision_ = mpf_get_default_prec();
-		mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
-		vectoroperations::ReleaseValues(scales_cached_);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scales_cached_);
 		scales_cached_.clear();
-		scales_cached_.push_back(mpftoperations::ToMpft(1.0));
-		mpf_t* divisor = mpftoperations::ToMpft(std::max(1, ((int) D) - 1));
-		mpf_t* one = mpftoperations::ToMpft(1);
-		mpf_t* exponent = mpftoperations::Divide(one, divisor);
-		mpf_t* base = mpftoperations::ToMpft(max_scale_);
-		mpf_t* multiplier = mpftoperations::Pow(base, exponent);
+		scales_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0));
+		mpf_t* divisor = arbitraryprecisioncalculation::mpftoperations::ToMpft(std::max(1, ((int) D) - 1));
+		mpf_t* one = arbitraryprecisioncalculation::mpftoperations::ToMpft(1);
+		mpf_t* exponent = arbitraryprecisioncalculation::mpftoperations::Divide(one, divisor);
+		mpf_t* base = arbitraryprecisioncalculation::mpftoperations::ToMpft(max_scale_);
+		mpf_t* multiplier = arbitraryprecisioncalculation::mpftoperations::Pow(base, exponent);
 		while(scales_cached_.size() < D){
-			scales_cached_.push_back(mpftoperations::Multiply(scales_cached_[scales_cached_.size() - 1], multiplier));
+			scales_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::Multiply(scales_cached_[scales_cached_.size() - 1], multiplier));
 		}
-		mpftoperations::ReleaseValue(divisor);
-		mpftoperations::ReleaseValue(one);
-		mpftoperations::ReleaseValue(exponent);
-		mpftoperations::ReleaseValue(base);
-		mpftoperations::ReleaseValue(multiplier);
-		mpftoperations::ChangeNumberOfMpftValuesCached( scales_cached_.size() );
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(divisor);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(one);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(exponent);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(base);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(multiplier);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( scales_cached_.size() );
 	}
-	std::vector<mpf_t*> vec2 = vectoroperations::Multiply(vec, vec);
-	std::vector<mpf_t*> sumUpValues = vectoroperations::Multiply(vec2, scales_cached_);
-	mpf_t* res = vectoroperations::Add(sumUpValues);
-	vectoroperations::ReleaseValues(vec2);
-	vectoroperations::ReleaseValues(sumUpValues);
+	std::vector<mpf_t*> vec2 = arbitraryprecisioncalculation::vectoroperations::Multiply(vec, vec);
+	std::vector<mpf_t*> sumUpValues = arbitraryprecisioncalculation::vectoroperations::Multiply(vec2, scales_cached_);
+	mpf_t* res = arbitraryprecisioncalculation::vectoroperations::Add(sumUpValues);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vec2);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(sumUpValues);
 	return res;
 }
 
@@ -99,7 +99,7 @@ std::string ScaledSphere::GetName(){
 }
 
 mpf_t* ScaledSphere::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 // ScaledSphereFixed ScaledSphereFixed ScaledSphereFixed ScaledSphereFixed ScaledSphereFixed ScaledSphereFixed
 ScaledSphereFixed::ScaledSphereFixed():ScaledSphere(1000000.0){}
@@ -112,8 +112,8 @@ ScaledHadamardRotatedSphere::ScaledHadamardRotatedSphere(double max_scale) : max
 
 ScaledHadamardRotatedSphere::~ScaledHadamardRotatedSphere(){
 	for(unsigned int i = 0; i < matrix_cached_.size(); i++){
-		mpftoperations::ChangeNumberOfMpftValuesCached( - ((int)(matrix_cached_[i].size())) );
-		vectoroperations::ReleaseValues(matrix_cached_[i]);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( - ((int)(matrix_cached_[i].size())) );
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(matrix_cached_[i]);
 		matrix_cached_[i].clear();
 	}
 }
@@ -123,19 +123,19 @@ void ScaledHadamardRotatedSphere::InitMatrixCached(const std::vector<mpf_t*> & v
 	if(matrix_cached_.size() != D || matrix_cached_precision_ != mpf_get_default_prec()){
 		matrix_cached_precision_ = mpf_get_default_prec();
 		for(unsigned int i = 0; i < matrix_cached_.size(); i++){
-			mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(matrix_cached_[i].size())) );
-			vectoroperations::ReleaseValues(matrix_cached_[i]);
+			arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(matrix_cached_[i].size())) );
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(matrix_cached_[i]);
 			matrix_cached_[i].clear();
 		}
-		mpf_t* divisor = mpftoperations::ToMpft(2 * std::max(1, ((int) D) - 1));
-		mpf_t* one = mpftoperations::ToMpft(1);
-		mpf_t* exponent = mpftoperations::Divide(one, divisor);
-		mpf_t* base = mpftoperations::ToMpft(max_scale_);
-		mpf_t* multiplier = mpftoperations::Pow(base, exponent);
-		mpftoperations::ReleaseValue(divisor);
-		mpftoperations::ReleaseValue(one);
-		mpftoperations::ReleaseValue(exponent);
-		mpftoperations::ReleaseValue(base);
+		mpf_t* divisor = arbitraryprecisioncalculation::mpftoperations::ToMpft(2 * std::max(1, ((int) D) - 1));
+		mpf_t* one = arbitraryprecisioncalculation::mpftoperations::ToMpft(1);
+		mpf_t* exponent = arbitraryprecisioncalculation::mpftoperations::Divide(one, divisor);
+		mpf_t* base = arbitraryprecisioncalculation::mpftoperations::ToMpft(max_scale_);
+		mpf_t* multiplier = arbitraryprecisioncalculation::mpftoperations::Pow(base, exponent);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(divisor);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(one);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(exponent);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(base);
 		std::vector<std::vector<mpf_t*> > tmp(D, std::vector<mpf_t*>(D, (mpf_t*) NULL));
 		for(unsigned int i = 0; i < D; i++){
 			for(unsigned int j = 0; j < D; j++){
@@ -145,31 +145,31 @@ void ScaledHadamardRotatedSphere::InitMatrixCached(const std::vector<mpf_t*> & v
 					neg = -neg;
 					tmp_and -= tmp_and&-tmp_and;
 				}
-				tmp[j][i] = mpftoperations::Pow(multiplier, (int)i);
+				tmp[j][i] = arbitraryprecisioncalculation::mpftoperations::Pow(multiplier, (int)i);
 				if(neg < 0){
-					mpf_t* temp = mpftoperations::Negate(tmp[j][i]);
+					mpf_t* temp = arbitraryprecisioncalculation::mpftoperations::Negate(tmp[j][i]);
 					std::swap(temp, tmp[j][i]);
-					mpftoperations::ReleaseValue(temp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(temp);
 				}
 			}
 		}
-		mpftoperations::ReleaseValue(multiplier);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(multiplier);
 		matrix_cached_ = std::vector<std::vector<mpf_t*> >(D, std::vector<mpf_t*>(D, (mpf_t*) NULL));
 		for(unsigned int i = 0; i < D; i++){
 			for(unsigned int j = 0; j < D; j++){
-				matrix_cached_[i][j] = mpftoperations::ToMpft(0.0);
+				matrix_cached_[i][j] = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 				for(unsigned int k = 0; k < D; k++){
-					mpf_t* next1 = mpftoperations::Multiply(tmp[i][k], tmp[j][k]);
-					mpf_t* next2 = mpftoperations::Add(matrix_cached_[i][j], next1);
-					mpftoperations::ReleaseValue(matrix_cached_[i][j]);
-					mpftoperations::ReleaseValue(next1);
+					mpf_t* next1 = arbitraryprecisioncalculation::mpftoperations::Multiply(tmp[i][k], tmp[j][k]);
+					mpf_t* next2 = arbitraryprecisioncalculation::mpftoperations::Add(matrix_cached_[i][j], next1);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(matrix_cached_[i][j]);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next1);
 					matrix_cached_[i][j] = next2;
 				}
 			}
 		}
-		mpftoperations::ChangeNumberOfMpftValuesCached ( D * D );
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached ( D * D );
 		for(unsigned int i = 0; i < D; i++){
-			vectoroperations::ReleaseValues(tmp[i]);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(tmp[i]);
 		}
 	}
 }
@@ -177,16 +177,16 @@ void ScaledHadamardRotatedSphere::InitMatrixCached(const std::vector<mpf_t*> & v
 mpf_t* ScaledHadamardRotatedSphere::Eval(const std::vector<mpf_t*> & vec) {
 	InitMatrixCached(vec);
 	unsigned int D = vec.size();
-	mpf_t* res = mpftoperations::ToMpft(0.0);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(unsigned int i = 0; i < D; i++){
 		for(unsigned int j = 0;j < D; j++){
-			mpf_t* cur = mpftoperations::Multiply(matrix_cached_[i][j], vec[i]);
-			mpf_t* next = mpftoperations::Multiply(cur, vec[j]);
-			mpftoperations::ReleaseValue(cur);
+			mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::Multiply(matrix_cached_[i][j], vec[i]);
+			mpf_t* next = arbitraryprecisioncalculation::mpftoperations::Multiply(cur, vec[j]);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
 			cur = next;
-			next = mpftoperations::Add(cur, res);
-			mpftoperations::ReleaseValue(cur);
-			mpftoperations::ReleaseValue(res);
+			next = arbitraryprecisioncalculation::mpftoperations::Add(cur, res);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 			res = next;
 		}
 	}
@@ -203,21 +203,21 @@ mpf_t* ScaledHadamardRotatedSphere::DistanceTo1DLocalOptimum(const std::vector<m
 	InitMatrixCached(pos);
 	int D = pos.size();
 	AssertCondition(D == (int)matrix_cached_.size() && matrix_cached_precision_ == mpf_get_default_prec(), "scaledandhadamardrotatedshpere: Initialization failed.");
-	mpf_t* B = mpftoperations::ToMpft(0.0);
+	mpf_t* B = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(int d2 = 0; d2 < D; d2++)if(d2 != d){
 		mpf_t* f = matrix_cached_[d][d2];
-		mpf_t* b = mpftoperations::Multiply(f,pos[d2]);
-		mpf_t* newB = mpftoperations::Add(b,B);
-		mpftoperations::ReleaseValue(b);
-		mpftoperations::ReleaseValue(B);
+		mpf_t* b = arbitraryprecisioncalculation::mpftoperations::Multiply(f,pos[d2]);
+		mpf_t* newB = arbitraryprecisioncalculation::mpftoperations::Add(b,B);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(b);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
 		B = newB;
 	}
-	mpf_t* best = mpftoperations::Divide(B,matrix_cached_[d][d]);
-	mpftoperations::ReleaseValue(B);
-	mpf_t* res = mpftoperations::Add(best, pos[d]);
-	mpftoperations::ReleaseValue(best);
-	mpf_t* res_abs = mpftoperations::Abs(res);
-	mpftoperations::ReleaseValue(res);
+	mpf_t* best = arbitraryprecisioncalculation::mpftoperations::Divide(B,matrix_cached_[d][d]);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(B);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Add(best, pos[d]);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(best);
+	mpf_t* res_abs = arbitraryprecisioncalculation::mpftoperations::Abs(res);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 	return res_abs;
 }
 
@@ -232,8 +232,8 @@ ScaledSphereRand::ScaledSphereRand(std::vector<std::string> rng_description):rng
 }
 
 ScaledSphereRand::~ScaledSphereRand(){
-	mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
-	vectoroperations::ReleaseValues(scales_cached_);
+	arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scales_cached_);
 	scales_cached_.clear();
 }
 
@@ -241,28 +241,28 @@ mpf_t* ScaledSphereRand::Eval(const std::vector<mpf_t*> & vec) {
 	unsigned int D = vec.size();
 	if(scales_cached_.size() != D || scales_cached_precision_ != mpf_get_default_prec()){
 		scales_cached_precision_ = mpf_get_default_prec();
-		mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
-		vectoroperations::ReleaseValues(scales_cached_);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( -((int)(scales_cached_.size())) );
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(scales_cached_);
 		scales_cached_.clear();
-		RandomNumberGenerator* rng = NULL;
+		arbitraryprecisioncalculation::RandomNumberGenerator* rng = NULL;
 		{
 			unsigned int parsed = 0;
-			rng = parse::ParseRandomNumberGenerator(rng_description_, parsed);
+			rng = arbitraryprecisioncalculation::parse::ParseRandomNumberGenerator(rng_description_, parsed);
 		}
 		while(scales_cached_.size() < D){
-			scales_cached_.push_back(mpftoperations::ToMpft(std::max(1LL, rng->RandomLongLong())));
+			scales_cached_.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(std::max(1LL, rng->RandomLongLong())));
 		}
-		mpftoperations::ChangeNumberOfMpftValuesCached( scales_cached_.size() );
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached( scales_cached_.size() );
 	}
-	mpf_t* res = mpftoperations::ToMpft(0.0);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0);
 	for(unsigned int i = 0; i < D; i++){
-		mpf_t* cur = mpftoperations::Multiply(scales_cached_[i], vec[i]);
-		mpf_t* next = mpftoperations::Multiply(cur, vec[i]);
-		mpftoperations::ReleaseValue(cur);
+		mpf_t* cur = arbitraryprecisioncalculation::mpftoperations::Multiply(scales_cached_[i], vec[i]);
+		mpf_t* next = arbitraryprecisioncalculation::mpftoperations::Multiply(cur, vec[i]);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
 		cur = next;
-		next = mpftoperations::Add(cur, res);
-		mpftoperations::ReleaseValue(cur);
-		mpftoperations::ReleaseValue(res);
+		next = arbitraryprecisioncalculation::mpftoperations::Add(cur, res);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(cur);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res);
 		res = next;
 	}
 	return res;
@@ -275,7 +275,7 @@ std::string ScaledSphereRand::GetName(){
 }
 
 mpf_t* ScaledSphereRand::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	return mpftoperations::Abs(pos[d]);
+	return arbitraryprecisioncalculation::mpftoperations::Abs(pos[d]);
 }
 
 } // namespace highprecisionpso

@@ -1,5 +1,5 @@
 /**
-* @file   function.cpp
+* @file   function/function.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains abstract classes for function generation.
@@ -73,16 +73,16 @@ mpf_t* Function::Evaluate(const std::vector<mpf_t*> & pos){
 		std::vector<mpf_t*> lower = GetLowerSearchSpaceBound();
 		std::vector<mpf_t*> upper = GetUpperSearchSpaceBound();
 		for(int i = 0; i < configuration::g_dimensions; i++){
-			if(mpftoperations::Compare((lower[i]), (pos[i])) > 0 ||
-				mpftoperations::Compare((pos[i]), (upper[i])) > 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare((lower[i]), (pos[i])) > 0 ||
+				arbitraryprecisioncalculation::mpftoperations::Compare((pos[i]), (upper[i])) > 0) {
 				infinity = true;
 				break;
 			}
 		}
-		vectoroperations::ReleaseValues(lower);
-		vectoroperations::ReleaseValues(upper);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lower);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(upper);
 		if(infinity){
-			return mpftoperations::GetPlusInfinity();
+			return arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity();
 		}
 	} else if(configuration::g_function_behavior_outside_of_bounds_mode == configuration::FUNCTION_BEHAVIOR_OUTSIDE_OF_BOUNDS_PERIODIC){
 		AssertCondition(((int)pos.size()) == configuration::g_dimensions, "Dimension mismatch: function is called with a position which has different number of dimensions as specified.");
@@ -90,41 +90,41 @@ mpf_t* Function::Evaluate(const std::vector<mpf_t*> & pos){
 		std::vector<mpf_t*> lower = GetLowerSearchSpaceBound();
 		std::vector<mpf_t*> upper = GetUpperSearchSpaceBound();
 		for(int i = 0; i < configuration::g_dimensions; i++){
-			if(mpftoperations::Compare((lower[i]), (pos[i])) > 0 ||
-				mpftoperations::Compare((pos[i]), (upper[i])) > 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare((lower[i]), (pos[i])) > 0 ||
+				arbitraryprecisioncalculation::mpftoperations::Compare((pos[i]), (upper[i])) > 0) {
 
-				mpf_t* mod_num = mpftoperations::Subtract(upper[i], lower[i]);
-				mpf_t* distance_away = mpftoperations::Subtract(pos[i], lower[i]);
-				mpf_t* intervals_away = mpftoperations::Divide(distance_away, mod_num);
-				mpf_t* interval_move = mpftoperations::Floor(intervals_away);
-				mpf_t* distance_move = mpftoperations::Multiply(interval_move, mod_num);
-				mpf_t* actual_pos = mpftoperations::Subtract(pos[i], distance_move);
-				while(mpftoperations::Compare(lower[i], actual_pos) > 0) {
-					mpf_t* tmp = mpftoperations::Add(actual_pos, mod_num);
+				mpf_t* mod_num = arbitraryprecisioncalculation::mpftoperations::Subtract(upper[i], lower[i]);
+				mpf_t* distance_away = arbitraryprecisioncalculation::mpftoperations::Subtract(pos[i], lower[i]);
+				mpf_t* intervals_away = arbitraryprecisioncalculation::mpftoperations::Divide(distance_away, mod_num);
+				mpf_t* interval_move = arbitraryprecisioncalculation::mpftoperations::Floor(intervals_away);
+				mpf_t* distance_move = arbitraryprecisioncalculation::mpftoperations::Multiply(interval_move, mod_num);
+				mpf_t* actual_pos = arbitraryprecisioncalculation::mpftoperations::Subtract(pos[i], distance_move);
+				while(arbitraryprecisioncalculation::mpftoperations::Compare(lower[i], actual_pos) > 0) {
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Add(actual_pos, mod_num);
 					std::swap(tmp, actual_pos);
-					mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 				}
-				while(mpftoperations::Compare(actual_pos, upper[i]) > 0) {
-					mpf_t* tmp = mpftoperations::Subtract(actual_pos, mod_num);
+				while(arbitraryprecisioncalculation::mpftoperations::Compare(actual_pos, upper[i]) > 0) {
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Subtract(actual_pos, mod_num);
 					std::swap(tmp, actual_pos);
-					mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 				}
 				eval_pos.push_back(actual_pos);
-				mpftoperations::ReleaseValue(mod_num);
-				mpftoperations::ReleaseValue(distance_away);
-				mpftoperations::ReleaseValue(intervals_away);
-				mpftoperations::ReleaseValue(interval_move);
-				mpftoperations::ReleaseValue(distance_move);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(mod_num);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(distance_away);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(intervals_away);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(interval_move);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(distance_move);
 			} else {
-				eval_pos.push_back(mpftoperations::Clone(pos[i]));
+				eval_pos.push_back(arbitraryprecisioncalculation::mpftoperations::Clone(pos[i]));
 			}
 		}
-		vectoroperations::ReleaseValues(lower);
-		vectoroperations::ReleaseValues(upper);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lower);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(upper);
 		FUNCTION_EVALUATE_ALREADY_CALLED = true;
 		mpf_t* result = Eval(eval_pos);
 		FUNCTION_EVALUATE_ALREADY_CALLED = false;
-		vectoroperations::ReleaseValues(eval_pos);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(eval_pos);
 		return result;
 	}
 	FUNCTION_EVALUATE_ALREADY_CALLED = true;
@@ -139,9 +139,9 @@ std::vector<mpf_t*> Function::GetLowerSearchSpaceBound() {
 	if(search_space_lower_bound_.size() > (unsigned int)configuration::g_dimensions){
 		auto copy_search_space_lower_bound = search_space_lower_bound_;
 		copy_search_space_lower_bound.resize(configuration::g_dimensions);
-		return vectoroperations::GetVector(copy_search_space_lower_bound);
+		return arbitraryprecisioncalculation::vectoroperations::GetVector(copy_search_space_lower_bound);
 	} else {
-		return vectoroperations::GetVector(search_space_lower_bound_);
+		return arbitraryprecisioncalculation::vectoroperations::GetVector(search_space_lower_bound_);
 	}
 }
 
@@ -151,16 +151,16 @@ std::vector<mpf_t*> Function::GetUpperSearchSpaceBound() {
 	if(search_space_upper_bound_.size() > (unsigned int)configuration::g_dimensions){
 		auto copy_search_space_upper_bound = search_space_upper_bound_;
 		copy_search_space_upper_bound.resize(configuration::g_dimensions);
-		return vectoroperations::GetVector(copy_search_space_upper_bound);
+		return arbitraryprecisioncalculation::vectoroperations::GetVector(copy_search_space_upper_bound);
 	} else {
-		return vectoroperations::GetVector(search_space_upper_bound_);
+		return arbitraryprecisioncalculation::vectoroperations::GetVector(search_space_upper_bound_);
 	}
 }
 
 mpf_t* Function::DistanceTo1DLocalOptimum(const std::vector<mpf_t*> & pos, int d){
-	mpf_t* start_distance = mpftoperations::ToMpft(0.001);
+	mpf_t* start_distance = arbitraryprecisioncalculation::mpftoperations::ToMpft(0.001);
 	mpf_t* res = DistanceTo1DLocalOptimumTernarySearch(pos, d, start_distance);
-	mpftoperations::ReleaseValue(start_distance);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(start_distance);
 	return res;
 }
 
@@ -174,49 +174,49 @@ mpf_t* Function::DistanceTo1DLocalOptimumTernarySearch(const std::vector<mpf_t*>
 		max_pos = high_bound[d];
 		low_bound[d] = NULL;
 		high_bound[d] = NULL;
-		vectoroperations::ReleaseValues(low_bound);
-		vectoroperations::ReleaseValues(high_bound);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(low_bound);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(high_bound);
 	}
-	if( (mpftoperations::Compare(min_pos, pos[d]) > 0) ||
-			(mpftoperations::Compare(max_pos, pos[d]) < 0) ) {
+	if( (arbitraryprecisioncalculation::mpftoperations::Compare(min_pos, pos[d]) > 0) ||
+			(arbitraryprecisioncalculation::mpftoperations::Compare(max_pos, pos[d]) < 0) ) {
 		// If the position is outside of the search space
 		// then the distance to the search space is returned.
 		mpf_t* res;
-		if(mpftoperations::Compare(min_pos, pos[d]) > 0){
-			res = mpftoperations::Subtract(min_pos, pos[d]);
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(min_pos, pos[d]) > 0){
+			res = arbitraryprecisioncalculation::mpftoperations::Subtract(min_pos, pos[d]);
 		} else {
-			res = mpftoperations::Subtract(pos[d], max_pos);
+			res = arbitraryprecisioncalculation::mpftoperations::Subtract(pos[d], max_pos);
 		}
-		mpftoperations::ReleaseValue(min_pos);
-		mpftoperations::ReleaseValue(max_pos);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(min_pos);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(max_pos);
 		return res;
 	}
 
-	AssertCondition(mpftoperations::Compare(start_distance, 0.0) > 0, "distance_to_1D_local_optimum_ternary_search has to be called with a positive value.");
+	AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare(start_distance, 0.0) > 0, "distance_to_1D_local_optimum_ternary_search has to be called with a positive value.");
 	mpf_t* low_position = NULL;
 	mpf_t* high_position = NULL;
-	std::vector<mpf_t*> current_position = vectoroperations::Clone(pos);
+	std::vector<mpf_t*> current_position = arbitraryprecisioncalculation::vectoroperations::Clone(pos);
 	mpf_t* mid_position = current_position[d];
 	current_position[d] = NULL;
-	mpf_t* diff = mpftoperations::Clone(start_distance);
+	mpf_t* diff = arbitraryprecisioncalculation::mpftoperations::Clone(start_distance);
 	mpf_t* value = Evaluate(pos);
 
 	{
-		mpf_t* next_position = mpftoperations::Add(mid_position, diff);
-		if( mpftoperations::Compare(next_position, max_pos) > 0){
-			high_position = mpftoperations::Clone(max_pos);
-			mpftoperations::ReleaseValue(next_position);
+		mpf_t* next_position = arbitraryprecisioncalculation::mpftoperations::Add(mid_position, diff);
+		if( arbitraryprecisioncalculation::mpftoperations::Compare(next_position, max_pos) > 0){
+			high_position = arbitraryprecisioncalculation::mpftoperations::Clone(max_pos);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_position);
 		} else {
 			current_position[d] = next_position;
 			mpf_t* next_value = Evaluate(current_position);
 			if(mpf_cmp(*next_value, *value) < 0 ){
 				low_position = mid_position;
 				mid_position = next_position;
-				mpftoperations::ReleaseValue(value);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(value);
 				value = next_value;
 			} else {
 				high_position = next_position;
-				mpftoperations::ReleaseValue(next_value);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_value);
 			}
 		}
 		AssertCondition(high_position != NULL || low_position != NULL, "Bounds are not available.");
@@ -225,17 +225,17 @@ mpf_t* Function::DistanceTo1DLocalOptimumTernarySearch(const std::vector<mpf_t*>
 
 			bool high_position_unset = (high_position == NULL);
 			if(high_position_unset){
-				next_position = mpftoperations::Add(mid_position, diff);
-				if( mpftoperations::Compare(next_position, max_pos) > 0){
-					high_position = mpftoperations::Clone(max_pos);
-					mpftoperations::ReleaseValue(next_position);
+				next_position = arbitraryprecisioncalculation::mpftoperations::Add(mid_position, diff);
+				if( arbitraryprecisioncalculation::mpftoperations::Compare(next_position, max_pos) > 0){
+					high_position = arbitraryprecisioncalculation::mpftoperations::Clone(max_pos);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_position);
 					continue;
 				}
 			} else { // low_position unset
-				next_position = mpftoperations::Subtract(mid_position, diff);
-				if( mpftoperations::Compare(next_position, min_pos) < 0){
-					low_position = mpftoperations::Clone(min_pos);
-					mpftoperations::ReleaseValue(next_position);
+				next_position = arbitraryprecisioncalculation::mpftoperations::Subtract(mid_position, diff);
+				if( arbitraryprecisioncalculation::mpftoperations::Compare(next_position, min_pos) < 0){
+					low_position = arbitraryprecisioncalculation::mpftoperations::Clone(min_pos);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_position);
 					continue;
 				}
 			}
@@ -247,22 +247,22 @@ mpf_t* Function::DistanceTo1DLocalOptimumTernarySearch(const std::vector<mpf_t*>
 				//  -> update function value of mid_position: "value"
 				//  -> increase value of diff
 				if(high_position_unset){
-					mpftoperations::ReleaseValue(low_position);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(low_position);
 					low_position = mid_position;
 					mid_position = next_position;
 				} else {
-					mpftoperations::ReleaseValue(high_position);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(high_position);
 					high_position = mid_position;
 					mid_position = next_position;
 				}
 				{
-					mpftoperations::ReleaseValue(value);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(value);
 					value = next_value;
 				}
 				{
-					mpf_t* tmp = mpftoperations::Multiply(diff, 2.0);
+					mpf_t* tmp = arbitraryprecisioncalculation::mpftoperations::Multiply(diff, 2.0);
 					std::swap(tmp, diff);
-					mpftoperations::ReleaseValue(tmp);
+					arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 				}
 			} else {
 				// current value is better than next_value:
@@ -273,33 +273,33 @@ mpf_t* Function::DistanceTo1DLocalOptimumTernarySearch(const std::vector<mpf_t*>
 				} else {
 					low_position = next_position;
 				}
-				mpftoperations::ReleaseValue(next_value);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_value);
 			}
 		}
 		current_position[d] = NULL;
 	}
-	mpftoperations::ReleaseValue(diff);
-	mpftoperations::ReleaseValue(min_pos);
-	mpftoperations::ReleaseValue(max_pos);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diff);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(min_pos);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(max_pos);
 
 
 	int current_precision = mpf_get_default_prec();
 	int equal_evaluation_counter = 0;
 	for(int iteration_counter = 0; iteration_counter < current_precision * 3 && equal_evaluation_counter < 10; iteration_counter++){
-		diff = mpftoperations::Subtract(high_position, low_position);
-		mpf_t* diff_half = mpftoperations::Multiply(diff, 0.5);
-		mpf_t* interval_mid = mpftoperations::Add(low_position, diff_half);
+		diff = arbitraryprecisioncalculation::mpftoperations::Subtract(high_position, low_position);
+		mpf_t* diff_half = arbitraryprecisioncalculation::mpftoperations::Multiply(diff, 0.5);
+		mpf_t* interval_mid = arbitraryprecisioncalculation::mpftoperations::Add(low_position, diff_half);
 		mpf_t* actual_diff;
 		if(mpf_cmp(*interval_mid, *mid_position) < 0) {
-			actual_diff = mpftoperations::Multiply(diff, 0.4);
+			actual_diff = arbitraryprecisioncalculation::mpftoperations::Multiply(diff, 0.4);
 		} else {
-			actual_diff = mpftoperations::Multiply(diff, 0.6);
+			actual_diff = arbitraryprecisioncalculation::mpftoperations::Multiply(diff, 0.6);
 		}
-		mpf_t* next_position = mpftoperations::Add(actual_diff, low_position);
-		mpftoperations::ReleaseValue(diff);
-		mpftoperations::ReleaseValue(diff_half);
-		mpftoperations::ReleaseValue(actual_diff);
-		mpftoperations::ReleaseValue(interval_mid);
+		mpf_t* next_position = arbitraryprecisioncalculation::mpftoperations::Add(actual_diff, low_position);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diff);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(diff_half);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(actual_diff);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(interval_mid);
 		current_position[d] = next_position;
 		mpf_t* next_value = Evaluate(current_position);
 		current_position[d] = NULL;
@@ -313,23 +313,23 @@ mpf_t* Function::DistanceTo1DLocalOptimumTernarySearch(const std::vector<mpf_t*>
 			std::swap(value, next_value);
 			std::swap(mid_position, next_position);
 		}
-		mpftoperations::ReleaseValue(next_value);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_value);
 		if(mpf_cmp(*next_position, *mid_position) < 0){
 			std::swap(low_position, next_position);
 		} else {
 			std::swap(high_position, next_position);
 		}
-		mpftoperations::ReleaseValue(next_position);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(next_position);
 	}
 	mpf_t* best_position = mid_position;
-	mpf_t* res_signed = mpftoperations::Subtract(pos[d], best_position);
-	mpf_t* res = mpftoperations::Abs(res_signed);
-	mpftoperations::ReleaseValue(low_position);
-	mpftoperations::ReleaseValue(high_position);
-	mpftoperations::ReleaseValue(best_position);
-	mpftoperations::ReleaseValue(res_signed);
-	mpftoperations::ReleaseValue(value);
-	vectoroperations::ReleaseValues(current_position);
+	mpf_t* res_signed = arbitraryprecisioncalculation::mpftoperations::Subtract(pos[d], best_position);
+	mpf_t* res = arbitraryprecisioncalculation::mpftoperations::Abs(res_signed);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(low_position);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(high_position);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(best_position);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(res_signed);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(value);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(current_position);
 	return res;
 }
 

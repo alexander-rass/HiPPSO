@@ -1,5 +1,5 @@
 /**
-* @file   direct_statistics.h
+* @file   statistics/direct_statistics.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contain classes, which evaluate to vectors depending on the current state of the particle swarm.

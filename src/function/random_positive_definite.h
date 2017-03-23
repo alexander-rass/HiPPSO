@@ -1,5 +1,5 @@
 /**
-* @file   random_positive_definite.h 
+* @file   function/random_positive_definite.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   July, 2013
 * @brief  This file contains the description of a function with random positive definite second derivative matrix.

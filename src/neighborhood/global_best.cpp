@@ -1,5 +1,5 @@
 /**
-* @file   global_best.cpp
+* @file   neighborhood/global_best.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2015
 * @brief  This file contains the global best neighborhood topology.
@@ -48,8 +48,8 @@
 namespace highprecisionpso {
 
 GlobalBest::~GlobalBest(){
-	vectoroperations::ReleaseValues(global_attractor_position_);
-	mpftoperations::ReleaseValue(global_attractor_value_cached_);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_position_);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
 }
 
 GlobalBest::GlobalBest(){
@@ -63,28 +63,28 @@ void GlobalBest::SetGlobalAttractorPositions(std::vector<std::vector<mpf_t*> > g
 	AssertCondition(globalAttractors.size() == (unsigned int)configuration::g_particles, "The number of particles is inconsistent.");
 	AssertCondition(configuration::g_dimensions > 0, "The number of dimensions needs to be positive.");
 	AssertCondition(globalAttractors[0].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
-	vectoroperations::ReleaseValues(global_attractor_position_);
-	mpftoperations::ReleaseValue(global_attractor_value_cached_);
-	if(global_attractor_value_cached_ == NULL) mpftoperations::ChangeNumberOfMpftValuesCached(1);
-	global_attractor_position_ = vectoroperations::Clone(globalAttractors[0]);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_position_);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
+	if(global_attractor_value_cached_ == NULL) arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
+	global_attractor_position_ = arbitraryprecisioncalculation::vectoroperations::Clone(globalAttractors[0]);
 	global_attractor_value_cached_ = configuration::g_function->Evaluate(global_attractor_position_);
 	global_attractor_value_cached_precision_ = mpf_get_default_prec();
 	for(int p = 0; p < configuration::g_particles; p++){
 		AssertCondition(globalAttractors[p].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
 		for(int d = 0; d < configuration::g_dimensions; d++){
-			AssertCondition(mpftoperations::Compare((globalAttractors[p][d]), (global_attractor_position_[d])) == 0, "For global best neighborhood all global attractors need to be equal, but this is not the case.");
+			AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare((globalAttractors[p][d]), (global_attractor_position_[d])) == 0, "For global best neighborhood all global attractors need to be equal, but this is not the case.");
 		}
 	}
 }
 
 std::vector<mpf_t*> GlobalBest::GetGlobalAttractorPosition(){
-	return vectoroperations::Clone(global_attractor_position_);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_position_);
 }
 
 std::vector<mpf_t*> GlobalBest::GetGlobalAttractorPosition(int particleId){
 	AssertCondition(particleId >= 0, "adjacency list neighborhood: Queried particle id is less than zero.");
 	AssertCondition(configuration::g_particles > particleId, "adjacency list neighborhood: Queried particle id is larger than the largest id.");
-	return vectoroperations::Clone(global_attractor_position_);
+	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_position_);
 }
 
 mpf_t* GlobalBest::GetGlobalAttractorValue(int particleId){
@@ -94,34 +94,34 @@ mpf_t* GlobalBest::GetGlobalAttractorValue(int particleId){
 mpf_t* GlobalBest::GetGlobalAttractorValue(){
 	if(global_attractor_value_cached_ == NULL
 			|| mpf_get_default_prec() != global_attractor_value_cached_precision_){
-		if(global_attractor_value_cached_ == NULL) mpftoperations::ChangeNumberOfMpftValuesCached(1);
-		mpftoperations::ReleaseValue(global_attractor_value_cached_);
+		if(global_attractor_value_cached_ == NULL) arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
 		global_attractor_value_cached_ = configuration::g_function->Evaluate(global_attractor_position_);
 		global_attractor_value_cached_precision_ = mpf_get_default_prec();
 	}
-	return mpftoperations::Clone(global_attractor_value_cached_);
+	return arbitraryprecisioncalculation::mpftoperations::Clone(global_attractor_value_cached_);
 }
 
 void GlobalBest::UpdateAttractorInstantly(std::vector<mpf_t*> position, mpf_t* value, int particleId){
 	if(global_attractor_position_.size() == 0){
 		configuration::g_statistics->global_attractor_update_counter[particleId]++;
-		global_attractor_position_ = vectoroperations::Clone(position);
-		mpftoperations::ReleaseValue(global_attractor_value_cached_);
-		if(global_attractor_value_cached_ == NULL) mpftoperations::ChangeNumberOfMpftValuesCached(1);
+		global_attractor_position_ = arbitraryprecisioncalculation::vectoroperations::Clone(position);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
+		if(global_attractor_value_cached_ == NULL) arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
 		global_attractor_value_cached_ = configuration::g_function->Evaluate(global_attractor_position_);
 		global_attractor_value_cached_precision_ = mpf_get_default_prec();
 	} else {
 		AssertCondition(global_attractor_position_.size() == position.size(), "The number of dimensions is inconsistent.");
 		mpf_t* curvalue = GetGlobalAttractorValue(particleId);
-		if(mpftoperations::Compare(value, curvalue) <= 0) {
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(value, curvalue) <= 0) {
 			configuration::g_statistics->global_attractor_update_counter[particleId]++;
-			vectoroperations::ReleaseValues(global_attractor_position_);
-			global_attractor_position_ = vectoroperations::Clone(position);
-			mpftoperations::ReleaseValue(global_attractor_value_cached_);
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_position_);
+			global_attractor_position_ = arbitraryprecisioncalculation::vectoroperations::Clone(position);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
 			global_attractor_value_cached_ = configuration::g_function->Evaluate(global_attractor_position_);
 			global_attractor_value_cached_precision_ = mpf_get_default_prec();
 		}
-		mpftoperations::ReleaseValue(curvalue);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(curvalue);
 	}
 }
 
@@ -130,12 +130,12 @@ std::string GlobalBest::GetName(){
 }
 void GlobalBest::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
 	for(int d = 0; d < configuration::g_dimensions; d++){
-		global_attractor_position_.push_back(mpftoperations::LoadMpft(inputstream, version_of_stored_data));
+		global_attractor_position_.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
 }
 void GlobalBest::StoreData(std::ofstream* outputstream){
 	for(int d = 0; d < configuration::g_dimensions; d++){
-		mpftoperations::StoreMpft(global_attractor_position_[d], outputstream);
+		arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_position_[d], outputstream);
 	}
 }
 

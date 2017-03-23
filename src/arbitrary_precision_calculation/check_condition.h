@@ -1,5 +1,5 @@
 /**
-* @file   general/check_condition.cpp
+* @file   arbitrary_precision_calculation/check_condition.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file includes a possibility to check conditions which should be true. (similar to assertions).
@@ -37,23 +37,32 @@
 *
 */
 
-#include <iostream>
+#ifndef ARBITRARY_PRECISION_CALCULATION_CHECK_CONDITION_H_
+#define ARBITRARY_PRECISION_CALCULATION_CHECK_CONDITION_H_
 
-#include "check_condition.h"
+#include <string>
 
-namespace highprecisionpso {
+namespace arbitraryprecisioncalculation {
 
-void __AssertCondition(const char * argument, const char * file, const char * function_name,  int line, std::string message){
-	std::cerr << "Unsatisfied condition \"" << std::string(argument) << "\" in file \"" << std::string(file) << "\" in function \"" 
-			<< std::string(function_name) << "\" at line " << line << ".\n";
-	if(message.size() > 0)std::cerr << "Message: " << message << std::endl;
-	std::cerr << "If you are sure that you did not accidentally cause the error yourself "
-			<< "(reason may be explained in the displayed message), "
-			<< "please contact the main program author Alexander Raß per mail at \"Alexander.Rass@fau.de\". "
-			<< "Please supply complete error message and available files which were used for or created by "
-			<< "the current program execution (like configuration file, log file, backup file, etc.). "
-			<< "Please supply also runtime circumstances (operating system, parallel program executions, etc.).\n";
-	exit (1);
-}
+/**
+* @brief If EX is evaluated to false then it prints the given information to stderr and let the program terminate with exit code 1.
+*
+* @param EX The expression which should be checked.
+* @param MSG A special message which will be displayed if EX is not true.
+*/
+#define AssertCondition(EX, MSG) (void)((EX) || (__AssertCondition (#EX, __FILE__, __func__, __LINE__, MSG),0))
 
-} // namespace highprecisionpso
+/**
+* @brief Prints the given information to stderr and let the program terminate with exit code 1.
+*
+* @param argument The argument of the checked condition.
+* @param file The file where the error occurs.
+* @param function_name The function name where the error occurs.
+* @param line The line where the error occurs
+* @param message A further information message, which gives some additional information why the error occurs.
+*/
+void __AssertCondition(const char *argument, const char * file, const char * function_name, int line, std::string message);
+
+} // namespace arbitraryprecisioncalculation
+
+#endif /* ARBITRARY_PRECISION_CALCULATION_CHECK_CONDITION_H_ */

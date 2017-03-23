@@ -1,5 +1,5 @@
 /**
-* @file   delta_updater.h
+* @file   position_and_velocity_updater/delta_updater.h
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   February, 2014
 * @brief  This file contains a class for processing the velocity and position update of each particle with random reinitialization of velocity in case of low energy.

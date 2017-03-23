@@ -1,5 +1,5 @@
 /**
-* @file   random_forth.cpp
+* @file   bound_handling/random_forth.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   March, 2015
 * @brief  This file contains the random forth bound handling strategy.
@@ -53,78 +53,78 @@ BoundHandlingRandomForth::BoundHandlingRandomForth(RandomForthMarkDimensions ran
 void BoundHandlingRandomForth::SetParticleUpdate(Particle * p){
 	std::vector<mpf_t*> oldPos = p->GetPosition();
 	std::vector<mpf_t*> vel = p->GetVelocity();
-	std::vector<mpf_t*> newPos = vectoroperations::Add(oldPos, vel);
+	std::vector<mpf_t*> newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, vel);
 	std::vector<bool> modifiedDimensions(newPos.size(), false);
-	mpf_t* scale = mpftoperations::ToMpft(1.0);
+	mpf_t* scale = arbitraryprecisioncalculation::mpftoperations::ToMpft(1.0);
 	bool outside = false;
 	std::vector<mpf_t*> lo = configuration::g_function->GetLowerSearchSpaceBound();
 	std::vector<mpf_t*> hi = configuration::g_function->GetUpperSearchSpaceBound();
 	int minScaleId = -1;
 	for(unsigned int i = 0; i < newPos.size(); i++) {
-		if(mpftoperations::Compare(lo[i], newPos[i]) > 0) {
+		if(arbitraryprecisioncalculation::mpftoperations::Compare(lo[i], newPos[i]) > 0) {
 			if(random_forth_mark_dimensions_ == RANDOM_FORTH_MARK_DIMENSIONS_OUTSIDE_BOUNDS){
 				modifiedDimensions[i] = true;
 			}
 			outside = true;
-			mpf_t* maxLen = mpftoperations::Subtract(lo[i], oldPos[i]);
-			mpf_t* newScale = mpftoperations::Divide(maxLen, vel[i]);
-			if(mpftoperations::Compare(newScale, scale) < 0) {
+			mpf_t* maxLen = arbitraryprecisioncalculation::mpftoperations::Subtract(lo[i], oldPos[i]);
+			mpf_t* newScale = arbitraryprecisioncalculation::mpftoperations::Divide(maxLen, vel[i]);
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(newScale, scale) < 0) {
 				minScaleId = i;
 				std::swap(newScale, scale);
 			}
-			mpftoperations::ReleaseValue(newScale);
-			mpftoperations::ReleaseValue(maxLen);
-		} else if(mpftoperations::Compare(hi[i], newPos[i]) < 0) {
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newScale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxLen);
+		} else if(arbitraryprecisioncalculation::mpftoperations::Compare(hi[i], newPos[i]) < 0) {
 			if(random_forth_mark_dimensions_ == RANDOM_FORTH_MARK_DIMENSIONS_OUTSIDE_BOUNDS){
 				modifiedDimensions[i] = true;
 			}
 			outside = true;
-			mpf_t* maxLen = mpftoperations::Subtract(hi[i], oldPos[i]);
-			mpf_t* newScale = mpftoperations::Divide(maxLen, vel[i]);
-			if(mpftoperations::Compare(newScale, scale) < 0) {
+			mpf_t* maxLen = arbitraryprecisioncalculation::mpftoperations::Subtract(hi[i], oldPos[i]);
+			mpf_t* newScale = arbitraryprecisioncalculation::mpftoperations::Divide(maxLen, vel[i]);
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(newScale, scale) < 0) {
 				minScaleId = i;
 				std::swap(newScale, scale);
 			}
-			mpftoperations::ReleaseValue(newScale);
-			mpftoperations::ReleaseValue(maxLen);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newScale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(maxLen);
 		}
 	}
 	if(outside){
 		if(random_forth_mark_dimensions_ == RANDOM_FORTH_MARK_DIMENSIONS_ALL_ON_CHANGE){
 			modifiedDimensions = std::vector<bool>(newPos.size(), true);
 		}
-		AssertCondition(mpftoperations::Compare(scale, 0.0) >= 0, "");
-		AssertCondition(mpftoperations::Compare(scale, 1.0) <= 0, "");
+		AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare(scale, 0.0) >= 0, "");
+		AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare(scale, 1.0) <= 0, "");
 		{// difference to absorb: random scale
-			mpf_t* random_scale = mpftoperations::Randomize(scale);
-			mpftoperations::ReleaseValue(scale);
+			mpf_t* random_scale = arbitraryprecisioncalculation::mpftoperations::Randomize(scale);
+			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(scale);
 			scale = random_scale;
 		}
-		vectoroperations::ReleaseValues(newPos);
-		std::vector<mpf_t*> cVel = vectoroperations::Multiply(vel, scale);
-		newPos = vectoroperations::Add(oldPos, cVel);
-		vectoroperations::ReleaseValues(cVel);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
+		std::vector<mpf_t*> cVel = arbitraryprecisioncalculation::vectoroperations::Multiply(vel, scale);
+		newPos = arbitraryprecisioncalculation::vectoroperations::Add(oldPos, cVel);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(cVel);
 		modifiedDimensions[minScaleId] = true;
 		for(unsigned int i = 0; i < newPos.size(); i++) {
-			if(mpftoperations::Compare(lo[i], newPos[i]) > 0) {
+			if(arbitraryprecisioncalculation::mpftoperations::Compare(lo[i], newPos[i]) > 0) {
 				modifiedDimensions[i] = true;
-				mpftoperations::ReleaseValue(newPos[i]);
-				newPos[i] = mpftoperations::Clone(lo[i]);
-			} else if(mpftoperations::Compare(hi[i], newPos[i]) < 0) {
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newPos[i]);
+				newPos[i] = arbitraryprecisioncalculation::mpftoperations::Clone(lo[i]);
+			} else if(arbitraryprecisioncalculation::mpftoperations::Compare(hi[i], newPos[i]) < 0) {
 				modifiedDimensions[i] = true;
-				mpftoperations::ReleaseValue(newPos[i]);
-				newPos[i] = mpftoperations::Clone(hi[i]);
+				arbitraryprecisioncalculation::mpftoperations::ReleaseValue(newPos[i]);
+				newPos[i] = arbitraryprecisioncalculation::mpftoperations::Clone(hi[i]);
 			}
 		}
 	}
-	mpftoperations::ReleaseValue(scale);
-	vectoroperations::ReleaseValues(lo);
-	vectoroperations::ReleaseValues(hi);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(scale);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(lo);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(hi);
 	p->SetPosition(newPos);
 	configuration::g_velocity_adjustment->AdjustVelocity(p, modifiedDimensions, oldPos);
-	vectoroperations::ReleaseValues(oldPos);
-	vectoroperations::ReleaseValues(vel);
-	vectoroperations::ReleaseValues(newPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(oldPos);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vel);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(newPos);
 }
 
 std::string BoundHandlingRandomForth::GetName(){

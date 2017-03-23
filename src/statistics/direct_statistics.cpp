@@ -1,5 +1,5 @@
 /**
-* @file   direct_statistics.cpp
+* @file   statistics/direct_statistics.cpp
 * @author Alexander Raß (alexander.rass@fau.de)
 * @date   September, 2015
 * @brief  This file contain classes, which evaluate to vectors depending on the current state of the particle swarm.
@@ -55,9 +55,9 @@ std::string Statistic::EvaluationToString(){
 	std::ostringstream os;
 	for(unsigned int i = 0; i < data.size(); i++){
 		if(i) os << " ";
-		os << mpftoperations::MpftToString(data[i]);
+		os << arbitraryprecisioncalculation::mpftoperations::MpftToString(data[i]);
 	}
-	vectoroperations::ReleaseValues(data);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(data);
 	std::string res = os.str();
 	return res;
 }
@@ -72,8 +72,8 @@ std::vector<mpf_t*> CombineStatistic::Evaluate(){
 	for(unsigned int i = 0; i < res1.size(); i++) {
 		res.push_back(operation_->Evaluate(res1[i], res2[i]));
 	}
-	vectoroperations::ReleaseValues(res1);
-	vectoroperations::ReleaseValues(res2);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res1);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(res2);
 	return res;
 }
 
@@ -89,7 +89,7 @@ std::vector<mpf_t*> StatisticReduceOperator::Evaluate(){
 	std::vector<std::vector<mpf_t*> > data = specific_evaluation_->Evaluate();
 	std::vector<mpf_t*> result = reduce_operation_->Evaluate(data);
 	for(unsigned int i = 0; i < data.size(); i++) {
-		vectoroperations::ReleaseValues(data[i]);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(data[i]);
 	}
 	return result;
 }
@@ -108,7 +108,7 @@ std::vector<mpf_t*> OperatedStatistic::Evaluate(){
 	for(unsigned int i = 0; i < values.size(); i++){
 		result.push_back(operation_->Operate(values[i]));
 	}
-	vectoroperations::ReleaseValues(values);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(values);
 	return result;
 }
 
@@ -138,7 +138,7 @@ std::vector<mpf_t*> GlobalBestPositionDistTo1DOptimumStatistic::Evaluate(){
 	std::vector<mpf_t*> globBest = configuration::g_neighborhood->GetGlobalAttractorPosition();
 	DistTo1DOptimumOperation operation;
 	std::vector<mpf_t*> res = operation.Operate(globBest);
-	vectoroperations::ReleaseValues(globBest);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(globBest);
 	return res;
 }
 
@@ -161,7 +161,7 @@ std::vector<mpf_t*> LocalAttractorUpdatesStatistic::Evaluate() {
 	std::vector<long long> vec = configuration::g_statistics->local_attractor_update_counter;
 	std::vector<mpf_t*> res;
 	for(unsigned int i = 0; i < vec.size(); i++ ){
-		res.push_back(mpftoperations::ToMpft(vec[i]));
+		res.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(vec[i]));
 	}
 	return res;
 }
@@ -174,7 +174,7 @@ std::vector<mpf_t*> GlobalAttractorUpdatesStatistic::Evaluate() {
 	std::vector<long long> vec = configuration::g_statistics->global_attractor_update_counter;
 	std::vector<mpf_t*> res;
 	for(unsigned int i = 0; i < vec.size(); i++ ){
-		res.push_back(mpftoperations::ToMpft(vec[i]));
+		res.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(vec[i]));
 	}
 	return res;
 }
@@ -185,7 +185,7 @@ std::string GlobalAttractorUpdatesStatistic::GetName() {
 
 std::vector<mpf_t*> PrecisionStatistic::Evaluate() {
 	std::vector<mpf_t*> res;
-	res.push_back(mpftoperations::ToMpft((int)mpf_get_default_prec()));
+	res.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft((int)mpf_get_default_prec()));
 	return res;
 }
 
@@ -197,8 +197,8 @@ ConstantStatistic::ConstantStatistic(int dimensions, ConstantEvaluation* constan
 
 std::vector<mpf_t*> ConstantStatistic::Evaluate(){
 	mpf_t* tmp = constant_evaluation_->Evaluate();
-	std::vector<mpf_t*> res = vectoroperations::GetConstantVector(dimensions_, tmp);
-	mpftoperations::ReleaseValue(tmp);
+	std::vector<mpf_t*> res = arbitraryprecisioncalculation::vectoroperations::GetConstantVector(dimensions_, tmp);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(tmp);
 	return res;
 }
 
