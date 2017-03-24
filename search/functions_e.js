@@ -6,8 +6,10 @@ var searchData=
   ['randompositivedefinitesecondderivative',['RandomPositiveDefiniteSecondDerivative',['../classhighprecisionpso_1_1RandomPositiveDefiniteSecondDerivative.html#ac5ce2226846c12e017b69e9989d3bbc6',1,'highprecisionpso::RandomPositiveDefiniteSecondDerivative']]],
   ['rastrigin',['Rastrigin',['../classhighprecisionpso_1_1Rastrigin.html#aeed87e6202321fb0825101dc32b32865',1,'highprecisionpso::Rastrigin']]],
   ['readconfigurationfile',['ReadConfigurationFile',['../namespacehighprecisionpso_1_1configuration.html#a9c26141162376eb8a1f014c32698c12a',1,'highprecisionpso::configuration']]],
+  ['recommendincreaseprecision',['RecommendIncreasePrecision',['../classarbitraryprecisioncalculation_1_1Configuration.html#ac10633dd9c3debb10a616676f26e3b62',1,'arbitraryprecisioncalculation::Configuration']]],
   ['releasevalue',['ReleaseValue',['../namespacearbitraryprecisioncalculation_1_1mpftoperations.html#ad3d099c7f42721a32abf1f0c2786e742',1,'arbitraryprecisioncalculation::mpftoperations']]],
   ['releasevalues',['ReleaseValues',['../namespacearbitraryprecisioncalculation_1_1vectoroperations.html#a336930d4cb6f30ac852bcc5b6ae46acb',1,'arbitraryprecisioncalculation::vectoroperations']]],
+  ['resetincreaseprecisionrecommended',['ResetIncreasePrecisionRecommended',['../classarbitraryprecisioncalculation_1_1Configuration.html#ae2cd87a27c60088393fe14cf58627ef3',1,'arbitraryprecisioncalculation::Configuration']]],
   ['restoreanddopso',['RestoreAndDoPso',['../namespacehighprecisionpso.html#a396390f5164436e9c861e908c1287999',1,'highprecisionpso']]],
   ['ringneighborhood',['RingNeighborhood',['../classhighprecisionpso_1_1RingNeighborhood.html#a407e640e62d0f63744047de1b2647af8',1,'highprecisionpso::RingNeighborhood']]],
   ['rosenbrock',['Rosenbrock',['../classhighprecisionpso_1_1Rosenbrock.html#ac366c8b2a04c79f5e4b142961ec0281f',1,'highprecisionpso::Rosenbrock']]]

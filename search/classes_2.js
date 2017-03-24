@@ -7,6 +7,7 @@ var searchData=
   ['composeddimensionreduceoperation',['ComposedDimensionReduceOperation',['../classhighprecisionpso_1_1ComposedDimensionReduceOperation.html',1,'highprecisionpso']]],
   ['composedparticlereduceoperation',['ComposedParticleReduceOperation',['../classhighprecisionpso_1_1ComposedParticleReduceOperation.html',1,'highprecisionpso']]],
   ['composedstatisticreduceoperation',['ComposedStatisticReduceOperation',['../classhighprecisionpso_1_1ComposedStatisticReduceOperation.html',1,'highprecisionpso']]],
+  ['configuration',['Configuration',['../classarbitraryprecisioncalculation_1_1Configuration.html',1,'arbitraryprecisioncalculation']]],
   ['constantevaluation',['ConstantEvaluation',['../classhighprecisionpso_1_1ConstantEvaluation.html',1,'highprecisionpso']]],
   ['constantfunction',['ConstantFunction',['../classhighprecisionpso_1_1ConstantFunction.html',1,'highprecisionpso']]],
   ['constantspecificfunction',['ConstantSpecificFunction',['../classhighprecisionpso_1_1ConstantSpecificFunction.html',1,'highprecisionpso']]],

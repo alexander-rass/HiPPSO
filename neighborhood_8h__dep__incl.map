@@ -1,6 +1,5 @@
 <map id="src/neighborhood/neighborhood.h" name="src/neighborhood/neighborhood.h">
 <area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,88,179,115"/>
-<area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="207,171,355,197"/>
-<area shape="rect" id="node4" href="$adjacency__list__neighborhood_8h.html" title="This file contains neighborhood topologies specified by adjacency lists. " alt="" coords="255,81,439,122"/>
-<area shape="rect" id="node5" href="$global__best_8h.html" title="This file contains the global best neighborhood topology. " alt="" coords="463,81,621,122"/>
+<area shape="rect" id="node3" href="$adjacency__list__neighborhood_8h.html" title="This file contains neighborhood topologies specified by adjacency lists. " alt="" coords="204,81,388,122"/>
+<area shape="rect" id="node4" href="$global__best_8h.html" title="This file contains the global best neighborhood topology. " alt="" coords="413,81,571,122"/>
 </map>

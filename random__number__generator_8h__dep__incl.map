@@ -1,8 +1,8 @@
 <map id="src/arbitrary_precision_calculation/random_number_generator.h" name="src/arbitrary_precision_calculation/random_number_generator.h">
-<area shape="rect" id="node2" href="$arbitrary__precision__calculation_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,110,184,151"/>
-<area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="360,200,508,227"/>
-<area shape="rect" id="node4" href="$operations_8h.html" title="This file contains a large set of operations for calculations with the mpf_t data type..." alt="" coords="261,110,427,151"/>
-<area shape="rect" id="node5" href="$arbitrary__precision__calculation_2parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="451,110,601,151"/>
-<area shape="rect" id="node6" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="626,117,800,144"/>
-<area shape="rect" id="node7" href="$general_2parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="825,117,959,144"/>
+<area shape="rect" id="node2" href="$arbitraryprecisioncalculation_8h.html" title="This file contains include directives to all externally useful functions of arbitraryprecisioncalcula..." alt="" coords="84,201,351,242"/>
+<area shape="rect" id="node3" href="$arbitrary__precision__calculation_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="29,110,208,151"/>
+<area shape="rect" id="node4" href="$operations_8h.html" title="This file contains a large set of operations for calculations with the mpf_t data type..." alt="" coords="233,110,399,151"/>
+<area shape="rect" id="node5" href="$arbitrary__precision__calculation_2parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="423,110,573,151"/>
+<area shape="rect" id="node6" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="598,117,772,144"/>
+<area shape="rect" id="node7" href="$general_2parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="797,117,931,144"/>
 </map>
