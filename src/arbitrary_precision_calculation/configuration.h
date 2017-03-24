@@ -73,6 +73,9 @@ enum CheckPrecisionMode {
 };
 } // namespace configuration
 
+/**
+* @brief Contains configuration of arbitrary precision calculation and supplies them by get and set methods.
+*/
 class Configuration{
 public:
 
