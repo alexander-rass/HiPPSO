@@ -46,11 +46,7 @@
 #include <string>
 #include <vector>
 
-#include "arbitrary_precision_calculation/check_condition.h"
-#include "arbitrary_precision_calculation/configuration.h"
-#include "arbitrary_precision_calculation/operations.h"
-#include "arbitrary_precision_calculation/parse.h"
-#include "arbitrary_precision_calculation/random_number_generator.h"
+#include "arbitrary_precision_calculation/arbitraryprecisioncalculation.h"
 
 namespace arbitraryprecisioncalculation {
 
@@ -122,8 +118,8 @@ int testValues(std::vector<mpf_t*> checkNums,
 		std::vector<mpf_t*> actualResults,
 		std::vector<mpf_t*> moreAccurateResults,
 		int mpf_t_used){
-	if(arbitraryprecisioncalculation::configuration::g_increase_precision){
-		arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+	if(arbitraryprecisioncalculation::Configuration::isIncreasePrecisionRecommended()){
+		arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 		std::cout << "WARNING: evaluation leads to an increase of precision\n";
 	}
 	{
@@ -190,13 +186,6 @@ int testValues(std::vector<mpf_t*> checkNums,
 		assert(result_should_be_true);
 		if(!(result_should_be_true)) return 1;
 	}
-/*	if(arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() != arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() + (int)checkNums.size() * 3 + mpf_t_used){
-		std::cerr << std::string(65, '!') << std::endl;
-		std::cerr << "mpf_t's in use inconsistent. Should be " << checkNums.size() * 3 + mpf_t_used + arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached() << " but there are " << arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() << std::endl;
-		std::cerr << std::string(65, '!') << std::endl;
-		mpf_t_used = arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesInUse() - checkNums.size() * 3 - arbitraryprecisioncalculation::mpftoperations::GetNumberOfMpftValuesCached();
-		return 1;
-	}*/
 	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(checkNums);
 	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(actualResults);
 	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(moreAccurateResults);
@@ -206,7 +195,7 @@ int testValues(std::vector<mpf_t*> checkNums,
 		std::cerr << std::string(65, '!') << std::endl;
 		return 1;
 	}
-	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 	return 0;
 }
 
@@ -1097,10 +1086,11 @@ int test_randomNumberGenerator(){
 }
 
 int start_tests(int argv, char * argc[]) {
-	arbitraryprecisioncalculation::configuration::g_output_precision = 10;
-	arbitraryprecisioncalculation::configuration::g_precision_safety_margin = BASE_PRECISION / 2;
+	arbitraryprecisioncalculation::Configuration::setOutputPrecision(10);
+	arbitraryprecisioncalculation::Configuration::setInitialPrecision(BASE_PRECISION);
+	arbitraryprecisioncalculation::Configuration::setPrecisionSafetyMargin(BASE_PRECISION / 2);
 	{
-		int result_should_be_true = (arbitraryprecisioncalculation::configuration::g_increase_precision == false);
+		int result_should_be_true = (arbitraryprecisioncalculation::Configuration::isIncreasePrecisionRecommended() == false);
 		assert(result_should_be_true);
 		if(!(result_should_be_true)) return 1;
 	}

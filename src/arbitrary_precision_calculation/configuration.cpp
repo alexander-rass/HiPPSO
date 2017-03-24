@@ -42,37 +42,108 @@
 #include "arbitrary_precision_calculation/random_number_generator.h"
 
 namespace arbitraryprecisioncalculation {
-namespace configuration {
 
-int g_initial_precision = 32;
-bool g_initial_precision_already_set = false;
-int g_precision_safety_margin = 32;
+int Configuration::initial_precision_ = 32;
+bool Configuration::initial_precision_already_set_ = false;
+int Configuration::precision_safety_margin_ = 32;
 
-enum CheckPrecisionMode g_check_precision_mode = CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
-double g_check_precision_probability = 1.00;
+arbitraryprecisioncalculation::configuration::CheckPrecisionMode Configuration::check_precision_mode_ = arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
+double Configuration::check_precision_probability_ = 1.00;
 // <= 0 -> surely not check
 // >= 1 -> surely check
 // > 0 && < 1 -> randomly check
-bool g_increase_precision = false;
+bool Configuration::increase_precision_recommended_ = false;
 
-int g_output_precision = 5;
+int Configuration::output_precision_ = 5;
 
-RandomNumberGenerator* g_standard_random_number_generator = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
+RandomNumberGenerator* Configuration::standard_random_number_generator_ = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
 
-void Init(){
+void Configuration::Init(){
 
-	g_initial_precision = 32;
-	g_initial_precision_already_set = false;
-	g_precision_safety_margin = 32;
+	initial_precision_ = 32;
+	initial_precision_already_set_ = false;
+	precision_safety_margin_ = 32;
 
-	g_check_precision_mode = CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
-	g_check_precision_probability = 1.00;
-	g_increase_precision = false;
+	check_precision_mode_ = arbitraryprecisioncalculation::configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS;
+	check_precision_probability_ = 1.00;
+	increase_precision_recommended_ = false;
 
-	g_output_precision = 5;
+	output_precision_ = 5;
 
-	g_standard_random_number_generator = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
+	standard_random_number_generator_ = new FastM2P63LinearCongruenceRandomNumberGenerator(1571204578482947281ULL, 12345678901234567ULL, 0);
 }
 
-} // namespace configuration
+
+arbitraryprecisioncalculation::configuration::CheckPrecisionMode Configuration::getCheckPrecisionMode() {
+	return check_precision_mode_;
+}
+
+void Configuration::setCheckPrecisionMode(
+		arbitraryprecisioncalculation::configuration::CheckPrecisionMode checkPrecisionMode) {
+	check_precision_mode_ = checkPrecisionMode;
+}
+
+double Configuration::getCheckPrecisionProbability() {
+	return check_precision_probability_;
+}
+
+void Configuration::setCheckPrecisionProbability(double checkPrecisionProbability) {
+	check_precision_probability_ = checkPrecisionProbability;
+}
+
+bool Configuration::isIncreasePrecisionRecommended() {
+	return increase_precision_recommended_;
+}
+
+void Configuration::ResetIncreasePrecisionRecommended() {
+	increase_precision_recommended_ = false;
+}
+
+void Configuration::RecommendIncreasePrecision() {
+	increase_precision_recommended_ = true;
+}
+
+int Configuration::getInitialPrecision() {
+	return initial_precision_;
+}
+
+void Configuration::setInitialPrecision(int initialPrecision) {
+	initial_precision_ = initialPrecision;
+	mpf_set_default_prec(initialPrecision);
+	if(!initial_precision_already_set_){
+		initial_precision_already_set_ = true;
+		setPrecisionSafetyMargin(initialPrecision);
+	}
+}
+
+int Configuration::getOutputPrecision() {
+	return output_precision_;
+}
+
+void Configuration::setOutputPrecision(int outputPrecision) {
+	output_precision_ = outputPrecision;
+}
+
+int Configuration::getPrecisionSafetyMargin() {
+	return precision_safety_margin_;
+}
+
+void Configuration::setPrecisionSafetyMargin(int precisionSafetyMargin) {
+	precision_safety_margin_ = precisionSafetyMargin;
+	if(!initial_precision_already_set_){
+		initial_precision_already_set_ = true;
+		setInitialPrecision(precisionSafetyMargin);
+	}
+}
+
+RandomNumberGenerator* Configuration::getStandardRandomNumberGenerator() {
+	return standard_random_number_generator_;
+}
+
+
+void Configuration::setStandardRandomNumberGenerator(
+		RandomNumberGenerator* standardRandomNumberGenerator) {
+	standard_random_number_generator_ = standardRandomNumberGenerator;
+}
+
 } // namespace arbitraryprecisioncalculation

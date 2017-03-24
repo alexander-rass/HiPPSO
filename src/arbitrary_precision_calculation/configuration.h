@@ -54,21 +54,6 @@ namespace arbitraryprecisioncalculation {
 * @brief Contains the variables which store information about the configuration for the arbitrary precision calculation.
 */
 namespace configuration {
-
-/**
-* @brief Specifies the initial precision of the mpf_t data type.
-*/
-extern int g_initial_precision;
-/**
-* @brief Remembers whether the initial precision is already set manually.
-* If this is not the case then a specification of the precision also overwrites the initial precision.
-*/
-extern bool g_initial_precision_already_set;
-/**
-* @brief Specifies the additional precision. If precision checks are activated then the check whether the precision should be increased uses this number to increase the calculated needed precision additionally.
-*/
-extern int g_precision_safety_margin;
-
 /**
 * @brief Specification possibilities in which cases precision checks occur.
 */
@@ -86,36 +71,163 @@ enum CheckPrecisionMode {
 	*/
 	CHECK_PRECISION_NEVER
 };
-/**
-* @brief Stores the information in which cases precision checks occur.
-*/
-extern CheckPrecisionMode g_check_precision_mode;
-/**
-* @brief Specifies the probability whether a precision check is actually done.
-*/
-extern double g_check_precision_probability;
-/**
-* @brief Specifies whether the precision will be increased shortly.
-*/
-extern bool g_increase_precision;
-
-/**
-* @brief Specifies the number of digits for the output of mpf_t values while using printing functions.
-* The value -1 specifies that the output precision should match the current precision of the mpf_t data type.
-*/
-extern int g_output_precision;
-
-/**
-* @brief Specifies the random number generator for the particle swarm optimization algorithm.
-*/
-extern RandomNumberGenerator* g_standard_random_number_generator;
-
-/**
-* @brief Resets all variables in the configuration section to the default values.
-*/
-void Init();
-
 } // namespace configuration
+
+class Configuration{
+public:
+
+	/**
+	* @brief Resets all variables in the configuration section to the default values.
+	*/
+	static void Init();
+
+	/**
+	 * @brief Getter function for the check precision mode.
+	 *
+	 * @return The current check precision mode.
+	 */
+	static arbitraryprecisioncalculation::configuration::CheckPrecisionMode getCheckPrecisionMode();
+
+	/**
+	 * @brief Setter function for the check precision mode. Stores the given check precision mode.
+	 *
+	 * @param checkPrecisionMode The new check precision mode.
+	 */
+	static void setCheckPrecisionMode(
+			arbitraryprecisioncalculation::configuration::CheckPrecisionMode checkPrecisionMode);
+
+	/**
+	 * @brief Getter function for the check precision probability.
+	 *
+	 * @return The current check precision probability.
+	 */
+	static double getCheckPrecisionProbability();
+
+	/**
+	 * @brief Setter function for the check precision probability. Stores the given check precision probability.
+	 *
+	 * @param checkPrecisionProbability The new check precision probability.
+	 */
+	static void setCheckPrecisionProbability(double checkPrecisionProbability);
+
+	/**
+	 * @brief Status function for increasing precision.
+	 *
+	 * @retval TRUE if calculations recommend an increase of the precision.
+	 * @retval FALSE otherwise.
+	 */
+	static bool isIncreasePrecisionRecommended();
+
+	/**
+	 * @brief Resets the status whether the precision should be increased to NO.
+	 */
+	static void ResetIncreasePrecisionRecommended();
+
+	/**
+	 * @brief Sets the status whether the precision should be increased to YES.
+	 */
+	static void RecommendIncreasePrecision();
+
+	/**
+	 * @brief Getter function for the initial precision.
+	 *
+	 * @return The currently stored initial precision.
+	 */
+	static int getInitialPrecision();
+
+	/**
+	 * @brief Setter function for the initial precision. Stores the given initial precision.
+	 *
+	 * @param initialPrecision The new initial precision.
+	 */
+	static void setInitialPrecision(int initialPrecision);
+
+	/**
+	 * @brief Getter function for the output precision.
+	 *
+	 * @return The currently stored output precision.
+	 */
+	static int getOutputPrecision();
+
+	/**
+	 * @brief Setter function for the output precision. Stores the given output precision.
+	 *
+	 * @param outputPrecision The new output precision.
+	 */
+	static void setOutputPrecision(int outputPrecision);
+
+	/**
+	 * @brief Getter function for the precision safety margin.
+	 *
+	 * @return The currently stored precision safety margin.
+	 */
+	static int getPrecisionSafetyMargin();
+
+	/**
+	 * @brief Setter function for the precision safety margin. Stores the given precision safety margin.
+	 *
+	 * @param precisionSafetyMargin The new precision safety margin.
+	 */
+	static void setPrecisionSafetyMargin(int precisionSafetyMargin);
+
+	/**
+	 * @brief Getter function for the standard random number generator.
+	 *
+	 * @return The currently stored standard random number generator.
+	 */
+	static RandomNumberGenerator* getStandardRandomNumberGenerator();
+
+	/**
+	 * @brief Setter function for the standard random number generator. Stores the given standard random number generator.
+	 *
+	 * @param standardRandomNumberGenerator The new standard random number generator.
+	 */
+	static void setStandardRandomNumberGenerator(
+			RandomNumberGenerator* standardRandomNumberGenerator);
+
+private:
+	/**
+	* @brief Specifies the initial precision of the mpf_t data type.
+	*/
+	static int initial_precision_;
+	/**
+	* @brief Remembers whether the initial precision is already set manually.
+	* If this is not the case then a specification of the precision also overwrites the initial precision.
+	*/
+	static bool initial_precision_already_set_;
+	/**
+	* @brief Specifies the additional precision. If precision checks are activated then the check whether the precision should be increased uses this number to increase the calculated needed precision additionally.
+	*/
+	static int precision_safety_margin_;
+
+
+	/**
+	* @brief Stores the information in which cases precision checks occur.
+	*/
+	static arbitraryprecisioncalculation::configuration::CheckPrecisionMode check_precision_mode_;
+	/**
+	* @brief Specifies the probability whether a precision check is actually done.
+	*/
+	static double check_precision_probability_;
+	/**
+	* @brief Specifies whether the precision will be increased shortly.
+	*/
+	static bool increase_precision_recommended_;
+
+	/**
+	* @brief Specifies the number of digits for the output of mpf_t values while using printing functions.
+	* The value -1 specifies that the output precision should match the current precision of the mpf_t data type.
+	*/
+	static int output_precision_;
+
+	/**
+	* @brief Specifies the random number generator for the particle swarm optimization algorithm.
+	*/
+	static RandomNumberGenerator* standard_random_number_generator_;
+
+
+}; // class Configuration
+
 } // namespace arbitraryprecisioncalculation
 
 #endif /* ARBITRARY_PRECISION_CALCULATION_CONFIGURATION_H_ */

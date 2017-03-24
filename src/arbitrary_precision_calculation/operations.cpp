@@ -393,19 +393,19 @@ void ReleaseValue(mpf_t* a) {
 }
 
 inline void checkPrecisionOnAdd(const mpf_t* a, const mpf_t* b){
-	if(configuration::g_increase_precision) return;
-	if(configuration::g_check_precision_probability <= 0)return;
-	bool doit = (configuration::g_check_precision_mode == configuration::CHECK_PRECISION_ALWAYS || 
-			(configuration::g_check_precision_mode == configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS
+	if(Configuration::isIncreasePrecisionRecommended()) return;
+	if(Configuration::getCheckPrecisionProbability() <= 0)return;
+	bool doit = (Configuration::getCheckPrecisionMode() == configuration::CHECK_PRECISION_ALWAYS ||
+			(Configuration::getCheckPrecisionMode() == configuration::CHECK_PRECISION_ALWAYS_EXCEPT_STATISTICS
 			 && !statistical_calculations_active_));
 	if(!doit)return;
 	{
 		if(IsInfinite(a) || IsInfinite(b)) return;
 		if(IsUndefined(a) || IsUndefined(b)) return;
 	}
-	if(configuration::g_check_precision_probability < 1){
+	if(Configuration::getCheckPrecisionProbability() < 1){
 		mpf_t* rand_value = GetRandomMpft();
-		doit = (mpftoperations::Compare(rand_value, configuration::g_check_precision_probability) < 0);
+		doit = (mpftoperations::Compare(rand_value, Configuration::getCheckPrecisionProbability()) < 0);
 		mpftoperations::ReleaseValue(rand_value);
 	}
 	if(!doit)return;
@@ -422,14 +422,14 @@ inline void checkPrecisionOnAdd(const mpf_t* a, const mpf_t* b){
 
 	if(mpf_cmp_d(*v[0], 0.0) == 0){
 		if(mpf_cmp(*v[1], *v[2]) != 0){
-			configuration::g_increase_precision = true;
+			Configuration::RecommendIncreasePrecision();
 		}
 	} else {
-		mpf_t* small = mpftoperations::Multiply2Exp(v[0], -configuration::g_precision_safety_margin);
+		mpf_t* small = mpftoperations::Multiply2Exp(v[0], -Configuration::getPrecisionSafetyMargin());
 		mpf_t* addVal = GetResultPointer();
 		mpf_add(*addVal, *small, *v[2]);
 		if(mpf_cmp(*addVal, *v[2]) == 0){
-			configuration::g_increase_precision = true;
+			Configuration::RecommendIncreasePrecision();
 		}
 		ReleaseValue(small);
 		ReleaseValue(addVal);
@@ -664,11 +664,11 @@ mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* ran
 }
 
 mpf_t* GetGaussianRandomMpft(double mu, double sigma){
-	return GetGaussianRandomMpft(mu, sigma, configuration::g_standard_random_number_generator);
+	return GetGaussianRandomMpft(mu, sigma, Configuration::getStandardRandomNumberGenerator());
 }
 
 mpf_t* Randomize(mpf_t* v) {
-	return Randomize(v, configuration::g_standard_random_number_generator);
+	return Randomize(v, Configuration::getStandardRandomNumberGenerator());
 }
 
 mpf_t* Randomize(mpf_t* v, RandomNumberGenerator* random){
@@ -679,7 +679,7 @@ mpf_t* Randomize(mpf_t* v, RandomNumberGenerator* random){
 }
 
 mpf_t* GetRandomMpft(){
-	return GetRandomMpft(configuration::g_standard_random_number_generator);
+	return GetRandomMpft(Configuration::getStandardRandomNumberGenerator());
 }
 
 mpf_t* GetRandomMpft(RandomNumberGenerator* random){
@@ -1706,7 +1706,7 @@ std::string MpftToString(mpf_t* v){
 	}
 	AssertCondition(buf_size != 0, "Initialization failed.");
 	int string_size;
-	int output_precision = configuration::g_output_precision;
+	int output_precision = Configuration::getOutputPrecision();
 	if(output_precision == -1){
 		output_precision = mpf_get_default_prec() / log(10.0) * log(2.0);
 	}
@@ -1720,7 +1720,7 @@ std::string MpftToString(mpf_t* v){
 		buf = (char*) malloc(buf_size * sizeof(char));
 	}
 	AssertCondition(string_size == (int)strlen(buf), "");
-	if(configuration::g_output_precision == -1){
+	if(Configuration::getOutputPrecision() == -1){
 		int e_pos = string_size - 1;
 		while(e_pos > 0 && buf[e_pos] != 'e')--e_pos;
 		if((buf[1] == '.' || buf[2] == '.') && e_pos > 1 && buf[e_pos - 1] == '0'){

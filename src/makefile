@@ -3,29 +3,40 @@ OPTIMIZATION=-O5
 LDFLAGS=-lgmp
 DEBUGFLAG=
 
-INCLUDE_FILE=general/includes.h
-
-SOURCES=$(filter-out testing/arbitrary_precision_calculation_tests.cpp, $(filter-out testing/pso_tests.cpp, $(filter-out general/main.cpp, $(wildcard */*.cpp))))
-
-OBJECTS=$(addprefix $(BUILD_DIR)/, $(SOURCES:.cpp=.o))
-H_FILES=$(SOURCES:.cpp=.h)
-
 EXECUTABLE=high_precision_pso
 TEST_PROGRAM_PSO=test_program_pso
 TEST_PROGRAM_APC=test_program_apc
 BUILD_DIR=build
 
+INCLUDE_FILE=general/includes.h
+
+LIB_FILE=libarbitraryprecisioncalculation.a
+LIB_LINK=$(subst lib, -l, $(LIB_FILE:.a=))
+LIB_DIR=lib
+
+SOURCES=$(filter-out testing/% arbitrary_precision_calculation/% general/main.cpp, $(wildcard */*.cpp))
+APC_SOURCES=$(wildcard arbitrary_precision_calculation/*.cpp)
+
+OBJECTS=$(addprefix $(BUILD_DIR)/, $(SOURCES:.cpp=.o))
+APC_OBJECTS=$(addprefix $(BUILD_DIR)/, $(APC_SOURCES:.cpp=.o))
+
+H_FILES=$(SOURCES:.cpp=.h)
+
 
 all: $(EXECUTABLE)
 	
-$(EXECUTABLE): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/general/main.o
-	$(CXX) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LDFLAGS) -o $@
+$(EXECUTABLE): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LIB_DIR)/$(LIB_FILE)
+	$(CXX) -L./$(LIB_DIR) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LIB_LINK) $(LDFLAGS) -o $@
 
-$(TEST_PROGRAM_PSO): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o
-	$(CXX) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LDFLAGS) -o $@
+$(TEST_PROGRAM_PSO): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LIB_DIR)/$(LIB_FILE)
+	$(CXX) -L./$(LIB_DIR) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
 
-$(TEST_PROGRAM_APC): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o
-	$(CXX) $(OBJECTS) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LDFLAGS) -o $@
+$(TEST_PROGRAM_APC): $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LIB_DIR)/$(LIB_FILE)
+	$(CXX) -L./$(LIB_DIR) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
+
+$(LIB_DIR)/$(LIB_FILE): $(APC_OBJECTS)
+	mkdir -p $(LIB_DIR) && \
+    ar rcs $(LIB_DIR)/$(LIB_FILE) $(APC_OBJECTS)
 
 $(INCLUDE_FILE): $(H_FILES)
 	echo "/**" > $@&& \
@@ -66,6 +77,7 @@ $(INCLUDE_FILE): $(H_FILES)
 	echo "*" >> $@ && \
 	echo "*/" >> $@ && \
 	echo "" >> $@ && \
+    echo "#include <arbitrary_precision_calculation/arbitraryprecisioncalculation.h>" >> $@ && \
 	echo $(H_FILES) | tr ' ' '\n' | grep -v "check_condition.h" | sed "s:$$:\":" | sed "s:^:#include \":" | sort >> $@
 
 test: $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC) $(EXECUTABLE)
@@ -86,7 +98,7 @@ $(BUILD_DIR)/%.d: ;
 -include $(OBJECTS:.o=.d)
 
 clean:
-	rm -rf $(BUILD_DIR) $(EXECUTABLE) $(INCLUDE_FILE) $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC)
+	rm -rf $(BUILD_DIR) $(EXECUTABLE) $(INCLUDE_FILE) $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC) $(LIB_DIR)
 
 debug:
 	make all "OPTIMIZATION=-O0" "DEBUGFLAG=-g"

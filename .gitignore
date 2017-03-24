@@ -5,6 +5,8 @@ test_program_apc
 
 # build folder
 build
+# lib folder
+lib
 
 # swap files from vi/vim/gvim etc
 *.swp

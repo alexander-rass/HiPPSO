@@ -93,7 +93,7 @@ int main(int argc, char * argv[]) {
 			if (command == "c") {
 				commandOK = highprecisionpso::configuration::ReadConfigurationFile(std::string(argv[2]));
 				if (commandOK) {
-					mpf_set_default_prec(arbitraryprecisioncalculation::configuration::g_initial_precision);
+					mpf_set_default_prec(arbitraryprecisioncalculation::Configuration::getInitialPrecision());
 
 					highprecisionpso::configuration::g_file_prefix = highprecisionpso::configuration::GetFilePrefix();
 
@@ -266,7 +266,7 @@ Statistics* RestoreAndDoPso() {
 	long long prec;
 	bu >> prec;
 	mpf_set_default_prec(prec);
-	arbitraryprecisioncalculation::configuration::g_standard_random_number_generator->LoadData(&bu);
+	arbitraryprecisioncalculation::Configuration::getStandardRandomNumberGenerator()->LoadData(&bu);
 	configuration::g_statistics->LoadData(&bu, &version_of_stored_data);
 	configuration::g_neighborhood->LoadData(&bu, &version_of_stored_data);
 	configuration::g_position_and_velocity_updater->LoadData(&bu, &version_of_stored_data);
@@ -482,7 +482,7 @@ Statistics* DoPso(Statistics* statistics) {
 			&& step > configuration::g_preserve_backup_times[nextBackupStepId]){
 		++nextBackupStepId;
 	}
-	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 	if(configuration::g_debug_swarm_activated){
 		visualization::VisualizeCurrentSwarm();
 	}
@@ -535,8 +535,8 @@ Statistics* DoPso(Statistics* statistics) {
 			if(configuration::g_update_global_attractor_mode == configuration::UPDATE_GLOBAL_ATTRACTOR_MODE_EACH_PARTICLE){
 				configuration::g_neighborhood->ProceedAllUpdates();
 			}
-			if(arbitraryprecisioncalculation::configuration::g_increase_precision){
-				arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+			if(arbitraryprecisioncalculation::Configuration::isIncreasePrecisionRecommended()){
+				arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 				arbitraryprecisioncalculation::mpftoperations::IncreasePrecision();
 			}
 		}
@@ -550,8 +550,8 @@ Statistics* DoPso(Statistics* statistics) {
 			visualization::VisualizeCurrentSwarm();
 		}
 
-		if(arbitraryprecisioncalculation::configuration::g_increase_precision){
-			arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+		if(arbitraryprecisioncalculation::Configuration::isIncreasePrecisionRecommended()){
+			arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 			arbitraryprecisioncalculation::mpftoperations::IncreasePrecision();
 		}
 
@@ -589,7 +589,7 @@ void WriteCurrentState(std::string filename) {
 	std::ofstream bu(filename.c_str());
 	bu << PSO_PROGRAM_VERSION.GetCompleteVersion() << std::endl;
 	bu << mpf_get_default_prec() << std::endl;
-	arbitraryprecisioncalculation::configuration::g_standard_random_number_generator->StoreData(&bu);
+	arbitraryprecisioncalculation::Configuration::getStandardRandomNumberGenerator()->StoreData(&bu);
 	configuration::g_statistics->StoreData(&bu);
 	configuration::g_neighborhood->StoreData(&bu);
 	configuration::g_position_and_velocity_updater->StoreData(&bu);

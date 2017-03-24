@@ -207,8 +207,8 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 		configuration::g_dimensions = checkNums[i].size();
 		moreAccurateResults.push_back(func->Evaluate(checkNums[i]));
 	}
-	if(arbitraryprecisioncalculation::configuration::g_increase_precision){
-		arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+	if(arbitraryprecisioncalculation::Configuration::isIncreasePrecisionRecommended()){
+		arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 		std::cout << "evaluation leads to an increase of precision\n";
 	}
 	if(evalFunc != NULL){
@@ -295,7 +295,7 @@ int testFunction(Function* func, double (*evalFunc)(std::vector<double>), double
 		std::cerr << std::string(65, '!') << std::endl;
 		return 1;
 	}
-	arbitraryprecisioncalculation::configuration::g_increase_precision = false;
+	arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
 	return 0;
 }
 
@@ -687,8 +687,9 @@ int testFunctions(){
 }
 
 int start_tests(int argv, char * argc[]) {
-	arbitraryprecisioncalculation::configuration::g_output_precision = 10;
-	arbitraryprecisioncalculation::configuration::g_precision_safety_margin = BASE_PRECISION / 2;
+	arbitraryprecisioncalculation::Configuration::setOutputPrecision(10);
+	arbitraryprecisioncalculation::Configuration::setPrecisionSafetyMargin(BASE_PRECISION / 2);
+	arbitraryprecisioncalculation::Configuration::setInitialPrecision(BASE_PRECISION);
 	mpf_set_default_prec(BASE_PRECISION);
 	init();
 	std::cout << "start test series\n";
