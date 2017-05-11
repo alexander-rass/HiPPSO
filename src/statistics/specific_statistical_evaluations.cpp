@@ -49,6 +49,8 @@
 #include "neighborhood/neighborhood.h"
 #include "statistics/statistics.h"
 
+#include "position_and_velocity_updater/delta_updater.h"
+
 namespace highprecisionpso {
 
 OperatedSpecificStatisticalEvaluation::OperatedSpecificStatisticalEvaluation(Operation* operation, SpecificStatisticalEvaluation* specificEvaluation):operation_(operation), specific_evaluation_(specificEvaluation){}
@@ -141,6 +143,25 @@ std::vector<std::vector<mpf_t*> > GlobalAttractorEvaluation::Evaluate(){
 
 std::string GlobalAttractorEvaluation::GetName(){
 	return "GloAt";
+}
+
+std::vector<std::vector<mpf_t*> > DeltaUpdateCounterEvaluation::Evaluate(){
+    DeltaUpdater* delta = dynamic_cast<DeltaUpdater*>(configuration::g_position_and_velocity_updater);
+    std::vector<std::vector<mpf_t*> > data(configuration::g_particles, std::vector<mpf_t*>(configuration::g_dimensions, NULL));
+    std::vector<std::vector<unsigned long long> > cnts(configuration::g_particles, std::vector<unsigned long long>(configuration::g_dimensions, 0));
+    if(delta != NULL){
+        cnts = delta->NumberOfDeltaUpdates();
+    }
+	for(int p = 0; p < configuration::g_particles; p++){
+        for(int d = 0; d < configuration::g_dimensions; d++) {
+            data[p][d] = arbitraryprecisioncalculation::mpftoperations::ToMpft(cnts[p][d]);
+        }
+    }
+	return data;
+}
+
+std::string DeltaUpdateCounterEvaluation::GetName(){
+	return "DeltaCnt";
 }
 
 

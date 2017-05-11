@@ -208,6 +208,21 @@ private:
 	ConstantEvaluation* constant_evaluation_;
 };
 
+/**
+* @brief This class implements a specific statistical evaluation, which supplies the number of delta updates if a DeltaUpdater is used.
+*/
+class DeltaUpdateCounterEvaluation : public SpecificStatisticalEvaluation {
+public:
+	/**
+	* @brief Returns the current number of delta updates of the particles in each dimension.
+	*
+	* @return The number of delta updates
+	*/
+	std::vector<std::vector<mpf_t*> > Evaluate();
+	std::string GetName();
+};
+
+
 /************************ STATISTICAL REDUCE OPERATIONS *****************************/
 
 /**
