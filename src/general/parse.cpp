@@ -614,6 +614,8 @@ SpecificStatisticalEvaluation* ParseSpecificStatistic(const std::vector<std::str
 				return NULL;
 			}
 			return new ConstantSpecificStatisticalEvaluation(constantEvaluation);
+		} else if(parameter == "deltaUpdateCounters") {
+			return new DeltaUpdateCounterEvaluation;
 		}
 	}
 	parsed_parameters = mem_parsed_parameters;
