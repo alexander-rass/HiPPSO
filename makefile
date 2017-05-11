@@ -18,6 +18,9 @@ clean:
 	$(MAKE) clean -C $(SOURCE_DIRECTORY)
 
 debug:
+	$(MAKE) -C $(SOURCE_DIRECTORY)/ && \
+    mkdir -p $(BINARY_DIRECTORY) && \
+    cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
 	$(MAKE) debug -C $(SOURCE_DIRECTORY)
 
 debugtest:
