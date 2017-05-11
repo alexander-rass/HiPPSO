@@ -27,7 +27,17 @@ for file in $reference/* ; do
 	if [ ${file: -5} != ".conf" ] ; then
 		checkFile=$(echo $file | sed "s#$reference/##");
 		if [ -f $checkFile ] ; then
-			differLines=$(diff $file $checkFile | wc -l)
+            if [ ${file: -7} == ".backup" ]; then
+                #compare all except first and last line (those two lines contain the version number)
+			    differLines=$(diff <(sed "$(cat $file | wc -l)d" $file | sed "1d") <(sed "$(cat $checkFile | wc -l)d" $checkFile | sed "1d") | wc -l)
+                #check that first line contains only a single string which represents the version
+                expectedoneword=$(head $file -n1 | wc -w)
+                if [ "$expectedoneword" -ne 1 ]; then
+                    differLines=1
+                fi
+            else
+			    differLines=$(diff $file $checkFile | wc -l)
+            fi
 			if [ $differLines -eq 0 ] ; then
 				rm $checkFile
 				else
