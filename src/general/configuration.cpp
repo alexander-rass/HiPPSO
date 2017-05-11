@@ -446,6 +446,18 @@ bool ReadConfigurationFile(std::string fileName) {
 					is2 >> gamma;
 					g_position_and_velocity_updater = new DeltaUpdater(v, gamma);
 				}
+			} else if(suboption1 == "deltatcs") {
+				std::istringstream is(input[2]);
+				double v;
+				is >> v;
+				if(input.size() == 3){
+					g_position_and_velocity_updater = new DeltaUpdaterTCS(v);
+				} else {
+					std::istringstream is2(input[3]);
+					double gamma;
+					is2 >> gamma;
+					g_position_and_velocity_updater = new DeltaUpdaterTCS(v, gamma);
+				}
 			} else if(suboption1 == "orientationchange") {
 				std::istringstream is(input[2]);
 				double v;

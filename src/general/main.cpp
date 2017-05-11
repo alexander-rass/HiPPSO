@@ -237,7 +237,7 @@ int main(int argc, char * argv[]) {
 
 namespace highprecisionpso {
 
-const ProgramVersion PSO_PROGRAM_VERSION (1, 0, 0);
+const ProgramVersion PSO_PROGRAM_VERSION (1, 0, 1);
 
 time_t LAST_BACKUP;
 time_t LAST_RUN_CHECK;
