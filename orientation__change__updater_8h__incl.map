@@ -1,7 +1,12 @@
 <map id="src/position_and_velocity_updater/orientation_change_updater.h" name="src/position_and_velocity_updater/orientation_change_updater.h">
-<area shape="rect" id="node5" href="$position__and__velocity__updater_8h.html" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="295,109,444,165"/>
-<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="184,363,355,389"/>
-<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="358,288,480,315"/>
-<area shape="rect" id="node10" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm. " alt="" coords="244,213,386,240"/>
-<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="174,437,304,464"/>
+<area shape="rect" id="node1" title="This file contains a position and velocity updater, which changes orientation if some directions have..." alt="" coords="427,5,612,61"/>
+<area shape="rect" id="node2" title=" " alt="" coords="534,363,601,389"/>
+<area shape="rect" id="node3" title=" " alt="" coords="159,512,218,539"/>
+<area shape="rect" id="node4" title=" " alt="" coords="363,512,422,539"/>
+<area shape="rect" id="node5" href="$position__and__velocity__updater_8h.html" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="295,109,445,165"/>
+<area shape="rect" id="node6" title=" " alt="" coords="44,437,99,464"/>
+<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="185,363,355,389"/>
+<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="359,288,480,315"/>
+<area shape="rect" id="node10" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm." alt="" coords="244,213,387,240"/>
+<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="175,437,304,464"/>
 </map>

@@ -1,3 +1,4 @@
 <map id="highprecisionpso::GlobalBestPositionFunctionEvaluationStatistic" name="highprecisionpso::GlobalBestPositionFunctionEvaluationStatistic">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations. " alt="" coords="21,5,196,32"/>
+<area shape="rect" id="node1" title="This class implements a statistic, which evaluates the objective function at the global best position..." alt="" coords="5,80,212,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations." alt="" coords="21,5,196,32"/>
 </map>

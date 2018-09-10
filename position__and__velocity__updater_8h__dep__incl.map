@@ -1,9 +1,9 @@
 <map id="src/position_and_velocity_updater/position_and_velocity_updater.h" name="src/position_and_velocity_updater/position_and_velocity_updater.h">
-<area shape="rect" id="node2" href="$configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,124,180,151"/>
-<area shape="rect" id="node3" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="466,213,615,240"/>
-<area shape="rect" id="node4" href="$default__updater_8h.html" title="This file contains the standard class for processing the velocity and position update of each particl..." alt="" coords="255,117,431,158"/>
-<area shape="rect" id="node5" href="$delta__updater_8h.html" title="This file contains a class for processing the velocity and position update of each particle with rand..." alt="" coords="456,117,625,158"/>
-<area shape="rect" id="node6" href="$dimension__independent__updater_8h.html" title="This file contains a position and velocity updater, which acts independent to the coordinate axes..." alt="" coords="649,109,861,165"/>
-<area shape="rect" id="node7" href="$orientation__change__updater_8h.html" title="This file contains a position and velocity updater, which changes orientation if some directions have..." alt="" coords="885,109,1071,165"/>
-<area shape="rect" id="node8" href="$testing__updater_8h.html" title="This file contains an experimental position and velocity updater. " alt="" coords="1095,117,1271,158"/>
+<area shape="rect" id="node1" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="496,5,697,61"/>
+<area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,124,180,151"/>
+<area shape="rect" id="node3" href="$default__updater_8h.html" title="This file contains the standard class for processing the velocity and position update of each particl..." alt="" coords="205,117,381,158"/>
+<area shape="rect" id="node4" href="$delta__updater_8h.html" title="This file contains a class for processing the velocity and position update of each particle with rand..." alt="" coords="405,117,575,158"/>
+<area shape="rect" id="node5" href="$dimension__independent__updater_8h.html" title="This file contains a position and velocity updater, which acts independent to the coordinate axes." alt="" coords="599,109,811,165"/>
+<area shape="rect" id="node6" href="$orientation__change__updater_8h.html" title="This file contains a position and velocity updater, which changes orientation if some directions have..." alt="" coords="835,109,1020,165"/>
+<area shape="rect" id="node7" href="$testing__updater_8h.html" title="This file contains an experimental position and velocity updater." alt="" coords="1045,117,1221,158"/>
 </map>

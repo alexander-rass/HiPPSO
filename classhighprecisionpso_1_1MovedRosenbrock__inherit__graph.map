@@ -1,3 +1,4 @@
 <map id="highprecisionpso::MovedRosenbrock" name="highprecisionpso::MovedRosenbrock">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="35,5,212,32"/>
+<area shape="rect" id="node1" title="This class represents a moved version of the well known test function rosenbrock, where the optimal v..." alt="" coords="5,80,241,107"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="35,5,212,32"/>
 </map>

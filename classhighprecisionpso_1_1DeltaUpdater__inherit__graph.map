@@ -1,3 +1,5 @@
 <map id="highprecisionpso::DeltaUpdater" name="highprecisionpso::DeltaUpdater">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PositionAndVelocityUpdater.html" title="This class is an abstract class for processing the velocity and position update of each particle..." alt="" coords="20,5,195,47"/>
+<area shape="rect" id="node1" title="The delta updater implements a specific position and velocity update procedure." alt="" coords="19,95,223,121"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1DeltaUpdaterTCS.html" title="The delta updater implements a specific position and velocity update procedure." alt="" coords="5,169,236,196"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PositionAndVelocityUpdater.html" title="This class is an abstract class for processing the velocity and position update of each particle." alt="" coords="33,5,208,47"/>
 </map>

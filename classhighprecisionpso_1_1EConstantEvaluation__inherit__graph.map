@@ -1,3 +1,4 @@
 <map id="highprecisionpso::EConstantEvaluation" name="highprecisionpso::EConstantEvaluation">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ConstantEvaluation.html" title="This class is an abstract class. It supplies the interface for generating a constant value..." alt="" coords="10,5,190,47"/>
+<area shape="rect" id="node1" title="This constant evaluation calculates the value E." alt="" coords="5,95,195,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ConstantEvaluation.html" title="This class is an abstract class. It supplies the interface for generating a constant value." alt="" coords="10,5,190,47"/>
 </map>

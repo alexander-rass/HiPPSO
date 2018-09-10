@@ -1,3 +1,4 @@
 <map id="highprecisionpso::DoubleConstantEvaluation" name="highprecisionpso::DoubleConstantEvaluation">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ConstantEvaluation.html" title="This class is an abstract class. It supplies the interface for generating a constant value..." alt="" coords="5,5,185,47"/>
+<area shape="rect" id="node1" title="This constant evaluation can calculate a predefined mpf_t value from a double value." alt="" coords="11,95,179,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ConstantEvaluation.html" title="This class is an abstract class. It supplies the interface for generating a constant value." alt="" coords="5,5,185,47"/>
 </map>

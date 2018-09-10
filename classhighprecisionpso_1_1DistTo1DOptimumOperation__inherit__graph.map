@@ -1,0 +1,4 @@
+<map id="highprecisionpso::DistTo1DOptimumOperation" name="highprecisionpso::DistTo1DOptimumOperation">
+<area shape="rect" id="node1" title="This vector operation calculates for each dimension the distance to the nearest 1&#45;dimensional local o..." alt="" coords="5,95,179,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1VectorOperation.html" title="This class is an abstract class. It supplies the interface to operate on vectors of mpf_t values." alt="" coords="9,5,175,47"/>
+</map>

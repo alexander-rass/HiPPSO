@@ -1,3 +1,4 @@
-<map id="src/general/operations.h" name="src/general/operations.h">
-<area shape="rect" id="node2" href="$includes_8h.html" title="This file enforces all .h files to be included. " alt="" coords="11,80,161,107"/>
+<map id="src/arbitrary_precision_calculation/operations.h" name="src/arbitrary_precision_calculation/operations.h">
+<area shape="rect" id="node1" title="This file contains a large set of operations for calculations with the mpf_t data type." alt="" coords="55,5,222,47"/>
+<area shape="rect" id="node2" href="$arbitraryprecisioncalculation_8h.html" title="This file contains include directives to all externally useful functions of arbitraryprecisioncalcula..." alt="" coords="5,95,272,136"/>
 </map>

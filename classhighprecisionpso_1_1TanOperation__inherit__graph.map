@@ -1,0 +1,4 @@
+<map id="highprecisionpso::TanOperation" name="highprecisionpso::TanOperation">
+<area shape="rect" id="node1" title="This operation calculates the tangent function of the supplied value." alt="" coords="5,80,211,107"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Operation.html" title="This class is an abstract class. It supplies the interface to operate on single mpf_t values." alt="" coords="17,5,199,32"/>
+</map>

@@ -1,6 +1,6 @@
 var searchData=
 [
-  ['geometricaveragemergeoperation',['GeometricAverageMergeOperation',['../classhighprecisionpso_1_1GeometricAverageMergeOperation.html',1,'highprecisionpso']]],
+  ['geometricaveragereduceoperation',['GeometricAverageReduceOperation',['../classhighprecisionpso_1_1GeometricAverageReduceOperation.html',1,'highprecisionpso']]],
   ['globalattractorevaluation',['GlobalAttractorEvaluation',['../classhighprecisionpso_1_1GlobalAttractorEvaluation.html',1,'highprecisionpso']]],
   ['globalattractorupdatesstatistic',['GlobalAttractorUpdatesStatistic',['../classhighprecisionpso_1_1GlobalAttractorUpdatesStatistic.html',1,'highprecisionpso']]],
   ['globalbest',['GlobalBest',['../classhighprecisionpso_1_1GlobalBest.html',1,'highprecisionpso']]],

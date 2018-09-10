@@ -1,5 +1,10 @@
 <map id="src/statistics/statistics.h" name="src/statistics/statistics.h">
-<area shape="rect" id="node5" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="233,155,403,181"/>
-<area shape="rect" id="node8" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="111,80,232,107"/>
-<area shape="rect" id="node7" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="267,229,396,256"/>
+<area shape="rect" id="node1" title="This file contains an class, which stores current information about the particle swarm." alt="" coords="89,5,254,32"/>
+<area shape="rect" id="node2" title=" " alt="" coords="24,155,90,181"/>
+<area shape="rect" id="node3" title=" " alt="" coords="472,229,527,256"/>
+<area shape="rect" id="node4" title=" " alt="" coords="149,304,208,331"/>
+<area shape="rect" id="node5" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="230,155,401,181"/>
+<area shape="rect" id="node8" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="111,80,232,107"/>
+<area shape="rect" id="node6" title=" " alt="" coords="302,304,361,331"/>
+<area shape="rect" id="node7" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="267,229,396,256"/>
 </map>

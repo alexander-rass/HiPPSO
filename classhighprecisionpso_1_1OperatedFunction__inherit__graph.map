@@ -1,0 +1,4 @@
+<map id="highprecisionpso::OperatedFunction" name="highprecisionpso::OperatedFunction">
+<area shape="rect" id="node1" title="This class is a function, which applies some operation to the result of another function." alt="" coords="5,80,185,121"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="7,5,184,32"/>
+</map>

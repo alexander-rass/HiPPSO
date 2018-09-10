@@ -1,8 +1,11 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classhighprecisionpso_1_1ConstantEvaluation.html" title="This class is an abstract class. It supplies the interface for generating a constant value..." alt="" coords="5,136,185,177"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DoubleConstantEvaluation.html" title="This constant evaluation can calculate a predefined mpf_t value from a double value. " alt="" coords="250,5,418,47"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1EConstantEvaluation.html" title="This constant evaluation calculates the value E. " alt="" coords="239,71,429,112"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1MinusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value &#45;infinity. " alt="" coords="233,136,435,177"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1PiConstantEvaluation.html" title="This constant evaluation calculates the value Pi. " alt="" coords="238,201,430,243"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1PlusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value +infinity. " alt="" coords="238,267,430,308"/>
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1BoundHandling.html" title="This class is an abstract class. It supplies the interface for bound handling strategies of the parti..." alt="" coords="5,242,220,269"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1BoundHandlingAbsorption.html" title="This class implements the bound handling strategy absorption for the particle swarm optimization." alt="" coords="268,5,483,47"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1BoundHandlingHyperbolic.html" title="This class implements the bound handling strategy hyperbolic for the particle swarm optimization." alt="" coords="268,71,483,112"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1BoundHandlingNearest.html" title="This class implements the bound handling strategy nearest for the particle swarm optimization." alt="" coords="268,136,483,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1BoundHandlingNoBounds.html" title="This class implements the bound handling strategy no bounds for the particle swarm optimization." alt="" coords="268,201,483,243"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1BoundHandlingRandom.html" title="This class implements the bound handling strategy random for the particle swarm optimization." alt="" coords="268,267,483,308"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1BoundHandlingRandomForth.html" title="This class implements the bound handling strategy random forth for the particle swarm optimization." alt="" coords="268,332,483,373"/>
+<area shape="rect" id="node8" href="$classhighprecisionpso_1_1BoundHandlingReflect.html" title="This class implements the bound handling strategy reflect for the particle swarm optimization." alt="" coords="268,397,483,439"/>
+<area shape="rect" id="node9" href="$classhighprecisionpso_1_1BoundHandlingTorus.html" title="This class implements the bound handling strategy torus for the particle swarm optimization." alt="" coords="268,463,483,504"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="highprecisionpso::MinimalValueReduceOperation" name="highprecisionpso::MinimalValueReduceOperation">
+<area shape="rect" id="node1" title="This vector reduce operation reduces a vector by calculation of its minimal entry." alt="" coords="5,95,177,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1VectorReduceOperation.html" title="This an abstract class. It supplies the interface for reducing a vector of mpf_t values to a single v..." alt="" coords="9,5,174,47"/>
+</map>

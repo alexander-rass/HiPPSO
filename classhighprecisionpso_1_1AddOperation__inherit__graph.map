@@ -1,3 +1,4 @@
 <map id="highprecisionpso::AddOperation" name="highprecisionpso::AddOperation">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PairCombinationOperation.html" title="This class is an abstract class. It supplies the interface for merging two mpf_t values to a single v..." alt="" coords="5,5,228,47"/>
+<area shape="rect" id="node1" title="This pair combination operation reduces two values by addition." alt="" coords="5,95,212,121"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PairReduceOperation.html" title="This class is an abstract class. It supplies the interface for reducing two mpf_t values to a single ..." alt="" coords="11,5,206,47"/>
 </map>

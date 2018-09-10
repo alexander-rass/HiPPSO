@@ -1,0 +1,4 @@
+<map id="highprecisionpso::ArithmeticAverageReduceOperation" name="highprecisionpso::ArithmeticAverageReduceOperation">
+<area shape="rect" id="node1" title="This vector reduce operation reduces a vector by calculation of its arithmetic average." alt="" coords="5,95,192,136"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1VectorReduceOperation.html" title="This an abstract class. It supplies the interface for reducing a vector of mpf_t values to a single v..." alt="" coords="16,5,181,47"/>
+</map>

@@ -1,0 +1,4 @@
+<map id="highprecisionpso::LogEOperation" name="highprecisionpso::LogEOperation">
+<area shape="rect" id="node1" title="This operation calculates the logarithm with base E of the supplied value." alt="" coords="5,80,219,107"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Operation.html" title="This class is an abstract class. It supplies the interface to operate on single mpf_t values." alt="" coords="21,5,203,32"/>
+</map>

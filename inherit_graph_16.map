@@ -1,3 +1,6 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classhighprecisionpso_1_1Statistics.html" title="This class stores current information about the particle swarm. " alt="" coords="5,5,188,32"/>
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1StatisticReduceOperation.html" title="This class is an abstract class. It supplies the interface to reduce specific statistical evaluations..." alt="" coords="5,39,180,80"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1ComposedStatisticReduceOperation.html" title="This class is an abstract class. Additionally to the statistic reduce operation it stores a vector re..." alt="" coords="228,39,419,80"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ComposedDimensionReduceOperation.html" title="This class implements a reduce operation, which reduces the values of all dimensions to a single valu..." alt="" coords="467,5,657,47"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ComposedParticleReduceOperation.html" title="This class implements a reduce operation, which reduces the values of all particles to a single value..." alt="" coords="467,71,657,112"/>
 </map>

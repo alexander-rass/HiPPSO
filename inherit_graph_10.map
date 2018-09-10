@@ -1,7 +1,9 @@
 <map id="Graphical Class Hierarchy" name="Graphical Class Hierarchy">
-<area shape="rect" id="node1" href="$classhighprecisionpso_1_1RandomNumberGenerator.html" title="This class is an abstract class. It supplies the interface for random number generators. " alt="" coords="5,113,181,155"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1FastLinearCongruenceRandomNumberGenerator.html" title="This is a fast random number generator which uses linear congruences. " alt="" coords="247,5,491,47"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1FastM2P63LinearCongruenceRandomNumberGenerator.html" title="This is a fast random number generator, which uses linear congruences. It uses the modulus 263..." alt="" coords="246,70,491,126"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1IntenseLinearCongruenceRandomNumberGenerator.html" title="This is a random number generator which uses linear congruences. " alt="" coords="229,149,508,191"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1IntenseM2P63LinearCongruenceRandomNumberGenerator.html" title="This is a random number generator which uses linear congruences. It uses the modulus 263..." alt="" coords="237,214,500,270"/>
+<area shape="rect" id="node1" href="$classhighprecisionpso_1_1PositionAndVelocityUpdater.html" title="This class is an abstract class for processing the velocity and position update of each particle." alt="" coords="5,123,180,164"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DefaultUpdater.html" title="This class implements the standard movement equations for particle swarm optimization." alt="" coords="245,5,415,47"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1DeltaUpdater.html" title="The delta updater implements a specific position and velocity update procedure." alt="" coords="228,71,432,98"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1DimensionIndependentUpdater.html" title="This class implements an update procedure, which acts independent to the coordinate axes." alt="" coords="235,123,425,164"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1OrientationChangeUpdater.html" title="The orientation change updater implements an update procedure, which changes orientation if some dire..." alt="" coords="235,188,425,229"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1TestingUpdater.html" title="The testing updater implements an experimental position and velocity update procedure." alt="" coords="245,253,415,295"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1DeltaUpdaterTCS.html" title="The delta updater implements a specific position and velocity update procedure." alt="" coords="480,71,711,98"/>
 </map>

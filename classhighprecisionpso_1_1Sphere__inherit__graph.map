@@ -1,4 +1,5 @@
 <map id="highprecisionpso::Sphere" name="highprecisionpso::Sphere">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Norm2PowerK.html" title="This class represents a function which calculates the p&#45;norm for all p which are powers of 2..." alt="" coords="5,80,217,107"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="23,5,200,32"/>
+<area shape="rect" id="node1" title="This class represents a function which calculates the 2&#45;norm (which is equivalent to the sphere funct..." alt="" coords="27,155,195,181"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Norm2PowerK.html" title="This class represents a function which calculates the p&#45;norm for all p which are powers of 2." alt="" coords="5,80,217,107"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="23,5,200,32"/>
 </map>

@@ -1,0 +1,4 @@
+<map id="arbitraryprecisioncalculation::FastLinearCongruenceRandomNumberGenerator" name="arbitraryprecisioncalculation::FastLinearCongruenceRandomNumberGenerator">
+<area shape="rect" id="node1" title="This is a fast random number generator which uses linear congruences." alt="" coords="5,95,261,151"/>
+<area shape="rect" id="node2" href="$classarbitraryprecisioncalculation_1_1RandomNumberGenerator.html" title="This class is an abstract class. It supplies the interface for random number generators." alt="" coords="42,5,225,47"/>
+</map>

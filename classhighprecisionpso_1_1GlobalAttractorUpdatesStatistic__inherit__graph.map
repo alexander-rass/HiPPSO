@@ -1,3 +1,4 @@
 <map id="highprecisionpso::GlobalAttractorUpdatesStatistic" name="highprecisionpso::GlobalAttractorUpdatesStatistic">
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations. " alt="" coords="5,5,180,32"/>
+<area shape="rect" id="node1" title="This class implements a statistic, which evaluates how often each particle updates a global attractor..." alt="" coords="8,80,177,121"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations." alt="" coords="5,5,180,32"/>
 </map>
