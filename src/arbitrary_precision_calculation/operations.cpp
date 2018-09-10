@@ -46,6 +46,7 @@
 #include <sstream>
 #include <string.h>
 #include <unordered_set>
+#include <cmath>
 
 #include "arbitrary_precision_calculation/check_condition.h"
 #include "arbitrary_precision_calculation/configuration.h"
