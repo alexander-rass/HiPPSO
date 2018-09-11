@@ -1,9 +1,8 @@
 <map id="src/velocity_adjustment/velocity_adjustment.h" name="src/velocity_adjustment/velocity_adjustment.h">
-<area shape="rect" id="node1" title="This file contains an abstract class for processing the velocity adjustment after the position update..." alt="" coords="481,5,641,47"/>
 <area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,102,180,129"/>
-<area shape="rect" id="node3" href="$adjust_8h.html" title="This file contains the adjust velocity adjustment strategy." alt="" coords="205,95,365,136"/>
-<area shape="rect" id="node4" href="$deterministic__back_8h.html" title="This file contains the deterministic back velocity adjustment strategy." alt="" coords="389,95,549,136"/>
-<area shape="rect" id="node5" href="$none_8h.html" title="This file contains the none velocity adjustment strategy." alt="" coords="573,95,733,136"/>
-<area shape="rect" id="node6" href="$random__back_8h.html" title="This file contains the random back velocity adjustment strategy." alt="" coords="757,95,917,136"/>
-<area shape="rect" id="node7" href="$zero_8h.html" title="This file contains the zero velocity adjustment strategy." alt="" coords="941,95,1101,136"/>
+<area shape="rect" id="node3" href="$adjust_8h.html" title="This file contains the adjust velocity adjustment strategy. " alt="" coords="205,95,365,136"/>
+<area shape="rect" id="node4" href="$deterministic__back_8h.html" title="This file contains the deterministic back velocity adjustment strategy. " alt="" coords="389,95,549,136"/>
+<area shape="rect" id="node5" href="$none_8h.html" title="This file contains the none velocity adjustment strategy. " alt="" coords="573,95,733,136"/>
+<area shape="rect" id="node6" href="$random__back_8h.html" title="This file contains the random back velocity adjustment strategy. " alt="" coords="757,95,917,136"/>
+<area shape="rect" id="node7" href="$zero_8h.html" title="This file contains the zero velocity adjustment strategy. " alt="" coords="941,95,1101,136"/>
 </map>

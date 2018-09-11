@@ -1,12 +1,7 @@
 <map id="src/position_and_velocity_updater/delta_updater.h" name="src/position_and_velocity_updater/delta_updater.h">
-<area shape="rect" id="node1" title="This file contains a class for processing the velocity and position update of each particle with rand..." alt="" coords="435,5,604,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="534,348,601,375"/>
-<area shape="rect" id="node3" title=" " alt="" coords="159,497,218,524"/>
-<area shape="rect" id="node4" title=" " alt="" coords="363,497,422,524"/>
 <area shape="rect" id="node5" href="$position__and__velocity__updater_8h.html" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="295,95,445,151"/>
-<area shape="rect" id="node6" title=" " alt="" coords="44,423,99,449"/>
-<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="185,348,355,375"/>
-<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="359,273,480,300"/>
-<area shape="rect" id="node10" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm." alt="" coords="244,199,387,225"/>
-<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="175,423,304,449"/>
+<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="185,348,355,375"/>
+<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="359,273,480,300"/>
+<area shape="rect" id="node10" href="$statistics_8h.html" title="This file contains an class, which stores current information about the particle swarm. " alt="" coords="244,199,387,225"/>
+<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="175,423,304,449"/>
 </map>

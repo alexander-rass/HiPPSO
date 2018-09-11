@@ -1,5 +1,4 @@
 <map id="highprecisionpso::PotentialFunctionDifference" name="highprecisionpso::PotentialFunctionDifference">
-<area shape="rect" id="node1" title="This potential calculator can calculate the function difference statistic." alt="" coords="5,184,184,225"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PotentialCalculator.html" title="This class is an abstract class. It supplies the interface for calculation of some statistical data." alt="" coords="5,95,184,136"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations." alt="" coords="7,5,182,47"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1PotentialCalculator.html" title="This class is an abstract class. It supplies the interface for calculation of some statistical data..." alt="" coords="5,95,184,136"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations..." alt="" coords="7,5,182,47"/>
 </map>

@@ -1,8 +1,3 @@
 <map id="src/arbitrary_precision_calculation/operations.h" name="src/arbitrary_precision_calculation/operations.h">
-<area shape="rect" id="node1" title="This file contains a large set of operations for calculations with the mpf_t data type." alt="" coords="103,5,270,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="5,199,64,225"/>
-<area shape="rect" id="node3" title=" " alt="" coords="202,199,257,225"/>
-<area shape="rect" id="node4" title=" " alt="" coords="279,109,337,136"/>
-<area shape="rect" id="node5" href="$random__number__generator_8h.html" title="This file contains the available random number generators." alt="" coords="60,95,204,151"/>
-<area shape="rect" id="node6" title=" " alt="" coords="99,199,165,225"/>
+<area shape="rect" id="node5" href="$random__number__generator_8h.html" title="This file contains the available random number generators. " alt="" coords="60,95,204,151"/>
 </map>

@@ -1,4 +1,3 @@
 <map id="highprecisionpso::MinOperation" name="highprecisionpso::MinOperation">
-<area shape="rect" id="node1" title="This pair combination operation reduces two values by calculation of the minimum." alt="" coords="5,95,209,121"/>
 <area shape="rect" id="node2" href="$classhighprecisionpso_1_1PairReduceOperation.html" title="This class is an abstract class. It supplies the interface for reducing two mpf_t values to a single ..." alt="" coords="10,5,205,47"/>
 </map>

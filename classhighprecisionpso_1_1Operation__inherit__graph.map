@@ -1,16 +1,15 @@
 <map id="highprecisionpso::Operation" name="highprecisionpso::Operation">
-<area shape="rect" id="node1" title="This class is an abstract class. It supplies the interface to operate on single mpf_t values." alt="" coords="5,363,188,389"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1AbsOperation.html" title="This operation calculates the absolute value of the supplied value." alt="" coords="239,5,446,32"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ArccosOperation.html" title="This operation calculates the arccosine function of the supplied value." alt="" coords="259,57,427,98"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ArcsinOperation.html" title="This operation calculates the arcsine function of the supplied value." alt="" coords="261,122,425,163"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1ArctanOperation.html" title="This operation calculates the arctangent function of the supplied value." alt="" coords="260,187,425,229"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1CosOperation.html" title="This operation calculates the cosine function of the supplied value." alt="" coords="239,253,446,280"/>
-<area shape="rect" id="node7" href="$classhighprecisionpso_1_1ExpOperation.html" title="This operation calculates the exponential function of the supplied value." alt="" coords="239,304,446,331"/>
-<area shape="rect" id="node8" href="$classhighprecisionpso_1_1Log2DoubleOperation.html" title="This operation calculates logarithm with base two of the supplied value." alt="" coords="245,355,441,397"/>
-<area shape="rect" id="node9" href="$classhighprecisionpso_1_1Log2Operation.html" title="This operation calculates the logarithm with base two of the supplied value." alt="" coords="237,421,448,448"/>
-<area shape="rect" id="node10" href="$classhighprecisionpso_1_1LogEOperation.html" title="This operation calculates the logarithm with base E of the supplied value." alt="" coords="236,472,449,499"/>
-<area shape="rect" id="node11" href="$classhighprecisionpso_1_1PowOperation.html" title="This operation calculates the power of the supplied value to a given exponent." alt="" coords="238,523,447,549"/>
-<area shape="rect" id="node12" href="$classhighprecisionpso_1_1SinOperation.html" title="This operation calculates the sine function of the supplied value." alt="" coords="241,573,444,600"/>
-<area shape="rect" id="node13" href="$classhighprecisionpso_1_1SqrtOperation.html" title="This operation calculates the square root of the supplied value." alt="" coords="239,624,446,651"/>
-<area shape="rect" id="node14" href="$classhighprecisionpso_1_1TanOperation.html" title="This operation calculates the tangent function of the supplied value." alt="" coords="240,675,445,701"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1AbsOperation.html" title="This operation calculates the absolute value of the supplied value. " alt="" coords="239,5,446,32"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1ArccosOperation.html" title="This operation calculates the arccosine function of the supplied value. " alt="" coords="259,57,427,98"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1ArcsinOperation.html" title="This operation calculates the arcsine function of the supplied value. " alt="" coords="261,122,425,163"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1ArctanOperation.html" title="This operation calculates the arctangent function of the supplied value. " alt="" coords="260,187,425,229"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1CosOperation.html" title="This operation calculates the cosine function of the supplied value. " alt="" coords="239,253,446,280"/>
+<area shape="rect" id="node7" href="$classhighprecisionpso_1_1ExpOperation.html" title="This operation calculates the exponential function of the supplied value. " alt="" coords="239,304,446,331"/>
+<area shape="rect" id="node8" href="$classhighprecisionpso_1_1Log2DoubleOperation.html" title="This operation calculates logarithm with base two of the supplied value. " alt="" coords="245,355,441,397"/>
+<area shape="rect" id="node9" href="$classhighprecisionpso_1_1Log2Operation.html" title="This operation calculates the logarithm with base two of the supplied value. " alt="" coords="237,421,448,448"/>
+<area shape="rect" id="node10" href="$classhighprecisionpso_1_1LogEOperation.html" title="This operation calculates the logarithm with base E of the supplied value. " alt="" coords="236,472,449,499"/>
+<area shape="rect" id="node11" href="$classhighprecisionpso_1_1PowOperation.html" title="This operation calculates the power of the supplied value to a given exponent. " alt="" coords="238,523,447,549"/>
+<area shape="rect" id="node12" href="$classhighprecisionpso_1_1SinOperation.html" title="This operation calculates the sine function of the supplied value. " alt="" coords="241,573,444,600"/>
+<area shape="rect" id="node13" href="$classhighprecisionpso_1_1SqrtOperation.html" title="This operation calculates the square root of the supplied value. " alt="" coords="239,624,446,651"/>
+<area shape="rect" id="node14" href="$classhighprecisionpso_1_1TanOperation.html" title="This operation calculates the tangent function of the supplied value. " alt="" coords="240,675,445,701"/>
 </map>

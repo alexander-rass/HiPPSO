@@ -1,4 +1,3 @@
 <map id="highprecisionpso::GlobalBest" name="highprecisionpso::GlobalBest">
-<area shape="rect" id="node1" title="This class implements the global best topology for the particle swarm, where all particles are neighb..." alt="" coords="13,80,204,107"/>
 <area shape="rect" id="node2" href="$classhighprecisionpso_1_1Neighborhood.html" title="This class is an abstract class. It supplies the interface for neighborhood topologies of the particl..." alt="" coords="5,5,212,32"/>
 </map>

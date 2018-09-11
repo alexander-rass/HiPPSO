@@ -1,4 +1,3 @@
 <map id="highprecisionpso::ObjectiveFunctionEvaluationReduceOperation" name="highprecisionpso::ObjectiveFunctionEvaluationReduceOperation">
-<area shape="rect" id="node1" title="This vector reduce operation reduces a vector by evaluation of the specified objective function." alt="" coords="5,95,240,136"/>
 <area shape="rect" id="node2" href="$classhighprecisionpso_1_1VectorReduceOperation.html" title="This an abstract class. It supplies the interface for reducing a vector of mpf_t values to a single v..." alt="" coords="40,5,205,47"/>
 </map>

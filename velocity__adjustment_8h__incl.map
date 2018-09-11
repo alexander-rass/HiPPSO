@@ -1,10 +1,5 @@
 <map id="src/velocity_adjustment/velocity_adjustment.h" name="src/velocity_adjustment/velocity_adjustment.h">
-<area shape="rect" id="node1" title="This file contains an abstract class for processing the velocity adjustment after the position update..." alt="" coords="206,5,366,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="304,319,362,345"/>
-<area shape="rect" id="node3" title=" " alt="" coords="306,244,360,271"/>
-<area shape="rect" id="node4" title=" " alt="" coords="8,319,66,345"/>
-<area shape="rect" id="node5" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="164,95,286,121"/>
-<area shape="rect" id="node6" title=" " alt="" coords="49,169,116,196"/>
-<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="140,169,310,196"/>
-<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="100,244,230,271"/>
+<area shape="rect" id="node5" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="164,95,286,121"/>
+<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="140,169,310,196"/>
+<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="100,244,230,271"/>
 </map>

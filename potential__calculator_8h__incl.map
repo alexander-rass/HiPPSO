@@ -1,11 +1,6 @@
 <map id="src/statistics/potential_calculator.h" name="src/statistics/potential_calculator.h">
-<area shape="rect" id="node1" title="This file contains classes for statistical calculations." alt="" coords="358,5,509,47"/>
-<area shape="rect" id="node2" title=" " alt="" coords="130,333,188,360"/>
-<area shape="rect" id="node3" title=" " alt="" coords="554,259,609,285"/>
-<area shape="rect" id="node4" title=" " alt="" coords="436,333,495,360"/>
-<area shape="rect" id="node5" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="149,102,270,129"/>
+<area shape="rect" id="node5" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="149,102,270,129"/>
 <area shape="rect" id="node9" href="$specific__statistical__evaluations_8h.html" title="This file contain classes, which can evaluate matrices depending on the current state of the particle..." alt="" coords="349,95,518,136"/>
-<area shape="rect" id="node6" title=" " alt="" coords="24,184,91,211"/>
-<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="298,184,468,211"/>
-<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="248,259,377,285"/>
+<area shape="rect" id="node7" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="298,184,468,211"/>
+<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="248,259,377,285"/>
 </map>

@@ -1,4 +1,3 @@
 <map id="highprecisionpso::InclinedPlaneAsym" name="highprecisionpso::InclinedPlaneAsym">
-<area shape="rect" id="node1" title="This class implements the asymmetric inclined plane function, which represents a function with consta..." alt="" coords="8,80,180,121"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="5,5,183,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="5,5,183,32"/>
 </map>

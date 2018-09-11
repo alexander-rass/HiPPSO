@@ -1,4 +1,3 @@
 <map id="highprecisionpso::OperatedStatistic" name="highprecisionpso::OperatedStatistic">
-<area shape="rect" id="node1" title="This class implements a statistic, which operates on the values of another statistic." alt="" coords="5,80,185,121"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations." alt="" coords="8,5,183,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations. " alt="" coords="8,5,183,32"/>
 </map>

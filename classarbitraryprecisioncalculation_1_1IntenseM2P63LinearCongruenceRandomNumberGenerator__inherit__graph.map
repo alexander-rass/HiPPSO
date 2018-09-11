@@ -1,4 +1,3 @@
 <map id="arbitraryprecisioncalculation::IntenseM2P63LinearCongruenceRandomNumberGenerator" name="arbitraryprecisioncalculation::IntenseM2P63LinearCongruenceRandomNumberGenerator">
-<area shape="rect" id="node1" title="This is a random number generator which uses linear congruences. It uses the modulus 263." alt="" coords="5,95,273,151"/>
-<area shape="rect" id="node2" href="$classarbitraryprecisioncalculation_1_1RandomNumberGenerator.html" title="This class is an abstract class. It supplies the interface for random number generators." alt="" coords="48,5,231,47"/>
+<area shape="rect" id="node2" href="$classarbitraryprecisioncalculation_1_1RandomNumberGenerator.html" title="This class is an abstract class. It supplies the interface for random number generators. " alt="" coords="48,5,231,47"/>
 </map>

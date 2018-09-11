@@ -1,5 +1,4 @@
 <map id="highprecisionpso::ScaledHadamardRotatedSphere" name="highprecisionpso::ScaledHadamardRotatedSphere">
-<area shape="rect" id="node1" title="This class represents a scaled and rotated version of the well known sphere function." alt="" coords="21,80,191,121"/>
 <area shape="rect" id="node3" href="$classhighprecisionpso_1_1ScaledHadamardRotatedSphereFixed.html" title="This class represents a scaled and rotated version of the well known sphere function with fixed scale..." alt="" coords="5,169,207,211"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="17,5,195,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="17,5,195,32"/>
 </map>

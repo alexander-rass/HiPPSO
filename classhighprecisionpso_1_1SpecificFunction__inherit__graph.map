@@ -1,7 +1,6 @@
 <map id="highprecisionpso::SpecificFunction" name="highprecisionpso::SpecificFunction">
-<area shape="rect" id="node1" title="This class is an abstract class. It supplies an interface for operations on vectors." alt="" coords="5,104,180,145"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1CombineSpecificFunction.html" title="This class implements a specific function, which combines two specific functions with an operation." alt="" coords="229,5,407,47"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1CombineSpecificFunction.html" title="This class implements a specific function, which combines two specific functions with an operation..." alt="" coords="229,5,407,47"/>
 <area shape="rect" id="node3" href="$classhighprecisionpso_1_1ConstantSpecificFunction.html" title="This class implements a specific function with an evaluation function that always evaluates to a vect..." alt="" coords="228,71,408,112"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1IdentitySpecificFunction.html" title="This class implements a specific function with an evaluation function that clones the input." alt="" coords="233,136,403,177"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1OperatedSpecificFunction.html" title="This class implements a specific function, which combines an operation with a specific function." alt="" coords="228,201,408,243"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1IdentitySpecificFunction.html" title="This class implements a specific function with an evaluation function that clones the input..." alt="" coords="233,136,403,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1OperatedSpecificFunction.html" title="This class implements a specific function, which combines an operation with a specific function..." alt="" coords="228,201,408,243"/>
 </map>

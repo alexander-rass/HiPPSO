@@ -1,11 +1,5 @@
 <map id="src/neighborhood/neighborhood.h" name="src/neighborhood/neighborhood.h">
-<area shape="rect" id="node1" title="This file contains an abstract classes for neighborhood generation." alt="" coords="57,5,270,32"/>
-<area shape="rect" id="node2" title=" " alt="" coords="25,155,91,181"/>
-<area shape="rect" id="node3" title=" " alt="" coords="150,304,209,331"/>
-<area shape="rect" id="node4" title=" " alt="" coords="79,80,136,107"/>
-<area shape="rect" id="node5" title=" " alt="" coords="394,304,453,331"/>
-<area shape="rect" id="node6" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="246,155,417,181"/>
-<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="160,80,281,107"/>
-<area shape="rect" id="node7" title=" " alt="" coords="421,229,476,256"/>
-<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="268,229,397,256"/>
+<area shape="rect" id="node6" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="246,155,417,181"/>
+<area shape="rect" id="node9" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="160,80,281,107"/>
+<area shape="rect" id="node8" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="268,229,397,256"/>
 </map>

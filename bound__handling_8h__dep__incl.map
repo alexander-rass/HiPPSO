@@ -1,12 +1,11 @@
 <map id="src/bound_handling/bound_handling.h" name="src/bound_handling/bound_handling.h">
-<area shape="rect" id="node1" title="This file contains an abstract class for different bound handling strategies, which can be used for t..." alt="" coords="640,5,775,47"/>
-<area shape="rect" id="node2" href="$absorption_8h.html" title="This file contains the absorption bound handling strategy." alt="" coords="5,95,140,136"/>
-<area shape="rect" id="node3" href="$hyperbolic_8h.html" title="This file contains the hyperbolic bound handling strategy." alt="" coords="164,95,299,136"/>
-<area shape="rect" id="node4" href="$nearest_8h.html" title="This file contains the nearest bound handling strategy." alt="" coords="323,95,457,136"/>
-<area shape="rect" id="node5" href="$no__bounds_8h.html" title="This file contains the no bounds bound handling strategy." alt="" coords="481,95,616,136"/>
-<area shape="rect" id="node6" href="$random_8h.html" title="This file contains the random bound handling strategy." alt="" coords="640,95,775,136"/>
-<area shape="rect" id="node7" href="$random__forth_8h.html" title="This file contains the random forth bound handling strategy." alt="" coords="799,95,933,136"/>
-<area shape="rect" id="node8" href="$reflect_8h.html" title="This file contains the reflect bound handling strategy." alt="" coords="957,95,1092,136"/>
-<area shape="rect" id="node9" href="$torus_8h.html" title="This file contains the torus bound handling strategy." alt="" coords="1116,95,1251,136"/>
+<area shape="rect" id="node2" href="$absorption_8h.html" title="This file contains the absorption bound handling strategy. " alt="" coords="5,95,140,136"/>
+<area shape="rect" id="node3" href="$hyperbolic_8h.html" title="This file contains the hyperbolic bound handling strategy. " alt="" coords="164,95,299,136"/>
+<area shape="rect" id="node4" href="$nearest_8h.html" title="This file contains the nearest bound handling strategy. " alt="" coords="323,95,457,136"/>
+<area shape="rect" id="node5" href="$no__bounds_8h.html" title="This file contains the no bounds bound handling strategy. " alt="" coords="481,95,616,136"/>
+<area shape="rect" id="node6" href="$random_8h.html" title="This file contains the random bound handling strategy. " alt="" coords="640,95,775,136"/>
+<area shape="rect" id="node7" href="$random__forth_8h.html" title="This file contains the random forth bound handling strategy. " alt="" coords="799,95,933,136"/>
+<area shape="rect" id="node8" href="$reflect_8h.html" title="This file contains the reflect bound handling strategy. " alt="" coords="957,95,1092,136"/>
+<area shape="rect" id="node9" href="$torus_8h.html" title="This file contains the torus bound handling strategy. " alt="" coords="1116,95,1251,136"/>
 <area shape="rect" id="node10" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="1275,102,1449,129"/>
 </map>

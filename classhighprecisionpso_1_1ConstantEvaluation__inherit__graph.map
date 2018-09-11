@@ -1,8 +1,7 @@
 <map id="highprecisionpso::ConstantEvaluation" name="highprecisionpso::ConstantEvaluation">
-<area shape="rect" id="node1" title="This class is an abstract class. It supplies the interface for generating a constant value." alt="" coords="5,136,185,177"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DoubleConstantEvaluation.html" title="This constant evaluation can calculate a predefined mpf_t value from a double value." alt="" coords="250,5,418,47"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1EConstantEvaluation.html" title="This constant evaluation calculates the value E." alt="" coords="239,71,429,112"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1MinusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value &#45;infinity." alt="" coords="233,136,435,177"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1PiConstantEvaluation.html" title="This constant evaluation calculates the value Pi." alt="" coords="238,201,430,243"/>
-<area shape="rect" id="node6" href="$classhighprecisionpso_1_1PlusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value +infinity." alt="" coords="238,267,430,308"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1DoubleConstantEvaluation.html" title="This constant evaluation can calculate a predefined mpf_t value from a double value. " alt="" coords="250,5,418,47"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1EConstantEvaluation.html" title="This constant evaluation calculates the value E. " alt="" coords="239,71,429,112"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1MinusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value &#45;infinity. " alt="" coords="233,136,435,177"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1PiConstantEvaluation.html" title="This constant evaluation calculates the value Pi. " alt="" coords="238,201,430,243"/>
+<area shape="rect" id="node6" href="$classhighprecisionpso_1_1PlusInfinityConstantEvaluation.html" title="This constant evaluation calculates the value +infinity. " alt="" coords="238,267,430,308"/>
 </map>

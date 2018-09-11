@@ -1,4 +1,3 @@
 <map id="highprecisionpso::LocalAttractorEvaluation" name="highprecisionpso::LocalAttractorEvaluation">
-<area shape="rect" id="node1" title="This class implements a specific statistical evaluation, which supplies the local attractor positions..." alt="" coords="5,95,213,136"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations." alt="" coords="22,5,197,47"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1SpecificStatisticalEvaluation.html" title="This class is an abstract class. It supplies the interface for intermediate statistical evaluations..." alt="" coords="22,5,197,47"/>
 </map>

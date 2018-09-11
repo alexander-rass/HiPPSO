@@ -1,4 +1,3 @@
 <map id="highprecisionpso::GlobalBestPositionDistTo1DOptimumStatistic" name="highprecisionpso::GlobalBestPositionDistTo1DOptimumStatistic">
-<area shape="rect" id="node1" title="This class implements a statistic, which evaluates the distance of the global best found position to ..." alt="" coords="5,80,259,121"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations." alt="" coords="45,5,219,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Statistic.html" title="This class is an abstract class. It supplies the interface for statistical evaluations. " alt="" coords="45,5,219,32"/>
 </map>

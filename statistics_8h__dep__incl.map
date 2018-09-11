@@ -1,11 +1,10 @@
 <map id="src/statistics/statistics.h" name="src/statistics/statistics.h">
-<area shape="rect" id="node1" title="This file contains an class, which stores current information about the particle swarm." alt="" coords="191,5,357,32"/>
 <area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,199,180,225"/>
-<area shape="rect" id="node3" href="$main_8h.html" title="This file contains the main methods to start the PSO algorithm." alt="" coords="209,95,339,121"/>
+<area shape="rect" id="node3" href="$main_8h.html" title="This file contains the main methods to start the PSO algorithm. " alt="" coords="209,95,339,121"/>
 <area shape="rect" id="node4" href="$position__and__velocity__updater_8h.html" title="This file contains an abstract class for processing the velocity and position update of each particle..." alt="" coords="389,80,591,136"/>
 <area shape="rect" id="node5" href="$default__updater_8h.html" title="This file contains the standard class for processing the velocity and position update of each particl..." alt="" coords="205,191,381,233"/>
 <area shape="rect" id="node6" href="$delta__updater_8h.html" title="This file contains a class for processing the velocity and position update of each particle with rand..." alt="" coords="405,191,575,233"/>
-<area shape="rect" id="node7" href="$dimension__independent__updater_8h.html" title="This file contains a position and velocity updater, which acts independent to the coordinate axes." alt="" coords="599,184,811,240"/>
+<area shape="rect" id="node7" href="$dimension__independent__updater_8h.html" title="This file contains a position and velocity updater, which acts independent to the coordinate axes..." alt="" coords="599,184,811,240"/>
 <area shape="rect" id="node8" href="$orientation__change__updater_8h.html" title="This file contains a position and velocity updater, which changes orientation if some directions have..." alt="" coords="835,184,1020,240"/>
-<area shape="rect" id="node9" href="$testing__updater_8h.html" title="This file contains an experimental position and velocity updater." alt="" coords="1045,191,1221,233"/>
+<area shape="rect" id="node9" href="$testing__updater_8h.html" title="This file contains an experimental position and velocity updater. " alt="" coords="1045,191,1221,233"/>
 </map>

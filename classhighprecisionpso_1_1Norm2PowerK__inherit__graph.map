@@ -1,8 +1,7 @@
 <map id="highprecisionpso::Norm2PowerK" name="highprecisionpso::Norm2PowerK">
-<area shape="rect" id="node1" title="This class represents a function which calculates the p&#45;norm for all p which are powers of 2." alt="" coords="231,81,443,108"/>
-<area shape="rect" id="node3" href="$classhighprecisionpso_1_1Norm2.html" title="This class represents a function, which calculates the 2&#45;norm." alt="" coords="491,5,658,32"/>
-<area shape="rect" id="node4" href="$classhighprecisionpso_1_1Norm4.html" title="This class represents a function, which calculates the 4&#45;norm." alt="" coords="491,56,658,83"/>
-<area shape="rect" id="node5" href="$classhighprecisionpso_1_1Norm8.html" title="This class represents a function, which calculates the 8&#45;norm." alt="" coords="491,107,658,133"/>
+<area shape="rect" id="node3" href="$classhighprecisionpso_1_1Norm2.html" title="This class represents a function, which calculates the 2&#45;norm. " alt="" coords="491,5,658,32"/>
+<area shape="rect" id="node4" href="$classhighprecisionpso_1_1Norm4.html" title="This class represents a function, which calculates the 4&#45;norm. " alt="" coords="491,56,658,83"/>
+<area shape="rect" id="node5" href="$classhighprecisionpso_1_1Norm8.html" title="This class represents a function, which calculates the 8&#45;norm. " alt="" coords="491,107,658,133"/>
 <area shape="rect" id="node6" href="$classhighprecisionpso_1_1Sphere.html" title="This class represents a function which calculates the 2&#45;norm (which is equivalent to the sphere funct..." alt="" coords="491,157,659,184"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="5,81,183,108"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="5,81,183,108"/>
 </map>

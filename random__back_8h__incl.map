@@ -1,11 +1,6 @@
 <map id="src/velocity_adjustment/random_back.h" name="src/velocity_adjustment/random_back.h">
-<area shape="rect" id="node1" title="This file contains the random back velocity adjustment strategy." alt="" coords="206,5,366,47"/>
 <area shape="rect" id="node2" href="$velocity__adjustment_8h.html" title="This file contains an abstract class for processing the velocity adjustment after the position update..." alt="" coords="210,95,363,136"/>
-<area shape="rect" id="node3" title=" " alt="" coords="304,408,362,435"/>
-<area shape="rect" id="node4" title=" " alt="" coords="306,333,360,360"/>
-<area shape="rect" id="node5" title=" " alt="" coords="8,408,66,435"/>
-<area shape="rect" id="node6" href="$particle_8h.html" title="This file contains information about the particles of the swarm." alt="" coords="164,184,286,211"/>
-<area shape="rect" id="node7" title=" " alt="" coords="49,259,116,285"/>
-<area shape="rect" id="node8" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects." alt="" coords="140,259,310,285"/>
-<area shape="rect" id="node9" href="$function_8h.html" title="This file contains abstract classes for function generation." alt="" coords="100,333,230,360"/>
+<area shape="rect" id="node6" href="$particle_8h.html" title="This file contains information about the particles of the swarm. " alt="" coords="164,184,286,211"/>
+<area shape="rect" id="node8" href="$general__objects_8h.html" title="This file contains various general objects which can be used by or contained in other objects..." alt="" coords="140,259,310,285"/>
+<area shape="rect" id="node9" href="$function_8h.html" title="This file contains abstract classes for function generation. " alt="" coords="100,333,230,360"/>
 </map>

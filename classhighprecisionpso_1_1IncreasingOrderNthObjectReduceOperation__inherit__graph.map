@@ -1,4 +1,3 @@
 <map id="highprecisionpso::IncreasingOrderNthObjectReduceOperation" name="highprecisionpso::IncreasingOrderNthObjectReduceOperation">
-<area shape="rect" id="node1" title="This vector reduce operation reduces a vector by sorting the vector and returning the value at the re..." alt="" coords="5,95,220,136"/>
 <area shape="rect" id="node2" href="$classhighprecisionpso_1_1VectorReduceOperation.html" title="This an abstract class. It supplies the interface for reducing a vector of mpf_t values to a single v..." alt="" coords="30,5,195,47"/>
 </map>

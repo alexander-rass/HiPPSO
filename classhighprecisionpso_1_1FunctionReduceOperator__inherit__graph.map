@@ -1,4 +1,3 @@
 <map id="highprecisionpso::FunctionReduceOperator" name="highprecisionpso::FunctionReduceOperator">
-<area shape="rect" id="node1" title="This class is a function, which reduces a specific function to a function with a vector reduce operat..." alt="" coords="5,80,183,121"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="5,5,183,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="5,5,183,32"/>
 </map>

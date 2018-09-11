@@ -1,4 +1,3 @@
 <map id="highprecisionpso::Norm1" name="highprecisionpso::Norm1">
-<area shape="rect" id="node1" title="This class represents a function which calculates the Manhattan norm of a vector." alt="" coords="11,80,177,107"/>
-<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions." alt="" coords="5,5,183,32"/>
+<area shape="rect" id="node2" href="$classhighprecisionpso_1_1Function.html" title="This class is an abstract class. It supplies the interface for objective functions. " alt="" coords="5,5,183,32"/>
 </map>

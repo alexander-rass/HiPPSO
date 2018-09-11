@@ -1,5 +1,4 @@
 <map id="src/statistics/direct_statistics.h" name="src/statistics/direct_statistics.h">
-<area shape="rect" id="node1" title="This file contain classes, which evaluate to vectors depending on the current state of the particle s..." alt="" coords="115,5,249,47"/>
 <area shape="rect" id="node2" href="$general_2configuration_8h.html" title="This file contains general information about the configuration for running the particle swarm optimiz..." alt="" coords="5,95,180,121"/>
-<area shape="rect" id="node3" href="$general_2parse_8h.html" title="This file contains functions for parsing the configuration file." alt="" coords="205,95,338,121"/>
+<area shape="rect" id="node3" href="$general_2parse_8h.html" title="This file contains functions for parsing the configuration file. " alt="" coords="205,95,338,121"/>
 </map>
