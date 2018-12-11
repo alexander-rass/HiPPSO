@@ -71,7 +71,7 @@ void usage(int argc, char * argv[]){
 	std::cout << std::string(argv[0]) << " rf <configuration backup file name with extension confBU>\n";
 	std::cout << "\tForces the restart of a stopped PSO run.\n";
 	std::cout << "\tThe file with extension \".SHUTDOWN\" is not necessary.\n";
-	std::cout << std::string(argv[0]) << " restart <config gile name> <backup file name>\n";
+	std::cout << std::string(argv[0]) << " restart <config file name> <backup file name>\n";
 	std::cout << "\tRestarts a PSO with the specified configuration file and backup file.\n";
 	std::cout << "\tIt starts running at the time step stored in the backup file.\n";
 	std::cout << "\tThe configuration file can be modified as long as the changes do not influence the movement of the swarm.\n";
@@ -182,18 +182,19 @@ int main(int argc, char * argv[]) {
 				// restarts old run from configuration file and backup file
 				std::string configFileName(argv[2]);
 				std::string backupFileName(argv[3]);
-				const char* confFile = configFileName.c_str();
-				if (!(highprecisionpso::configuration::ReadConfigurationFile(confFile))){
-					std::cerr << "could not read configuration file " << configFileName << std::endl;
-					return 1;
+				{
+					const char* confFile = configFileName.c_str();
+					if (!(highprecisionpso::configuration::ReadConfigurationFile(confFile))){
+						std::cerr << "could not read configuration file " << configFileName << std::endl;
+						return 1;
+					}
+					if (!highprecisionpso::AllowedToRun()) {
+						std::cout << "not allowed to run\n";
+						return 0;
+					}
 				}
-				if (!highprecisionpso::AllowedToRun()) {
-					std::cout << "not allowed to run\n";
-					return 0;
-				}
-
 				highprecisionpso::configuration::g_file_prefix = highprecisionpso::configuration::GetFilePrefix();
-				{ // copy config file
+				if(configFileName != (highprecisionpso::configuration::g_file_prefix + ".confBU")){ // copy config file
 					std::ifstream confFile(argv[2]);
 					FILE* backup = fopen(
 							(highprecisionpso::configuration::g_file_prefix + ".confBU").c_str(),
@@ -206,7 +207,7 @@ int main(int argc, char * argv[]) {
 					fclose(backup);
 					confFile.close();
 				}
-				{ // copy backup file
+				if(backupFileName != (highprecisionpso::configuration::g_file_prefix + ".backup")){ // copy backup file
 					std::ifstream confFile(argv[3]);
 					FILE* backup = fopen(
 							(highprecisionpso::configuration::g_file_prefix + ".backup").c_str(),
@@ -218,6 +219,15 @@ int main(int argc, char * argv[]) {
 					}
 					fclose(backup);
 					confFile.close();
+				} else {
+					std::cout << "backup file \"" << backupFileName << "\" will be overwritten by new backup files. "
+					          << "Are you sure that this is intentionaly? "
+					          << "Please write \"YES\" to continue." << std::endl;
+					std::string tmp;
+					std::cin >> tmp;
+					if(tmp != "YES"){
+						std::cout << "You did not write \"YES\". Program terminates whithout any action." << std::endl;
+					}
 				}
 
 				highprecisionpso::RestoreAndDoPso();
