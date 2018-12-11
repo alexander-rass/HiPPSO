@@ -194,10 +194,29 @@ int main(int argc, char * argv[]) {
 					}
 				}
 				highprecisionpso::configuration::g_file_prefix = highprecisionpso::configuration::GetFilePrefix();
-				if(configFileName != (highprecisionpso::configuration::g_file_prefix + ".confBU")){ // copy config file
+				std::string newConfigurationBackupFileName = highprecisionpso::configuration::g_file_prefix + ".confBU";
+				if(configFileName != newConfigurationBackupFileName){ // copy config file
+					bool fileexists = false;
+					{
+						std::ifstream checkfile(newConfigurationBackupFileName);
+						if(checkfile.good()){
+							fileexists = true;
+							checkfile.close();
+						}
+					}
+					if(fileexists){
+						std::cout << "File \"" << newConfigurationBackupFileName << "\" already exists. "
+							<< "This file will be overwritten if you continue. "
+							<< "Please write \"YES\" to continue." << std::endl;
+						std::string tmp;
+						std::cin >> tmp;
+						if(tmp != "YES"){
+							std::cout << "You did not write \"YES\". Program terminates whithout any action." << std::endl;
+						}
+					}
 					std::ifstream confFile(argv[2]);
 					FILE* backup = fopen(
-							(highprecisionpso::configuration::g_file_prefix + ".confBU").c_str(),
+							newConfigurationBackupFileName.c_str(),
 							"w");
 					while (!confFile.eof()) {
 						std::string tmp;
@@ -207,10 +226,29 @@ int main(int argc, char * argv[]) {
 					fclose(backup);
 					confFile.close();
 				}
-				if(backupFileName != (highprecisionpso::configuration::g_file_prefix + ".backup")){ // copy backup file
+				std::string newBackupFileName = highprecisionpso::configuration::g_file_prefix + ".backup";
+				if(backupFileName != (newBackupFileName)){ // copy backup file
+					bool fileexists = false;
+					{
+						std::ifstream checkfile(newBackupFileName);
+						if(checkfile.good()){
+							fileexists = true;
+							checkfile.close();
+						}
+					}
+					if(fileexists){
+						std::cout << "File \"" << newBackupFileName << "\" already exists. "
+							<< "This file will be overwritten if you continue. "
+							<< "Please write \"YES\" to continue." << std::endl;
+						std::string tmp;
+						std::cin >> tmp;
+						if(tmp != "YES"){
+							std::cout << "You did not write \"YES\". Program terminates whithout any action." << std::endl;
+						}
+					}
 					std::ifstream confFile(argv[3]);
 					FILE* backup = fopen(
-							(highprecisionpso::configuration::g_file_prefix + ".backup").c_str(),
+							newBackupFileName.c_str(),
 							"w");
 					while (!confFile.eof()) {
 						std::string tmp;
@@ -327,7 +365,6 @@ Statistics* InitAndDoPso() {
 		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(range1P);
 		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(center1P);
 	}
-	std::vector<std::vector<configuration::InitializationInformation> > initialization_informations = {configuration::g_position_initialization_informations, configuration::g_velocity_initialization_informations};
 	for (unsigned int position_or_velocity = 0; position_or_velocity < 2; position_or_velocity++){
 		std::vector<configuration::InitializationInformation> * initialization_informations;
 		if(position_or_velocity == 0){
