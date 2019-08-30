@@ -16,6 +16,6 @@ matrix:
         - os: osx
           compiler: clang
           env: TARGET=test
-script: make && make $TARGET
+script: make $TARGET
 before_install: if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coveralls ; fi
 after_success: if [ "$TARGET" = "coveragetest" ]; then coveralls --exclude lib --exclude tests --gcov-options '\-lp' ; fi
