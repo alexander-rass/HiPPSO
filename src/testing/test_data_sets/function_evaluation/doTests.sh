@@ -31,7 +31,7 @@ for file in $reference/* ; do
                 #compare all except first and last line (those two lines contain the version number)
 			    differLines=$(diff <(sed "$(cat $file | wc -l)d" $file | sed "1d") <(sed "$(cat $checkFile | wc -l)d" $checkFile | sed "1d") | wc -l)
                 #check that first line contains only a single string which represents the version
-                expectedoneword=$(head $file -n 1 | wc -w)
+                expectedoneword=$(head -n 1 $file | wc -w)
                 if [ "$expectedoneword" -ne 1 ]; then
                     differLines=1
                 fi
