@@ -5,6 +5,10 @@ matrix:
           os: linux
           compiler: g++
           env: TARGET=coveragetest
+          addons:
+              apt:
+                  packages:
+                      - lcov
         - name: linux and g++
           os: linux
           compiler: g++
