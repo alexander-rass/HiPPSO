@@ -1,22 +1,27 @@
 language: cpp
 matrix:
     include:
-        - os: linux
+        - name: linux and g++ (coverage)
+          os: linux
           compiler: g++
           env: TARGET=coveragetest
-        - os: linux
+        - name: linux and g++
+          os: linux
           compiler: g++
           env: TARGET=test
-        - os: linux
+        - name: linux and clang
+          os: linux
           compiler: clang
           env: TARGET=test
-        - os: osx
+        - name: osx and g++
+          os: osx
           compiler: g++
           env: TARGET=test
-        - os: osx
+        - name: osx and clang
+          os: osx
           compiler: clang
           env: TARGET=test
 script: make $TARGET
 before_install: if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coveralls ; PARENTDIR=$(pwd) ; fi
-after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; coveralls --gcov-options '\-lp' ; fi
-##after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; lcov -t "result" -o coverage_out.info -c -d .; lcov --list coverage_out.info; gem install coveralls-lcov ; coveralls-lcov coverage_out.info; bash <(curl -s https://codecov.io/bash) -f coverage_out.info.cleaned || echo "Codecov did not collect coverage reports" ; fi
+#after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; coveralls --gcov-options '\-lp' ; fi
+after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; lcov -t "result" -o coverage_out.info -c -d .; lcov --list coverage_out.info; gem install coveralls-lcov ; coveralls-lcov coverage_out.info; bash <(curl -s https://codecov.io/bash) -f coverage_out.info || echo "Codecov did not collect coverage reports" ; fi
