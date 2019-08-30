@@ -1,8 +1,23 @@
 language: cpp
-compiler:
-    - clang
-    - g++
-os:
-    - linux
-    - osx
-script: make && make test
+matrix:
+    include:
+        - os: linux
+          compiler: g++
+          env: TARGET=coveragetest
+        - os: linux
+          compiler: g++
+          env: TARGET=test
+        - os: linux
+          compiler: clang
+          env: TARGET=test
+        - os: osx
+          compiler: g++
+          env: TARGET=test
+        - os: osx
+          compiler: clang
+          env: TARGET=test
+script: make && make $TARGET
+before_install:
+        -if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coeralls ; fi
+after_success:
+        -if [ "$TARGET" = "coveragetest" ]; then coveralls --exclude lib --exclude tests --gcov-options '\-lp' ; fi
