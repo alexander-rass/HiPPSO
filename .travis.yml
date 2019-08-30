@@ -17,5 +17,6 @@ matrix:
           compiler: clang
           env: TARGET=test
 script: make $TARGET
-before_install: if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coveralls ; fi
-after_success: if [ "$TARGET" = "coveragetest" ]; then coveralls --exclude lib --exclude tests --gcov-options '\-lp' ; fi
+before_install: if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coveralls ; PARENTDIR=$(pwd) ; fi
+after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; coveralls --gcov-options '\-lp' ; fi
+##after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src/build ; lcov -t "result" -o coverage_out.info -c -d .; lcov --list coverage_out.info; gem install coveralls-lcov ; coveralls-lcov coverage_out.info; bash <(curl -s https://codecov.io/bash) -f coverage_out.info.cleaned || echo "Codecov did not collect coverage reports" ; fi
