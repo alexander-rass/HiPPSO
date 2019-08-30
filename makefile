@@ -34,3 +34,10 @@ doc:
 cleandoc:
 	rm -rf doc/html/*
 
+coverage:
+	$(MAKE) coverage -C $(SOURCE_DIRECTORY)/ && \
+    mkdir -p $(BINARY_DIRECTORY) && \
+    cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
+
+coveragetest:
+	$(MAKE) coveragetest -C $(SOURCE_DIRECTORY)

@@ -2,6 +2,7 @@ CFLAGS=-Wall -std=c++11
 OPTIMIZATION=-O5
 LDFLAGS=-lgmp
 DEBUGFLAG=
+CODECOVERAGE=
 
 EXECUTABLE=high_precision_pso
 TEST_PROGRAM_PSO=test_program_pso
@@ -26,13 +27,13 @@ H_FILES=$(SOURCES:.cpp=.h)
 all: $(EXECUTABLE)
 	
 $(EXECUTABLE): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LIB_DIR)/$(LIB_FILE)
-	$(CXX) -L./$(LIB_DIR) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LIB_LINK) $(LDFLAGS) -o $@
+	$(CXX) -L./$(LIB_DIR) $(CODECOVERAGE) $(OBJECTS) $(BUILD_DIR)/general/main.o $(LIB_LINK) $(LDFLAGS) -o $@
 
 $(TEST_PROGRAM_PSO): $(INCLUDE_FILE) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LIB_DIR)/$(LIB_FILE)
-	$(CXX) -L./$(LIB_DIR) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
+	$(CXX) -L./$(LIB_DIR) $(CODECOVERAGE) $(OBJECTS) $(BUILD_DIR)/testing/pso_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
 
 $(TEST_PROGRAM_APC): $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LIB_DIR)/$(LIB_FILE)
-	$(CXX) -L./$(LIB_DIR) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
+	$(CXX) -L./$(LIB_DIR) $(CODECOVERAGE) $(BUILD_DIR)/testing/arbitrary_precision_calculation_tests.o $(LIB_LINK) $(LDFLAGS) -o $@
 
 $(LIB_DIR)/$(LIB_FILE): $(APC_OBJECTS)
 	mkdir -p $(LIB_DIR) && \
@@ -88,7 +89,7 @@ test: $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC) $(EXECUTABLE)
 
 $(BUILD_DIR)/%.o : %.cpp
 	mkdir -p $(addprefix $(BUILD_DIR)/, $(dir $*))
-	$(CXX) -I . -MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.temp.d $(CFLAGS) $(DEBUGFLAG) $(OPTIMIZATION) -c -o $(BUILD_DIR)/$*.o $*.cpp
+	$(CXX) -I . -MT $@ -MMD -MP -MF $(BUILD_DIR)/$*.temp.d $(CFLAGS) $(CODECOVERAGE) $(DEBUGFLAG) $(OPTIMIZATION) -c -o $(BUILD_DIR)/$*.o $*.cpp
 	mv -f $(BUILD_DIR)/$*.temp.d $(BUILD_DIR)/$*.d
 
 $(BUILD_DIR)/%.d: ;
@@ -106,3 +107,8 @@ debug:
 debugtest:
 	make test "OPTIMIZATION=-O0" "DEBUGFLAG=-g"
 
+coverage:
+	make debug "CODECOVERAGE=--coverage"
+
+coveragetest:
+	make debugtest  "CODECOVERAGE=--coverage"
