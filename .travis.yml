@@ -2,4 +2,7 @@ language: cpp
 compiler:
     - clang
     - g++
+os:
+    - linux
+    - osx
 script: make && make test
