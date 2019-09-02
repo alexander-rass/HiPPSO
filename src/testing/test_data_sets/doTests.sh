@@ -27,7 +27,7 @@ for folder in $REFFOLDER/* ; do
         fi
         CURCONFIGFILE=$TESTBASEFOLDER/$folder/*.confBU
 
-        TMPFOLDER=tmpfolder$(echo $folder | md5sum | sed "s/ .*//")
+        TMPFOLDER=tmpfolder
         if [ -d $TMPFOLDER ]; then
             rm -r $TMPFOLDER;
         fi
@@ -70,8 +70,8 @@ for folder in $REFFOLDER/* ; do
             cd $TESTBASEFOLDER
             exit 1
         fi
-        NUMREFFILES=$(find $TESTBASEFOLDER/$folder -type f -printf . | wc -c)
-        NUMPRODUCEDFILES=$(find . -type f -printf . | wc -c)
+        NUMREFFILES=$(find $TESTBASEFOLDER/$folder -type f -print0 | tr -d -c '\0' | wc -c)
+        NUMPRODUCEDFILES=$(find . -type f -print0 | tr -d -c '\0' | wc -c)
         if [ $NUMREFFILES -ne $NUMPRODUCEDFILES ]; then
             echo "FAILURE DETECTED"
             echo "Number of prduced files ($NUMPRODUCEDFILES) differs from number of reference files ($NUMREFFILES)"
@@ -82,7 +82,9 @@ for folder in $REFFOLDER/* ; do
         find . -type f -print0 |
             while IFS= read -r -d '' line; do
                 currentfile="$line"
-                reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S${SPLITITERATIONS}F/S${ITERATIONS}F/")
+                echo Current file: $line
+                reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S$SPLITITERATIONS/S$ITERATIONS/")
+                echo Compare with: $reffile
                 if [ -f $reffile ]; then
                     if [ ${currentfile: -7} == ".backup" ]; then
                         #compare all except first and last line (those two lines contain the version number)
