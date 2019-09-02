@@ -82,9 +82,9 @@ $(INCLUDE_FILE): $(H_FILES)
 	echo $(H_FILES) | tr ' ' '\n' | grep -v "check_condition.h" | sed "s:$$:\":" | sed "s:^:#include \":" | sort >> $@
 
 test: $(TEST_PROGRAM_PSO) $(TEST_PROGRAM_APC) $(EXECUTABLE)
+	$(MAKE) -C testing/test_data_sets/ && \
 	./$(TEST_PROGRAM_PSO) && \
-    ./$(TEST_PROGRAM_APC) && \
-	$(MAKE) -C testing/test_data_sets/
+	./$(TEST_PROGRAM_APC)
 
 
 $(BUILD_DIR)/%.o : %.cpp

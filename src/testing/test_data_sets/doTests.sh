@@ -56,8 +56,9 @@ for folder in $REFFOLDER/* ; do
             cd $TESTBASEFOLDER
             exit 1
         fi
-        CURCONFIGFILE=*.confBU
-        sed -i "s/^steps $SPLITITERATIONS/steps $ITERATIONS/" $CURCONFIGFILE
+        CURCONFIGFILE=$(echo *.confBU)
+        sed "s/^steps $SPLITITERATIONS/steps $ITERATIONS/" $CURCONFIGFILE > TMP_$CURCONFIGFILE
+        mv TMP_$CURCONFIGFILE $CURCONFIGFILE
         ../../../../../bin/high_precision_pso rf $CURCONFIGFILE;
         receivedExitCode=$? ;
         expectedExitCode=0;
@@ -82,9 +83,9 @@ for folder in $REFFOLDER/* ; do
         find . -type f -print0 |
             while IFS= read -r -d '' line; do
                 currentfile="$line"
-                echo Current file: $line
-                reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S$SPLITITERATIONS/S$ITERATIONS/")
-                echo Compare with: $reffile
+                #echo Current file: $line
+                reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S${SPLITITERATIONS}F/S${ITERATIONS}F/")
+                #echo Compare with: $reffile
                 if [ -f $reffile ]; then
                     if [ ${currentfile: -7} == ".backup" ]; then
                         #compare all except first and last line (those two lines contain the version number)
