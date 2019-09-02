@@ -27,4 +27,4 @@ matrix:
           env: TARGET=test
 script: make $TARGET
 before_install: if [ "$TARGET" = "coveragetest" ]; then pip install --user cpp-coveralls ; PARENTDIR=$(pwd) ; fi
-after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src ; lcov -t "result" -o coverage_out.info -c -d ./build/; lcov --remove coverage_out.info "/usr/include/*" -o coverage_out2.info; sed -i "s/SF:.*\/HiPPSO\/src\//SF:/" coverage_out2.info ; lcov --list coverage_out2.info; gem install coveralls-lcov ; ls ; pwd;  coveralls-lcov coverage_out2.info; fi
+after_success: if [ "$TARGET" = "coveragetest" ]; then cd $PARENTDIR/src ; lcov -t "result" -o coverage_out.info -c -d ./build/; lcov --remove coverage_out.info "/usr/include/*" -o coverage_out2.info; sed -i "s/SF:.*\/HiPPSO\/src\//SF:/" coverage_out2.info ; lcov --list coverage_out2.info; gem install coveralls-lcov ; coveralls-lcov coverage_out2.info; fi
