@@ -1,24 +1,32 @@
 #!/bin/bash
 
-numfunctions=$(cat function_options.conf | wc -l);
-for line in $(seq 1 $numfunctions) ;
-do
-	file=run$line.conf ;
-	cat base_configfile.conf > $file;
-	functionDescription=$(head -n$line function_options.conf | tail -n1);
-	echo "function $functionDescription" >> $file;
-	echo "showNamedStatistic FuncEvalPos reduce dimension functionEvaluation $functionDescription position" >> $file;
-	echo "showNamedStatistic FuncEvalLocAt reduce dimension functionEvaluation $functionDescription localAttractor" >> $file;
+ITERATIONS="142"
 
-	echo "fileprefix run$line" >>  $file;
-	../../../high_precision_pso c $file ;
+for TESTID in 1 2 ; do
+    echo Testseries $TESTID
+    REFFOLDER="reference_data$TESTID"
+    FUNCTIONOPTIONS="function_options$TESTID.conf"
+    # create clean folder for reference data
+    if [ -d $REFFOLDER ] ; then
+        rm -r $REFFOLDER
+    fi
+    mkdir $REFFOLDER
+
+    numfunctions=$(cat $FUNCTIONOPTIONS | wc -l);
+    for line in $(seq 1 $numfunctions) ;
+    do
+        tmpconffile=tmp.conf ;
+        cat base_configfile$TESTID.conf > $tmpconffile;
+        functionDescription=$(head -n$line $FUNCTIONOPTIONS | tail -n1);
+        echo "function $functionDescription" >> $tmpconffile;
+        echo "showNamedStatistic FuncEvalPos reduce dimension functionEvaluation $functionDescription position" >> $tmpconffile;
+        echo "showNamedStatistic FuncEvalLocAt reduce dimension functionEvaluation $functionDescription localAttractor" >> $tmpconffile;
+        echo "steps $ITERATIONS" >> $tmpconffile
+        folder=run$line ;
+        mkdir $REFFOLDER/$folder
+        cd $REFFOLDER/$folder
+        ../../../../../../bin/high_precision_pso c ../../$tmpconffile ;
+        cd ../..
+        rm $tmpconffile
+    done
 done
-if [ -d reference_data ] ; then
-	rm -r reference_data
-fi
-mkdir reference_data
-mv *.backup reference_data
-mv *STAT* reference_data
-mv *confBU reference_data
-rm run*.log
-mv run*.conf reference_data

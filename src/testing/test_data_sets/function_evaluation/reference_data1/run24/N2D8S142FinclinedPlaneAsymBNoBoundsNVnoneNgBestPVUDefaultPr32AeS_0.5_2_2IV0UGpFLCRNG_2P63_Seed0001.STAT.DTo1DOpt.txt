@@ -1,0 +1,6 @@
+0 inf inf inf inf inf inf inf inf
+25 inf inf inf inf inf inf inf inf
+50 inf inf inf inf inf inf inf inf
+75 inf inf inf inf inf inf inf inf
+100 inf inf inf inf inf inf inf inf
+125 inf inf inf inf inf inf inf inf

@@ -9,7 +9,7 @@ all:
     cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
 
 .PHONY: test
-test: 
+test: all
 	$(MAKE) test -C $(SOURCE_DIRECTORY)
 
 
@@ -22,7 +22,7 @@ debug:
     mkdir -p $(BINARY_DIRECTORY) && \
     cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
 
-debugtest:
+debugtest: debug
 	$(MAKE) debugtest -C $(SOURCE_DIRECTORY)
 
 .PHONY: doc
@@ -39,5 +39,5 @@ coverage:
     mkdir -p $(BINARY_DIRECTORY) && \
     cp $(SOURCE_DIRECTORY)/$(EXECUTABLE) $(BINARY_DIRECTORY)/$(EXECUTABLE)
 
-coveragetest:
+coveragetest: coverage
 	$(MAKE) coveragetest -C $(SOURCE_DIRECTORY)
