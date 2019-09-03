@@ -19,6 +19,8 @@ showNamedStatistic Pos0 reduce particle specific 0 position
 showNamedStatistic Pos1 reduce particle specific 1 position
 showNamedStatistic Vel0 reduce particle specific 0 velocity
 showNamedStatistic Vel1 reduce particle specific 1 velocity
+showStatistic globalBestPosition
+showStatistic globalBestPositionFunctionEvaluation
 initializeVelocity zero
 function standard sphere
 neighborhood lBest 2

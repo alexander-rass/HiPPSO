@@ -2,7 +2,7 @@
 
 ITERATIONS="142"
 
-for TESTID in 1 ; do
+for TESTID in 1 2 ; do
     echo Testseries $TESTID
     REFFOLDER="reference_data$TESTID"
     NEIGHBORHOODOPTIONS="neighborhood_options$TESTID.conf"

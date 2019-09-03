@@ -195,7 +195,6 @@ void AdjacencyListNeighborhood::LoadData(std::ifstream* inputstream, ProgramVers
 
 	global_attractor_positions_ = std::vector<std::vector<mpf_t*> >(configuration::g_particles);
 	for(int p = 0; p < configuration::g_particles; p++){
-		global_attractor_positions_.push_back(std::vector<mpf_t*>());
 		for(int d = 0; d < configuration::g_dimensions; d++){
 			global_attractor_positions_[p].push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 		}
