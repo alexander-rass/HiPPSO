@@ -1,0 +1,25 @@
+includeSystemTimeInFilename false
+parameterChi 0.5
+parameterCoefficientLocalAttractor 2
+parameterCoefficientGlobalAttractor 2
+updateGlobalAttractor eachParticle
+initialprecision 32
+precision 32
+checkprecision allExceptStatistics
+checkprecisionprobability 0.50
+particles 16
+dimensions 16
+srand 1
+functionbehavioroutsideofbounds normal
+boundhandling noBounds
+positionAndVelocityUpdater default
+outputPrecision -1
+showStatistics 0 1222111222 25
+showNamedStatistic Pos0 reduce particle specific 0 position
+showNamedStatistic Pos1 reduce particle specific 1 position
+showNamedStatistic Vel0 reduce particle specific 0 velocity
+showNamedStatistic Vel1 reduce particle specific 1 velocity
+initializeVelocity zero
+function standard sphere
+neighborhood ring
+steps 142

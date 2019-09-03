@@ -131,6 +131,10 @@ void Particle::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_s
 	for (int d = 0; d < configuration::g_dimensions; d++) {
 		local_attractor_position.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
+	if((*version_of_stored_data)>=ProgramVersion("1.0.2")){
+		local_attractor_value_cached_ = arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream);
+		(*inputstream) >> local_attractor_value_cached_precision_;
+	}
 }
 
 void Particle::StoreData(std::ofstream* outputstream){
@@ -145,6 +149,10 @@ void Particle::StoreData(std::ofstream* outputstream){
 	for (int d = 0; d < configuration::g_dimensions; d++) {
 		arbitraryprecisioncalculation::mpftoperations::StoreMpft(local_attractor_position[d], outputstream);
 	}
+	(*outputstream) << std::endl;
+	arbitraryprecisioncalculation::mpftoperations::StoreMpft(local_attractor_value_cached_, outputstream);
+	(*outputstream) << std::endl;
+	(*outputstream) << local_attractor_value_cached_precision_;
 	(*outputstream) << std::endl;
 }
 

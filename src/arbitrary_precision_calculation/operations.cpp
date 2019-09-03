@@ -1750,7 +1750,9 @@ int StringToInt(std::string s){
 }
 
 void StoreMpft(mpf_t* a, std::ofstream * file){
-	if ( IsPlusInfinity(a) ) {
+	if ( NULL == a ) {
+		(*file) << "NULL" << std::endl;
+	} else if ( IsPlusInfinity(a) ) {
 		(*file) << "+inf" << std::endl;
 	} else if ( IsMinusInfinity(a) ) {
 		(*file) << "-inf" << std::endl;
@@ -1770,6 +1772,9 @@ void StoreMpft(mpf_t* a, std::ofstream * file){
 mpf_t* LoadMpft(std::ifstream* file){
 	std::string part;
 	(*file) >> part;
+	if ( part == "NULL" ) {
+		return NULL;
+	}
 	if ( part == "+inf" ) {
 		return GetPlusInfinity();
 	}
