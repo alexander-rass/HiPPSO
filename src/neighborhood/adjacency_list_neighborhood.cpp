@@ -187,20 +187,32 @@ int AdjacencyListNeighborhood::GetGlobalAttractorIndex(){
 }
 
 void AdjacencyListNeighborhood::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+	if((*version_of_stored_data)>=ProgramVersion("1.0.2")){
+		(*inputstream) >> global_attractor_index_;
+		global_attractor_values_cached_ = std::vector<mpf_t*>(configuration::g_particles);
+		global_attractor_values_cached_precision_ = std::vector<unsigned int>(configuration::g_particles);
+	}
+
 	global_attractor_positions_ = std::vector<std::vector<mpf_t*> >(configuration::g_particles);
 	for(int p = 0; p < configuration::g_particles; p++){
 		global_attractor_positions_.push_back(std::vector<mpf_t*>());
 		for(int d = 0; d < configuration::g_dimensions; d++){
 			global_attractor_positions_[p].push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 		}
+		if((*version_of_stored_data)>=ProgramVersion("1.0.2")){
+			global_attractor_values_cached_[p] = arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream);
+			(*inputstream) >> global_attractor_values_cached_precision_[p];
+		}
 	}
 }
 void AdjacencyListNeighborhood::StoreData(std::ofstream* outputstream){
+	(*outputstream) << global_attractor_index_ << std::endl;
 	for(int p = 0; p < configuration::g_particles; p++){
 		for(int d = 0; d < configuration::g_dimensions; d++){
 			arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_positions_[p][d], outputstream);
 		}
-		(*outputstream) << std::endl;
+		arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_values_cached_[p], outputstream);
+		(*outputstream) << global_attractor_values_cached_precision_[p] << std::endl;
 	}
 }
 
