@@ -83,9 +83,7 @@ for folder in $REFFOLDER/* ; do
         find . -type f -print0 |
             while IFS= read -r -d '' line; do
                 currentfile="$line"
-                #echo Current file: $line
                 reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S${SPLITITERATIONS}F/S${ITERATIONS}F/")
-                #echo Compare with: $reffile
                 if [ -f $reffile ]; then
                     if [ ${currentfile: -7} == ".backup" ]; then
                         #compare all except first and last line (those two lines contain the version number)

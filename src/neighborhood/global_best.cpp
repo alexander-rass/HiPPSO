@@ -132,11 +132,17 @@ void GlobalBest::LoadData(std::ifstream* inputstream, ProgramVersion* version_of
 	for(int d = 0; d < configuration::g_dimensions; d++){
 		global_attractor_position_.push_back(arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream));
 	}
+	if((*version_of_stored_data)>=ProgramVersion("1.0.2")){
+		global_attractor_value_cached_ = arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream);
+		(*inputstream) >> global_attractor_value_cached_precision_;
+	}
 }
 void GlobalBest::StoreData(std::ofstream* outputstream){
 	for(int d = 0; d < configuration::g_dimensions; d++){
 		arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_position_[d], outputstream);
 	}
+	arbitraryprecisioncalculation::mpftoperations::StoreMpft(global_attractor_value_cached_, outputstream);
+	(*outputstream) << "\n" << global_attractor_value_cached_precision_ << "\n";
 }
 
 } // namespace highprecisionpso

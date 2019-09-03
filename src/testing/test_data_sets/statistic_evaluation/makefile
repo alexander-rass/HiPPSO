@@ -1,2 +1,2 @@
 test:
-	./doTests.sh
+	../doTests.sh reference_data 45 142

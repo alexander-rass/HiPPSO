@@ -1,0 +1,28 @@
+filePrefix statisticTest2
+includeSystemTimeInFilename false
+parameterChi 0.01
+parameterCoefficientLocalAttractor 0.01
+parameterCoefficientGlobalAttractor 0.01
+updateGlobalAttractor eachParticle
+initialprecision 32
+precision 32
+checkprecision allExceptStatistics
+checkprecisionprobability 0.50
+particles 20
+dimensions 32
+steps 142
+srand 1
+function standard sphere
+functionbehavioroutsideofbounds normal
+boundhandling noBounds
+neighborhood gBest
+positionAndVelocityUpdater delta 10
+outputPrecision -1
+showStatistics 0 1222111222 5
+showStatistic reduce particle specific 0 position
+showStatistic reduce particle specific 1 position
+showStatistic reduce particle specific 0 velocity
+showStatistic reduce particle specific 1 velocity
+showStatistic globalBestPosition
+showStatistic reduce particle sum deltaUpdateCounters
+initializeVelocity zero
