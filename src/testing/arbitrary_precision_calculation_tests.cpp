@@ -1194,6 +1194,21 @@ int test_baseFunctionality(){
 		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(large);
 		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sq);
 	}
+	{
+		double cnum = 4.675812364871;
+		mpf_t* value = arbitraryprecisioncalculation::mpftoperations::ToMpft(cnum);
+		std::vector<mpf_t*> vec(1,value);
+		std::vector<double> dvec = arbitraryprecisioncalculation::vectoroperations::MpftToDouble(vec);
+		double rel = dvec[0] / cnum;
+		bool allOK = true;
+		allOK &= (rel > (1.0 - 1e-8));
+		allOK &= (rel < (1.0 + 1e-8));
+		assert(allOK);
+		if(!allOK){
+			return 1;
+		}
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(value);
+	}
 	std::cout << "base funcionality test succeeded.\n";
 	return 0;
 }
