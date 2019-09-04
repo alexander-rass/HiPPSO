@@ -67,34 +67,6 @@ AdjacencyListNeighborhood::AdjacencyListNeighborhood(){
 	adjacency_list.clear();
 }
 
-void AdjacencyListNeighborhood::SetGlobalAttractorPositions(std::vector<std::vector<mpf_t*> > globalAttractors){
-	AssertCondition(configuration::g_particles > 0, "The number of particles needs to be positive.");
-	AssertCondition(globalAttractors.size() == (unsigned int)configuration::g_particles, "The number of particles is inconsistent.");
-	AssertCondition(configuration::g_dimensions > 0, "The number of dimensions needs to be positive.");
-	AssertCondition(globalAttractors[0].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
-	for(int p = 0; p < configuration::g_particles; p++){
-		AssertCondition(globalAttractors[p].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
-	}
-	for(unsigned int i = 0; i < global_attractor_positions_.size(); i++){
-		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_positions_[i]);
-		global_attractor_positions_[i].clear();
-	}
-	global_attractor_positions_ = std::vector<std::vector<mpf_t*> >(configuration::g_particles);
-	for(int i = 0; i < configuration::g_particles; i++) {
-		global_attractor_positions_[i] = arbitraryprecisioncalculation::vectoroperations::Clone(globalAttractors[i]);
-	}
-	for(unsigned int i = 0; i < global_attractor_values_cached_.size(); i++){
-		if(global_attractor_values_cached_[i] != NULL) {
-			arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(-1);
-			arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_values_cached_[i]);
-			global_attractor_values_cached_[i] = NULL;
-		}
-	}
-	global_attractor_values_cached_ = std::vector<mpf_t*>(configuration::g_particles, (mpf_t*) NULL);
-	global_attractor_values_cached_precision_ = std::vector<unsigned int>(configuration::g_particles, 0);
-	global_attractor_index_ = -1;
-}
-
 std::vector<mpf_t*> AdjacencyListNeighborhood::GetGlobalAttractorPosition(){
 	int id = GetGlobalAttractorIndex();
 	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_positions_[id]);

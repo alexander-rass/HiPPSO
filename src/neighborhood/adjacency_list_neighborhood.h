@@ -57,7 +57,6 @@ public:
 	* @brief The destructor.
 	*/
 	~AdjacencyListNeighborhood();
-	void SetGlobalAttractorPositions(std::vector<std::vector<mpf_t*> > global_attractors);
 	std::vector<mpf_t*> GetGlobalAttractorPosition();
 	std::vector<mpf_t*> GetGlobalAttractorPosition(int particle_id);
 	mpf_t* GetGlobalAttractorValue();

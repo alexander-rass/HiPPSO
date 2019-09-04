@@ -60,15 +60,6 @@ public:
 	*/
 	virtual ~Neighborhood();
 	/**
-	* @brief Sets the global attractors according to the given vector of global attractor positions.
-	*
-	* There should be exactly one global attractor position for each particle,
-	* because, depending on the topology, each particle can have a different global attractor.
-	*
-	* @param global_attractors The vector of global attractor positions.
-	*/
-	virtual void SetGlobalAttractorPositions(std::vector<std::vector<mpf_t*> > global_attractors) = 0;
-	/**
 	* @brief Returns the position of the global attractor for the given particle.
 	*
 	* @param p The particle.

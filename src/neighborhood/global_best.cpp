@@ -58,25 +58,6 @@ GlobalBest::GlobalBest(){
 	global_attractor_value_cached_precision_ = 1;
 }
 
-void GlobalBest::SetGlobalAttractorPositions(std::vector<std::vector<mpf_t*> > globalAttractors){
-	AssertCondition(configuration::g_particles > 0, "The number of particles needs to be positive.");
-	AssertCondition(globalAttractors.size() == (unsigned int)configuration::g_particles, "The number of particles is inconsistent.");
-	AssertCondition(configuration::g_dimensions > 0, "The number of dimensions needs to be positive.");
-	AssertCondition(globalAttractors[0].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
-	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(global_attractor_position_);
-	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(global_attractor_value_cached_);
-	if(global_attractor_value_cached_ == NULL) arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(1);
-	global_attractor_position_ = arbitraryprecisioncalculation::vectoroperations::Clone(globalAttractors[0]);
-	global_attractor_value_cached_ = configuration::g_function->Evaluate(global_attractor_position_);
-	global_attractor_value_cached_precision_ = mpf_get_default_prec();
-	for(int p = 0; p < configuration::g_particles; p++){
-		AssertCondition(globalAttractors[p].size() == (unsigned int)configuration::g_dimensions, "The number of dimensions is inconsistent.");
-		for(int d = 0; d < configuration::g_dimensions; d++){
-			AssertCondition(arbitraryprecisioncalculation::mpftoperations::Compare((globalAttractors[p][d]), (global_attractor_position_[d])) == 0, "For global best neighborhood all global attractors need to be equal, but this is not the case.");
-		}
-	}
-}
-
 std::vector<mpf_t*> GlobalBest::GetGlobalAttractorPosition(){
 	return arbitraryprecisioncalculation::vectoroperations::Clone(global_attractor_position_);
 }
