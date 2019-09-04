@@ -1,0 +1,23 @@
+includeSystemTimeInFilename false
+parameterChi 0.8
+parameterCoefficientLocalAttractor 1.5
+parameterCoefficientGlobalAttractor 1.5
+updateGlobalAttractor eachParticle
+initialprecision 32
+precision 32
+checkprecision allExceptStatistics
+checkprecisionprobability 0.50
+particles 6
+dimensions 32
+functionbehavioroutsideofbounds infinity
+positionAndVelocityUpdater default
+outputPrecision -1
+showStatistics 0 1222111222 5
+showNamedStatistic Vel0 reduce particle specific 0 velocity
+showStatistic globalBestPosition
+initializeVelocity zero
+function standard sphere
+velocityAdjustment mirror
+boundhandling noBounds
+srand linearCongruenceRNG 542 mod2p63 23 37 fast
+steps 42

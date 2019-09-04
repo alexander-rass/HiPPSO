@@ -340,12 +340,7 @@ mpf_t* ToMpft(long long v) {
 	mpf_t* multiplyer = ToMpft(1LL << 28);
 	mpf_t* small_part_mpf_t = ToMpft(remaining);
 	mpf_t* res_large = mpftoperations::Multiply(large_part_mpf_t, multiplyer);
-	double memCheckPrecisionProbability = Configuration::getCheckPrecisionProbability();
-	if(memCheckPrecisionProbability < 1.0){
-		Configuration::setCheckPrecisionProbability(0.0);
-	}
 	mpf_t* res = mpftoperations::Add(res_large, small_part_mpf_t);
-	Configuration::setCheckPrecisionProbability(memCheckPrecisionProbability);
 	mpftoperations::ReleaseValue(large_part_mpf_t);
 	mpftoperations::ReleaseValue(multiplyer);
 	mpftoperations::ReleaseValue(small_part_mpf_t);

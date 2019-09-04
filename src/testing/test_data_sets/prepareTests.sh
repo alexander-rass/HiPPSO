@@ -1,7 +1,7 @@
 #!/bin/bash
 
 TESTSETS=$1
-ITERATIONS="142"
+ITERATIONS=$2
 
 for TESTID in $(seq 1 $TESTSETS) ; do
     echo Testseries $TESTID
@@ -19,8 +19,12 @@ for TESTID in $(seq 1 $TESTSETS) ; do
         tmpconffile=tmp.conf ;
         cp base_configfiles/base_configfile$TESTID.conf $tmpconffile;
         optionDescription=$(head -n$line $SPECIALOPTIONS | tail -n1);
-        echo "$optionDescription" >> $tmpconffile;
+        echo "$optionDescription" | tr '#' '\n' >> $tmpconffile;
         echo "steps $ITERATIONS" >> $tmpconffile
+        appendfile=base_configfiles/base_configfile_append$TESTID.conf
+        if [ -f "$appendfile" ] ; then
+            cat "$appendfile" >> $tmpconffile
+        fi
         folder=run$line ;
         mkdir $REFFOLDER/$folder
         cd $REFFOLDER/$folder
