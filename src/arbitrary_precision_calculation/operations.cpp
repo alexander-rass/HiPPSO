@@ -410,7 +410,12 @@ inline void checkPrecisionOnAdd(const mpf_t* a, const mpf_t* b){
 		if(IsUndefined(a) || IsUndefined(b)) return;
 	}
 	if(Configuration::getCheckPrecisionProbability() < 1){
+		double memCheckPrecisionProbability = Configuration::getCheckPrecisionProbability();
+		if(memCheckPrecisionProbability < 1.0){
+			Configuration::setCheckPrecisionProbability(0.0);
+		}
 		mpf_t* rand_value = GetRandomMpft();
+		Configuration::setCheckPrecisionProbability(memCheckPrecisionProbability);
 		doit = (mpftoperations::Compare(rand_value, Configuration::getCheckPrecisionProbability()) < 0);
 		mpftoperations::ReleaseValue(rand_value);
 	}
