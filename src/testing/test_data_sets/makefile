@@ -1,4 +1,5 @@
 test:
+	$(MAKE) -C randomnumbergenerators_evaluation && \
 	$(MAKE) -C positionandvelocityupdater_evaluation && \
 	$(MAKE) -C boundhandling_velocityadjustment_evaluation && \
 	$(MAKE) -C neighborhood_evaluation && \
