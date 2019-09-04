@@ -1634,13 +1634,6 @@ std::string MpftToString(const mpf_t* v){
 	return res;
 }
 
-int StringToInt(std::string s){
-	std::istringstream is(s);
-	int res;
-	is >> res;
-	return res;
-}
-
 void StoreMpft(mpf_t* a, std::ofstream * file){
 	if ( NULL == a ) {
 		(*file) << "NULL" << std::endl;

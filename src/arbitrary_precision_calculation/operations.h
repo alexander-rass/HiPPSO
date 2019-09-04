@@ -721,14 +721,6 @@ double Log2Double(mpf_t* value);
 std::string MpftToString(const mpf_t* value);
 
 /**
-* @brief Converts a string to an int.
-*
-* @param input The string.
-*
-* @return The converted value.
-*/
-int StringToInt(std::string input);
-/**
 * @brief Writes the content of a mpf_t value to the given stream such that it can completely recovered.
 *
 * @param value The mpf_t value.

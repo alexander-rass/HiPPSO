@@ -702,10 +702,16 @@ bool AllowedToRun() {
 					}
 					if (!formatOk)
 						continue;
-					int minutes1 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[1]) * 60
-						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[2]);
-					int minutes2 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[3]) * 60
-						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[4]);
+					int minutes1, minutes2;
+					{
+						std::vector<int> timenumbers(4);
+						for(int i = 0; i < 4; i++){
+							std::istringstream is2(input[i+1]);
+							is2 >> timenumbers[i];
+						}
+						minutes1 = timenumbers[0] * 60 + timenumbers[1];
+						minutes2 = timenumbers[2] * 60 + timenumbers[3];
+					}
 					int cminutes = timeInfo->tm_hour * 60 + timeInfo->tm_min;
 					if (minutes1 <= cminutes && cminutes <= minutes2) {
 						ok = false;
@@ -723,10 +729,16 @@ bool AllowedToRun() {
 					}
 					if (!formatOk)
 						continue;
-					int minutes1 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[1]) * 60
-						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[2]);
-					int minutes2 = arbitraryprecisioncalculation::mpftoperations::StringToInt(input[3]) * 60
-						+ arbitraryprecisioncalculation::mpftoperations::StringToInt(input[4]);
+					int minutes1, minutes2;
+					{
+						std::vector<int> timenumbers(4);
+						for(int i = 0; i < 4; i++){
+							std::istringstream is2(input[i+1]);
+							is2 >> timenumbers[i];
+						}
+						minutes1 = timenumbers[0] * 60 + timenumbers[1];
+						minutes2 = timenumbers[2] * 60 + timenumbers[3];
+					}
 					int cminutes = timeInfo->tm_hour * 60 + timeInfo->tm_min;
 					if (minutes1 <= cminutes && cminutes <= minutes2) {
 						allowed = true;
