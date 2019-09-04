@@ -1084,6 +1084,119 @@ int test_randomNumberGenerator(){
 	std::cout << "random number generator test succeeded.\n";
 	return 0;
 }
+int test_baseFunctionality(){
+	std::cout << "begin base functionality test\n";
+	{
+		std::vector<mpf_t*> vec1, vec2;
+		for(int i = 0; i < 4; i++){
+			vec1.push_back(arbitraryprecisioncalculation::mpftoperations::GetMinusInfinity());
+			vec1.push_back(arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity());
+			vec1.push_back(arbitraryprecisioncalculation::mpftoperations::GetUndefined());
+			vec1.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
+		}
+		{
+			for(int i = 0; i < 4; i++)vec2.push_back(arbitraryprecisioncalculation::mpftoperations::GetMinusInfinity());
+			for(int i = 0; i < 4; i++)vec2.push_back(arbitraryprecisioncalculation::mpftoperations::GetPlusInfinity());
+			for(int i = 0; i < 4; i++)vec2.push_back(arbitraryprecisioncalculation::mpftoperations::GetUndefined());
+			for(int i = 0; i < 4; i++)vec2.push_back(arbitraryprecisioncalculation::mpftoperations::ToMpft(0.0));
+		}
+		{
+			bool allOK = true;
+			std::vector<mpf_t*> results = arbitraryprecisioncalculation::vectoroperations::Divide(vec1, vec2);
+			for(int i = 0; i < 16; i++){
+				if(!arbitraryprecisioncalculation::mpftoperations::IsUndefined(vec1[i]) &&  arbitraryprecisioncalculation::mpftoperations::Compare(vec1[i],0.0) == 0){
+					if(arbitraryprecisioncalculation::mpftoperations::IsInfinite(vec2[i])){
+						allOK &= (arbitraryprecisioncalculation::mpftoperations::Compare(0.0, results[i]) == 0);
+					} else {
+						allOK &= arbitraryprecisioncalculation::mpftoperations::IsUndefined(results[i]);
+					}
+				} else {
+					allOK &= arbitraryprecisioncalculation::mpftoperations::IsUndefined(results[i]);
+				}
+			}
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(results);
+			assert(allOK);
+			if(!allOK){
+				return 1;
+			}
+		}
+		{
+			bool allOK = true;
+			std::vector<mpf_t*> results = arbitraryprecisioncalculation::vectoroperations::Multiply(vec1, vec2);
+			for(int i = 0; i < 16; i++){
+				if(arbitraryprecisioncalculation::mpftoperations::IsUndefined(vec1[i]) || arbitraryprecisioncalculation::mpftoperations::IsUndefined(vec2[i])){
+					allOK &= arbitraryprecisioncalculation::mpftoperations::IsUndefined(results[i]);
+				} else if(arbitraryprecisioncalculation::mpftoperations::Compare(vec1[i],0.0) == 0 && arbitraryprecisioncalculation::mpftoperations::Compare(vec2[i],0.0) == 0){
+					allOK &= (arbitraryprecisioncalculation::mpftoperations::Compare(0.0, results[i]) == 0);
+				} else if(arbitraryprecisioncalculation::mpftoperations::Compare(vec1[i],0.0) == 0 || arbitraryprecisioncalculation::mpftoperations::Compare(vec2[i],0.0) == 0){
+					allOK &= arbitraryprecisioncalculation::mpftoperations::IsUndefined(results[i]);
+				} else {
+					assert(arbitraryprecisioncalculation::mpftoperations::IsInfinite(vec1[i]));
+					assert(arbitraryprecisioncalculation::mpftoperations::IsInfinite(vec2[i]));
+					if(arbitraryprecisioncalculation::mpftoperations::IsPlusInfinity(vec1[i]) == arbitraryprecisioncalculation::mpftoperations::IsPlusInfinity(vec2[i])){
+						allOK &= arbitraryprecisioncalculation::mpftoperations::IsPlusInfinity(results[i]);
+					} else {
+						allOK &= arbitraryprecisioncalculation::mpftoperations::IsMinusInfinity(results[i]);
+					}
+				}
+			}
+			arbitraryprecisioncalculation::vectoroperations::ReleaseValues(results);
+			assert(allOK);
+			if(!allOK){
+				return 1;
+			}
+		}
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vec1);
+		arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vec2);
+	}
+	{
+		mpf_t* v3_4 = arbitraryprecisioncalculation::mpftoperations::ToMpft(3.4);
+		mpf_t* ceilv3_4 = arbitraryprecisioncalculation::mpftoperations::Ceil(v3_4);
+		mpf_t* v4 = arbitraryprecisioncalculation::mpftoperations::ToMpft(4);
+		bool allOK = true;
+		allOK &= (arbitraryprecisioncalculation::mpftoperations::Compare(v4, ceilv3_4) == 0);
+		assert(allOK);
+		if(!allOK){
+			return 1;
+		}
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v3_4);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v4);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(ceilv3_4);
+	}
+	{
+		mpf_t* v3_4 = arbitraryprecisioncalculation::mpftoperations::ToMpft(-3.4);
+		mpf_t* ceilv3_4 = arbitraryprecisioncalculation::mpftoperations::Ceil(v3_4);
+		mpf_t* v3 = arbitraryprecisioncalculation::mpftoperations::ToMpft(-3);
+		bool allOK = true;
+		allOK &= (arbitraryprecisioncalculation::mpftoperations::Compare(v3, ceilv3_4) == 0);
+		assert(allOK);
+		if(!allOK){
+			return 1;
+		}
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v3_4);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(v3);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(ceilv3_4);
+	}
+	{
+		double larged = 1e299;
+		mpf_t* large = arbitraryprecisioncalculation::mpftoperations::ToMpft(larged);
+		mpf_t* sq = arbitraryprecisioncalculation::mpftoperations::Multiply(large,large);
+		double log2value = 2*log(larged)/log(2.0);
+		double res = arbitraryprecisioncalculation::mpftoperations::Log2Double(sq);
+		double rel = log2value / res;
+		bool allOK = true;
+		allOK &= (rel > (1.0 - 1e-8));
+		allOK &= (rel < (1.0 + 1e-8));
+		assert(allOK);
+		if(!allOK){
+			return 1;
+		}
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(large);
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sq);
+	}
+	std::cout << "base funcionality test succeeded.\n";
+	return 0;
+}
 
 int start_tests(int argv, char * argc[]) {
 	arbitraryprecisioncalculation::Configuration::setOutputPrecision(10);
@@ -1119,6 +1232,11 @@ int start_tests(int argv, char * argc[]) {
 	}
 	{
 		int result_should_be_true = (test_randomNumberGenerator() == 0);
+		assert(result_should_be_true);
+		if(!(result_should_be_true)) return 1;
+	}
+	{
+		int result_should_be_true = (test_baseFunctionality() == 0);
 		assert(result_should_be_true);
 		if(!(result_should_be_true)) return 1;
 	}

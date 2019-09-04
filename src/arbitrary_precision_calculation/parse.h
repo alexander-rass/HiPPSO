@@ -66,17 +66,6 @@ namespace parse {
  */
 RandomNumberGenerator* ParseRandomNumberGenerator(const std::vector<std::string> & parameters, unsigned int & parsed_parameters);
 
-/**
- * @brief Prints the supplied parameters to stderr and let the program terminate with exit code 1.
- *
- * This function is called if a command in the configuration file can not be parsed.
- * The supplied command will be printed to stderr with an error message.
- * Finally the function let the program terminate with exit code 1.
- *
- * @param parameters The command of the configuration file which can not be parsed.
- */
-void SignalInvalidCommand(const std::vector<std::string> & parameters);
-
 } // namespace parse
 } // namespace arbitraryprecisioncalculation
 

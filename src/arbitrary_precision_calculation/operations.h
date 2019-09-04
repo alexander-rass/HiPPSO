@@ -718,7 +718,7 @@ double Log2Double(mpf_t* value);
 *
 * @return The string representation.
 */
-std::string MpftToString(mpf_t* value);
+std::string MpftToString(const mpf_t* value);
 
 /**
 * @brief Converts a string to an int.

@@ -191,15 +191,5 @@ RandomNumberGenerator* ParseRandomNumberGenerator(const std::vector<std::string>
 	}
 }
 
-void SignalInvalidCommand(const std::vector<std::string> & command){
-	std::cerr << ("One of the specified commands in the configuration file can not be interpreted:\n\"");
-	for(unsigned int i = 0; i < command.size(); i++){
-		if(i != 0)std::cerr << " ";
-		std::cerr << command[i];
-	}
-	std::cerr << ("\"\n");
-	exit(1);
-}
-
 } // namespace parse
 } // namespace arbitraryprecisioncalculation

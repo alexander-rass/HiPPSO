@@ -51,12 +51,6 @@
 #include "arbitrary_precision_calculation/check_condition.h"
 #include "arbitrary_precision_calculation/configuration.h"
 
-// If ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_
-// is set to one then taylor approximation is used for trigonometric functions.
-// If it is set to zero then the CORDIC algorithm is used.
-// Here it is set to one, because even for large precision values the taylor approximation seems to be faster.
-#define ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ 1
-
 namespace arbitraryprecisioncalculation {
 namespace vectoroperations {
 
@@ -547,6 +541,9 @@ mpf_t* Divide(const mpf_t* a, const mpf_t* b) {
 		} else {
 			return GetPlusInfinity();
 		}
+	}
+	if(Compare(b, 0.0) == 0){
+		return GetUndefined();
 	}
 	mpf_t* res = GetResultPointer();
 	mpf_div(*res, *a, *b);
@@ -1043,106 +1040,6 @@ mpf_t* sin_taylor(mpf_t* num){
 	return res;
 }
 
-std::vector<mpf_t*> sin_cos_cordic_angles_cached_;
-unsigned int sin_cos_cordic_angles_cached_precision_ = 0;
-mpf_t* sin_cos_cordic_factor_cached_ = NULL;
-unsigned int sin_cos_cordic_factor_cached_precision_ = 0;
-
-std::pair<mpf_t*, mpf_t*> sin_cos_cordic(mpf_t* num){
-	if(sin_cos_cordic_angles_cached_precision_ != mpf_get_default_prec()){
-		sin_cos_cordic_angles_cached_precision_ = mpf_get_default_prec();
-		number_of_mpf_t_values_cached_ -= sin_cos_cordic_angles_cached_.size();
-		vectoroperations::ReleaseValues(sin_cos_cordic_angles_cached_);
-		sin_cos_cordic_angles_cached_.clear();
-		mpf_t* pi = GetPi();
-		sin_cos_cordic_angles_cached_.push_back(Multiply2Exp(pi, -2));
-		ReleaseValue(pi);
-		int p = 0;
-		mpf_t* n1 = ToMpft(1.0);
-		while(true){
-			mpf_t* cv = Multiply2Exp(n1, --p);
-			mpf_t* inv = Arctan(cv);
-			sin_cos_cordic_angles_cached_.push_back(inv);
-			ReleaseValue(cv);
-			mpf_t* tmp = add_NO_CHECK(inv, sin_cos_cordic_angles_cached_[0]);
-			bool same = (mpf_cmp(*tmp, *(sin_cos_cordic_angles_cached_[0])) == 0);
-			ReleaseValue(tmp);
-			if(same)break;
-		}
-		ReleaseValue(n1);
-		number_of_mpf_t_values_cached_ += sin_cos_cordic_angles_cached_.size();
-	}
-	mpf_t* cx = ToMpft(1.0);
-	mpf_t* cy = ToMpft(0.0);
-	AssertCondition(std::abs(MpftToDouble(num)) < std::acos(0.0) + 1e-7 , "CORDIC precondition not fulfilled. (sin / cos / tan calculations)");
-	mpf_t* cnum = Clone(num);
-	bool same = false;
-	for(unsigned int p = 0; p < sin_cos_cordic_angles_cached_.size() && !same; p++) {
-		mpf_t* cxs = Multiply2Exp(cx, -p);
-		mpf_t* cys = Multiply2Exp(cy, -p);
-		if(Compare(cnum, 0.0) > 0){
-			mpf_t* nnum = subtract_NO_CHECK(cnum, sin_cos_cordic_angles_cached_[p]);
-			ReleaseValue(cnum);
-			cnum = nnum;
-			mpf_t* nx = subtract_NO_CHECK(cx, cys);
-			mpf_t* ny = add_NO_CHECK(cy, cxs);
-			same = (mpf_cmp(*cx, *nx) == 0 && mpf_cmp(*cy, *ny) == 0);
-			ReleaseValue(cx);
-			ReleaseValue(cy);
-			cx = nx;
-			cy = ny;
-		} else {
-			mpf_t* nnum = add_NO_CHECK(cnum, sin_cos_cordic_angles_cached_[p]);
-			ReleaseValue(cnum);
-			cnum = nnum;
-			mpf_t* nx = add_NO_CHECK(cx, cys);
-			mpf_t* ny = subtract_NO_CHECK(cy, cxs);
-			same = (mpf_cmp(*cx, *nx) == 0 && mpf_cmp(*cy, *ny) == 0);
-			ReleaseValue(cx);
-			ReleaseValue(cy);
-			cx = nx;
-			cy = ny;
-		}
-		ReleaseValue(cxs);
-		ReleaseValue(cys);
-	}
-	ReleaseValue(cnum);
-	if(sin_cos_cordic_factor_cached_precision_ != mpf_get_default_prec()){
-		sin_cos_cordic_factor_cached_precision_ = mpf_get_default_prec();
-		if(sin_cos_cordic_factor_cached_ == NULL)++number_of_mpf_t_values_cached_;
-		ReleaseValue(sin_cos_cordic_factor_cached_);
-
-		mpf_t* xx = Multiply(cx, cx);
-		mpf_t* yy = Multiply(cy, cy);
-		mpf_t* slen = add_NO_CHECK(xx, yy);
-		mpf_t* sq = Sqrt(slen);
-		mpf_t* n1 = ToMpft(1.0);
-		sin_cos_cordic_factor_cached_ = Divide(n1, sq);
-		ReleaseValue(xx);
-		ReleaseValue(yy);
-		ReleaseValue(slen);
-		ReleaseValue(sq);
-		ReleaseValue(n1);
-	}
-	mpf_t* nx = Multiply(cx, sin_cos_cordic_factor_cached_);
-	mpf_t* ny = Multiply(cy, sin_cos_cordic_factor_cached_);
-	ReleaseValue(cx);
-	ReleaseValue(cy);
-	return std::make_pair(nx, ny);
-}
-
-mpf_t* sin_CORDIC(mpf_t* num){
-	std::pair<mpf_t*, mpf_t*> sc = sin_cos_cordic(num);
-	ReleaseValue(sc.first);
-	return sc.second;
-}
-
-mpf_t* cos_CORDIC(mpf_t* num){
-	std::pair<mpf_t*, mpf_t*> sc = sin_cos_cordic(num);
-	ReleaseValue(sc.second);
-	return sc.first;
-}
-
 mpf_t* arctan_taylor(mpf_t* num){
 	mpf_t* mul = Clone(num);
 	mpf_t* res = Clone(num);
@@ -1382,13 +1279,8 @@ mpf_t* Sin(mpf_t* num){
 
 	mpf_t* res = NULL;
 
-#if ARBITRARY_PRECISION_CALCULATION_OPERATIONS_CPP_USE_TAYLOR_APPROXIMATION_FOR_TRIGONOMETRC_FUNCTIONS_ // use taylor approximation
 	if(doCosinus)res = cos_taylor(num);
 	else res = sin_taylor(num);
-#else // use CORDIC-algorithm
-	if(doCosinus)res = cos_CORDIC(num);
-	else res = sin_CORDIC(num);
-#endif
 
 	ReleaseValue(num);
 	if(doNegate){
@@ -1699,7 +1591,7 @@ double Log2Double(mpf_t* v) {
 	return std::log(mpftoperations::MpftToDouble(v)) / std::log(2.0);
 }
 
-std::string MpftToString(mpf_t* v){
+std::string MpftToString(const mpf_t* v){
 	if(IsUndefined(v))return "nan";
 	if(IsPlusInfinity(v))return "inf";
 	if(IsMinusInfinity(v))return "-inf";
