@@ -530,7 +530,7 @@ Statistics* DoPso(Statistics* statistics) {
 		++nextBackupStepId;
 	}
 	arbitraryprecisioncalculation::Configuration::ResetIncreasePrecisionRecommended();
-	if(configuration::g_debug_swarm_activated){
+	if(configuration::g_debug_swarm_activated && step == 0){
 		visualization::VisualizeCurrentSwarm();
 	}
 	if(step == 0){
