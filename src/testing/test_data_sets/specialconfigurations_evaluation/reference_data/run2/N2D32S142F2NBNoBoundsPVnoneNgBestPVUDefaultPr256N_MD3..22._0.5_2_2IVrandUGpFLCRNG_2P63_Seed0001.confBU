@@ -1,0 +1,46 @@
+includeSystemTimeInFilename false
+parameterChi 0.5
+parameterCoefficientLocalAttractor 2
+parameterCoefficientGlobalAttractor 2
+updateGlobalAttractor eachParticle
+initialprecision 256
+precision 256
+checkprecision never
+checkprecisionprobability 1.00
+particles 2
+dimensions 32
+steps 142
+srand 1
+function standard sphere
+functionbehavioroutsideofbounds periodic
+boundhandling noBounds
+neighborhood gBest
+positionAndVelocityUpdater default
+outputPrecision -1
+functionbounds 0 10 -5 1
+functionbounds 11 30 -1 15
+initializationinformation position 0 1 3 17 bounds 140 141
+initializationinformation position 0 0 18 21 centerandrange 0 1e-9
+initializationinformation position 0 0 18 19 scale 1e-9
+initializationinformation position 0 0 21 22 powerscale -40
+initializationinformation velocity 0 1 3 17 bounds -10 10
+initializationinformation velocity 0 0 18 21 centerandrange 1 2
+initializationinformation velocity 0 0 18 19 scale 1e-9
+initializationinformation velocity 0 0 21 22 powerscale -40
+showStatistics 0 1222111222 1
+showStatistic reduce particle specific 0 position
+showStatistic reduce particle specific 1 position
+showStatistic reduce particle specific 0 velocity
+showStatistic reduce particle specific 1 velocity
+showStatistic globalBestPosition
+showStatistic globalBestPositionFunctionEvaluation
+showStatistic precision
+initializeVelocity random
+debugswarm
+debugswarmShowGlobalAttractorTrajectory 15
+debugswarmImageGenerationFrequency 15
+debugswarmShowGlobalAttractor false
+debugswarmXresolution 2560
+debugswarmYresolution 1440
+debugswarmGnuplotTerminal png
+debugswarmOutput png

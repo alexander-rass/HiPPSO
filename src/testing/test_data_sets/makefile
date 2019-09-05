@@ -1,4 +1,5 @@
 test:
+	$(MAKE) -C specialconfigurations_evaluation && \
 	$(MAKE) -C initvelocity_evaluation && \
 	$(MAKE) -C randomnumbergenerators_evaluation && \
 	$(MAKE) -C positionandvelocityupdater_evaluation && \

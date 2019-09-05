@@ -1,0 +1,435 @@
+set terminal png size 2560,1440
+set output '000.png'
+set multiplot layout 4,4 rowsfirst title "PSO after 0 steps"
+set xlabel 'dimension 0'
+set ylabel 'dimension 1'
+set xrange [-8:4]
+set yrange [-8:4]
+set arrow from -4.7508332072405,-1.8266982498582 to -5.6100872983694,-1.6011882463205
+set arrow from -0.1490987017653,-3.3220981118436 to -1.1788901975571,-5.8029824677784
+set label "(0)" at -4.7508332072405,-1.8266982498582
+set label "(1)" at -0.1490987017653,-3.3220981118436
+set grid
+set arrow from -5,-5 to 1,-5 nohead
+set arrow from -5,-5 to -5,1 nohead
+set arrow from -5,1 to 1,1 nohead
+set arrow from 1,-5 to 1,1 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+-4.7508332072405 -1.8266982498582
+e
+-4.7508332072405 -1.8266982498582
+-0.1490987017653 -3.3220981118436
+e
+-4.7508332072405 -1.8266982498582
+-0.1490987017653 -3.3220981118436
+e
+-4.7508332072405 -1.8266982498582
+-4.7508332072405 -1.8266982498582
+e
+unset label
+unset arrow
+set xlabel 'dimension 2'
+set ylabel 'dimension 3'
+set xrange [-8:4]
+set yrange [-8:147.37989643705]
+set arrow from -2.9284365445344,140.99815555861 to -0.043715398904943,136.8123531154
+set arrow from -4.1372204651576,140.46939469281 to -6.3139270555339,147.37989643705
+set label "(0)" at -2.9284365445344,140.99815555861
+set label "(1)" at -4.1372204651576,140.46939469281
+set grid
+set arrow from -5,-5 to 1,-5 nohead
+set arrow from -5,-5 to -5,1 nohead
+set arrow from -5,1 to 1,1 nohead
+set arrow from 1,-5 to 1,1 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+-2.9284365445344 140.99815555861
+e
+-2.9284365445344 140.99815555861
+-4.1372204651576 140.46939469281
+e
+-2.9284365445344 140.99815555861
+-4.1372204651576 140.46939469281
+e
+-2.9284365445344 140.99815555861
+-2.9284365445344 140.99815555861
+e
+unset label
+unset arrow
+set xlabel 'dimension 4'
+set ylabel 'dimension 5'
+set xrange [-8:148.95896505988]
+set yrange [-8:142.28892774155]
+set arrow from 140.28410357471,140.65367918953 to 148.95896505988,142.28892774155
+set arrow from 140.83767123153,140.57540536437 to 134.32051867427,132.43135092645
+set label "(0)" at 140.28410357471,140.65367918953
+set label "(1)" at 140.83767123153,140.57540536437
+set grid
+set arrow from -5,-5 to 1,-5 nohead
+set arrow from -5,-5 to -5,1 nohead
+set arrow from -5,1 to 1,1 nohead
+set arrow from 1,-5 to 1,1 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.28410357471 140.65367918953
+e
+140.28410357471 140.65367918953
+140.83767123153 140.57540536437
+e
+140.28410357471 140.65367918953
+140.83767123153 140.57540536437
+e
+140.28410357471 140.65367918953
+140.28410357471 140.65367918953
+e
+unset label
+unset arrow
+set xlabel 'dimension 6'
+set ylabel 'dimension 7'
+set xrange [-8:144.91527629099]
+set yrange [-8:141.48611039114]
+set arrow from 140.54964533153,140.6157501156 to 130.61985032473,141.41769792228
+set arrow from 140.76234715319,140.26856589482 to 144.91527629099,141.48611039114
+set label "(0)" at 140.54964533153,140.6157501156
+set label "(1)" at 140.76234715319,140.26856589482
+set grid
+set arrow from -5,-5 to 1,-5 nohead
+set arrow from -5,-5 to -5,1 nohead
+set arrow from -5,1 to 1,1 nohead
+set arrow from 1,-5 to 1,1 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.54964533153 140.6157501156
+e
+140.54964533153 140.6157501156
+140.76234715319 140.26856589482
+e
+140.54964533153 140.6157501156
+140.76234715319 140.26856589482
+e
+140.54964533153 140.6157501156
+140.54964533153 140.6157501156
+e
+unset label
+unset arrow
+set xlabel 'dimension 8'
+set ylabel 'dimension 9'
+set xrange [-8:148.81418250574]
+set yrange [-8:144.43584939056]
+set arrow from 140.80117849503,140.23379603345 to 134.19432052922,140.65547188803
+set arrow from 140.14273535432,140.76007724358 to 148.81418250574,144.43584939056
+set label "(0)" at 140.80117849503,140.23379603345
+set label "(1)" at 140.14273535432,140.76007724358
+set grid
+set arrow from -5,-5 to 1,-5 nohead
+set arrow from -5,-5 to -5,1 nohead
+set arrow from -5,1 to 1,1 nohead
+set arrow from 1,-5 to 1,1 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.80117849503 140.23379603345
+e
+140.80117849503 140.23379603345
+140.14273535432 140.76007724358
+e
+140.80117849503 140.23379603345
+140.14273535432 140.76007724358
+e
+140.80117849503 140.23379603345
+140.80117849503 140.23379603345
+e
+unset label
+unset arrow
+set xlabel 'dimension 10'
+set ylabel 'dimension 11'
+set xrange [-8:144.23399650319]
+set yrange [-9:141.74069398353]
+set arrow from 140.93101096425,140.88036794575 to 144.23399650319,141.74069398353
+set arrow from 140.8321906525,140.63468857775 to 138.08769757262,140.81047824915
+set label "(0)" at 140.93101096425,140.88036794575
+set label "(1)" at 140.8321906525,140.63468857775
+set grid
+set arrow from -5,-1 to 1,-1 nohead
+set arrow from -5,-1 to -5,15 nohead
+set arrow from -5,15 to 1,15 nohead
+set arrow from 1,-1 to 1,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.93101096425 140.88036794575
+e
+140.93101096425 140.88036794575
+140.8321906525 140.63468857775
+e
+140.93101096425 140.88036794575
+140.8321906525 140.63468857775
+e
+140.93101096425 140.88036794575
+140.93101096425 140.88036794575
+e
+unset label
+unset arrow
+set xlabel 'dimension 12'
+set ylabel 'dimension 13'
+set xrange [-9:140.68584229602]
+set yrange [-9:142.79665790127]
+set arrow from 140.68584229602,140.89141793742 to 138.25609387569,142.79665790127
+set arrow from 140.16532966493,140.73363980464 to 130.32398083864,142.13590524725
+set label "(0)" at 140.68584229602,140.89141793742
+set label "(1)" at 140.16532966493,140.73363980464
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.68584229602 140.89141793742
+e
+140.68584229602 140.89141793742
+140.16532966493 140.73363980464
+e
+140.68584229602 140.89141793742
+140.16532966493 140.73363980464
+e
+140.68584229602 140.89141793742
+140.68584229602 140.89141793742
+e
+unset label
+unset arrow
+set xlabel 'dimension 14'
+set ylabel 'dimension 15'
+set xrange [-9:149.39148872078]
+set yrange [-9:148.70908956294]
+set arrow from 140.81707288631,140.76630833534 to 149.39148872078,131.47165075559
+set arrow from 140.38921174866,140.87487939442 to 138.25622026298,148.70908956294
+set label "(0)" at 140.81707288631,140.76630833534
+set label "(1)" at 140.38921174866,140.87487939442
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.81707288631 140.76630833534
+e
+140.81707288631 140.76630833534
+140.38921174866 140.87487939442
+e
+140.81707288631 140.76630833534
+140.38921174866 140.87487939442
+e
+140.81707288631 140.76630833534
+140.81707288631 140.76630833534
+e
+unset label
+unset arrow
+set xlabel 'dimension 16'
+set ylabel 'dimension 17'
+set xrange [-9:145.01365158694]
+set yrange [-9:142.79244520373]
+set arrow from 140.69918552048,140.39261926412 to 145.01365158694,142.34212564503
+set arrow from 140.62076268065,140.39758719632 to 132.73179714408,142.79244520373
+set label "(0)" at 140.69918552048,140.39261926412
+set label "(1)" at 140.62076268065,140.39758719632
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+140.69918552048 140.39261926412
+e
+140.69918552048 140.39261926412
+140.62076268065 140.39758719632
+e
+140.69918552048 140.39261926412
+140.62076268065 140.39758719632
+e
+140.69918552048 140.39261926412
+140.69918552048 140.39261926412
+e
+unset label
+unset arrow
+set xlabel 'dimension 18'
+set ylabel 'dimension 19'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from -5.4864863802865e-19,-4.9842981386235e-19 to 1.0000000015446,0.99999999876365
+set arrow from 13.243634744367,4.0113986136865 to 11.621126033925,2.4109462232486
+set label "(0)" at -5.4864863802865e-19,-4.9842981386235e-19
+set label "(1)" at 13.243634744367,4.0113986136865
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+-5.4864863802865e-19 -4.9842981386235e-19
+e
+-5.4864863802865e-19 -4.9842981386235e-19
+13.243634744367 4.0113986136865
+e
+-5.4864863802865e-19 -4.9842981386235e-19
+13.243634744367 4.0113986136865
+e
+-5.4864863802865e-19 -4.9842981386235e-19
+-5.4864863802865e-19 -4.9842981386235e-19
+e
+unset label
+unset arrow
+set xlabel 'dimension 20'
+set ylabel 'dimension 21'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from 5.7741843444973e-10,-8.573205186897e-22 to 1.2740636149168,0.99999999999887
+set arrow from 3.9547974378142,7.6017155079548 to 4.8875658916129,9.0264075952023
+set label "(0)" at 5.7741843444973e-10,-8.573205186897e-22
+set label "(1)" at 3.9547974378142,7.6017155079548
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+5.7741843444973e-10 -8.573205186897e-22
+e
+5.7741843444973e-10 -8.573205186897e-22
+3.9547974378142 7.6017155079548
+e
+5.7741843444973e-10 -8.573205186897e-22
+3.9547974378142 7.6017155079548
+e
+5.7741843444973e-10 -8.573205186897e-22
+5.7741843444973e-10 -8.573205186897e-22
+e
+unset label
+unset arrow
+set xlabel 'dimension 22'
+set ylabel 'dimension 23'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from 6.9999999999973,14.297763524029 to 6.9999999999962,15.579718202832
+set arrow from 10.543635690702,10.082798932387 to 14.512467620262,6.860825704836
+set label "(0)" at 6.9999999999973,14.297763524029
+set label "(1)" at 10.543635690702,10.082798932387
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+6.9999999999973 14.297763524029
+e
+6.9999999999973 14.297763524029
+10.543635690702 10.082798932387
+e
+6.9999999999973 14.297763524029
+10.543635690702 10.082798932387
+e
+6.9999999999973 14.297763524029
+6.9999999999973 14.297763524029
+e
+unset label
+unset arrow
+set xlabel 'dimension 24'
+set ylabel 'dimension 25'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from 4.3698473724731,6.5111804250508 to -1.5943105303909,10.10525606043
+set arrow from 10.509032520597,4.9484273670963 to 4.5961766419751,8.3927012630077
+set label "(0)" at 4.3698473724731,6.5111804250508
+set label "(1)" at 10.509032520597,4.9484273670963
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+4.3698473724731 6.5111804250508
+e
+4.3698473724731 6.5111804250508
+10.509032520597 4.9484273670963
+e
+4.3698473724731 6.5111804250508
+10.509032520597 4.9484273670963
+e
+4.3698473724731 6.5111804250508
+4.3698473724731 6.5111804250508
+e
+unset label
+unset arrow
+set xlabel 'dimension 26'
+set ylabel 'dimension 27'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from 12.498798519947,10.571897323722 to 13.756045001087,11.515965460351
+set arrow from 13.287400094127,7.8183773108963 to 14.855405773953,-0.034134496747668
+set label "(0)" at 12.498798519947,10.571897323722
+set label "(1)" at 13.287400094127,7.8183773108963
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+12.498798519947 10.571897323722
+e
+12.498798519947 10.571897323722
+13.287400094127 7.8183773108963
+e
+12.498798519947 10.571897323722
+13.287400094127 7.8183773108963
+e
+12.498798519947 10.571897323722
+12.498798519947 10.571897323722
+e
+unset label
+unset arrow
+set xlabel 'dimension 28'
+set ylabel 'dimension 29'
+set xrange [-9:23]
+set yrange [-9:23]
+set arrow from 11.641042040841,4.7043686785238 to 14.381119258998,7.9113936914127
+set arrow from 10.036830990567,13.929325720294 to 5.3048329736513,16.378412359292
+set label "(0)" at 11.641042040841,4.7043686785238
+set label "(1)" at 10.036830990567,13.929325720294
+set grid
+set arrow from -1,-1 to 15,-1 nohead
+set arrow from -1,-1 to -1,15 nohead
+set arrow from -1,15 to 15,15 nohead
+set arrow from 15,-1 to 15,15 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+11.641042040841 4.7043686785238
+e
+11.641042040841 4.7043686785238
+10.036830990567 13.929325720294
+e
+11.641042040841 4.7043686785238
+10.036830990567 13.929325720294
+e
+11.641042040841 4.7043686785238
+11.641042040841 4.7043686785238
+e
+unset label
+unset arrow
+set xlabel 'dimension 30'
+set ylabel 'dimension 31'
+set xrange [-9:23]
+set yrange [-200:200]
+set arrow from 4.3625116411415,-71.467487438904 to -0.014618989185019,0.60960927272669
+set arrow from 5.9394851408433,-84.902285170116 to 3.5641543877489,-101.32512760894
+set label "(0)" at 4.3625116411415,-71.467487438904
+set label "(1)" at 5.9394851408433,-84.902285170116
+set grid
+set arrow from -1,-100 to 15,-100 nohead
+set arrow from -1,-100 to -1,100 nohead
+set arrow from -1,100 to 15,100 nohead
+set arrow from 15,-100 to 15,100 nohead
+plot   '-' using 1:2 with lines title 'best global attractor footprints', '-' using 1:2 title 'positions', '-' using 1:2 title 'local attractors', '-' using 1:2 title 'global attractors'
+4.3625116411415 -71.467487438904
+e
+4.3625116411415 -71.467487438904
+5.9394851408433 -84.902285170116
+e
+4.3625116411415 -71.467487438904
+5.9394851408433 -84.902285170116
+e
+4.3625116411415 -71.467487438904
+4.3625116411415 -71.467487438904
+e
+unset label
+unset arrow
