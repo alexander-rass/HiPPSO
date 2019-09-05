@@ -35,7 +35,7 @@ for folder in $REFFOLDER/* ; do
         mkdir $TMPFOLDER
         cd $TMPFOLDER
         sed "s/^steps $ITERATIONS/steps $SPLITITERATIONS/" $CURCONFIGFILE > $TMPCONFIGFILE
-        ../../../../../bin/high_precision_pso c $TMPCONFIGFILE;
+        ../../../../../bin/high_precision_pso c $TMPCONFIGFILE > stdout.txt 2> stderr.txt;
         receivedExitCode=$? ;
         expectedExitCode=0;
         if [ $receivedExitCode -ne $expectedExitCode ] ; then
@@ -59,7 +59,7 @@ for folder in $REFFOLDER/* ; do
         CURCONFIGFILE=$(echo *.confBU)
         sed "s/^steps $SPLITITERATIONS/steps $ITERATIONS/" $CURCONFIGFILE > TMP_$CURCONFIGFILE
         mv TMP_$CURCONFIGFILE $CURCONFIGFILE
-        ../../../../../bin/high_precision_pso rf $CURCONFIGFILE;
+        ../../../../../bin/high_precision_pso rf $CURCONFIGFILE >> stdout.txt 2>> stderr.txt;
         receivedExitCode=$? ;
         expectedExitCode=0;
         if [ $receivedExitCode -ne $expectedExitCode ] ; then
@@ -70,6 +70,14 @@ for folder in $REFFOLDER/* ; do
             EXITCODE=1
             cd $TESTBASEFOLDER
             exit 1
+        fi
+        STDOUTLINES=$(cat stdout.txt | wc -l)
+        if [ $STDOUTLINES -eq 0 ]; then
+            rm stdout.txt;
+        fi
+        STDERRLINES=$(cat stderr.txt | wc -l)
+        if [ $STDERRLINES -eq 0 ]; then
+            rm stderr.txt;
         fi
         NUMREFFILES=$(find $TESTBASEFOLDER/$folder -type f -print0 | tr -d -c '\0' | wc -c)
         NUMPRODUCEDFILES=$(find . -type f -print0 | tr -d -c '\0' | wc -c)
