@@ -28,7 +28,15 @@ for TESTID in $(seq 1 $TESTSETS) ; do
         folder=run$line ;
         mkdir $REFFOLDER/$folder
         cd $REFFOLDER/$folder
-        ../../../../../../bin/high_precision_pso c ../../$tmpconffile ;
+        ../../../../../../bin/high_precision_pso c ../../$tmpconffile > stdout.txt 2> stderr.txt;
+        STDOUTLINES=$(cat stdout.txt | wc -l)
+        if [ $STDOUTLINES -eq 0 ]; then
+            rm stdout.txt;
+        fi
+        STDERRLINES=$(cat stderr.txt | wc -l)
+        if [ $STDERRLINES -eq 0 ]; then
+            rm stderr.txt;
+        fi
         cd ../..
         rm $tmpconffile
     done

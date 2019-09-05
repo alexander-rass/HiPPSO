@@ -1,5 +1,90 @@
 #!/bin/bash
 
+checkFilesMatching(){
+    reffile="$1"
+    prodfile="$2"
+
+    if [ "${prodfile: -7}" == ".backup" ]; then
+        if [ "${reffile: -7}" == ".backup" ]; then
+            prodlines=$(cat "$prodfile" | wc -l)
+            reflines=$(cat "$reffile" | wc -l)
+            if [ $prodlines -ne $reflines ] ; then
+                return 1
+            fi
+            prodwords=$(cat "$prodfile" | wc -w)
+            refwords=$(cat "$reffile" | wc -w)
+            if [ $prodwords -ne $refwords ] ; then
+                return 1
+            fi
+            cmp --silent <(sed "${prodlines}d" "$prodfile" | sed "1d") <(sed "${reflines}d" "$reffile" | sed "1d") || return 1
+            #check that first line contains only a single string which represents the version
+            expectedoneword=$(head -n 1 "$prodfile" | wc -w)
+            if [ "$expectedoneword" -ne 1 ]; then
+                return 1
+            fi
+            expectedoneword=$(head -n 1 "$reffile" | wc -w)
+            if [ "$expectedoneword" -ne 1 ]; then
+                return 1
+            fi
+        else
+            return 1
+        fi
+    elif [ "${prodfile: -4}" == ".log" ]; then
+        if [ "${reffile: -4}" == ".log" ] ; then
+            return 0
+        else
+            return 1
+        fi
+    elif [ "${prodfile: -12}" == ".gnuplot.txt" ]; then
+        if [ "${reffile: -12}" == ".gnuplot.txt" ] ; then
+            cmp --silent <(sed "s/set xrange \[.*\]/set xrange []/" "$prodfile" | sed "s/set yrange \[.*\]/set yrange []/" | sed "s/set output '0*/set output '/" | grep -v "nohead") <(sed "s/set xrange \[.*\]/set xrange []/" "$reffile" | sed "s/set yrange \[.*\]/set yrange []/" | sed "s/set output '0*/set output '/" | grep -v "nohead") || return 1
+        else
+            return 1
+        fi
+    else
+        cmp --silent "$reffile" "$prodfile" || return 1
+    fi
+    return 0
+}
+
+checkFoldersMatching(){
+    REFFOLDER="$1"
+    PRODFOLDER="$2"
+
+    #store filenames of each folder in an array:
+    PRODUCEDFILEARRAY=()
+    while IFS=  read -r -d $'\0'; do
+        PRODUCEDFILEARRAY+=("$REPLY")
+    done < <(find "$PRODFOLDER" -type f -print0)
+    REFFILEARRAY=()
+    while IFS=  read -r -d $'\0'; do
+        REFFILEARRAY+=("$REPLY")
+    done < <(find "$REFFOLDER" -type f -print0)
+
+    #check whether number of files is equal
+    if [ ${#REFFILEARRAY[@]} -ne ${#PRODUCEDFILEARRAY[@]} ]; then
+        echo "FAILURE DETECTED"
+        echo "Number of prduced files (${#PRODUCEDFILEARRAY[@]}) differs from number of reference files (${#REFFILEARRAY[@]})"
+        return 1
+    fi
+
+    for prodindex in ${!PRODUCEDFILEARRAY[@]}; do
+        sameindex=-1
+        for refindex in ${!REFFILEARRAY[@]}; do
+            reffile="${REFFILEARRAY[$refindex]}"
+            prodfile="${PRODUCEDFILEARRAY[$prodindex]}"
+            checkFilesMatching "$reffile" "$prodfile" && sameindex=$refindex && break
+        done
+        if [ $sameindex -ne -1 ]; then
+            unset REFFILEARRAY[$refindex]
+        else
+            echo "No match for file ${PRODUCEDFILEARRAY[$prodindex]}"
+            return 1
+        fi
+    done
+    return 0
+}
+
 ITERATIONS=$3
 SPLITITERATIONS=$2
 REFFOLDER="$1"
@@ -79,57 +164,11 @@ for folder in $REFFOLDER/* ; do
         if [ $STDERRLINES -eq 0 ]; then
             rm stderr.txt;
         fi
-        NUMREFFILES=$(find $TESTBASEFOLDER/$folder -type f -print0 | tr -d -c '\0' | wc -c)
-        NUMPRODUCEDFILES=$(find . -type f -print0 | tr -d -c '\0' | wc -c)
-        if [ $NUMREFFILES -ne $NUMPRODUCEDFILES ]; then
-            echo "FAILURE DETECTED"
-            echo "Number of prduced files ($NUMPRODUCEDFILES) differs from number of reference files ($NUMREFFILES)"
-            EXITCODE=1
-            cd $TESTBASEFOLDER
-            exit 1
-        fi
-        find . -type f -print0 |
-            while IFS= read -r -d '' line; do
-                currentfile="$line"
-                reffile=$(echo "$currentfile" | sed "s|\./|$TESTBASEFOLDER/$folder/|" | sed "s/S${SPLITITERATIONS}F/S${ITERATIONS}F/")
-                if [ -f $reffile ]; then
-                    if [ ${currentfile: -7} == ".backup" ]; then
-                        #compare all except first and last line (those two lines contain the version number)
-                        differLines=$(diff <(sed "$(cat $currentfile | wc -l)d" $currentfile | sed "1d") <(sed "$(cat $reffile | wc -l)d" $reffile | sed "1d") | wc -l)
-                        #check that first line contains only a single string which represents the version
-                        expectedoneword=$(head -n 1 $currentfile | wc -w)
-                        if [ "$expectedoneword" -ne 1 ]; then
-                            differLines=1
-                        fi
-                    elif [ ${currentfile: -4} == ".log" ]; then
-                        differLines=0
-                    else
-                        differLines=$(diff $currentfile $reffile | wc -l)
-                    fi
-                    if [ $differLines -ne 0 ] ; then
-                        echo "FAILURE DETECTED"
-                        echo "$reffile does not match!"
-                        EXITCODE=1
-                        cd $TESTBASEFOLDER
-                        exit 1
-                    fi
-                else
-                    echo "FAILURE DETECTED"
-                    echo "No reference file for data file $currentfile found."
-                    EXITCODE=1
-                    cd $TESTBASEFOLDER
-                    exit 1
-                fi
-            done
-        receivedExitCode=$? ;
-        if [ $receivedExitCode -ne 0 ] ; then
-            echo "FAILURE DETECTED"
-            echo "failure appeared while testing $folder"
-            EXITCODE=1
-            cd $TESTBASEFOLDER
-            exit 1
-        fi
+        checkFoldersMatching "$TESTBASEFOLDER/$folder" "."  || EXITCODE=1
         cd $TESTBASEFOLDER
+        if [ $EXITCODE -eq 1 ]; then
+            exit 1
+        fi
         rm -r $TMPFOLDER
     else
         EXITCODE=1
