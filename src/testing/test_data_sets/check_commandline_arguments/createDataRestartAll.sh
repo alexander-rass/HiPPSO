@@ -34,9 +34,5 @@ cd stage4
 
 cd ../..
 
-# wait for processes in this session to terminate
-for prid in $(ps -s $$ -o pid=) ; do
-	if [ $prid -ne $$ ]; then
-		tail --pid=$prid -f /dev/null
-	fi
-done
+# wait a short time to let subprocesses be finished
+sleep 3

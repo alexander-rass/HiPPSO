@@ -12,7 +12,7 @@ else
     exit 1;
 fi
 
-setsid ./createDataRestartAll.sh testfolder
+./createDataRestartAll.sh testfolder
 
 EXITCODE=0
 for TESTID in $(seq 1 3); do
