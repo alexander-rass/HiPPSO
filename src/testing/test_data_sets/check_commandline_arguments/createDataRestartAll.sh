@@ -22,11 +22,11 @@ for TESTID in $(seq 1 2); do
     rm tmp.confBU
     touch test$TESTID.SHUTDOWN
 done
+cp -R . ../stage3
 ../../../../../../bin/high_precision_pso restartAll . > /dev/null 2> /dev/null
 cd ..
-cp -R stage2 stage3
 cp ../configuration_files/runcheck_allowed.conf stage3/runcheck.conf
-../../../../../bin/high_precision_pso restartAll stage3
+../../../../../bin/high_precision_pso restartAll stage3 > /dev/null 2> /dev/null
 
 mkdir stage4
 cd stage4
