@@ -247,17 +247,17 @@ int main(int argc, char * argv[]) {
 							std::cout << "You did not write \"YES\". Program terminates whithout any action." << std::endl;
 						}
 					}
-					std::ifstream confFile(argv[3]);
+					std::ifstream backupFile(argv[3]);
 					FILE* backup = fopen(
 							newBackupFileName.c_str(),
 							"w");
-					while (!confFile.eof()) {
+					while (!backupFile.eof()) {
 						std::string tmp;
-						getline(confFile, tmp);
+						getline(backupFile, tmp);
 						fprintf(backup, "%s\n", tmp.c_str());
 					}
 					fclose(backup);
-					confFile.close();
+					backupFile.close();
 				} else {
 					std::cout << "backup file \"" << backupFileName << "\" will be overwritten by new backup files. "
 					          << "Are you sure that this is intentionaly? "

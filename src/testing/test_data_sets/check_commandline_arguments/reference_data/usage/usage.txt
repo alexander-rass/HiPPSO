@@ -1,0 +1,21 @@
+usage:
+../../../../bin/high_precision_pso c <config file name>
+	Starts a PSO run specified by the configuration in the specified configuration file.
+../../../../bin/high_precision_pso r <configuration backup file name with extension confBU>
+	Restarts a stopped PSO run.
+	The file with extension ".SHUTDOWN" needs to be available.
+../../../../bin/high_precision_pso rf <configuration backup file name with extension confBU>
+	Forces the restart of a stopped PSO run.
+	The file with extension ".SHUTDOWN" is not necessary.
+../../../../bin/high_precision_pso restart <config file name> <backup file name>
+	Restarts a PSO with the specified configuration file and backup file.
+	It starts running at the time step stored in the backup file.
+	The configuration file can be modified as long as the changes do not influence the movement of the swarm.
+	For example the number of iterations can be increased or statistics (and when they should be displayed) can be modified completely.
+../../../../bin/high_precision_pso restartAll <folder>
+	Restarts all PSO runs in the specified folder if file with extension ".SHUTDOWN" is available.
+	This command can be used in a cron job to restart PSO runs automatically if a time interval starts where running PSO is not forbidden.
+../../../../bin/high_precision_pso -version
+	Prints the version of the PSO program.
+../../../../bin/high_precision_pso -gmpversion
+	Prints the used version of the gmp library.

@@ -27,7 +27,12 @@ cd ..
 cp -R stage2 stage3
 cp ../configuration_files/runcheck_allowed.conf stage3/runcheck.conf
 ../../../../../bin/high_precision_pso restartAll stage3
-cd ..
+
+mkdir stage4
+cd stage4
+../../../../../../bin/high_precision_pso restart ../stage2/test1.confBU ../stage2/test1.S50.backup
+
+cd ../..
 
 # wait for processes in this session to terminate
 for prid in $(ps -s $$ -o pid=) ; do

@@ -51,6 +51,14 @@ checkFoldersMatching(){
     REFFOLDER="$1"
     PRODFOLDER="$2"
 
+    if [ ! -d $REFFOLDER ]; then
+        echo "$REFFOLDER does not exist";
+        return 1
+    fi
+    if [ ! -d $PRODFOLDER ]; then
+        echo "$PRODFOLDER does not exist";
+        return 1
+    fi
     #store filenames of each folder in an array:
     PRODUCEDFILEARRAY=()
     while IFS=  read -r -d $'\0'; do

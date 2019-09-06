@@ -10,7 +10,7 @@ checkprecision allExceptStatistics
 checkprecisionprobability 1.00
 particles 8
 dimensions 8
-steps 100
+steps 200
 srand 1
 initializeVelocity zero
 neighborhood gBest
@@ -22,3 +22,4 @@ velocityAdjustment none
 outputPrecision 10
 runcheck runcheck.conf
 preservebackup 50
+
