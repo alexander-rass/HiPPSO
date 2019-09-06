@@ -1,4 +1,5 @@
 test:
+	$(MAKE) -C check_commandline_arguments && \
 	$(MAKE) -C specialconfigurations_evaluation && \
 	$(MAKE) -C initvelocity_evaluation && \
 	$(MAKE) -C randomnumbergenerators_evaluation && \
