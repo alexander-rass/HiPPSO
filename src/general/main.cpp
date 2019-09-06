@@ -47,6 +47,7 @@
 #include <sstream>
 #include <string.h>
 #include <unistd.h>
+#include <sys/wait.h>
 
 #include "function/function.h"
 #include "general/check_condition.h"
@@ -777,9 +778,16 @@ void Shutdown() {
 }
 
 int StartTasks( char * argv[]) {
+	if(0 != chdir(argv[2])){
+		std::cerr << "Could not open directory \"" << std::string(argv[2]) << "\"\n";
+		return 1;
+	}
 	DIR* directory;
 	struct dirent *entry;
-	if (( directory = opendir (argv[2])) == NULL ){
+	std::string cfolder_s = ".";
+	char cfolder_cstr[2];
+	strcpy(cfolder_cstr, cfolder_s.c_str());
+	if (( directory = opendir (cfolder_cstr)) == NULL ){
 		std::cerr << "Could not open directory \"" << std::string(argv[2]) << "\"\n";
 		return 1;
 	}
