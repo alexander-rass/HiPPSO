@@ -62,11 +62,15 @@ checkFoldersMatching(){
     #store filenames of each folder in an array:
     PRODUCEDFILEARRAY=()
     while IFS=  read -r -d $'\0'; do
-        PRODUCEDFILEARRAY+=("$REPLY")
+        if [ "${REPLY}: -10}" != ".stackdump" ]; then
+            PRODUCEDFILEARRAY+=("$REPLY")
+        fi
     done < <(find "$PRODFOLDER" -type f -print0)
     REFFILEARRAY=()
     while IFS=  read -r -d $'\0'; do
-        REFFILEARRAY+=("$REPLY")
+        if [ "${REPLY}: -10}" != ".stackdump" ]; then
+            REFFILEARRAY+=("$REPLY")
+        fi
     done < <(find "$REFFOLDER" -type f -print0)
 
     #check whether number of files is equal

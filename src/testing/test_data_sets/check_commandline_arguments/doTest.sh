@@ -15,7 +15,7 @@ fi
 ./createDataRestartAll.sh testfolder
 
 EXITCODE=0
-for TESTID in $(seq 1 3); do
+for TESTID in $(seq 1 4); do
 	checkFoldersMatching "testfolder/stage$TESTID" "reference_data/stage$TESTID"  || EXITCODE=1
 	if [ $EXITCODE -eq 1 ]; then
 		cd $TESTBASEFOLDER
