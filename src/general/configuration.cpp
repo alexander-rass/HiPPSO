@@ -940,21 +940,11 @@ std::string GetFilePrefix(){
 		time_t t = time(0); // get time now
 		struct tm * now = localtime(&t);
 		fName << "." << (now->tm_year + 1900) << "-";
-		if (now->tm_mon + 1 < 10)
-			fName << "0";
-		fName << (now->tm_mon + 1) << '-';
-		if (now->tm_mday < 10)
-			fName << "0";
-		fName << now->tm_mday << '_';
-		if (now->tm_hour < 10)
-			fName << "0";
-		fName << now->tm_hour << '.';
-		if (now->tm_min < 10)
-			fName << '0';
-		fName << now->tm_min << '.';
-		if (now->tm_sec < 10)
-			fName <<  '0';
-		fName << now->tm_sec;
+		fName << ((now->tm_mon + 1 < 10)?"0":"") << (now->tm_mon + 1) << '-';
+		fName << ((now->tm_mday < 10)?"0":"") << now->tm_mday << '_';
+		fName << ((now->tm_hour < 10)?"0":"") << now->tm_hour << '.';
+		fName << ((now->tm_min < 10)?"0":"") << now->tm_min << '.';
+		fName << ((now->tm_sec < 10)?"0":"") << now->tm_sec;
 	}
 	std::string res = fName.str();
 	return res;
