@@ -1,6 +1,11 @@
 
 # High Precision Particle Swarm Optimization (HiPPSO) in C++<a name="high-precision-particle-swarm-optimization-hippso-in-c"></a>
 
+[![DOI](https://zenodo.org/badge/85169564.svg)](https://zenodo.org/badge/latestdoi/85169564)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+[![Build Status](https://travis-ci.org/alexander-rass/HiPPSO.svg?branch=master)](https://travis-ci.org/alexander-rass/HiPPSO)
+[![Coverage Status](https://coveralls.io/repos/github/alexander-rass/HiPPSO/badge.svg)](https://coveralls.io/github/alexander-rass/HiPPSO)
+
 ## Table of Contents<a name="table-of-contents"></a>
 * [High Precision Particle Swarm Optimization (HiPPSO) in C++](#high-precision-particle-swarm-optimization-hippso-in-c)
 * [Table of Contents](#table-of-contents)
