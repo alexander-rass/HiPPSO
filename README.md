@@ -261,9 +261,9 @@ submodule and has an
 ## Testing<a name="testing"></a>
 
 This software uses Travis CI
-([![Build Status](https://travis-ci.org/alexander-rass/HiPPSO.svg?branch=master)](https://travis-ci.org/alexander-rass/HiPPSO))
+[![Build Status](https://travis-ci.org/alexander-rass/HiPPSO.svg?branch=master)](https://travis-ci.org/alexander-rass/HiPPSO)
 as continuous integration service and Coveralls
-([![Coverage Status](https://coveralls.io/repos/github/alexander-rass/HiPPSO/badge.svg)](https://coveralls.io/github/alexander-rass/HiPPSO))
+[![Coverage Status](https://coveralls.io/repos/github/alexander-rass/HiPPSO/badge.svg)](https://coveralls.io/github/alexander-rass/HiPPSO)
 to ensure reasonable test coverage.
 
 ## Extensibility<a name="extensibility"></a>
@@ -291,6 +291,7 @@ versions of the following modules beside the respective source files:
 * [Bound handling strategy](https://github.com/alexander-rass/HiPPSO/blob/master/src/bound_handling/bound_handling.README)
 * [Velocity adjustment](https://github.com/alexander-rass/HiPPSO/blob/master/src/velocity_adjustment/velocity_adjustment.README) (after bound handling has been applied)
 * [Position and velocity updater](https://github.com/alexander-rass/HiPPSO/blob/master/src/position_and_velocity_updater/position_and_velocity_updater.README) (specifies how the new velocity is calculated)
+
 Please click on the respective item to go directly to the guideline description.
 
 ## Feedback<a name="feedback"></a>
