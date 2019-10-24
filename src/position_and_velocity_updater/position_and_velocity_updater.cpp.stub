@@ -1,0 +1,90 @@
+/**
+* @file   <TODO: Please add filename here>
+* @author <TODO: Please add author name and mail here>
+* @date   <TODO: Please add date here>
+* @brief  <TODO: Please add short description here>
+*
+* @copyright
+* This project is released under the MIT License (MIT).
+*
+* @copyright
+* The MIT License (MIT)
+*
+* @copyright
+* Copyright (c) 2016 by Friedrich-Alexander-Universität Erlangen-Nürnberg and
+* Alexander Raß
+*
+* @copyright
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* @copyright
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* @copyright
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
+/***********************************************************************************************
+                Method stubs for implementing a position and velocity updater
+ **********************************************************************************************/
+
+
+// TODO: Adjust this to the chosen filename; keep position_and_velocity_updater folder.
+#include "position_and_velocity_updater/position_and_velocity_updater.h.stub"
+
+// TODO: Adjust needed include files
+#include <gmp.h>
+#include <vector>
+#include "bound_handling/bound_handling.h"
+#include "general/configuration.h"
+#include "arbitrary_precision_calculation/operations.h"
+#include "general/particle.h"
+#include "neighborhood/neighborhood.h"
+
+namespace highprecisionpso {
+
+//TODO: Replace all appearances of MyPositionAndVelocityUpdater by the class name of your choice.
+
+void MyPositionAndVelocityUpdater::Update(Particle* p) {
+	// The given particle is positioned on its recent position (not yet
+	// updated) and the velocity of this particle is also on its recent (not
+	// yet updated) value. You can obtain the recent position by
+	// p->GetPosition() and the velocity by p->GetVelocity(). This function
+	// should calculate the new velocity of the particle in accordance to the
+	// position and velocity updater.  To set the velocity one has to call the
+	// function p->SetVelocity(<newVel>), where <newVel> is the new velocity
+	// vector.  Usually one needs the local and global attractors which can be
+	// obtained by p->GetLocalAttractorPosition() and
+	// configuration::g_neighborhood->GetGlobalAttractorPosition(p).  Please
+	// use the vector difference calculation of the bound handling strategy by
+	// configuration::g_bound_handling->GetDirectionVector(<vec1>, <vec2>) for
+	// the difference (<vec2> - <vec1>). This is not necessarily the vector
+	// difference (for circular search spaces the direct vector might go
+	// through the search space bounds).
+	//
+	// After setting the new velocity one has to activate the bound handling
+	// strategy (which updates the position in accordance to the old position
+	// and the new velocity) by
+	// configuration::g_bound_handling->SetParticleUpdate(p)
+	
+	// TODO
+}
+
+std::string MyPositionAndVelocityUpdater::GetName(){
+	return "NameOfYourPositionAndVelocityUpdater"; // TODO
+}
+
+} // namespace highprecisionpso

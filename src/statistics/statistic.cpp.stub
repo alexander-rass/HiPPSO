@@ -1,0 +1,77 @@
+/**
+* @file   <TODO: Please add filename here>
+* @author <TODO: Please add author name and mail here>
+* @date   <TODO: Please add date here>
+* @brief  <TODO: Please add short description here>
+*
+* @copyright
+* This project is released under the MIT License (MIT).
+*
+* @copyright
+* The MIT License (MIT)
+*
+* @copyright
+* Copyright (c) 2016 by Friedrich-Alexander-Universität Erlangen-Nürnberg and
+* Alexander Raß
+*
+* @copyright
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* @copyright
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* @copyright
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
+/***********************************************************************************************
+                       Method stubs for implementing a statistic
+ **********************************************************************************************/
+
+
+// TODO: Adjust this to the chosen filename; keep statistics folder.
+#include "statistics/statistic.h.stub"
+
+// TODO: Adjust needed include files
+#include "general/check_condition.h"
+#include "general/configuration.h"
+#include "general/general_objects.h"
+#include "arbitrary_precision_calculation/operations.h"
+#include "neighborhood/neighborhood.h"
+#include "statistics/statistics.h"
+
+namespace highprecisionpso {
+
+std::vector<mpf_t*> MyStatistic::Evaluate(){
+	// Return the data vector for current situation.
+	// You can use positions, velocities, local attractors and global
+	// attractors of all particles, the overall best found position or any
+	// other value for this purpose.
+	// Probably helpful variables/functions are (among many others):
+	// Position of the best found position: configuration::g_neighborhood->GetGlobalAttractorPosition()
+	// Number of particles: configuration::g_particles
+	// Number of dimensions: configuration::g_dimensions
+	// Pointer on vector of particle pointers: configuration::g_statistics->swarm
+	// Position vector of particle i: (*(configuration::g_statistics->swarm))[i]->GetPosition()
+	// Velocity vector of particle i: (*(configuration::g_statistics->swarm))[i]->GetVelocity()
+	// TODO
+}
+
+std::string MyStatistic::GetName(){
+	return "NameOfYourStatistic"; // TODO
+}
+
+} // namespace highprecisionpso

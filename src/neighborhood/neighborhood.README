@@ -1,0 +1,19 @@
+For implementing your own neighborhood topology please do the following tasks:
+
+- Copy "neighborhood/neighborhood.cpp.stub" and
+  "neighborhood/neighborhood.h.stub" to
+  "neighborhood/<filename of your choice>.cpp" and
+  "neighborhood/<filename of your choice>.h" within the "neighborhood"-folder.
+- Within these two new files: Adjust all tasks signaled by "TODO" keyword.
+- In file "general/configuration.cpp": Search for "ADDNEIGHBORHOOD" and add in
+  the following if-statement a case creating your neighborhood
+  topology (add else-if-statement; You do not need to include the new .h-file
+  containing your new neighborhood topology - this happens automatically).
+
+- run "make clean" and then "make" in the base folder of this repository. Then
+  your new neighborhood topology should be activated and can be selected by a
+  configuration file by command "neighborhood <your choosen keyword>".
+
+A "quite easy" example implementation is the global best neighborhod topology
+(GlobalBest) implemented in the files "neighborhood/global_best.cpp" and
+"neighborhood/global_best.h".

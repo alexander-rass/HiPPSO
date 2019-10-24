@@ -1,0 +1,132 @@
+/**
+* @file   <TODO: Please add filename here>
+* @author <TODO: Please add author name and mail here>
+* @date   <TODO: Please add date here>
+* @brief  <TODO: Please add short description here>
+*
+* @copyright
+* This project is released under the MIT License (MIT).
+*
+* @copyright
+* The MIT License (MIT)
+*
+* @copyright
+* Copyright (c) 2016 by Friedrich-Alexander-Universität Erlangen-Nürnberg and
+* Alexander Raß
+*
+* @copyright
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* @copyright
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* @copyright
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
+
+/***********************************************************************************************
+                Method stubs for implementing a neighborhood topology
+ **********************************************************************************************/
+
+
+// TODO: Adjust this to the chosen filename; keep neighborhood folder.
+#include "neighborhood/neighborhood.h.stub"
+
+// TODO: Adjust needed include files
+#include "function/function.h"
+#include "general/check_condition.h"
+#include "general/configuration.h"
+#include "arbitrary_precision_calculation/operations.h"
+#include "statistics/statistics.h"
+
+namespace highprecisionpso {
+
+//TODO: Replace all appearances of MyNeighborhoodTopology by the class name of your choice.
+
+MyNeighborhoodTopology::MyNeighborhoodTopology(){
+	// TODO: Initialize your data structures.
+}
+
+MyNeighborhoodTopology::~MyNeighborhoodTopology(){
+	// TODO: Release values that you have stored in the neighborhood topology.
+}
+
+void MyNeighborhoodTopology::UpdateAttractorInstantly(std::vector<mpf_t*> position, mpf_t* value, int particleId){
+	// The supplied position is visited by the particle with id "particleId".
+	// If the objective function value "value" is better than previously found
+	// values by this particle then depending on the neighborhood the newly
+	// found position has to be stored somehow in this class. Please note: If
+	// the supplied values have to be stored then you have to clone them and it
+	// is necessary to notify the arbitraryprecisioncalculation-framework if
+	// the number of stored values has changed
+	// (arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(changeInNumberOfStoredValues).
+	// Before overwriting old values please release them with
+	// arbitraryprecisioncalculation::mpftoperations::ReleaseValue(valueToRelease)
+	// or
+	// arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vectorOfValuesToRelease).
+	// TODO
+}
+
+std::vector<mpf_t*> MyNeighborhoodTopology::GetGlobalAttractorPosition(){
+	// return the position of the best global attractor.
+	return std::vector<mpf_t*>(); // TODO
+}
+
+mpf_t* MyNeighborhoodTopology::GetGlobalAttractorValue(){
+	// return the objective function value of the global attractor.
+	//
+	// Either this value has to be stored or it has to be calculated by calling
+	// "configuration::g_function->Evaluate(<stored position>)", where
+	// <stored position> is the position of the global attractor.
+	return NULL; // TODO
+}
+
+std::vector<mpf_t*> MyNeighborhoodTopology::GetGlobalAttractorPosition(int particleId){
+	// Return the position of the global attractor which is visible for particle with id "particleId".
+	return std::vector<mpf_t*>(); // TODO;
+}
+
+mpf_t* MyNeighborhoodTopology::GetGlobalAttractorValue(int particleId){
+	// Return the objective function value of the global attractor which is
+	// visible for particle with id "particleId".
+	//
+	// Either this value has to be stored or it has to be calculated by calling
+	// "configuration::g_function->Evaluate(<stored position>)", where
+	// <stored position> is the position of the respective global attractor.
+	return NULL; // TODO;
+}
+
+std::string MyNeighborhoodTopology::GetName(){
+	return "NameOfYourNeighborhoodTopology"; // TODO
+}
+
+void MyNeighborhoodTopology::StoreData(std::ofstream* outputstream){
+	// Store all memorized data to achieve the exact same state after all the
+	// stored data would be loaded again. Use
+	// arbitraryprecisioncalculation::mpftoperations::StoreMpft(valueToStore,outputstream);
+	// for storing mpf_t* objects.
+	// TODO
+}
+
+void MyNeighborhoodTopology::LoadData(std::ifstream* inputstream, ProgramVersion* version_of_stored_data){
+	// Load all stored data. Use
+	// arbitraryprecisioncalculation::mpftoperations::LoadMpft(inputstream) to
+	// load mpf_t* objects.
+	// TODO
+}
+
+} // namespace highprecisionpso

@@ -1,0 +1,22 @@
+For implementing your own bound handling strategy please do the following tasks:
+
+- Copy "bound_handling/bound_handling.cpp.stub" and
+  "bound_handling/bound_handling.h.stub" to
+  "bound_handling/<filename of your choice>.cpp" and
+  "bound_handling/<filename of your choice>.h" within the "bound_handling"-folder.
+- Within these two new files: Adjust all tasks signaled by "TODO" keyword.
+- In file "general/configuration.cpp": Search for "ADDBOUNDHANDLING" and add in
+  the following if-statement a case creating your bound handling strategy (add
+  else-if-statement; You do not need to include the new .h-file containing your
+  new bound handling strategy - this happens automatically).
+
+- run "make clean" and then "make" in the base folder of this repository. Then
+  your new bound handling strategy should be activated and can be selected by a
+  configuration file by command "boundhandling <your choosen keyword>".
+
+An easy example implementation is the "no bounds" bound handling strategy
+(BoundHandlingNoBounds) implemented in the files "bound_handling/no_bounds.cpp"
+and "bound_handling/no_bounds.h". An Example of a little more elaborate bound
+handling strategy, using the velocity adjustment at the end, is the "nearest"
+bound handling strategy (BoundHandlingNearest) implemented in the files
+"bound_handling/nearest.cpp" and "bound_handling/nearest.h".

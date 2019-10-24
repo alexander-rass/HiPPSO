@@ -1,0 +1,97 @@
+/**
+* @file   <TODO: Please add filename here>
+* @author <TODO: Please add author name and mail here>
+* @date   <TODO: Please add date here>
+* @brief  <TODO: Please add short description here>
+*
+* @copyright
+* This project is released under the MIT License (MIT).
+*
+* @copyright
+* The MIT License (MIT)
+*
+* @copyright
+* Copyright (c) 2016 by Friedrich-Alexander-Universität Erlangen-Nürnberg and
+* Alexander Raß
+*
+* @copyright
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* @copyright
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* @copyright
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
+
+/***********************************************************************************************
+                Method stubs for implementing a bound handling strategy
+ **********************************************************************************************/
+
+
+// TODO: Adjust this to the chosen filename; keep bound_handling folder.
+#include "bound_handling/bound_handling.h.stub"
+
+// TODO: Adjust needed include files
+#include "arbitrary_precision_calculation/operations.h"
+#include "general/particle.h"
+#include "general/configuration.h"
+#include "velocity_adjustment/velocity_adjustment.h"
+
+namespace highprecisionpso {
+
+//TODO: Replace all appearances of MyBoundHandlingStrategy by the class name of your choice.
+
+void MyBoundHandlingStrategy::SetParticleUpdate(Particle * p){
+	// The given particle is positioned on its recent position (not yet
+	// updated) and the velocity of this particle is already updated to the new
+	// velocity. You can obtain the recent position by p->GetPosition() and the
+	// velocity by p->GetVelocity(). With this two vectors this function should
+	// calculate the new position of the particle in accordance to the bound
+	// handling strategy. To set the position one has to call the function
+	// p->SetPosition(<newPos>), where <newPos> is the new position vector.
+	// Usually one needs the lower and upper function bounds which can be
+	// obtained by configuration::g_function->GetLowerSearchSpaceBound() and
+	// configuration::g_function->GetUpperSearchSpaceBound(). After setting the
+	// new position in accordance to the bound handling strategy one has to
+	// trigger the velocity adjustment if applicable by calling
+	// configuration::g_velocity_adjustment->AdjustVelocity(p,<modifiedDimensions>,<oldPos>),
+	// where <modifiedDimensions> is a boolean vector specifying for each
+	// dimension whether it was adjusted by the bound handling strategy (and
+	// therefore velocity adjustment has to be applied for that dimension) and
+	// <oldPos> is the old position of the particle. Please release all
+	// intermediate results at the end by
+	// arbitraryprecisioncalculation::mpftoperations::ReleaseValue(valueToRelease)
+	// or
+	// arbitraryprecisioncalculation::vectoroperations::ReleaseValues(vectorOfValuesToRelease).
+	
+	// TODO
+	
+	//p->SetPosition(<newPos>);
+	//configuration::g_velocity_adjustment->AdjustVelocity(p, <modifiedDimensions>, <oldPos>);
+}
+
+std::string MyBoundHandlingStrategy::GetName(){
+	return "NameOfYourBoundHandlingStrategy"; // TODO
+}
+// TODO: Implementation of GetDirectionVector is optional. The standard
+// implementation just calculates the difference between aim and position
+// (aim - position). For example with circular search spaces other
+// interpretations of "direct" direction are possible.
+// std::vector<mpf_t*> GetDirectionVector(const std::vector<mpf_t*> & position, const std::vector<mpf_t*> & aim){}
+
+} // namespace highprecisionpso

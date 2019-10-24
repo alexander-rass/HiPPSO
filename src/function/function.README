@@ -1,0 +1,18 @@
+For implementing your own function please do the following tasks:
+
+- Copy "function/function.cpp.stub" and
+  "function/function.h.stub" to
+  "function/<filename of your choice>.cpp" and
+  "function/<filename of your choice>.h" within the "function"-folder.
+- Within these two new files: Adjust all tasks signaled by "TODO" keyword.
+- In file "general/parse.cpp": Search for "ADDFUNCTION" and add in
+  the following if-statement a case creating your function
+  (add else-if-statement; You do not need to include the new .h-file
+  containing your new function - this happens automatically).
+
+- run "make clean" and then "make" in the base folder of this repository. Then
+  your new function should be activated and can be selected by a
+  configuration file by command "function standard <your choosen keyword>".
+
+An easy example implementation is the Rastrigin function implemented in the
+files "function/rastrigin.cpp" and "function/rastrigin.h".

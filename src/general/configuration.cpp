@@ -266,6 +266,11 @@ bool ReadConfigurationFile(std::string fileName) {
 			}
 			std::string suboption1 = input[1];
 			std::transform(suboption1.begin(), suboption1.end(), suboption1.begin(), ::tolower);
+			// If you create new implementations of BoundHandling class please
+			// add an else-if-statement with a keyword of your choice
+			// (alphanumeric lower case, no whitespace) creating your
+			// BoundHandling class and storing it in the variable
+			// "g_bound_handling" (see examples below). (ADDBOUNDHANDLING)
 			if (suboption1 == "nobounds") {
 				if(input.size() != 2){
 					parse::SignalInvalidCommand(input);
@@ -346,6 +351,12 @@ bool ReadConfigurationFile(std::string fileName) {
 				delete (g_velocity_adjustment);
 				g_velocity_adjustment = NULL;
 			}
+			// If you create new implementations of VelocityAdjustment
+			// class please add an else-if-statement with a keyword of your
+			// choice (alphanumeric lower case, no whitespace) creating your
+			// VelocityAdjustment class and storing it in the variable
+			// "g_velocity_adjustment" (see examples below).
+			// (ADDVELOCITYADJUSTMENT)
 			if (input[1] == "none") {
 				if(input.size() != 2){
 					parse::SignalInvalidCommand(input);
@@ -399,6 +410,11 @@ bool ReadConfigurationFile(std::string fileName) {
 				delete (g_neighborhood);
 				g_neighborhood = NULL;
 			}
+			// If you create new implementations of Neighborhood class please
+			// add an else-if-statement with a keyword of your choice
+			// (alphanumeric, no whitespace) creating your Neighborhood class
+			// and storing it in the variable "g_neighborhood" (see examples
+			// below). (ADDNEIGHBORHOOD)
 			if (input[1] == "gBest") {
 				g_neighborhood = new GlobalBest();
 			} else if(input[1] == "wheel") {
@@ -432,6 +448,12 @@ bool ReadConfigurationFile(std::string fileName) {
 			}
 			std::string suboption1 = input[1];
 			std::transform(suboption1.begin(), suboption1.end(), suboption1.begin(), ::tolower);
+			// If you create new implementations of PositionAndVelocityUpdater
+			// class please add an else-if-statement with a keyword of your
+			// choice (alphanumeric lower case, no whitespace) creating your
+			// PositionAndVelocityUpdater class and storing it in the variable
+			// "g_position_and_velocity_updater" (see examples below).
+			// (ADDPOSITIONANDVELOCITYUPDATER)
 			if (suboption1 == "default") {
 				g_position_and_velocity_updater = new DefaultUpdater;
 			} else if(suboption1 == "delta") {

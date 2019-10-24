@@ -1,0 +1,73 @@
+/**
+* @file   <TODO: Please add filename here>
+* @author <TODO: Please add author name and mail here>
+* @date   <TODO: Please add date here>
+* @brief  <TODO: Please add short description here>
+*
+* @copyright
+* This project is released under the MIT License (MIT).
+*
+* @copyright
+* The MIT License (MIT)
+*
+* @copyright
+* Copyright (c) 2016 by Friedrich-Alexander-Universität Erlangen-Nürnberg and
+* Alexander Raß
+*
+* @copyright
+* Permission is hereby granted, free of charge, to any person obtaining a copy
+* of this software and associated documentation files (the "Software"), to deal
+* in the Software without restriction, including without limitation the rights
+* to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+* copies of the Software, and to permit persons to whom the Software is
+* furnished to do so, subject to the following conditions:
+*
+* @copyright
+* The above copyright notice and this permission notice shall be included in
+* all copies or substantial portions of the Software.
+*
+* @copyright
+* THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+* IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+* FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+* AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+* LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+* OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+* SOFTWARE.
+*
+*/
+
+/***********************************************************************************************
+                   Class stub for implementing a statistic
+ **********************************************************************************************/
+
+// TODO: Please adjust the "define" statement.
+// The preferred "define" statement uses the capitalized file name including its parent folder and project name.
+// For example HIGH_PRECISION_PSO_STATISTICS_STATISTIC_H_STUB_
+#ifndef HIGH_PRECISION_PSO_STATISTICS_<PLEASE USE A SPECIALIZED DEFINE FOR YOUR STATISTIC>_H_
+#define HIGH_PRECISION_PSO_STATISTICS_<PLEASE USE A SPECIALIZED DEFINE FOR YOUR STATISTIC>_H_
+
+#include "statistics/direct_statistics.h"
+
+namespace highprecisionpso {
+
+//TODO: Replace MyStatistic by the class name of your choice.
+
+/**
+* @brief TODO: Add brief description of this class
+*/
+class MyStatistic : public Statistic {
+// TODO: All abstract functions of the abstract class Statistic have to be
+// implemented within the respective .cpp-file.
+// Please read API or direct_statistics.h-file for intended functionality.
+public:
+	std::vector<mpf_t*> Evaluate();
+	std::string GetName();
+private: // TODO: Additional internal variables or functions are allowed here.
+};
+
+
+} // namespace highprecisionpso
+
+// TODO: Adjust comment containing the "define"-name (keep as comment).
+#endif /* HIGH_PRECISION_PSO_STATISTICS_<PLEASE USE A SPECIALIZED DEFINE FOR YOUR STATISTIC>_H_ */

@@ -143,7 +143,10 @@ Function* ParseStandardFunction(const std::vector<std::string> & parameters, uns
 	}
 	std::string functionName = parameters[parsed_parameters++];
 	std::transform(functionName.begin(), functionName.end(), functionName.begin(), ::tolower);
-	//************************ Please add new functions here ***************************//
+	// If you create new implementations of Function class please
+	// add an else-if-statement with a keyword of your choice
+	// (alphanumeric lowercase, no whitespace) creating your Function class
+	// and return it (see examples below). (ADDFUNCTION)
 	if (functionName == "sphere") {
 		return new Sphere;
 	} else if(functionName == "norm1"){
@@ -574,7 +577,6 @@ SpecificStatisticalEvaluation* ParseSpecificStatistic(const std::vector<std::str
 	unsigned int mem_parsed_parameters = parsed_parameters;
 	std::string parameter = parameters[parsed_parameters++];
 	{
-		//************************ Please add new potentials here ***************************//
 		if(parameter == "position") {
 			return new PositionEvaluation;
 		} else if(parameter == "velocity") {
@@ -776,6 +778,10 @@ Statistic* ParseStatistic(const std::vector<std::string> & parameters, unsigned 
 	std::string parameter = parameters[parsed_parameters++];
 	// check direct statistic type
 	{
+		// If you create new implementations of Statistic class please
+		// add an else-if-statement with a keyword of your choice
+		// (alphanumeric, no whitespace) creating your Statistic class
+		// and return it (see examples below). (ADDSTATISTIC)
 		if(parameter == "globalBestPosition"){
 			return new GlobalBestPositionStatistic;
 		} else if(parameter == "globalBestPositionDistanceTo1DOptimum") {
