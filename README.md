@@ -13,6 +13,8 @@
 * [Usage](#usage)
 * [Examples](#examples)
 * [Documentation](#documentation)
+* [Testing](#testing)
+* [Extensibility](#extensibility)
 * [Feedback](#feedback)
 * [License](#license)
 * [Scientific Results](#scientific-results)
@@ -127,7 +129,11 @@ The behavior is specified in a configuration file. Examples and explanations of
 all options, which can be used in the configuration files, can be found in the
 sub-folder
 [guideline_configuration_files](https://github.com/alexander-rass/HiPPSO/tree/master/guideline_configuration_files).
-An exception is the file
+It is recommended to use our
+[online tool for configuration file generation](https://www12.informatik.uni-erlangen.de/downloads/eako/HiPPSOconfigurationFileGeneration/index.php).
+There you can find additional information for each option. This is especially
+helpful if you move your mouse over options of drop down menus.
+An additional special file is the file
 [runcheck.conf](https://github.com/alexander-rass/HiPPSO/blob/master/guideline_configuration_files/runcheck.conf).
 If the runcheck option is activated in the normal configuration files, then it
 can be specified, when the program is allowed to run.  As the runcheck
@@ -178,7 +184,7 @@ some examples can be found.
 (f(x)=&sum;<sub>d=0..D-1</sub>x[d]<sup>2</sup>)
 in two dimensions. The used configuration file is
 [example_01.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.conf).
-A statistic is generatet, which contains the objective function value of the
+A statistic is generated, which contains the objective function value of the
 best found position.  In combination with the short gnuplot script
 [example_01.STAT.GlBestFuncValue.gnuplot](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_01.STAT.GlBestFuncValue.gnuplot).
 the following figure can be produced:
@@ -223,7 +229,7 @@ with four particles. The used configuration files are
 [example_03a.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03a.conf)
 (configuration with self adjusting precision) and
 [example_03b.conf](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03b.conf)
-(configuration with constant precision).  A statistic is generatet, which
+(configuration with constant precision).  A statistic is generated, which
 contains the objective function value of the best found position.  In
 combination with the short gnuplot script
 [example_03.STAT.GlBestFuncValue.gnuplot](https://github.com/alexander-rass/HiPPSO/blob/master/examples/example_03.STAT.GlBestFuncValue.gnuplot)
@@ -251,6 +257,41 @@ some files from the
 repository of [Velron](https://github.com/Velron) are used. It is added as a
 submodule and has an
 [Apache 2.0 license](https://www.apache.org/licenses/LICENSE-2.0).
+
+## Testing<a name="testing"></a>
+
+This software uses Travis CI
+([![Build Status](https://travis-ci.org/alexander-rass/HiPPSO.svg?branch=master)](https://travis-ci.org/alexander-rass/HiPPSO))
+as continuous integration service and Coveralls
+([![Coverage Status](https://coveralls.io/repos/github/alexander-rass/HiPPSO/badge.svg)](https://coveralls.io/github/alexander-rass/HiPPSO))
+to ensure reasonable test coverage.
+
+## Extensibility<a name="extensibility"></a>
+
+By configuration file it is possible to define many properties and
+characteristics of the HiPPSO. Especially for functions and statistics it is
+additionally possible to specify new functions through a special syntax. By
+this syntax it is possible to evaluate benchmark functions like Ackley function
+even though it is not natively supplied. You can do element wise operations and
+sum them up (E.g. sum of sine values `function reduce sum sin identity`). It is
+also possible to access individual position entries (E.g. for third dimension
+`reduce specific 2 identity`), perform further operations with them and combine
+them with other values (E.g. the sine value of first dimension multiplied by
+the cosine value of fourth dimension and then evaluating the square root of
+the absolute value of that product:
+`function sqrt abs combine * sin reduce specific 0 identity reduce specific 3 identity`).
+Additionally there are many more options.
+
+However, if the available options are still not sufficient it is possible to
+implement your own versions.  You can find guidelines to implement your own
+versions of the following modules beside the respective source files:
+* [Function](https://github.com/alexander-rass/HiPPSO/blob/master/src/function/function.README)
+* [Statistic](https://github.com/alexander-rass/HiPPSO/blob/master/src/statistics/statistic.README)
+* [Neighborhood topology](https://github.com/alexander-rass/HiPPSO/blob/master/src/neighborhood/neighborhood.README)
+* [Bound handling strategy](https://github.com/alexander-rass/HiPPSO/blob/master/src/bound_handling/bound_handling.README)
+* [Velocity adjustment](https://github.com/alexander-rass/HiPPSO/blob/master/src/velocity_adjustment/velocity_adjustment.README) (after bound handling has been applied)
+* [Position and velocity updater](https://github.com/alexander-rass/HiPPSO/blob/master/src/position_and_velocity_updater/position_and_velocity_updater.README) (specifies how the new velocity is calculated)
+Please click on the respective item to go directly to the guideline description.
 
 ## Feedback<a name="feedback"></a>
 
