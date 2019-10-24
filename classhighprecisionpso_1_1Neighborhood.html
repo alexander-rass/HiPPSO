@@ -153,9 +153,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ad8584e964dcf20e2813712030a082796"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1Neighborhood.html#ad8584e964dcf20e2813712030a082796">ProceedAllUpdates</a> ()</td></tr>
 <tr class="memdesc:ad8584e964dcf20e2813712030a082796"><td class="mdescLeft">&#160;</td><td class="mdescRight">Initializes the processing of all entries in the list of pending updates for the global attractors.  <a href="#ad8584e964dcf20e2813712030a082796">More...</a><br /></td></tr>
 <tr class="separator:ad8584e964dcf20e2813712030a082796"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:af61bac8f7be4d447526ba3b89634151c"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1Neighborhood.html#af61bac8f7be4d447526ba3b89634151c">SetGlobalAttractorPositions</a> (std::vector&lt; std::vector&lt; mpf_t * &gt; &gt; global_attractors)=0</td></tr>
-<tr class="memdesc:af61bac8f7be4d447526ba3b89634151c"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global attractors according to the given vector of global attractor positions.  <a href="#af61bac8f7be4d447526ba3b89634151c">More...</a><br /></td></tr>
-<tr class="separator:af61bac8f7be4d447526ba3b89634151c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7da3949a95444002841d884ff4994ed0"><td class="memItemLeft" align="right" valign="top">virtual void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1Neighborhood.html#a7da3949a95444002841d884ff4994ed0">StoreData</a> (std::ofstream *output_stream)=0</td></tr>
 <tr class="memdesc:a7da3949a95444002841d884ff4994ed0"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the current state of this neighborhood topology such that it can completely restore the current state with this data.  <a href="#a7da3949a95444002841d884ff4994ed0">More...</a><br /></td></tr>
 <tr class="separator:a7da3949a95444002841d884ff4994ed0"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -465,41 +462,6 @@ Public Member Functions</h2></td></tr>
 
 <p>Initializes the processing of all entries in the list of pending updates for the global attractors. </p>
 <p>The list of pending updates will be processed depending on mode of updates (Configuration::UPDATE_GLOBAL_ATTRACTOR). </p>
-
-</div>
-</div>
-<a class="anchor" id="af61bac8f7be4d447526ba3b89634151c"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">virtual void highprecisionpso::Neighborhood::SetGlobalAttractorPositions </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; mpf_t * &gt; &gt;&#160;</td>
-          <td class="paramname"><em>global_attractors</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">pure virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets the global attractors according to the given vector of global attractor positions. </p>
-<p>There should be exactly one global attractor position for each particle, because, depending on the topology, each particle can have a different global attractor.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">global_attractors</td><td>The vector of global attractor positions. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implemented in <a class="el" href="classhighprecisionpso_1_1AdjacencyListNeighborhood.html#a9a0223a45880599687a6a8c54c61457d">highprecisionpso::AdjacencyListNeighborhood</a>, and <a class="el" href="classhighprecisionpso_1_1GlobalBest.html#aa20a1b0a5cb1683b80bf72984e65ea7e">highprecisionpso::GlobalBest</a>.</p>
 
 </div>
 </div>

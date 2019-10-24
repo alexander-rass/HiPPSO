@@ -148,9 +148,6 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:a740e84d586e7937391b8a5964b52ecfb"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1AdjacencyListNeighborhood.html#a740e84d586e7937391b8a5964b52ecfb">LoadData</a> (std::ifstream *input_stream, <a class="el" href="classhighprecisionpso_1_1ProgramVersion.html">ProgramVersion</a> *version_of_stored_data)</td></tr>
 <tr class="memdesc:a740e84d586e7937391b8a5964b52ecfb"><td class="mdescLeft">&#160;</td><td class="mdescRight">Loads data to reset the state of the neighborhood topology to the state which was stored.  <a href="#a740e84d586e7937391b8a5964b52ecfb">More...</a><br /></td></tr>
 <tr class="separator:a740e84d586e7937391b8a5964b52ecfb"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a9a0223a45880599687a6a8c54c61457d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1AdjacencyListNeighborhood.html#a9a0223a45880599687a6a8c54c61457d">SetGlobalAttractorPositions</a> (std::vector&lt; std::vector&lt; mpf_t * &gt; &gt; global_attractors)</td></tr>
-<tr class="memdesc:a9a0223a45880599687a6a8c54c61457d"><td class="mdescLeft">&#160;</td><td class="mdescRight">Sets the global attractors according to the given vector of global attractor positions.  <a href="#a9a0223a45880599687a6a8c54c61457d">More...</a><br /></td></tr>
-<tr class="separator:a9a0223a45880599687a6a8c54c61457d"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9be444bea09f24b911b22cdcb76d3fe2"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="classhighprecisionpso_1_1AdjacencyListNeighborhood.html#a9be444bea09f24b911b22cdcb76d3fe2">StoreData</a> (std::ofstream *output_stream)</td></tr>
 <tr class="memdesc:a9be444bea09f24b911b22cdcb76d3fe2"><td class="mdescLeft">&#160;</td><td class="mdescRight">Stores the current state of this neighborhood topology such that it can completely restore the current state with this data.  <a href="#a9be444bea09f24b911b22cdcb76d3fe2">More...</a><br /></td></tr>
 <tr class="separator:a9be444bea09f24b911b22cdcb76d3fe2"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -456,41 +453,6 @@ Protected Attributes</h2></td></tr>
 </dl>
 
 <p>Implements <a class="el" href="classhighprecisionpso_1_1Neighborhood.html#a830a0115d7426aa7fad50ff67876f887">highprecisionpso::Neighborhood</a>.</p>
-
-</div>
-</div>
-<a class="anchor" id="a9a0223a45880599687a6a8c54c61457d"></a>
-<div class="memitem">
-<div class="memproto">
-<table class="mlabels">
-  <tr>
-  <td class="mlabels-left">
-      <table class="memname">
-        <tr>
-          <td class="memname">void highprecisionpso::AdjacencyListNeighborhood::SetGlobalAttractorPositions </td>
-          <td>(</td>
-          <td class="paramtype">std::vector&lt; std::vector&lt; mpf_t * &gt; &gt;&#160;</td>
-          <td class="paramname"><em>global_attractors</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-  </td>
-  <td class="mlabels-right">
-<span class="mlabels"><span class="mlabel">virtual</span></span>  </td>
-  </tr>
-</table>
-</div><div class="memdoc">
-
-<p>Sets the global attractors according to the given vector of global attractor positions. </p>
-<p>There should be exactly one global attractor position for each particle, because, depending on the topology, each particle can have a different global attractor.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">global_attractors</td><td>The vector of global attractor positions. </td></tr>
-  </table>
-  </dd>
-</dl>
-
-<p>Implements <a class="el" href="classhighprecisionpso_1_1Neighborhood.html#af61bac8f7be4d447526ba3b89634151c">highprecisionpso::Neighborhood</a>.</p>
 
 </div>
 </div>

@@ -108,9 +108,6 @@ Functions</h2></td></tr>
 <tr class="memitem:a6294bdea197e6b596d040269983e2c55"><td class="memItemLeft" align="right" valign="top"><a class="el" href="classarbitraryprecisioncalculation_1_1RandomNumberGenerator.html">RandomNumberGenerator</a> *&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearbitraryprecisioncalculation_1_1parse.html#a6294bdea197e6b596d040269983e2c55">ParseRandomNumberGenerator</a> (const std::vector&lt; std::string &gt; &amp;parameters, unsigned int &amp;parsed_parameters)</td></tr>
 <tr class="memdesc:a6294bdea197e6b596d040269983e2c55"><td class="mdescLeft">&#160;</td><td class="mdescRight">Parses the given vector for a random number generator starting at the given index.  <a href="#a6294bdea197e6b596d040269983e2c55">More...</a><br /></td></tr>
 <tr class="separator:a6294bdea197e6b596d040269983e2c55"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ada0e168ae20e7d1a5b7b89bd8ebe4482"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="namespacearbitraryprecisioncalculation_1_1parse.html#ada0e168ae20e7d1a5b7b89bd8ebe4482">SignalInvalidCommand</a> (const std::vector&lt; std::string &gt; &amp;parameters)</td></tr>
-<tr class="memdesc:ada0e168ae20e7d1a5b7b89bd8ebe4482"><td class="mdescLeft">&#160;</td><td class="mdescRight">Prints the supplied parameters to stderr and let the program terminate with exit code 1.  <a href="#ada0e168ae20e7d1a5b7b89bd8ebe4482">More...</a><br /></td></tr>
-<tr class="separator:ada0e168ae20e7d1a5b7b89bd8ebe4482"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <a name="details" id="details"></a><h2 class="groupheader">Detailed Description</h2>
 <div class="textblock"><p>Contains a large set of functions for parsing the configuration file. </p>
@@ -149,31 +146,6 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 <dl class="section return"><dt>Returns</dt><dd>A pointer to the parsed random number generator if the parsing process was successful and NULL otherwise. </dd></dl>
-
-</div>
-</div>
-<a class="anchor" id="ada0e168ae20e7d1a5b7b89bd8ebe4482"></a>
-<div class="memitem">
-<div class="memproto">
-      <table class="memname">
-        <tr>
-          <td class="memname">void arbitraryprecisioncalculation::parse::SignalInvalidCommand </td>
-          <td>(</td>
-          <td class="paramtype">const std::vector&lt; std::string &gt; &amp;&#160;</td>
-          <td class="paramname"><em>parameters</em></td><td>)</td>
-          <td></td>
-        </tr>
-      </table>
-</div><div class="memdoc">
-
-<p>Prints the supplied parameters to stderr and let the program terminate with exit code 1. </p>
-<p>This function is called if a command in the configuration file can not be parsed. The supplied command will be printed to stderr with an error message. Finally the function let the program terminate with exit code 1.</p>
-<dl class="params"><dt>Parameters</dt><dd>
-  <table class="params">
-    <tr><td class="paramname">parameters</td><td>The command of the configuration file which can not be parsed. </td></tr>
-  </table>
-  </dd>
-</dl>
 
 </div>
 </div>
