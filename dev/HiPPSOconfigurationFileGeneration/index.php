@@ -217,7 +217,7 @@ class ConfigurationOptions{
 		self::$command_explanation['<standard function>' . implode("_", array('monosphere'))] = 'monosphere (x) = (x[0])^2.';
 		self::$command_explanation['<standard function>' . implode("_", array('schwefel'))] = 'schwefel (x) = sum_{i=0..D-1} ((sum_{j=0..i} x[j])^2).';
 		self::$command_explanation['<standard function>' . implode("_", array('schwefel2'))] = '"schwefel2" is also known as Schwefel function in the literature. schwefel2 (x) = sum_{i=0..D-1} (-x[i] * sin(sqrt(abs(x[i])))).';
-		self::$command_explanation['<standard function>' . implode("_", array('rosenbrock'))] = 'rosenbrock (x) = sum{i=0..D-2} (100 * (x[i+1] - x[i] * x[i])^2 + (1 - x[i])^2.';
+		self::$command_explanation['<standard function>' . implode("_", array('rosenbrock'))] = 'rosenbrock (x) = sum{i=0..D-2} (100 * (x[i+1] - x[i] * x[i])^2 + (1 - x[i])^2).';
 		self::$command_explanation['<standard function>' . implode("_", array('movedrosenbrock'))] = '"movedrosenbrock" is a moved version of the rosenbrock function such that the optimum is at the origin. movedrosenbrock (x) =rosenbrock([(x[0])+1,(x[1])+1,....]).';
 		self::$command_explanation['<standard function>' . implode("_", array('rastrigin'))] = 'rastrigin (x) = sum{i=0..D-1} (10 + x[i]^2 - 10 * cos(2 * PI * x[i])).';
 		self::$command_explanation['<standard function>' . implode("_", array('randomposdef', '<rng description>'))] = 'randomposdef <rng description> (x) = Transpose(x) * A * x with a once randomly generated positive definite matrix A with given RNG.';
