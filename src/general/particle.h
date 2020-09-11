@@ -61,6 +61,13 @@ public:
 	Particle();
 
 	/**
+	* @brief The desctructor.
+	*
+	* Frees all allocated resources.
+	*/
+	~Particle();
+
+	/**
 	* @brief Clones the position of the current local attractor.
 	*
 	* @return The position of the local attractor.
@@ -90,7 +97,7 @@ public:
 	*
 	* @param pos The new position of the local attractor.
 	*/
-	void SetLocalAttractorPosition(std::vector<mpf_t*> pos);
+	virtual void SetLocalAttractorPosition(std::vector<mpf_t*> pos);
 	/**
 	* @brief Sets the position to the supplied position.
 	*
@@ -99,7 +106,7 @@ public:
 	*
 	* @param pos The new position of the particle.
 	*/
-	void SetPosition(std::vector<mpf_t*> pos);
+	virtual void SetPosition(std::vector<mpf_t*> pos);
 	/**
 	* @brief Sets the velocity to the supplied velocity. 
 	*
@@ -113,7 +120,7 @@ public:
 	* @param goodPosition The position of the new local attractor.
 	* @param goodValue The value of the objective function at the specified position.
 	*/
-	void UpdateGlobalAttractor(std::vector<mpf_t*> goodPosition,
+	virtual void UpdateGlobalAttractor(std::vector<mpf_t*> goodPosition,
 			mpf_t* goodValue);
 	/**
 	* @brief Tells the position and velocity updater to update position and velocity of this particle. 
@@ -155,10 +162,62 @@ public:
 	*/
 	std::vector<mpf_t*> velocity;
 
+protected:
+	/**
+	* @brief The cached evaluated value of the local attractor position.
+	*/
+	mpf_t* local_attractor_value_cached_;
+	/**
+	* @brief The precision of the evaluated value of the local attractor position.
+	*/
+	unsigned int local_attractor_value_cached_precision_;
+
 private:
 	static int active_particles_;
-	mpf_t* local_attractor_value_cached_;
-	unsigned int local_attractor_value_cached_precision_;
+};
+
+/**
+* @brief A lazy particle for the particle swarm optimization algorithm that does not update attractors when moving.
+*/
+class LazyParticle : public Particle {
+public:
+	/**
+	* @brief The constructor.
+	*
+	* Initializes the particle. Position and velocity need to be set manually with the set methods.
+	*/
+	LazyParticle();
+
+	/**
+	* @brief The constructor.
+	*
+	* Initializes the particle. Sets position and velocity to the corresponding values of the provided particle.
+	*/
+	LazyParticle(Particle *p);
+
+	/**
+	* @brief Sets the position of the local attractor to the supplied position. 
+	*
+	* @param pos The new position of the local attractor.
+	*/
+	virtual void SetLocalAttractorPosition(std::vector<mpf_t*> pos);
+	/**
+	* @brief Sets the position to the supplied position.
+	*
+	* Contrary to the corresponding function in Particle does not update any attractors.
+	*
+	* @param pos The new position of the particle.
+	*/
+	virtual void SetPosition(std::vector<mpf_t*> pos);
+
+	/**
+	* @brief Overwritten method that must never be called as a LazyParticle must never attempt to update any attractors
+	*
+	* @param goodPosition The position of the new local attractor.
+	* @param goodValue The value of the objective function at the specified position.
+	*/
+	virtual void UpdateGlobalAttractor(std::vector<mpf_t*> goodPosition,
+			mpf_t* goodValue);
 };
 
 } // namespace highprecisionpso
