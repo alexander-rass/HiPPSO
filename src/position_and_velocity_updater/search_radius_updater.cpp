@@ -193,6 +193,7 @@ void SearchRadiusUpdaterNormalDistr::Update(Particle* p) {
 	mpf_t *bestVal = NULL;
 	if(sample_points_ > 0) {
 		LazyParticle lzp(p);
+		lzp.SetVelocity(newVelocity);
 		configuration::g_bound_handling->SetParticleUpdate(&lzp);
 		std::vector<mpf_t*> newPos = lzp.GetPosition();
 		bestVal = configuration::g_function->Evaluate(newPos);
