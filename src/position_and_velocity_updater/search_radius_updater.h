@@ -45,8 +45,8 @@
 namespace highprecisionpso {
 
 /**
-* @brief This search radius updater implements an updater which adds an random offset chosen from positions within a cube
-* to the new position which scales with the velocity.
+* @brief This search radius updater implements an updater which adds a random offset chosen uniformly
+* from positions within a hyper cube, which scales with the velocity.
 *
 * See update function for more details.
 */
@@ -67,10 +67,11 @@ public:
 	* Around this position a search area is spanned which size depends on the length of the velocity vector,
 	* the radius coefficient and a random value between [0, 1].
 	*
-	* The area a sample point is chosen from is a hyper cube with the default particle position as center.
+	* The area additional sample points are chosen from is a hyper cube with the default particle position as center.
 	*
-	* If the number of additional sampling points is 0, the new position is randomly chosen within this area.
-	* Otherwise additional points within the area are sampled and the best is chosen for new position.
+	* If the number of additional sample points is 0, the new position is randomly chosen within this area.
+	* Otherwise the default particle position and additional points within the area are sampled
+	* and the best is chosen for new position.
 	*/
 	void Update(Particle* p);
 
@@ -81,8 +82,8 @@ private:
 };
 
 /**
-* @brief This search radius updater implements an updater which adds an random offset chosen from positions created by a normal distribution
-* to the new position which scales with the velocity.
+* @brief This search radius updater implements an updater which adds a random offset chosen from positions created by a normal distribution
+* scaled with velocity to the new position.
 *
 * See update function for more details.
 */
@@ -101,10 +102,10 @@ public:
 	*
 	* As a first step the new velocity and position is determined by the default particle swarm equations.
 	* Around this position a search area is created with a normal distribution and the default particle position as expected value.
-	* The standard deviation is dependant on the velocity vector lenght and the radius coefficient.
+	* The standard deviation is dependant on the velocity vector length and the radius coefficient.
 	*
 	* If the number of additional sampling points is 0, the new position is randomly chosen within this area.
-	* Otherwise additional points within the area are sampled and the best is chosen for new position.
+	* Otherwise the default particle position and additional points within the area are sampled and the best is chosen for new position.
 	*/
 	void Update(Particle* p);
 

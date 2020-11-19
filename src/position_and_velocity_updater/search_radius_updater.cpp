@@ -40,8 +40,8 @@
 #include "position_and_velocity_updater/search_radius_updater.h"
 
 #include <gmp.h>
+#include <sstream>
 #include <vector>
-#include <iostream>
 #include "bound_handling/bound_handling.h"
 #include "general/configuration.h"
 #include "arbitrary_precision_calculation/configuration.h"
@@ -103,7 +103,7 @@ void SearchRadiusUpdaterCube::Update(Particle* p) {
 	mpf_t *sqVelocityLength = arbitraryprecisioncalculation::vectoroperations::SquaredEuclideanLength(newVelocity);
 	mpf_t *velocityLength = arbitraryprecisioncalculation::mpftoperations::Sqrt(sqVelocityLength);
 	mpf_t *searchRadius = arbitraryprecisioncalculation::mpftoperations::Multiply(velocityLength, coefficient_radius_);
-	mpf_t *minusSearchRadius = arbitraryprecisioncalculation::mpftoperations::Multiply(searchRadius, -1);
+	mpf_t *minusSearchRadius = arbitraryprecisioncalculation::mpftoperations::Negate(searchRadius);
 	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(sqVelocityLength);
 	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(velocityLength);
 
@@ -149,7 +149,9 @@ void SearchRadiusUpdaterCube::Update(Particle* p) {
 }
 
 std::string SearchRadiusUpdaterCube::GetName() {
-	return "SR_C";
+	std::ostringstream os;
+	os << "SR_C" << coefficient_radius_ << "sp" << sample_points_;
+	return os.str();
 }
 
 SearchRadiusUpdaterNormalDistr::SearchRadiusUpdaterNormalDistr(double coefficient_radius, long long sample_points) : 
@@ -238,7 +240,9 @@ void SearchRadiusUpdaterNormalDistr::Update(Particle* p) {
 }
 
 std::string SearchRadiusUpdaterNormalDistr::GetName() {
-	return "SR_ND";
+	std::ostringstream os;
+	os << "SR_ND" << coefficient_radius_ << "sp" << sample_points_;
+	return os.str();
 }
 
 
