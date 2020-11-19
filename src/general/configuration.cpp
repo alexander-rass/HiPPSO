@@ -501,6 +501,30 @@ bool ReadConfigurationFile(std::string fileName) {
 					is >> max_dimensions;
 				}
 				g_position_and_velocity_updater = new DimensionIndependentUpdater(reduction, max_dimensions);
+			} else if(suboption1 == "searchradius") {
+				std::istringstream is(input[3]);
+				double v;
+				is >> v;
+				if(input.size() == 4){
+					if(input[2] == "cube"){
+						g_position_and_velocity_updater = new SearchRadiusUpdaterCube(v);
+					} else if(input[2] == "normal"){
+						g_position_and_velocity_updater = new SearchRadiusUpdaterNormalDistr(v);
+					} else {
+						parse::SignalInvalidCommand(input);
+					}
+				} else {
+					std::istringstream is2(input[4]);
+					unsigned int additional;
+					is2 >> additional;
+					if(input[2] == "cube"){
+						g_position_and_velocity_updater = new SearchRadiusUpdaterCube(v, additional);
+					} else if(input[2] == "normal"){
+						g_position_and_velocity_updater = new SearchRadiusUpdaterNormalDistr(v, additional);
+					} else {
+						parse::SignalInvalidCommand(input);
+					}
+				}
 			} else if (suboption1 == "testing") {
 				g_position_and_velocity_updater = new TestingUpdater;
 			} else {

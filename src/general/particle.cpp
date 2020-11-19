@@ -59,6 +59,13 @@ Particle::Particle() {
 	local_attractor_value_cached_precision_ = 1;
 }
 
+Particle::~Particle() {
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(local_attractor_position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position);
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(velocity);
+	arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_attractor_value_cached_);
+}
+
 std::vector<mpf_t*> Particle::GetLocalAttractorPosition() {
 	return arbitraryprecisioncalculation::vectoroperations::Clone(local_attractor_position);
 }
@@ -154,6 +161,42 @@ void Particle::StoreData(std::ofstream* outputstream){
 	(*outputstream) << std::endl;
 	(*outputstream) << local_attractor_value_cached_precision_;
 	(*outputstream) << std::endl;
+}
+
+
+
+
+
+LazyParticle::LazyParticle() {
+	local_attractor_position.clear();
+	local_attractor_value_cached_ = NULL;
+	local_attractor_value_cached_precision_ = 1;
+}
+
+LazyParticle::LazyParticle(Particle *p) : LazyParticle() {
+	local_attractor_position = p->GetLocalAttractorPosition();
+	position = p->GetPosition();
+	velocity = p->GetVelocity();
+}
+
+void LazyParticle::SetLocalAttractorPosition(std::vector<mpf_t*> newLocalAttractorPosition) {
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(local_attractor_position);
+	local_attractor_position = arbitraryprecisioncalculation::vectoroperations::Clone(newLocalAttractorPosition);
+	if(local_attractor_value_cached_ != NULL) {
+		arbitraryprecisioncalculation::mpftoperations::ReleaseValue(local_attractor_value_cached_);
+		arbitraryprecisioncalculation::mpftoperations::ChangeNumberOfMpftValuesCached(-1);
+	}
+	local_attractor_value_cached_ = NULL;
+}
+
+void LazyParticle::SetPosition(std::vector<mpf_t*> newPosition) {
+	arbitraryprecisioncalculation::vectoroperations::ReleaseValues(position);
+	position = arbitraryprecisioncalculation::vectoroperations::Clone(newPosition);
+}
+
+void LazyParticle::UpdateGlobalAttractor(std::vector<mpf_t*> goodPosition,
+		mpf_t* goodValue) {
+	AssertCondition(false, "LazyParticle must never try to update the global attractor.");
 }
 
 } // namespace highprecisionpso

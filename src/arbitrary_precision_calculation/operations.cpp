@@ -596,7 +596,7 @@ mpf_t* Clone(const mpf_t* v) {
 
 // the generation of gaussian noise (random variable with normal
 // distribution) is done by minor variation of Box Muller method.
-mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* random){
+mpf_t* GetGaussianRandomMpft(mpf_t *mu, mpf_t *sigma, RandomNumberGenerator* random){
 	mpf_t* u = NULL;
 	mpf_t* x = NULL;
 	mpf_t* y = NULL;
@@ -651,8 +651,7 @@ mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* ran
 	mpf_t* x_plus_y = Add(x,y);
 	mpf_t* mul1 = Multiply(sqrt_minus_log_u, x_plus_y);
 	mpf_t* mul2 = Multiply(mul1, sigma);
-	mpf_t* mu_mpft = ToMpft(mu);
-	mpf_t* res = Add(mul2, mu_mpft);
+	mpf_t* res = Add(mul2, mu);
 	ReleaseValue(u);
 	ReleaseValue(x);
 	ReleaseValue(y);
@@ -662,8 +661,20 @@ mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* ran
 	ReleaseValue(x_plus_y);
 	ReleaseValue(mul1);
 	ReleaseValue(mul2);
-	ReleaseValue(mu_mpft);
 	return res; // = sqrt(-log(u)) * (x + y) * sigma + mu
+}
+
+mpf_t* GetGaussianRandomMpft(mpf_t *mu, mpf_t *sigma){
+	return GetGaussianRandomMpft(mu, sigma, Configuration::getStandardRandomNumberGenerator());
+}
+
+mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* random){
+	mpf_t* mu_mpft = ToMpft(mu);
+	mpf_t* sigma_mpft = ToMpft(sigma);
+	mpf_t *res = GetGaussianRandomMpft(mu_mpft, sigma_mpft, random);
+	ReleaseValue(mu_mpft);
+	ReleaseValue(sigma_mpft);
+	return res;
 }
 
 mpf_t* GetGaussianRandomMpft(double mu, double sigma){

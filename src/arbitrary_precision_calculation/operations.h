@@ -624,6 +624,25 @@ mpf_t* GetRandomMpft();
 *
 * @return The calculated random number.
 */
+mpf_t* GetGaussianRandomMpft(mpf_t *mu, mpf_t *sigma, RandomNumberGenerator* random);
+/**
+* @brief Calculates a random value with normal distribution (gaussian distribution).
+*
+* @param mu The expectation of the normal distribution.
+* @param sigma The standard deviation of the normal distribution (this is the square root of the variance).
+*
+* @return The calculated random number.
+*/
+mpf_t* GetGaussianRandomMpft(mpf_t *mu, mpf_t *sigma);
+/**
+* @brief Calculates a random value with normal distribution (gaussian distribution).
+*
+* @param mu The expectation of the normal distribution.
+* @param sigma The standard deviation of the normal distribution (this is the square root of the variance).
+* @param random The random number generator.
+*
+* @return The calculated random number.
+*/
 mpf_t* GetGaussianRandomMpft(double mu, double sigma, RandomNumberGenerator* random);
 /**
 * @brief Calculates a random value with normal distribution (gaussian distribution).
